@@ -1,0 +1,17 @@
+target/
+pom.xml.tag
+pom.xml.versionBackup
+pom.xml.releaseBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+*.iws
+log/
+
