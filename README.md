@@ -1,2 +1,3 @@
 Regole per il progetto:
- * indentazione con tab, niente spazi!
+	* Non si pusha sul master!
+	* indentazione con tab, niente spazi!
