@@ -32,15 +32,15 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.jsp"><i class="zmdi zmdi-movie-alt zmdi-right-8"></i>Home</a>
+                        <a class="navbar-brand" href="../webpages/index.jsp"><i class="zmdi zmdi-movie-alt zmdi-right-8"></i>Home</a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="index.jsp"><i class="zmdi zmdi-home zmdi-right-8"></i>Home</a></li>
-                            <li><a href="index.jsp"><i class="zmdi zmdi-movie zmdi-right-8"></i>Film</a></li>
-                            <li><a href="index.jsp"><i class="zmdi zmdi-calendar-check zmdi-right-8"></i>Spettacoli</a></li>
+                            <li><a href="../webpages/index.jsp"><i class="zmdi zmdi-home zmdi-right-8"></i>Home</a></li>
+                            <li><a href="../webpages/index.jsp"><i class="zmdi zmdi-movie zmdi-right-8"></i>Film</a></li>
+                            <li><a href="../webpages/index.jsp"><i class="zmdi zmdi-calendar-check zmdi-right-8"></i>Spettacoli</a></li>
                             <li class="dropdown" id="menu">
-                                <%@ include file="menu.jsp" %>
+                                <%@ include file="../webpages/menu.jsp" %>
                             </li>
                         </ul>
                     </div>
