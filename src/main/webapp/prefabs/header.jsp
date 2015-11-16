@@ -21,7 +21,7 @@
         <script src="/js/jquery.bxslider.min.js"></script>
         <title>Login</title>
     </head>
-    <body>
+
         <header>
             <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="container">
