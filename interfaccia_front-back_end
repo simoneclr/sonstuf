@@ -1,0 +1,153 @@
+LISTA RICHIESTE (input)
+[
+	{
+	"idRequest" : "<requestId>",
+	"user" : 
+		{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
+	"request":
+		{"category" : "<categoryName>", "place" : "<place>", "time" : "<time>"}	
+	},
+	{
+	"idRequest" : "<requestId>",
+	"user" : 
+		{"nome" : "<nomeIncompleto>", "rankR" : "<rankDouble>"},
+	"request":
+		{"category" : "<nomeCategoria>", "place" : "<place>", "time" : "<time>"}	
+	}			
+]
+
+INSERISCI RICHIESTA	
+input:
+tabella che mappa idCategoria su nomeCategoria
+[{"<categoryId>":"<categoryName>"}, {"<categoryId>":"<categoryName>"}]
+
+output: (nota la photo va passata in push)
+campi del form: "title" , "description" , "categoryId" , "place" , "time", "photo"
+
+PAGINA RICHIESTA
+input:
+{
+	"idRequest" : "<requestId>",
+	"user" : 
+		{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
+	"request":
+		{"category" : "<categoryName>", "requestDescription" : "text", "place" : "<place>", "time" : "<time>", "photo" : "<link>"}
+}
+
+output: per segnalare che si offre per quella richiesta.
+campi del form: "idRequest"
+La servlet che accetta il form dovrà reindirizzare su una pagina di success o fail a seconda.
+
+LOGIN
+output: userName può essere email o numero di telefono
+form: "userName", "password"
+
+HOME ADMIN
+--
+
+INSERISCI RICHIESTA OPERATORE SELEZIONE UTENTE (form di inserimento dati utente con sotto la lista di user che matchano i dati inseriti)
+output:
+form per dati utente(può essere già esistente oppure no): "name", "surname", "telephone", "email", "birthdate" ;
+a questo form la pagina mi risponde con una lista:
+[
+	{"idUser": "<userId>", "nameame" : "<name>", "surname" : "<surname>" , "telephone" : "<telephone>", "email" : "<email>" , "birthdate" : "birthdate"},
+	{"idUser": "<userId>", "name" : "<name>", "surname" : "<surname>" , "telephone" : "<telephone>", "email" : "<email>" , "birthdate" : "birthdate"}
+]
+l'operatore seleziona uno fra i diversi utenti e questo punto viene mostrata il form di inserimento richiesta settato per tale idUser
+
+output: form con campo hidden "idUser" che viene settato da js nel momento in cui l'opetatore seleziona un utente (vedi sopra)
+"title" , "description" , "categoryId" , "place" , "time", "photo", "idUser"
+
+PAGINA PERSONALE UTENTE
+input:
+{
+	"idUser": "<userId>", "name" : "<name>", "surname" : "<surname>" , "telephone" : "<telephone>", "email" : "<email>" , "birthdate" : "birthdate", "rankO" : "<doubleRank>" , "rankR" : "<doubleRank"}
+}
+se seleziona la scheda richieste : lista di richieste fatte da lui, user non verrà mostrato (è sempre lo stesso utente)
+[
+	{
+		"idRequest" : "<requestId>",
+		"user" : 
+			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
+		"request":
+			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>"}	
+	},
+	{
+		"idRequest" : "<requestId>",
+		"user" : 
+			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
+		"request":
+			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>"}	
+	}
+]
+
+se seleziona la scheda offerte: lista di offerte fatte da lui
+[
+	{
+		"idOffer": "<idOffer>",
+		"isInCharge" : "<boolean>",
+		"user" : 
+			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
+		"request":
+			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>"}	
+	},
+	{
+		"idOffer": "<idOffer>",
+		"isInCharge" : "<boolean>",
+		"user" : 
+			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
+		"request":
+			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>"}	
+	}
+]
+
+output: l'utente può cambiare i suoi dati attraverso una modal (form)
+form: "name", "surname", "email", "birthdate", "oldPassword", "newPassword1", "newPassword2"
+
+DETTAGLIO LAVORI UTENTE
+se dalla pagina personale clicca su una richiesta
+input:
+{
+	"request":
+		{"idRequest" : "<requestId>","category" : "<categoryName>", "categoryDescription" : "<completeDescription>", "place" : "<place>", "time" : "<time>", "photo" : "<link>"},
+	"state" : "<can be 0: in corso, 1: in attesa di valutazione (c'è un incaricato), 2: finito>",
+	"offerers" : 
+		[
+			{"id" : "<userId>", "name" : "<incompleteName>", "rankO" : "<rank as offerer>"},
+		],
+	"valuation" : {"rank" : "double" , "comment" : "text"}
+}
+note: 
+	se lo stato è 0 in bidders c'è la lista di user che si sono offerti per la mia richiesta, valuation inesistente
+	se lo stato è 1 in bidders ci sarà l'utente incaricato, valuation inesistente
+	se lo stato è 2 in bidders ci sarà l'utente incaricato, e valuation sarà esistente
+output:
+	se stato 0:
+		pulsante che seleziona un utente "idUser" "idRequest"
+	se stato 1:
+		form : "idRequest", "rank", "comment"
+
+
+se dalla pagina pesonale clicco su un offerta
+{
+	"request":
+		{"idRequest" : "<RequestId>","category" : "<categoryName>", "categoryDescription" : "<completeDescription>", "place" : "<place>", "time" : "<time>", "photo" : "<link>"},
+	"state" : "<can be 0: in attesa di ricevere incarico, 1: in attesa di valutazione (c'è un incaricato), 2: finito>",
+	"requestingUser": {"id" : "<userId>", "name" : "<incompleteName>", "rankR" : "<rank as requester>"},
+	"valuation" : {"rank" : "double" , "comment" : "text"}		
+}
+note:
+	se stato 0: valuation non c'è.
+	se stato 1: valuation non c'è.
+	se stato 2: valuation c'è e mostra la valutazione fatta
+output:
+	se stato 1:
+		form : "idRequest", "rank", "comment"
+
+REGISTRAZIONE
+
+form: "name", "surname", "email", "phone", "birthdate", "password1", "password2"
+
+		
+		
+
