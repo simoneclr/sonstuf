@@ -14,9 +14,9 @@
             </div>
         </footer>
 
-        <script src="js/jquery-ui.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/app.js"></script>
+        <script src="/js/jquery-ui.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/app.js"></script>
 
     </body>
 </html>
