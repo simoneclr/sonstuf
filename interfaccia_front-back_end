@@ -109,7 +109,7 @@ se dalla pagina personale clicca su una richiesta
 input:
 {
 	"request":
-		{"idRequest" : "<requestId>","category" : "<categoryName>", "categoryDescription" : "<completeDescription>", "place" : "<place>", "time" : "<time>", "photo" : "<link>"},
+		{"idRequest" : "<requestId>","category" : "<categoryName>", "requestDescription" : "<requestDescription>", "place" : "<place>", "time" : "<time>", "photo" : "<link>"},
 	"state" : "<can be 0: in corso, 1: in attesa di valutazione (c'è un incaricato), 2: finito>",
 	"offerers" : 
 		[
@@ -131,7 +131,7 @@ output:
 se dalla pagina pesonale clicco su un offerta
 {
 	"request":
-		{"idRequest" : "<RequestId>","category" : "<categoryName>", "categoryDescription" : "<completeDescription>", "place" : "<place>", "time" : "<time>", "photo" : "<link>"},
+		{"idRequest" : "<RequestId>","category" : "<categoryName>", "requestDescription" : "<requestDescription>", "place" : "<place>", "time" : "<time>", "photo" : "<link>"},
 	"state" : "<can be 0: in attesa di ricevere incarico, 1: in attesa di valutazione (c'è un incaricato), 2: finito>",
 	"requestingUser": {"id" : "<userId>", "name" : "<incompleteName>", "rankR" : "<rank as requester>"},
 	"valuation" : {"rank" : "double" , "comment" : "text"}		
