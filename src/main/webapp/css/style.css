@@ -17,3 +17,29 @@ hr.colorgraph {
 input.btn.btn-success{
     margin-top:20px;
 }
+
+.orange-circle-button {
+    box-shadow: 2px 4px 0 2px rgba(0,0,0,0.1);
+    border: .5em solid #E84D0E;
+    font-size: 1em;
+    line-height: 1.1em;
+    color: #ffffff;
+    background-color: #e84d0e;
+    margin: auto;
+    border-radius: 50%;
+    height: 5em;
+    width: 5em;
+    position: relative;
+}
+
+.orange-circle-button:hover {
+    color:#ffffff;
+    background-color: #e84d0e;
+    text-decoration: none;
+    border-color: #ff7536;
+
+}
+
+span.glyphicon-arrow-right {
+    font-size: 1.9em;
+}
