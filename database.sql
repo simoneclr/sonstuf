@@ -5,12 +5,15 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema sonstuf
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `sonstuf` ;
 CREATE SCHEMA IF NOT EXISTS `sonstuf` DEFAULT CHARACTER SET utf8 COLLATE utf8_estonian_ci ;
 USE `sonstuf` ;
 
 -- -----------------------------------------------------
 -- Table `sonstuf`.`user`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `sonstuf`.`user` ;
+
 CREATE TABLE IF NOT EXISTS `sonstuf`.`user` (
   `iduser` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
@@ -18,9 +21,10 @@ CREATE TABLE IF NOT EXISTS `sonstuf`.`user` (
   `phone` VARCHAR(45) NULL,
   `email` VARCHAR(100) NULL,
   `passwordhash` VARCHAR(110) NULL,
-  `ranko` VARCHAR(45) NULL DEFAULT 0,
-  `rankp` VARCHAR(45) NULL DEFAULT 0,
-  `birthdate` VARCHAR(45) NULL,
+  `ranko` FLOAT NULL DEFAULT 0,
+  `rankp` FLOAT NULL DEFAULT 0,
+  `birthdate` DATE NULL,
+  `admin` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`iduser`),
   UNIQUE INDEX `phone_UNIQUE` (`phone` ASC),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
@@ -30,6 +34,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `sonstuf`.`category`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `sonstuf`.`category` ;
+
 CREATE TABLE IF NOT EXISTS `sonstuf`.`category` (
   `idcategory` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
@@ -41,6 +47,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `sonstuf`.`request`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `sonstuf`.`request` ;
+
 CREATE TABLE IF NOT EXISTS `sonstuf`.`request` (
   `idrequest` INT NOT NULL AUTO_INCREMENT,
   `title` TEXT NOT NULL,
@@ -50,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `sonstuf`.`request` (
   `photo` TEXT NULL,
   `iduser` INT NOT NULL,
   `idcategory` INT NOT NULL,
-  `status` TINYINT NULL,
+  `status` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`idrequest`),
   INDEX `fk_request_user_idx` (`iduser` ASC),
   INDEX `fk_request_category1_idx` (`idcategory` ASC),
@@ -70,12 +78,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `sonstuf`.`offer`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `sonstuf`.`offer` ;
+
 CREATE TABLE IF NOT EXISTS `sonstuf`.`offer` (
   `idoffer` INT NOT NULL AUTO_INCREMENT,
   `isincharge` TINYINT(1) NOT NULL DEFAULT 0,
   `idrequest` INT NOT NULL,
   `iduser` INT NOT NULL,
-  `status` TINYTEXT NULL,
+  `status` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`idoffer`),
   INDEX `fk_offer_request1_idx` (`idrequest` ASC),
   INDEX `fk_offer_user1_idx` (`iduser` ASC),
@@ -96,6 +106,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `sonstuf`.`message`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `sonstuf`.`message` ;
+
 CREATE TABLE IF NOT EXISTS `sonstuf`.`message` (
   `idmessage` INT NOT NULL AUTO_INCREMENT,
   `datetime` TIMESTAMP NULL,
@@ -121,6 +133,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `sonstuf`.`offererrank`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `sonstuf`.`offererrank` ;
+
 CREATE TABLE IF NOT EXISTS `sonstuf`.`offererrank` (
   `rank` INT NOT NULL,
   `comment` TEXT NULL,
@@ -137,6 +151,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `sonstuf`.`requesterrank`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `sonstuf`.`requesterrank` ;
+
 CREATE TABLE IF NOT EXISTS `sonstuf`.`requesterrank` (
   `rank` INT NOT NULL,
   `comment` TEXT NULL,
@@ -153,6 +169,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `sonstuf`.`auth_tokens`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `sonstuf`.`auth_tokens` ;
+
 CREATE TABLE IF NOT EXISTS `sonstuf`.`auth_tokens` (
   `auth_token_id` VARCHAR(8) NOT NULL,
   `hash` VARCHAR(64) NOT NULL,
