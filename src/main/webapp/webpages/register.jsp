@@ -11,11 +11,22 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <c:import url="/prefabs/header.jsp"></c:import>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="../css/style.css" rel="stylesheet">
     <title>Login</title>
 
 </head>
     <body>
+
+        <c:import url="/prefabs/navbar.jsp"></c:import>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
@@ -60,5 +71,8 @@
                 <input type="password" name="" class="form-control" id="" value="">
             </div>
         </div>
+
+        <c:import url="/prefabs/footer.jsp"></c:import>
+
     </body>
 </html>
