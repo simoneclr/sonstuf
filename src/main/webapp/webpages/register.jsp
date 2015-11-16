@@ -36,39 +36,34 @@
             </div>
             <div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
                 <label>Nome</label>
-                <input type="text" name="" class="form-control" id="" value="">
+                <input type="text" name="name" class="form-control" id="" value="">
             </div>
             <div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
                 <label>Cognome</label>
-                <input type="text" name="" class="form-control" id="" value="">
+                <input type="text" name="surname" class="form-control" id="" value="">
             </div>
             <div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
                 <label>Data di nascita</label>
-                <input type="date" name="" class="form-control" id="" value="">
+                <input type="date" name="birthdate" class="form-control" id="" value="">
             </div>
             <div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
                 <label>Email</label>
-                <input type="email" name="" class="form-control" id="" value="">
+                <input type="email" name="email" class="form-control" id="" value="">
             </div>
             <div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
                 <label>Telefono</label>
-                <input type="tel" name="" class="form-control" id="" value="">
-            </div>
-            <div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
-                <label>Username</label>
-                <input type="text" name="" class="form-control" id="" value="">
+                <input type="tel" name="phone" class="form-control" id="" value="">
             </div>
             <div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
                 <label>Password</label>
-                <input type="password" name="" class="form-control" id="" value="">
+                <input type="password" name="password1" class="form-control" id="" value="">
             </div>
             <div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
                 <label>Conferma password</label>
-                <input type="password" name="" class="form-control" id="" value="">
+                <input type="password" name="password2" class="form-control" id="" value="">
             </div>
             <div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
-                <label>Conferma password</label>
-                <input type="password" name="" class="form-control" id="" value="">
+                <input type="submit" name="enter" class="btn-success" id="" value="Accedi">
             </div>
         </div>
 
