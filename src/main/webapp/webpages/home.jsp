@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: gianluke
-  Date: 16/11/15
-  Time: 14.11
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 	<head>
@@ -15,13 +8,6 @@
 	</head>
 	<body>
 		<c:import url="/prefabs/navbar.jsp"></c:import>
-
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
 
 		<div class="container" id="home_main_container">
 			<div class="row">

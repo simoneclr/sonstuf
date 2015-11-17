@@ -16,13 +16,6 @@
 	<body>
 	<c:import url="/prefabs/navbar.jsp"></c:import>
 
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-
 	<div class="container">
 		<div class ="row">
 			<div class="col-md-offset-1 col-md-10">
