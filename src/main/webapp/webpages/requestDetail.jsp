@@ -51,7 +51,7 @@
 		<c:forEach var="i" begin="1" end="5">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="panel panel-default">
+					<div class="panel panel-default box-shadow">
 						<div class="panel-heading">
 							<strong>Offerta</strong>
 						</div>
