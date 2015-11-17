@@ -1,6 +1,7 @@
 package com.sonstuf.model.bean;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * Classe che rappresenta la tabella utente del db
