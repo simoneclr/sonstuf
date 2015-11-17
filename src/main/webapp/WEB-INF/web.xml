@@ -8,7 +8,7 @@
   	<servlet-name>AuthenticationServlet</servlet-name>
   	<display-name>AuthenticationServlet</display-name>
   	<description></description>
-  	<servlet-class>com.sonstuf.model.AuthenticationServlet</servlet-class>
+  	<servlet-class>com.sonstuf.control.AuthenticationServlet</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>AuthenticationServlet</servlet-name>
