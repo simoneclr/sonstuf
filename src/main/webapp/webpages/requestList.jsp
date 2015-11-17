@@ -29,7 +29,7 @@
 		</div>
 		<div class="col-md-offset-1 col-md-2">
 			<label>Nome</label>
-			<input type="text" name="nome" class="form-control" id="" value="">
+			<input type="text" name="name" class="form-control" id="" value="">
 		</div>
 		<div class="col-md-offset-1 col-md-2">
 			<label>Luogo</label>
@@ -37,7 +37,7 @@
 		</div>
 
 		<div class="col-md-offset-1 col-md-2">
-			<button class="btn btn-primary" style="margin-top: 25px" id="">Cerca </button>
+			<button class="btn btn-success" style="margin-top: 25px" id="">Cerca </button>
 		</div>
 	</div>
 
