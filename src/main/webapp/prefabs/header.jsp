@@ -6,7 +6,9 @@
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/jquery.bxslider.css" rel="stylesheet">
 <link href="/css/star-rating.css" rel="stylesheet">
+<!--
 <link href="/css/style.css" rel="stylesheet">
+-->
 <link href="/css/navbars.css" rel="stylesheet">
 <!--
 <link href="/css/cinema.css" rel="stylesheet">
