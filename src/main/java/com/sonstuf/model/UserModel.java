@@ -140,4 +140,55 @@ public class UserModel {
 		return res;
 	}
 
+	/**
+	 * todo
+	 * @param phone
+	 * @return
+	 * @throws SQLException
+	 */
+	public static User getUserByPhone ( String phone) throws SQLException {
+
+		Connection connection;
+		PreparedStatement ps;
+		ResultSet rs;
+		User res;
+
+
+		String query = 	"SELECT * from user" +
+				"WHERE phone = ? ;";
+
+		connection = Connector.getConnection();
+
+		ps = connection.prepareStatement(query);
+		ps.setString ( 0, phone );
+
+		rs = ps.executeQuery();
+
+		if (rs.next()) {
+
+			res = new User();
+
+			res.setIdUser(rs.getInt("iduser"));
+			res.setName(rs.getString("name"));
+			res.setSurname(rs.getString("surname"));
+			res.setPhone(rs.getString("phone"));
+			res.setPasswordHash(rs.getString("passwordhash"));
+			res.setRankO(rs.getFloat("ranko"));
+			res.setRankP(rs.getFloat("rankp"));
+			res.setBirthDate(rs.getDate("birthdate"));
+			res.setAdmin(rs.getBoolean("admin"));
+
+
+		} else {
+
+			res = null;
+		}
+
+		rs.close();
+		ps.close();
+		connection.close();
+
+		return res;
+	}
+
 }
