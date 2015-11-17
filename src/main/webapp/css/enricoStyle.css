@@ -9,13 +9,17 @@ small {
 	width: 100%;
 }
 
+.request {
+	padding: 47px;
+}
+
 .offer {
 	overflow: hidden;
 	background-color: #819b90;
 }
 
 .icon {
-	width: 100%;
+	width: 70%;
 	margin: 4px;
 }
 
@@ -28,6 +32,11 @@ small {
 .box-shadow {
 	-webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, .10);
 	box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, .10);
+}
+
+.status{
+	padding-top: 240px;
+	width : 80%;
 }
 
 .offerDate {
