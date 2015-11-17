@@ -5,14 +5,14 @@ LISTA RICHIESTE (input)
 	"user" : 
 		{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
 	"request":
-		{"category" : "<categoryName>", "place" : "<place>", "time" : "<time>"}	
+		{"category" : "<categoryName>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}	
 	},
 	{
 	"idRequest" : "<requestId>",
 	"user" : 
 		{"nome" : "<nomeIncompleto>", "rankR" : "<rankDouble>"},
 	"request":
-		{"category" : "<nomeCategoria>", "place" : "<place>", "time" : "<time>"}	
+		{"category" : "<categoryName>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}
 	}			
 ]
 
@@ -31,7 +31,7 @@ input:
 	"user" : 
 		{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
 	"request":
-		{"category" : "<categoryName>", "requestDescription" : "text", "place" : "<place>", "time" : "<time>", "photo" : "<link>"}
+		{"category" : "<categoryName>", "requestDescription" : "text", "place" : "<place>", "time" : "<time>", "photo" : "<link>", "postTimestamp" : "<postTimeStamp>"}
 }
 
 output: per segnalare che si offre per quella richiesta.
@@ -70,14 +70,14 @@ se seleziona la scheda richieste : lista di richieste fatte da lui, user non ver
 		"user" : 
 			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
 		"request":
-			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>"}	
+			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}	
 	},
 	{
 		"idRequest" : "<requestId>",
 		"user" : 
 			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
 		"request":
-			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>"}	
+			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}	
 	}
 ]
 
@@ -89,7 +89,7 @@ se seleziona la scheda offerte: lista di offerte fatte da lui
 		"user" : 
 			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
 		"request":
-			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>"}	
+			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}	
 	},
 	{
 		"idOffer": "<idOffer>",
@@ -97,7 +97,7 @@ se seleziona la scheda offerte: lista di offerte fatte da lui
 		"user" : 
 			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
 		"request":
-			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>"}	
+			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}	
 	}
 ]
 
@@ -109,7 +109,7 @@ se dalla pagina personale clicca su una richiesta
 input:
 {
 	"request":
-		{"idRequest" : "<requestId>","category" : "<categoryName>", "requestDescription" : "<requestDescription>", "place" : "<place>", "time" : "<time>", "photo" : "<link>"},
+		{"idRequest" : "<requestId>","category" : "<categoryName>", "requestDescription" : "<requestDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>", "photo" : "<link>"},
 	"state" : "<can be 0: in corso, 1: in attesa di valutazione (c'è un incaricato), 2: finito>",
 	"offerers" : 
 		[
@@ -131,7 +131,7 @@ output:
 se dalla pagina pesonale clicco su un offerta
 {
 	"request":
-		{"idRequest" : "<RequestId>","category" : "<categoryName>", "requestDescription" : "<requestDescription>", "place" : "<place>", "time" : "<time>", "photo" : "<link>"},
+		{"idRequest" : "<RequestId>","category" : "<categoryName>", "requestDescription" : "<requestDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>", "photo" : "<link>"},
 	"state" : "<can be 0: in attesa di ricevere incarico, 1: in attesa di valutazione (c'è un incaricato), 2: finito>",
 	"requestingUser": {"id" : "<userId>", "name" : "<incompleteName>", "rankR" : "<rank as requester>"},
 	"valuation" : {"rank" : "double" , "comment" : "text"}		
