@@ -38,6 +38,38 @@
 				</h4>
 			</div>
 		</div>
+
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#requests">I tuoi annunci</a></li>
+			<li><a data-toggle="tab" href="#jobs">I tuoi lavori</a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div id="requests" class="tab-pane fade in active">
+
+				<div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">Titolo richiesta</div>
+						<div class="panel body" style="overflow: auto; margin-bottom: 0px">
+							<img src="http://placehold.it/150x150" style="float: left; margin-right: 10px">
+							<p>
+								"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+								Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+								ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+								esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+								non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="jobs" class="tab-pane fade in">
+
+			</div>
+		</div>
+
 	</div>
 
 	<script>
