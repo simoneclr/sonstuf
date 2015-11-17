@@ -17,8 +17,8 @@ public class User implements Serializable{
     private String phone;
     private String email;
     private String passwordHash;
-    private String rankO;
-    private String rankP;
+    private float rankO;
+    private float rankP;
     private Date birthDate;
     private boolean admin;
 
@@ -75,19 +75,19 @@ public class User implements Serializable{
         this.passwordHash = passwordHash;
     }
 
-    public String getRankO() {
+    public float getRankO() {
         return rankO;
     }
 
-    public void setRankO(String rankO) {
+    public void setRankO(float rankO) {
         this.rankO = rankO;
     }
 
-    public String getRankP() {
+    public float getRankP() {
         return rankP;
     }
 
-    public void setRankP(String rankP) {
+    public void setRankP(float rankP) {
         this.rankP = rankP;
     }
 
