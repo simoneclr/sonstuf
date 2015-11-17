@@ -39,6 +39,7 @@ small {
 	width : 80%;
 }
 
-.offerDate {
+.hidden{
+	display: none;
 }
 
