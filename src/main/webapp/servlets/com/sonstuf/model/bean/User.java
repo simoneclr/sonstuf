@@ -22,7 +22,6 @@ public class User implements Serializable{
     private Date birthDate;
     private boolean admin;
 
-
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
