@@ -34,11 +34,15 @@ small {
 	box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, .10);
 }
 
-.status{
+.status {
 	padding-top: 240px;
-	width : 80%;
+	width: 80%;
 }
 
 .offerDate {
+}
+
+.hidden {
+	display: none;
 }
 
