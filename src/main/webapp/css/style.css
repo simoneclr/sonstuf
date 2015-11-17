@@ -17,6 +17,11 @@ hr.colorgraph {
 input.btn.btn-success{
 	margin-top:20px;
 }
+.request{
+    height: 180px;
+    background-color:#CEF6D8;
+    margin-bottom: 5px;
+}
 
 .orange-circle-button {
 	box-shadow: 2px 4px 0 2px rgba(0,0,0,0.1);
@@ -104,7 +109,11 @@ span.glyphicon-arrow-right {
 .btn-file {
 	position: relative;
 	overflow: hidden;
+.list{
+    overflow: hidden;
 }
+
+
 .btn-file input[type=file] {
 	position: absolute;
 	top: 0;
@@ -119,4 +128,28 @@ span.glyphicon-arrow-right {
 	background: cornflowerblue;
 	cursor: inherit;
 	display: block;
+}
+
+.imgCategory{
+    height: 120px;
+    width: 150px;
+}
+
+.glyphicon {  margin-bottom: 10px;margin-right: 10px;}
+
+small {
+    display: block;
+    line-height: 1.428571429;
+    color: #585858;
+    font-size: 13px;
+}
+
+.main-profile-p{
+    font-size: 16px;
+    color: black;
+}
+
+.summary-profile-position{
+    position: relative;
+    top: -20px;
 }
