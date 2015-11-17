@@ -3,6 +3,7 @@
 	<head>
 		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<c:import url="/prefabs/header.jsp"></c:import>
+		<link href="../css/style-gianluca.css" rel="stylesheet">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Home</title>
 	</head>
