@@ -95,7 +95,7 @@ public class UserModel {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static User getUserByMail ( String email) throws SQLException {
+	public static User getUserByMail ( String email) throws SQLException, NamingException {
 
 		Connection connection;
 		PreparedStatement ps;
@@ -146,7 +146,7 @@ public class UserModel {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static User getUserByPhone ( String phone) throws SQLException {
+	public static User getUserByPhone ( String phone) throws SQLException, NamingException {
 
 		Connection connection;
 		PreparedStatement ps;
