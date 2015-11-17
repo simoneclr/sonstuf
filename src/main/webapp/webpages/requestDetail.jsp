@@ -4,6 +4,7 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<c:import url="/prefabs/header.jsp"></c:import>
 	<link href="/css/enricoStyle.css" rel="stylesheet">
+
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Dettaglio richiesta</title>
 
@@ -19,33 +20,25 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-4">
-				<img class="icon" src="http://image.freepik.com/free-photo/grass--garden_19-119630.jpg">
+				<img class="icon img-rounded" src="http://image.freepik.com/free-photo/grass--garden_19-119630.jpg">
 			</div>
 			<div class="col-xs-4">
-				<h3>
+				<h3 class="title">
 					Taglio erba
 				</h3>
 				<br>
 
-				<div class="lib-row lib-desc">
+				<div class="description">
 					Cerco qualcuno che possa tagliare l'erba; <br>
 					Ho tosaerba da mettere a disposizione. <br>
 					Prato piano di 1000 m^2 <br>
 					O.o
 				</div>
 			</div>
-			<div class="col-xs-4">
-				<ul>
-					<li class="category">
-						<p>giardinaggio</p>
-					</li>
-					<li>
-						<p>casa mia</p>
-					</li>
-					<li>
-						<p>when u want</p>
-					</li>
-				</ul>
+			<div class="col-xs-4 text-center">
+				<small><cite> <i class="glyphicon glyphicon-map-marker"></i>Dambel</cite></small>
+				<small><cite> <i class="glyphicon glyphicon-time"></i>Sabato mattina</cite></small>
+				<small><cite> <i class="glyphicon glyphicon-user"></i>Gianlu94</cite></small>
 			</div>
 		</div>
 	</div>
@@ -53,35 +46,38 @@
 
 <hr>
 <div class="container inCorso">
-	<div class="row">
-		<div class="[ col-xs-12 col-sm-offset-2 col-sm-8 ]">
-			<ul class="event-list">
-				<li class="offer">
-					<time datetime="2014-07-20">
-						<span class="day">4</span>
-						<span class="month">Jul</span>
-						<span class="year">2014</span>
-						<span class="time">ALL DAY</span>
-					</time>
-					<div class="userInfo">
-						nameSur <br>
-						rankO
+	<div class="[ col-xs-12 col-sm-offset-2 col-sm-8 ]">
+		<ul class="offer-list">
+			<li class="offer">
+				<div class="box-shadow row">
+					<div class="offerDate col-xs-3">
+						<time datetime="2015-12-22">22 dicembre ore 20:00</time>
 					</div>
-					<div class="info">
-						<h2 class="title">Fellin</h2>
-
-						<p class="desc">si è offerto per aiutarti</p>
+					<div class="col-xs-3">
+						<h2 class="userName">FellinR</h2>
 					</div>
-					<div class="social">
+					<div class="userRank col-xs-3">
+						* * * * *
+						<!--
+						<div data-content="" class="rating-container rating-gly-star">
+							<div style="width: 100%;" data-content="" class="rating-stars"></div>
+							<input id="rating-o" class="rating form-control hide" min="0" max="5" step="1"
+								   data-size="sm" type="number"></div>
+								   -->
+					</div>
+					<div class="social col-xs-3">
 						<ul>
-							<li class="assign"><img class="icon"
-							                        src="http://media.licdn.com/mpr/mpr/shrinknp_400_400/p/5/005/067/1a9/39f45b1.jpg">
+							<li class="assign">
+								<img class="icon"
+								     src="http://media.licdn.com/mpr/mpr/shrinknp_400_400/p/5/005/067/1a9/39f45b1.jpg">
 							</li>
 						</ul>
 					</div>
+				</div>
 				</li>
-			</ul>
-		</div>
+
+
+		</ul>
 	</div>
 </div>
 
