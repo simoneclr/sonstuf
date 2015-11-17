@@ -10,7 +10,6 @@
 </head>
 <body>
 <c:import url="/prefabs/navbar.jsp"></c:import>
-
 <div class="container centered">
 	<div class="panel box-shadow">
 		<div class="row">
@@ -75,8 +74,8 @@
 					</div>
 					<div class="social">
 						<ul>
-							<li class="assign">
-								<img src="http://media.licdn.com/mpr/mpr/shrinknp_400_400/p/5/005/067/1a9/39f45b1.jpg">
+							<li class="assign"><img class="icon"
+							                        src="http://media.licdn.com/mpr/mpr/shrinknp_400_400/p/5/005/067/1a9/39f45b1.jpg">
 							</li>
 						</ul>
 					</div>
