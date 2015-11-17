@@ -182,9 +182,7 @@
 				break;
 			case 3:
 				alert("sorry invalid state");
-
 		}
-
 	});
 </script>
 <c:import url="/prefabs/footer.jsp"></c:import>
