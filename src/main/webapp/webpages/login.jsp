@@ -13,9 +13,9 @@
 			<h2>Login</h2>
 			<form class="form-horizontal" method="POST" action="check-login">
 				<div class="form-group">
-					<label for="username" class="col-sm-2 col-xs-2 control-label">Username</label>
+					<label for="userName" class="col-sm-2 col-xs-2 control-label">Username</label>
 					<div class="col-sm-6 col-xs-6">
-						<input type="email" class="form-control" id="username" name="username" placeholder="username">
+						<input class="form-control" id="userName" name="userName" placeholder="username">
 					</div>
 				</div>
 				<div class="form-group">
@@ -27,7 +27,7 @@
 				<div class="form-group">
 					<div class="col-sm-4 col-xs-4 remember_column">
 						<div class="checkbox">
-								<input name="remember" type="checkbox" value="Remember Me"> Remember Me
+								<input name="rememberMe" type="checkbox" value="Remember Me"> Remember Me
 						</div>
 					</div>
 				</div>
