@@ -39,8 +39,8 @@ campi del form: "idRequest"
 La servlet che accetta il form dovrà reindirizzare su una pagina di success o fail a seconda.
 
 LOGIN
-output: userName può essere email o numero di telefono
-form: "userName", "password"
+output: userName può essere email o numero di telefono, remeber me per settare i cookies
+form: "userName", "password, remeberMe"
 
 HOME ADMIN
 --
