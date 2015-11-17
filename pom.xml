@@ -45,6 +45,11 @@
 	  <artifactId>mysql-connector-java</artifactId>
 	  <version>5.1.6</version>
 	</dependency>
+	<dependency>
+	  <groupId>org.apache.tomcat</groupId>
+	  <artifactId>tomcat-jdbc</artifactId>
+	  <version>8.0.28</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>com.sonstuf</finalName>
