@@ -118,3 +118,7 @@ span.glyphicon-arrow-right {
 	cursor: inherit;
 	display: block;
 }
+
+.remember_column{
+	padding-left: 34px;
+}
