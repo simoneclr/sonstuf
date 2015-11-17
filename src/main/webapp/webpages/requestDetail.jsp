@@ -101,19 +101,61 @@
 							</p>
 						</div>
 						<div class="col-xs-4">
-							<strong>Valuta il lavoro di Gino:</strong>
+
+							<strong>Valuta come Gino ha lavorato:</strong>
 
 							<p>
 								<input id="rating-o" type="number" class="rating" min=0 max=5 step=1 data-size="sm">
 								<input type="text" placeholder="commento">
 							</p>
-							<button type="submit" class="btn btn-default">Invia</button>
+							<button type="submit" class="btn btn-default">Spedisci</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<div class="done hidden">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default box-shadow">
+					<div class="panel-heading">
+						<strong>Offerta</strong>
+					</div>
+					<div class="panel body" style="overflow: auto; margin-bottom: 0px">
+						<div class="col-xs-2">
+							<img src="http://placehold.it/150x150" style="float: left; margin-right: 10px">
+						</div>
+						<div class="col-xs-6">
+							<p>
+								"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+								Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+								ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+								esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+								non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+							</p>
+						</div>
+						<div class="col-xs-4">
+							<strong>Hai valutato Gino:</strong>
+							<input id="rating-oDone" type="number" class="rating" min=0 max=5 step=1 data-size="sm">
+
+							<div class="comment">
+								<p>
+									molto bravo.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<br>
+<br>
 
 	<div class="done hidden">
 		<div class="row">
