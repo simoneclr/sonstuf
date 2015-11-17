@@ -11,11 +11,6 @@
 <c:import url="/prefabs/navbar.jsp"></c:import>
 
 <div class="request">
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 
 	<div class="container" style="background-color: #1c699d">
 		<img class="col-xs-4 img-responsive img-circle" src="http://placehold.it/2048x1024">

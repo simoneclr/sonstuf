@@ -18,9 +18,9 @@ input.btn.btn-success{
 	margin-top:20px;
 }
 .request{
-    height: 180px;
-    background-color:#CEF6D8;
-    margin-bottom: 5px;
+	height: 180px;
+	background-color:#CEF6D8;
+	margin-bottom: 5px;
 }
 
 .orange-circle-button {
@@ -112,7 +112,7 @@ span.glyphicon-arrow-right {
 }
 
 .list{
-    overflow: hidden;
+	overflow: hidden;
 }
 
 
@@ -133,27 +133,27 @@ span.glyphicon-arrow-right {
 }
 
 .imgCategory{
-    height: 120px;
-    width: 150px;
+	height: 120px;
+	width: 150px;
 }
 
 .glyphicon {  margin-bottom: 10px;margin-right: 10px;}
 
 small {
-    display: block;
-    line-height: 1.428571429;
-    color: #585858;
-    font-size: 13px;
+	display: block;
+	line-height: 1.428571429;
+	color: #585858;
+	font-size: 13px;
 }
 
 .main-profile-p{
-    font-size: 16px;
-    color: black;
+	font-size: 16px;
+	color: black;
 }
 
 .summary-profile-position{
-    position: relative;
-    top: -20px;
+	position: relative;
+	top: -20px;
 }
 
 /*
