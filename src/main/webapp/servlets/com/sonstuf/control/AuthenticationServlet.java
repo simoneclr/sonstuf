@@ -17,7 +17,8 @@ public class AuthenticationServlet extends HttpServlet {
 	
 	private static final String FORM_USERNAME_FIELD = "userName";
 	private static final String FORM_PASSWORD_FIELD = "password";
-       
+    private static final String FORM_REMEMBER_ME_FIELD = "rememberMe";
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
