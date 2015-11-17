@@ -15,37 +15,37 @@ hr.colorgraph {
 }
 
 .request{
-height: 180px;
-background-color:#CEF6D8;
+    height: 180px;
+    background-color:#CEF6D8;
     margin-bottom: 5px;
-    }
+}
 
 .list{
-overflow: hidden;
+    overflow: hidden;
 }
 
-.category{
-    float: left;
-    width: 145px;
-    margin-top: 5px;
-}
+
 
 .imgCategory{
     height: 120px;
     width: 150px;
 }
 
-.nameCategory{
-    text-align: center;
-    height: 30px;
+.glyphicon {  margin-bottom: 10px;margin-right: 10px;}
+
+small {
+    display: block;
+    line-height: 1.428571429;
+    color: #585858;
+    font-size: 13px;
 }
 
-.description{
-    float: left;
-    width: 70%;
-    margin: 3%;
+.main-profile-p{
+    font-size: 16px;
+    color: black;
 }
 
-.info{
-    margin-top: 8px;
+.summary-profile-position{
+    position: relative;
+    top: -20px;
 }
