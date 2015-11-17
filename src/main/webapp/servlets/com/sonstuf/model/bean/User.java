@@ -13,7 +13,7 @@ public class User implements Serializable{
 
     private int idUser;
     private String name;
-    private String Surname;
+    private String surname;
     private String phone;
     private String email;
     private String passwordHash;
