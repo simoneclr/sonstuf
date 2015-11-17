@@ -191,4 +191,16 @@ public class UserModel {
 		return res;
 	}
 
+	/**
+	 * todo
+	 * @param password
+	 * @param user
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
+	 */
+	public static boolean checkPassword(String password, User user) throws NoSuchAlgorithmException, InvalidKeySpecException {
+		return PasswordHash.validatePassword(password, user.getPasswordHash());
+	}
+
 }
