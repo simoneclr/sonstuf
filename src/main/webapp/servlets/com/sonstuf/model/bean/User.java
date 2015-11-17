@@ -9,100 +9,101 @@ import java.sql.Date;
  */
 public class User implements Serializable{
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private int idUser;
-    private String name;
-    private String surname;
-    private String phone;
-    private String email;
-    private String passwordHash;
-    private String rankO;
-    private String rankP;
-    private Date birthDate;
-    private boolean admin;
+	private int idUser;
+	private String name;
+	private String surname;
+	private String phone;
+	private String email;
+	private String passwordHash;
+	private String rankO;
+	private String rankP;
+	private Date birthDate;
+	private boolean admin;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
-    public int getIdUser() {
-        return idUser;
-    }
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
+	public int getIdUser() {
+		return idUser;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getSurname() {
-        return Surname;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setSurname(String surname) {
-        Surname = surname;
-    }
+	public String getSurname() {
+		return Surname;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public void setSurname(String surname) {
+		Surname = surname;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getPasswordHash() {
-        return passwordHash;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
+	public String getPasswordHash() {
+		return passwordHash;
+	}
 
-    public String getRankO() {
-        return rankO;
-    }
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
+	}
 
-    public void setRankO(String rankO) {
-        this.rankO = rankO;
-    }
+	public String getRankO() {
+		return rankO;
+	}
 
-    public String getRankP() {
-        return rankP;
-    }
+	public void setRankO(String rankO) {
+		this.rankO = rankO;
+	}
 
-    public void setRankP(String rankP) {
-        this.rankP = rankP;
-    }
+	public String getRankP() {
+		return rankP;
+	}
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
+	public void setRankP(String rankP) {
+		this.rankP = rankP;
+	}
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
+	public Date getBirthDate() {
+		return birthDate;
+	}
 
-    public boolean isAdmin() {
-        return admin;
-    }
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 }
