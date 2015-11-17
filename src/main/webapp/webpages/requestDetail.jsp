@@ -3,6 +3,7 @@
 <head>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<c:import url="/prefabs/header.jsp"></c:import>
+	<link href="/css/enricoStyle.css" rel="stylesheet">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Dettaglio richiesta</title>
 
@@ -11,12 +12,6 @@
 <c:import url="/prefabs/navbar.jsp"></c:import>
 
 <div class="request">
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-
 	<div class="container" style="background-color: #1c699d">
 		<img class="col-xs-4 img-responsive img-circle" src="http://placehold.it/2048x1024">
 
