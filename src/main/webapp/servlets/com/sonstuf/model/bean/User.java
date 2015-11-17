@@ -4,122 +4,105 @@ import java.io.Serializable;
 
 /**
  * Classe che rappresenta la tabella utente del db
- * @author alberto
+ * @author enrico.t
  */
 public class User implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
-    private int idUtente;
+    private int idUser;
+    private String name;
+    private String Surname;
+    private String phone;
     private String email;
-    private String password;
-    private double credito;
-    private String ruolo;
-    private boolean active;
-    private String attivazione;
+    private String passwordHash;
+    private String rankO;
+    private String rankP;
+    private Date birthDate;
+    private boolean admin;
 
-    //private Connection connection;
-/*
-    public User() throws NamingException, SQLException {
 
-        connection = Connector.getConnection();
-    }
-*/
-    /**
-     * @return the idUtente
-     */
-    public int getIdUtente() {
-        return idUtente;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    /**
-     * @param idUtente the idUtente to set
-     */
-    public void setIdUtente(int idUtente) {
-        this.idUtente = idUtente;
+    public int getIdUser() {
+        return idUser;
     }
 
-    /**
-     * @return the email
-     */
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return Surname;
+    }
+
+    public void setSurname(String surname) {
+        Surname = surname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getEmail() {
         return email;
     }
 
-    /**
-     * @param email the email to set
-     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    /**
-     * @return the password
-     */
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    /**
-     * @param password the password to set
-     */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
-    /**
-     * @return the credito
-     */
-    public double getCredito() {
-        return credito;
+    public String getRankO() {
+        return rankO;
     }
 
-    /**
-     * @param credito the credito to set
-     */
-    public void setCredito(double credito) {
-        this.credito = credito;
+    public void setRankO(String rankO) {
+        this.rankO = rankO;
     }
 
-    /**
-     * @return the active
-     */
-    public boolean isActive() {
-        return active;
+    public String getRankP() {
+        return rankP;
     }
 
-    /**
-     * @param active the active to set
-     */
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setRankP(String rankP) {
+        this.rankP = rankP;
     }
 
-    /**
-     * @return the attivazione
-     */
-    public String getAttivazione() {
-        return attivazione;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    /**
-     * @param attivazione the attivazione to set
-     */
-    public void setAttivazione(String attivazione) {
-        this.attivazione = attivazione;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
-    /**
-     * @return the ruolo
-     */
-    public String getRuolo() {
-        return ruolo;
+    public boolean isAdmin() {
+        return admin;
     }
 
-    /**
-     * @param ruolo the ruolo to set
-     */
-    public void setRuolo(String ruolo) {
-        this.ruolo = ruolo;
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 }
