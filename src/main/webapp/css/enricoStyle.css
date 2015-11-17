@@ -5,6 +5,7 @@
 	margin: 0px;
 	padding: 0px;
 }
+
 .event-list > li {
 	background-color: rgb(255, 255, 255);
 	box-shadow: 0px 0px 5px rgb(51, 51, 51);
@@ -12,6 +13,7 @@
 	padding: 0px;
 	margin: 0px 0px 20px;
 }
+
 .event-list > li > time {
 	display: inline-block;
 	width: 100%;
@@ -21,41 +23,50 @@
 	text-align: center;
 	text-transform: uppercase;
 }
+
 .event-list > li:nth-child(even) > time {
 	background-color: rgb(165, 82, 167);
 }
+
 .event-list > li > time > span {
 	display: none;
 }
+
 .event-list > li > time > .day {
 	display: block;
 	font-size: 56pt;
 	font-weight: 100;
 	line-height: 1;
 }
+
 .event-list > li time > .month {
 	display: block;
 	font-size: 24pt;
 	font-weight: 900;
 	line-height: 1;
 }
+
 .event-list > li > img {
 	width: 100%;
 }
+
 .event-list > li > .info {
 	padding-top: 5px;
 	text-align: center;
 }
+
 .event-list > li > .info > .title {
 	font-size: 17pt;
 	font-weight: 700;
 	margin: 0px;
 }
+
 .event-list > li > .info > .desc {
 	font-size: 13pt;
 	font-weight: 300;
 	margin: 0px;
 }
+
 .event-list > li > .info > ul,
 .event-list > li > .social > ul {
 	display: table;
@@ -65,9 +76,11 @@
 	width: 100%;
 	text-align: center;
 }
+
 .event-list > li > .social > ul {
 	margin: 0px;
 }
+
 .event-list > li > .info > ul > li,
 .event-list > li > .social > ul > li {
 	display: table-cell;
@@ -77,18 +90,22 @@
 	font-weight: 300;
 	padding: 3px 0px;
 }
+
 .event-list > li > .info > ul > li > a {
 	display: block;
 	width: 100%;
 	color: rgb(30, 30, 30);
 	text-decoration: none;
 }
+
 .event-list > li > .social > ul > li {
 	padding: 0px;
 }
+
 .event-list > li > .social > ul > li > a {
 	padding: 3px 0px;
 }
+
 .event-list > li > .info > ul > li:hover,
 .event-list > li > .social > ul > li:hover {
 	color: rgb(30, 30, 30);
@@ -103,19 +120,23 @@
 		height: 120px;
 		padding: 0px;
 	}
+
 	.event-list > li > time,
-	.event-list > li > img  {
+	.event-list > li > img {
 		display: inline-block;
 	}
+
 	.event-list > li > time,
 	.event-list > li > img {
 		width: 120px;
 		float: left;
 	}
+
 	.event-list > li > .info {
 		background-color: rgb(245, 245, 245);
 		overflow: hidden;
 	}
+
 	.event-list > li > time,
 	.event-list > li > img {
 		width: 120px;
@@ -123,21 +144,25 @@
 		padding: 0px;
 		margin: 0px;
 	}
+
 	.event-list > li > .info {
 		position: relative;
 		height: 120px;
 		text-align: left;
 		padding-right: 40px;
 	}
+
 	.event-list > li > .info > .title,
 	.event-list > li > .info > .desc {
 		padding: 0px 10px;
 	}
+
 	.event-list > li > .info > ul {
 		position: absolute;
 		left: 0px;
 		bottom: 0px;
 	}
+
 	.event-list > li > .social {
 		position: absolute;
 		top: 0px;
@@ -145,13 +170,16 @@
 		display: block;
 		width: 40px;
 	}
+
 	.event-list > li > .social > ul {
 		border-left: 1px solid rgb(230, 230, 230);
 	}
+
 	.event-list > li > .social > ul > li {
 		display: block;
 		padding: 0px;
 	}
+
 	.event-list > li > .social > ul > li > a {
 		display: block;
 		width: 40px;
@@ -160,19 +188,39 @@
 }
 
 .assign > img {
-	width : 100%;
+	width: 100%;
 }
-.offer{
+
+.offer {
 	overflow: hidden;
 }
-.userInfo{
-	float: left;
-	margin : 5px;
-}
-.info{
+
+.userInfo {
 	float: left;
 	margin: 5px;
 }
-.social{
+
+.info {
+	float: left;
+	margin: 5px;
+}
+
+.social {
 	float: right;
+}
+
+.icon {
+	width: 100%;
+	margin: 4px;
+}
+
+.panel {
+	background-color: #FFFFFF;
+	margin: 4px;
+	padding: 4px;
+}
+
+.box-shadow {
+	-webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, .10);
+	box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, .10);
 }
