@@ -5,21 +5,11 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
-  	<servlet-name>TestClass</servlet-name>
-  	<display-name>TestClass</display-name>
-  	<description></description>
-  	<servlet-class>com.sontuf.TestClass</servlet-class>
-  </servlet>
-  <servlet>
   	<servlet-name>AuthenticationServlet</servlet-name>
   	<display-name>AuthenticationServlet</display-name>
   	<description></description>
   	<servlet-class>com.sonstuf.model.AuthenticationServlet</servlet-class>
   </servlet>
-  <servlet-mapping>
-  	<servlet-name>TestClass</servlet-name>
-  	<url-pattern>/TestClass</url-pattern>
-  </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>AuthenticationServlet</servlet-name>
   	<url-pattern>/AuthenticationServlet</url-pattern>
