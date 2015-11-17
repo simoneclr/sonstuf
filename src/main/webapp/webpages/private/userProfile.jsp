@@ -7,7 +7,7 @@
 	<title>User Profile | Sonstuf</title>
 </head>
 
-<body style="padding-top: 50px">
+<body>
 
 	<c:import url="/prefabs/navbar.jsp"></c:import>
 
