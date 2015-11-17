@@ -109,6 +109,8 @@ span.glyphicon-arrow-right {
 .btn-file {
 	position: relative;
 	overflow: hidden;
+}
+
 .list{
     overflow: hidden;
 }
