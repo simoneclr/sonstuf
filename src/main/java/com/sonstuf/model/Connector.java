@@ -14,14 +14,14 @@ import javax.sql.DataSource;
  * @author hypertesto
  */
 public class Connector {
-    
-    /**
-     * Ritorna la connessione al pool nel modo appropriato.
-     * @return Una connessione valida al db
-     * @throws NamingException
-     * @throws SQLException 
-     */
-    public static Connection getConnection () throws NamingException, SQLException {
+
+	/**
+	 * Ritorna la connessione al pool nel modo appropriato.
+	 * @return Una connessione valida al db
+	 * @throws NamingException
+	 * @throws SQLException
+	 */
+	public static Connection getConnection () throws NamingException, SQLException {
 		
 		InitialContext initialContext;
 		Context context;
@@ -33,5 +33,5 @@ public class Connector {
 		ds = (DataSource) context.lookup ("connpool");
 		return ds.getConnection ();
 	}
-    
+
 }
