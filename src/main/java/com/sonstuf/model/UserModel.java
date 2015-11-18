@@ -155,7 +155,7 @@ public class UserModel {
 
 
 		String query = 	"SELECT * from user\n" +
-				"WHERE phone = ? ;";
+						"WHERE phone = ? ;";
 
 		connection = Connector.getConnection();
 
