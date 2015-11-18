@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sonstuf.model.UserModel;
 import com.sonstuf.model.bean.User;
 import com.sonstuf.utils.Retval;
@@ -42,43 +42,39 @@ public class AuthenticationServlet extends HttpServlet {
 		
 		String op;
 		Retval operationStatus;
+		ObjectMapper mapper;
 		
 		op = request.getParameter ("op");
 		
 		if (op == null) {
 			
-			return;
+			operationStatus = new Retval (false, "Invalid request: missing op parameter");
+		
+		} else {
+		
+			switch (op) {
+				
+				case "authenticate":
+					
+					operationStatus = doLogin (request);
+					break;
+					
+				case "logout":
+					
+					operationStatus = doLogout (request);
+					break;
+					
+				default:
+					
+					//TODO: please escape op to avoid code injection
+					operationStatus = new Retval (false, op + ": Unknown operation");
+					break;
+			}
 		}
-		
-		switch (op) {
-			
-			case "authenticate":
-				
-				operationStatus = doLogin (request);
-				break;
-				
-			case "logout":
-				
-				operationStatus = doLogout (request);
-				break;
-				
-			default:
-				
-				//TODO: please escape op to avoid code injection
-				operationStatus = new Retval (false, op + ": Unknown operation");
-				break;
-		}
-		
-		//TODO: the selected operation was complete, the exit status is in
-		//operationStatus. We should now serialize an information-containing class
-		//(which might also be Retval) and send it to the front end.
-		
-		/*
-		ObjectMapper mapper;
 		
 		mapper = new ObjectMapper ();
 		response.getWriter ().write (mapper.writeValueAsString (operationStatus));
-		*/
+		
 		
 		/* OLD CODE
 		// For picking up methods return values
@@ -248,7 +244,6 @@ public class AuthenticationServlet extends HttpServlet {
 		
 		HttpSession session;
 		String username, password; // NOTA: username might also contain user's phone number
-		Retval res;
 		User tempUser;
 		boolean isPasswordRight;
 		
