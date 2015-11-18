@@ -4,7 +4,9 @@
 <html>
 <head>
 	<c:import url="/prefabs/header.jsp"></c:import>
-	<title>Roberto 'Amumu' Fellin | Sonstuf</title>
+	<link	href="/css/style-simone.css" rel="stylesheet">
+	<script src="/js/simone/userprofile.js"></script>
+	<title>User Profile | Sonstuf</title>
 </head>
 
 <body style="padding-top: 50px">
@@ -13,9 +15,9 @@
 
 	<div class="container">
 
-		<div class="row" style="margin-bottom: 30px; margin-top: 30px">
+		<div class="row title-row" style="margin-bottom: 30px; margin-top: 30px">
 			<div class="col-md-9">
-				<h1>Roberto 'Amumu' Fellin</h1>
+				<h1 id="ucname">Roberto 'Amumu' Fellin</h1>
 			</div>
 
 			<div class="col-md-3">
@@ -33,13 +35,72 @@
 
 				<!-- Modal content-->
 				<div class="modal-content">
-					<div class="modal-header">
+					<div class="modal-header" style="padding-bottom: 5px">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Impostazioni profilo</h4>
+						<h4 class="modal-title"><strong>Impostazioni profilo</strong></h4>
 					</div>
 					<div class="modal-body">
-						<form>
+						<form class="form-horizontal" role="form" style="margin-bottom: 0">
+							<!--
+							<div class="form-group">
+								<label class="control-label col-sm-2" for="in-name">Nome:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="in-name" placeholder="Nuovo nome">
+								</div>
+							</div>
 
+							<div class="form-group">
+								<label class="control-label col-sm-2" for="in-sname">Cognome:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="in-sname" placeholder="Nuovo cognome">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-sm-2" for="in-bdate">Data di nascita:</label>
+								<div class="col-sm-10">
+									<input type="date" class="form-control" id="in-bdate">
+								</div>
+							</div>
+							-->
+
+							<div class="form-group">
+								<label class="control-label col-sm-3" for="in-email">Email:</label>
+								<div class="col-sm-9">
+									<input type="email" class="form-control" id="in-email" placeholder="Nuova email">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-sm-3" for="in-pwd-1">Cambia password:</label>
+								<div class="col-sm-9">
+									<input type="password" class="form-control" id="in-pwd-1" placeholder="Nuova nuova password">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-sm-3" for="in-pwd-2">Conferma password:</label>
+								<div class="col-sm-9">
+									<input type="password" class="form-control" id="in-pwd-2" placeholder="Reimmetti la nuova password">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-sm-3" for="in-old-pwd">Password attuale:</label>
+								<div class="col-sm-9">
+									<input type="password" class="form-control" id="in-old-pwd" placeholder="Immetti la password attuale come verifica">
+								</div>
+							</div>
+
+							<div class="form-group" style="margin-bottom: 0">
+								<div class="col-sm-3">
+									<button type="reset" class="btn btn-danger btn-lg btn-block" data-dismiss="modal">Cancella</button>
+								</div>
+								<div class="col-sm-6"></div>
+								<div class="col-sm-3">
+									<button type="submit" class="btn btn-success btn-lg btn-block" data-dismiss="modal">Conferma</button>
+								</div>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -52,9 +113,9 @@
 				<img src="http://placehold.it/250x300">
 			</div>
 			<div class="col-md-9">
-				<h4><strong>Data di nascita:</strong> 21/12/2012</h4>
-				<h4><strong>Email:</strong> rf.garenlol@dambel.zum</h4>
-				<h4><strong>Telefono:</strong> Non te lo dico gné gné!</h4>
+				<h4><strong>Data di nascita:</strong> <span id="bdate">21/12/2012</span></h4>
+				<h4><strong>Email:</strong> <span id="email">rf.garenlol@dambel.zum</span></h4>
+				<h4><strong>Telefono:</strong> <span id="telnum">Non te lo dico gné gné!</span></h4>
 				<br>
 				<h4>
 					<strong>Rating O:</strong>
@@ -67,66 +128,78 @@
 			</div>
 		</div>
 
-		<hr style="margin-top: 80px">
+		<hr class="colorgraph" style="margin-top: 100px">
 
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#requests">I tuoi annunci</a></li>
-			<li><a data-toggle="tab" href="#jobs">I tuoi lavori</a></li>
+			<li><a data-toggle="tab" href="#offers">I tuoi lavori</a></li>
 		</ul>
 
 		<div class="tab-content" style="padding-top: 10px;">
 			<div id="requests" class="tab-pane fade in active">
-
-				<c:forEach var="i" begin="1" end="5">
+				<script id="request-template" type="text/x-handlebars-template">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="panel panel-default">
+							<div class="panel panel-default request-panel">
 								<div class="panel-heading">
-									<strong>Titolo Richiesta</strong>
+									<h3 class="panel-title">
+										<a href="#" style="float: left"><strong>{{title}}</strong></a>
+									</h3>
+
+									<ul class="place-time">
+										<li>
+											<span class="glyphicon glyphicon-map-marker"></span> {{place}}
+										</li>
+										<li>
+											<span class="glyphicon glyphicon-time"></span>{{time}}
+										</li>
+									</ul>
+
+									<div style="clear: both"></div>
 								</div>
-								<div class="panel body" style="overflow: auto; margin-bottom: 0px">
-									<img src="http://placehold.it/150x150" style="float: left; margin-right: 10px">
+								<div class="panel-body">
+									<img src="http://placehold.it/150x150" class="request-img">
 									<p>
-										"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-										sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-										Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-										ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-										esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-										non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+										{{description}}
 									</p>
 								</div>
 							</div>
 						</div>
 					</div>
-				</c:forEach>
-
+				</script>
 			</div>
 
-			<div id="jobs" class="tab-pane fade in">
-
-				<c:forEach var="i" begin="1" end="5">
+			<div id="offers" class="tab-pane fade in">
+				<script id="offers-template" type="text/x-handlebars-template">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="panel panel-default">
+							<div class="panel panel-default request-panel">
 								<div class="panel-heading">
-									<strong>Titolo Richiesta</strong>
+									<h3 class="panel-title">
+										<a href="#" style="float: left"><strong>{{title}}</strong></a>
+									</h3>
+
+									<ul class="place-time">
+										<li>
+											<span class="glyphicon glyphicon-map-marker"></span> {{place}}
+										</li>
+										<li>
+											<span class="glyphicon glyphicon-time"></span>{{time}}
+										</li>
+									</ul>
+
+									<div style="clear: both"></div>
 								</div>
-								<div class="panel body" style="overflow: auto; margin-bottom: 0px">
-									<img src="http://placehold.it/150x150" style="float: left; margin-right: 10px">
+								<div class="panel-body">
+									<img src="http://placehold.it/150x150" class="request-img">
 									<p>
-										"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-										sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-										Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-										ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-										esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-										non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+										{{description}}
 									</p>
 								</div>
 							</div>
 						</div>
 					</div>
-				</c:forEach>
-
+				</script>
 			</div>
 		</div>
 
@@ -137,12 +210,12 @@
 		$("#rating-o").rating({'showCaption': false,
 			'showClear': false,
 			'readonly': true
-		}).rating('update', 5);
+		});
 
 		$("#rating-r").rating({'showCaption': false,
 			'showClear': false,
 			'readonly': true
-		}).rating('update', 4);
+		});
 	</script>
 
 </body>

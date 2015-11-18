@@ -6,9 +6,7 @@
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/jquery.bxslider.css" rel="stylesheet">
 <link href="/css/star-rating.css" rel="stylesheet">
-<!--
 <link href="/css/style.css" rel="stylesheet">
--->
 <link href="/css/navbars.css" rel="stylesheet">
 <!--
 <link href="/css/cinema.css" rel="stylesheet">
@@ -25,4 +23,5 @@
 <script src="/js/jquery.bxslider.min.js"></script>
 -->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
 <script src="/js/jquery-ui.min.js"></script>

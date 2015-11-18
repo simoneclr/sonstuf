@@ -1,0 +1,33 @@
+/*userProfile.jsp*/
+
+ul.place-time {
+	padding-left: 0;
+	text-align: right;
+	margin: 0;
+	display: inline;
+	float: right
+}
+
+ul.place-time > li {
+	display: inline;
+	padding-left: 10px;
+}
+
+.request-img {
+	float: left;
+	margin-right: 10px;
+}
+
+div.request-panel > .panel-body {
+	overflow: auto;
+	padding: 2px;
+}
+
+div.request-panel > .panel-heading {
+	padding-bottom: 2px;
+}
+
+.glyphicon-time {
+	padding-right: 5px;
+}
+
