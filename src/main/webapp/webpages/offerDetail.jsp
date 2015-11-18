@@ -6,7 +6,7 @@
 	<link href="/css/enricoStyle.css" rel="stylesheet">
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Dettaglio richiesta</title>
+	<title>Dettaglio offerta</title>
 
 </head>
 <body>
@@ -48,43 +48,19 @@
 
 <div class="container centered status">
 	<div class="inCorso hidden">
-		<c:forEach var="i" begin="1" end="5">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="panel panel-default box-shadow">
-						<div class="panel-heading">
-							<strong>Offerta</strong>
-						</div>
-						<div class="panel body" style="overflow: auto; margin-bottom: 0px">
-							<div class="col-xs-2">
-								<img src="http://placehold.it/150x150" style="float: left; margin-right: 10px">
-							</div>
-							<div class="col-xs-8">
-								<p>
-									"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-									sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-									ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-									esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-									non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-								</p>
-							</div>
-							<div class="col-xs-2">
-								<small><cite> <i class="glyphicon glyphicon-ok"></i>Incarica</cite></small>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</c:forEach>
+		<div class="col-xs-4"></div>
+		<div class="col-xs-4">
+			<p>hai dato la tua disponibilità per questa richiesta;</p>
+			<p>attendi che Fuffi scelga un incaricato.</p>
+		</div>
+		<div class="col-xs-4"></div>
 	</div>
-
 	<div class="inAttesaDiValutazione hidden">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default box-shadow">
 					<div class="panel-heading">
-						<strong>Valuta Gino</strong>
+						<strong>Valuta Fuffi</strong>
 					</div>
 					<div class="panel body" style="overflow: auto; margin-bottom: 0px">
 						<div class="col-xs-2">
@@ -102,7 +78,7 @@
 						</div>
 						<div class="col-xs-4">
 
-							<strong>Valuta come Gino ha lavorato:</strong>
+							<strong>Valuta come è stato il rapporto con Fuffi:</strong>
 
 							<p>
 								<input id="rating-o" type="number" class="rating" min=0 max=5 step=1 data-size="sm">
@@ -121,7 +97,7 @@
 			<div class="col-md-12">
 				<div class="panel panel-default box-shadow">
 					<div class="panel-heading">
-						<strong>Hai valutato Gino</strong>
+						<strong>Hai valutato Fuffi</strong>
 					</div>
 					<div class="panel body" style="overflow: auto; margin-bottom: 0px">
 						<div class="col-xs-2">
