@@ -45,11 +45,36 @@
 	  <artifactId>mysql-connector-java</artifactId>
 	  <version>5.1.6</version>
 	</dependency>
-	<dependency>
-	  <groupId>org.apache.tomcat</groupId>
-	  <artifactId>tomcat-jdbc</artifactId>
-	  <version>8.0.28</version>
-	</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jdbc</artifactId>
+			<version>8.0.28</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>8.0.28</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-el-api</artifactId>
+			<version>8.0.28</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jasper-el</artifactId>
+			<version>8.0.28</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-websocket-api</artifactId>
+			<version>8.0.28</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jsp-api</artifactId>
+			<version>8.0.28</version>
+		</dependency>
   </dependencies>
   <build>
     <finalName>com.sonstuf</finalName>
