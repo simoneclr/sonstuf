@@ -195,7 +195,7 @@ public class UserModel {
 	 * todo
 	 * @param password
 	 * @param user
-	 * @return
+	 * @return, NamingException
 	 * @throws NoSuchAlgorithmException
 	 * @throws InvalidKeySpecException
 	 */
