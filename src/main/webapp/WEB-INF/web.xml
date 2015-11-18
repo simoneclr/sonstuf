@@ -4,6 +4,16 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>LoginFilter</filter-name>
+  	<display-name>LoginFilter</display-name>
+  	<description></description>
+  	<filter-class>com.sonstuf.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>LoginFilter</filter-name>
+  	<url-pattern>/webpages/private/*</url-pattern>
+  </filter-mapping>
   <servlet>
   	<servlet-name>AuthenticationServlet</servlet-name>
   	<display-name>AuthenticationServlet</display-name>
