@@ -147,6 +147,8 @@ output:
 REGISTRAZIONE
 
 form: "name", "surname", "email", "phone", "birthdate", "password1", "password2"
+
+formato birthdate: dd/MM/yyyy (su notazione java.text.SimpleDateFormat http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html)
 NOTA: i controlli verranno effettuati a lato servlet
 		
 		
