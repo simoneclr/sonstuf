@@ -13,10 +13,13 @@ public class Request {
 	private String place;
 	private String dateTime;	//il testo è libero
 	private String photo;
-	private User user;
-	private Category category;
+	private int idUser;
+	//private User user;
+	private int idCategory;
+	//private Category category;
 	private int status;
 	private Timestamp postTime;
+
 
 	public int getIdRequest() {
 		return idRequest;
@@ -66,20 +69,20 @@ public class Request {
 		this.photo = photo;
 	}
 
-	public User getUser() {
-		return user;
+	public int getIdUser() {
+		return idUser;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 
-	public Category getCategory() {
-		return category;
+	public int getIdCategory() {
+		return idCategory;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setIdCategory(int idCategory) {
+		this.idCategory = idCategory;
 	}
 
 	public int getStatus() {
