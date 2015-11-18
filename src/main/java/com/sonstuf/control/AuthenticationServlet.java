@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import com.sonstuf.model.UserModel;
 import com.sonstuf.model.bean.User;
 import com.sonstuf.utils.Retval;
@@ -38,46 +39,48 @@ public class AuthenticationServlet extends HttpServlet {
 	 */
 	protected void doGet (HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-			
-		// Request's session; if absent, create it
-		HttpSession session;
-		String op, username, password;
 		
-		session = request.getSession (true);
+		String op;
+		Retval operationStatus;
+		
 		op = request.getParameter ("op");
 		
-		User kaby;
-		
-		kaby = new User ();
-		
-		kaby.setName ("Kaby");
-		kaby.setSurname ("Bobby");
-		kaby.setBirthDate (new java.sql.Date (System.currentTimeMillis ()));
-		kaby.setEmail ("ssfshf@cacca.medda");
-		kaby.setAdmin (false);
-		kaby.setPhone ("1234545532");
-		kaby.setRankO (5);
-		kaby.setRankP (5);
-		
-		try {
-			UserModel.insert (kaby);
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (op == null) {
+			
+			return;
 		}
 		
-		response.getWriter ().write ("Dehiho\n");
+		switch (op) {
+			
+			case "authenticate":
+				
+				operationStatus = doLogin (request);
+				break;
+				
+			case "logout":
+				
+				operationStatus = doLogout (request);
+				break;
+				
+			default:
+				
+				//TODO: please escape op to avoid code injection
+				operationStatus = new Retval (false, op + ": Unknown operation");
+				break;
+		}
+		
+		//TODO: the selected operation was complete, the exit status is in
+		//operationStatus. We should now serialize an information-containing class
+		//(which might also be Retval) and send it to the front end.
 		
 		/*
+		ObjectMapper mapper;
+		
+		mapper = new ObjectMapper ();
+		response.getWriter ().write (mapper.writeValueAsString (operationStatus));
+		*/
+		
+		/* OLD CODE
 		// For picking up methods return values
 		Retval retval = null;
 		
@@ -241,12 +244,12 @@ public class AuthenticationServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private Retval doAuth (HttpServletRequest request, HttpServletResponse response) {
+	private Retval doLogin (HttpServletRequest request) {
 		
 		HttpSession session;
 		String username, password; // NOTA: username might also contain user's phone number
 		Retval res;
-		User temp;
+		User tempUser;
 		boolean isPasswordRight;
 		
 		session = request.getSession (true);
@@ -266,19 +269,19 @@ public class AuthenticationServlet extends HttpServlet {
 
 		try {
 
-			temp = UserModel.getUserByMail (username);
+			tempUser = UserModel.getUserByMail (username);
 
-			if (temp == null) {
+			if (tempUser == null) {
 
-				temp = UserModel.getUserByPhone (username);
+				tempUser = UserModel.getUserByPhone (username);
 				
-				if (temp == null) {
+				if (tempUser == null) {
 					
 					return new Retval (false, "Invalid email/phone number or password");
 				}
 			}
 
-			isPasswordRight = UserModel.checkPassword (password, temp);
+			isPasswordRight = UserModel.checkPassword (password, tempUser);
 
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException | NamingException | SQLException ex) {
 			
@@ -290,12 +293,7 @@ public class AuthenticationServlet extends HttpServlet {
 			return new Retval (false, "Invalid email/phone number or password");
 		}
 		
-		session.setAttribute ("logged", true);
-		
-		if (temp.isAdmin ()) {
-			
-			session.setAttribute ("admin", true);
-		}
+		session.setAttribute ("user", tempUser);
 		
 		return new Retval (true);
 		
@@ -334,6 +332,20 @@ public class AuthenticationServlet extends HttpServlet {
 			}
 		}
 		*/
+	}
+	
+	private Retval doLogout (HttpServletRequest request) {
+		
+		HttpSession session;
+		
+		session = request.getSession ();
+		
+		if (session != null) {
+			
+			session.removeAttribute ("user");
+		}
+		
+		return new Retval (true);
 	}
 
 }
