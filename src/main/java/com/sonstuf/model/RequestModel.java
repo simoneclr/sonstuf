@@ -63,7 +63,7 @@ public class RequestModel {
 	}
 
 
-	public static List<Request> getRequestByUserId (int id ) throws SQLException, NamingException {
+	public static List<Request> getRequestsByUserId ( int id ) throws SQLException, NamingException {
 
 		Connection connection;
 		PreparedStatement ps;
