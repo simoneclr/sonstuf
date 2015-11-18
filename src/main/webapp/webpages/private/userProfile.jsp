@@ -6,7 +6,7 @@
 	<c:import url="/prefabs/header.jsp"></c:import>
 	<link	href="/css/style-simone.css" rel="stylesheet">
 	<script src="/js/simone/userprofile.js"></script>
-	<title>Roberto 'Amumu' Fellin | Sonstuf</title>
+	<title>User Profile | Sonstuf</title>
 </head>
 
 <body>
@@ -73,62 +73,48 @@
 
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#requests">I tuoi annunci</a></li>
-			<li><a data-toggle="tab" href="#jobs">I tuoi lavori</a></li>
+			<li><a data-toggle="tab" href="#offers">I tuoi lavori</a></li>
 		</ul>
 
 		<div class="tab-content" style="padding-top: 10px;">
 			<div id="requests" class="tab-pane fade in active">
-
-				<c:forEach var="i" begin="1" end="5">
+				<script id="request-template" type="text/x-handlebars-template">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<strong>Titolo Richiesta</strong>
+									<strong>{{title}}</strong>
 								</div>
 								<div class="panel body" style="overflow: auto; margin-bottom: 0px">
 									<img src="http://placehold.it/150x150" style="float: left; margin-right: 10px">
 									<p>
-										"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-										sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-										Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-										ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-										esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-										non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+										{{description}}
 									</p>
 								</div>
 							</div>
 						</div>
 					</div>
-				</c:forEach>
-
+				</script>
 			</div>
 
-			<div id="jobs" class="tab-pane fade in">
-
-				<c:forEach var="i" begin="1" end="5">
+			<div id="offers" class="tab-pane fade in">
+				<script id="offers-template" type="text/x-handlebars-template">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<strong>Titolo Richiesta</strong>
+									<strong>{{title}}</strong>
 								</div>
 								<div class="panel body" style="overflow: auto; margin-bottom: 0px">
 									<img src="http://placehold.it/150x150" style="float: left; margin-right: 10px">
 									<p>
-										"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-										sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-										Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-										ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-										esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-										non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+										{{description}}
 									</p>
 								</div>
 							</div>
 						</div>
 					</div>
-				</c:forEach>
-
+				</script>
 			</div>
 		</div>
 

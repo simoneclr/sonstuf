@@ -23,4 +23,5 @@
 <script src="/js/jquery.bxslider.min.js"></script>
 -->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
