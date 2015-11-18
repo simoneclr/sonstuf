@@ -25,10 +25,16 @@
 	<div class="row">
 		<div class="col-md-offset-1 col-md-2">
 			<label>Categoria</label>
-			<input type="text" name="category" class="form-control" id="" value="">
+			<select class="form-control">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+			</select>
 		</div>
 		<div class="col-md-offset-1 col-md-2">
-			<label>Nome</label>
+			<label>Nome Richiedente</label>
 			<input type="text" name="name" class="form-control" id="" value="">
 		</div>
 		<div class="col-md-offset-1 col-md-2">
