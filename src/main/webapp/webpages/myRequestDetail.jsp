@@ -106,7 +106,8 @@
 
 							<p>
 								<input id="rating-o" type="number" class="rating" min=0 max=5 step=1 data-size="sm">
-								<input type="text" placeholder="commento">
+								<textarea id="comment" placeholder="commento" rows="4" cols="50"></textarea>
+							</p>
 							</p>
 							<button type="submit" class="btn btn-default">Spedisci</button>
 						</div>
