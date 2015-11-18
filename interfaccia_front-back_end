@@ -147,7 +147,7 @@ output:
 REGISTRAZIONE
 
 form: "name", "surname", "email", "phone", "birthdate", "password1", "password2"
-
+NOTA: i controlli verranno effettuati a lato servlet
 		
 		
 
