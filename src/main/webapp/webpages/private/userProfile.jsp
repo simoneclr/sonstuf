@@ -4,6 +4,8 @@
 <html>
 <head>
 	<c:import url="/prefabs/header.jsp"></c:import>
+	<link	href="/css/style-simone.css" rel="stylesheet">
+	<script src="/js/simone/userprofile.js"></script>
 	<title>Roberto 'Amumu' Fellin | Sonstuf</title>
 </head>
 
@@ -15,7 +17,7 @@
 
 		<div class="row" style="margin-bottom: 30px; margin-top: 30px">
 			<div class="col-md-9">
-				<h1>Roberto 'Amumu' Fellin</h1>
+				<h1 id="ucname">Roberto 'Amumu' Fellin</h1>
 			</div>
 
 			<div class="col-md-3">
@@ -52,9 +54,9 @@
 				<img src="http://placehold.it/250x300">
 			</div>
 			<div class="col-md-9">
-				<h4><strong>Data di nascita:</strong> 21/12/2012</h4>
-				<h4><strong>Email:</strong> rf.garenlol@dambel.zum</h4>
-				<h4><strong>Telefono:</strong> Non te lo dico gné gné!</h4>
+				<h4><strong>Data di nascita:</strong> <span id="bdate">21/12/2012</span></h4>
+				<h4><strong>Email:</strong> <span id="email">rf.garenlol@dambel.zum</span></h4>
+				<h4><strong>Telefono:</strong> <span id="telnum">Non te lo dico gné gné!</span></h4>
 				<br>
 				<h4>
 					<strong>Rating O:</strong>
@@ -67,7 +69,7 @@
 			</div>
 		</div>
 
-		<hr style="margin-top: 80px">
+		<hr class="colorgraph" style="margin-top: 100px">
 
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#requests">I tuoi annunci</a></li>
@@ -137,12 +139,12 @@
 		$("#rating-o").rating({'showCaption': false,
 			'showClear': false,
 			'readonly': true
-		}).rating('update', 5);
+		});
 
 		$("#rating-r").rating({'showCaption': false,
 			'showClear': false,
 			'readonly': true
-		}).rating('update', 4);
+		});
 	</script>
 
 </body>
