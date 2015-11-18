@@ -102,6 +102,7 @@ span.glyphicon-arrow-right {
 .btn-file {
 	position: relative;
 	overflow: hidden;
+	font-size: 20px;
 }
 .btn-file input[type=file] {
 	position: absolute;
@@ -112,13 +113,41 @@ span.glyphicon-arrow-right {
 	font-size: 100px;
 	text-align: right;
 	filter: alpha(opacity=0);
-	opacity: 0;
+	color: black;
 	outline: none;
-	background: cornflowerblue;
+	background-color: #597ea2;
+	opacity: 0.25;
 	cursor: inherit;
 	display: block;
 }
 
 .remember_column{
 	padding-left: 34px;
+}
+
+#request_insert{
+	margin-top: -20px;
+	width: 150px;
+	height: 50px;
+	font-size: 20px;
+	color: black;
+}
+
+#category_p1{
+	padding-top: 10px;
+}
+
+#category_p2{
+	padding-top: 10px;
+	padding-left: 10px;
+
+}
+
+#category_p3{
+	padding-top: 10px;
+}
+
+.field_input_title{
+	padding-bottom: 60px;
+	padding-top: 12px;
 }
