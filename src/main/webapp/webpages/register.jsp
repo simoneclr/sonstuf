@@ -20,36 +20,44 @@
 				</div>
 			</div>
 			<form>
-				<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
-					<label>Nome</label>
-					<input type="text" name="name" class="form-control" id="" value="">
+				<div class="row">
+					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-offset-2 col-xs-4">
+						<label>Nome</label>
+						<input type="text" name="name" class="form-control" id="" value="">
+					</div>
+					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-offset-2 col-xs-4">
+						<label>Cognome</label>
+						<input type="text" name="surname" class="form-control" id="" value="">
+					</div>
 				</div>
-				<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
-					<label>Cognome</label>
-					<input type="text" name="surname" class="form-control" id="" value="">
+				<div class="row">
+					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-offset-2 col-xs-4">
+						<label>Data di nascita</label>
+						<input type="tel" name="birthdate" class="form-control" id="" value="">
+					</div>
+					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-offset-2 col-xs-4">
+						<label>Email</label>
+						<input type="password" name="email" class="form-control" id="" value="">
+					</div>
 				</div>
-				<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
-					<label>Data di nascita</label>
-					<input type="date" name="birthdate" class="form-control" id="" value="">
+				<div class="row">
+					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-offset-2 col-xs-4">
+						<label>Telefono</label>
+						<input type="tel" name="phone" class="form-control" id="" value="">
+					</div>
+					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-offset-2 col-xs-4">
+						<label>Password</label>
+						<input type="password" name="password1" class="form-control" id="" value="">
+					</div>
 				</div>
-				<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
-					<label>Email</label>
-					<input type="email" name="email" class="form-control" id="" value="">
-				</div>
-				<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
-					<label>Telefono</label>
-					<input type="tel" name="phone" class="form-control" id="" value="">
-				</div>
-				<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
-					<label>Password</label>
-					<input type="password" name="password1" class="form-control" id="" value="">
-				</div>
-				<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2">
-					<label>Conferma password</label>
-					<input type="password" name="password2" class="form-control" id="" value="">
-				</div>
-				<div id="button_submit" class="form-group col-md-offset-4 col-md-2 col-sm-2 col-sm-offset-2">
-					<input type="submit" name="enter" class="btn btn-success" id="" value="Accedi">
+				<div class="row">
+					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-offset-2 col-xs-4">
+						<label>Conferma password</label>
+						<input type="password" name="password2" class="form-control" id="" value="">
+					</div>
+					<div id="button_submit" class="form-group col-md-offset-4 col-md-2 col-sm-2 col-sm-offset-2 col-xs-offset-2 col-xs-4">
+						<input type="submit" name="enter" class="btn btn-success" id="" value="Accedi">
+					</div>
 				</div>
 			</form>
 		</div>
