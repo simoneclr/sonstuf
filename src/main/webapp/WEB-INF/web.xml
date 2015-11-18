@@ -20,8 +20,18 @@
   	<description></description>
   	<servlet-class>com.sonstuf.control.AuthenticationServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>RegistrationServlet</servlet-name>
+  	<display-name>RegistrationServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.sonstuf.control.RegistrationServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>AuthenticationServlet</servlet-name>
   	<url-pattern>/AuthenticationServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>RegistrationServlet</servlet-name>
+  	<url-pattern>/RegistrationServlet</url-pattern>
   </servlet-mapping>
 </web-app>
