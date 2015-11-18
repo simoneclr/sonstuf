@@ -5,14 +5,14 @@ LISTA RICHIESTE (input)
 	"user" : 
 		{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
 	"request":
-		{"category" : "<categoryName>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}	
+		{"category" : "<categoryName>", "title" : "<title>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}	
 	},
 	{
 	"idRequest" : "<requestId>",
 	"user" : 
 		{"nome" : "<nomeIncompleto>", "rankR" : "<rankDouble>"},
 	"request":
-		{"category" : "<categoryName>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}
+		{"category" : "<categoryName>", "title" : "<title>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}
 	}			
 ]
 
