@@ -154,13 +154,13 @@ public class UserModel {
 		User res;
 
 
-		String query = 	"SELECT * from user" +
+		String query = 	"SELECT * from user\n" +
 				"WHERE phone = ? ;";
 
 		connection = Connector.getConnection();
 
 		ps = connection.prepareStatement(query);
-		ps.setString ( 0, phone );
+		ps.setString ( 1, phone );
 
 		rs = ps.executeQuery();
 

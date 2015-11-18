@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hypertesto on 18/11/15.
@@ -49,6 +51,54 @@ public class RequestModel {
 		} else {
 
 			res = null;
+
+		}
+
+		rs.close();
+		ps.close();
+		connection.close();
+
+		return res;
+
+	}
+
+
+	public static List<Request> getRequestsByUserId ( int id ) throws SQLException, NamingException {
+
+		Connection connection;
+		PreparedStatement ps;
+		ResultSet rs;
+		ArrayList<Request> res;
+
+
+		String query = 	"SELECT * from request\n" +
+						"WHERE iduser = ? ;";
+
+		connection = Connector.getConnection();
+
+		ps = connection.prepareStatement(query);
+		ps.setInt( 1, id );
+
+		rs = ps.executeQuery();
+
+		res = new ArrayList<Request>();
+
+		while ( rs.next() ) {
+			
+			Request r = new Request();
+			r = new Request();
+			r.setIdRequest( rs.getInt("idrequest") );
+			r.setTitle( rs.getString("title"));
+			r.setDescription( rs.getString("description"));
+			r.setPlace( rs.getString("place"));
+			r.setDateTime( rs.getString("datetime"));
+			r.setPhoto( rs.getString("photo"));
+			r.setIdUser( rs.getInt("iduser"));
+			r.setIdCategory( rs.getInt("idcategory"));
+			r.setStatus( rs.getInt("status"));
+			r.setPostTime( rs.getTimestamp("posttime"));
+
+			res.add(r);
 
 		}
 
