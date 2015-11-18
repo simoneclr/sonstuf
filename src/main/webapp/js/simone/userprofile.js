@@ -28,7 +28,7 @@ var requests = [
 			"category" : "Giardinaggio",
 			"categoryDescription" : loremIpsum,
 			"place" : "Dambel",
-			"time" : "13:00-15:33",
+			"time" : "quando cazzo volete",
 			"postTimestamp" : "wtf?"
 		}
 	},
@@ -179,7 +179,7 @@ function updatePersonalData(){
 	$("#ucname").text(completeName);
 	$("#telnum").text(user.telephone);
 	$("#bdate").text(user.birthdate);
-	$("#email").text(user.telephone);
+	$("#email").text(user.email);
 }
 
 function updateUserRatings(){
@@ -194,8 +194,12 @@ function updateRequests(){
 	$("#requests").empty();
 
 	for (var i = 0; i < requests.length; i++){
-		var context = {title: requests[i].request.category,
-			description: requests[i].request.categoryDescription};
+		var context = {
+			title: requests[i].request.category,
+			description: requests[i].request.categoryDescription,
+			place: requests[i].request.place,
+			time: requests[i].request.time
+		};
 		var html = template(context);
 		$("#requests").append(html);
 	}
@@ -208,8 +212,12 @@ function updateOffers(){
 	$("#offers").empty();
 
 	for (var i = 0; i < offers.length; i++){
-		var context = {title: offers[i].request.category,
-			description: offers[i].request.categoryDescription};
+		var context = {
+			title: offers[i].request.category,
+			description: offers[i].request.categoryDescription,
+			place: offers[i].request.place,
+			time: offers[i].request.time
+		};
 		var html = template(context);
 		$("#offers").append(html);
 	}
