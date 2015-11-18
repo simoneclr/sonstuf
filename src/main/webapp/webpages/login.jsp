@@ -3,12 +3,13 @@
 <html>
 	<head>
 		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-		<c:import url="/prefabs/header.jsp"></c:import>
+		<c:import url="../prefabs/header.jsp"></c:import>
 		<link href="../css/style-gianluca.css" rel="stylesheet">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Login</title>
 	</head>
 	<body>
+		<c:import url="../prefabs/navbar.jsp"></c:import>
 		<div class="login">
 			<h2>Login</h2>
 			<form class="form-horizontal" method="POST" action="check-login">
@@ -38,6 +39,9 @@
 				</div>
 			</form>
 		</div>
+
+		<c:import url="../prefabs/footer.jsp"></c:import>
+
 	</body>
 
 </html>

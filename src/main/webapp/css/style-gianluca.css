@@ -151,3 +151,18 @@ span.glyphicon-arrow-right {
 	padding-bottom: 60px;
 	padding-top: 12px;
 }
+
+.panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px; }
+
+.panel_admin{
+	padding-top: 50px;
+}
+
+.panel_admin_info{
+	padding-bottom: 20px;
+	margin-top: 30px;
+}
+
+.panel_admin_heading{
+	height:20px;
+}
