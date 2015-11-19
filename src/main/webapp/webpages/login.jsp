@@ -14,19 +14,19 @@
 			<h2>Login</h2>
 			<form class="form-horizontal" method="POST" action="check-login">
 				<div class="form-group">
-					<label for="userName" class="col-sm-2 col-xs-2 control-label">Username</label>
-					<div class="col-sm-6 col-xs-6">
+					<label for="userName" class="col-md-2 col-sm-3 col-xs-10 control-label">Username</label>
+					<div class="col-md-5 col-md-offset-1  col-sm-6 col-xs-10">
 						<input class="form-control" id="userName" name="userName" placeholder="username">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="password" class="col-sm-2 col-xs-2 control-label">Password</label>
-					<div class="col-sm-6 col-xs-6">
+					<label for="password" class=" col-md-2 col-sm-3 col-xs-10 control-label">Password</label>
+					<div class="col-md-5 col-md-offset-1  col-sm-6 col-xs-10">
 						<input type="password" class="form-control" id="password" name="password" placeholder="password">
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-4 col-xs-4 remember_column">
+					<div class="col-md-5 col-sm-6 col-xs-12 remember_column">
 						<div class="checkbox">
 								<input name="rememberMe" type="checkbox" value="Remember Me"> Remember Me
 						</div>
@@ -34,7 +34,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-3 col-xs-2">
-						<button type="submit" class="btn btn-default">Entra</button>
+						<button type="submit" class="btn btn-primary btn-md">Accedi</button>
 					</div>
 				</div>
 			</form>
