@@ -11,6 +11,7 @@
 		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<c:import url="/prefabs/header.jsp"></c:import>
 		<link href="../css/style-gianluca.css" rel="stylesheet">
+		<script src="../js/gianluca/inserisci-richiesta.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Inserisci richiesta</title>
 	</head>
@@ -40,15 +41,15 @@
 					<p class="request_category">Categoria :</p>
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-4">
-					<img src="../img/giardinaggio.jpeg" class="img-responsive" id ="category1">
+					<img src="../img/giardinaggio.jpeg" class="img-responsive img_category deselected" id ="category1">
 					<p id="category_p1">Giardinaggio</p>
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-4">
-					<img src="../img/spesa.jpg" class="img-responsive" id ="category2">
+					<img src="../img/spesa.jpg" class="img-responsive img_category deselected" id ="category2">
 					<p id="category_p2">Spesa</p>
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-4">
-					<img src="../img/elettronica.jpg" class="img-responsive" id ="category3">
+					<img src="../img/elettronica.jpg" class="img-responsive img_category deselected" id ="category3">
 					<p id="category_p3">Elettronica</p>
 				</div>
 			</div>
@@ -87,7 +88,7 @@
 				</div>
 			</div>
 			<div class ="row">
-				<div class="col-md-2 col-md-offset-9 col-sm-2 col-sm-offset-9 col-xs-3 col-xs-offset-7  field_input">
+				<div class="col-md-2 col-md-offset-9 col-sm-2 col-sm-offset-9 col-xs-3  field_input">
 					<input type="submit" name="enter" class="btn btn-success" id="request_insert" value="Inserisci">
 				</div>
 			</div>
