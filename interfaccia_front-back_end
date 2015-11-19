@@ -58,51 +58,70 @@ l'operatore seleziona uno fra i diversi utenti e questo punto viene mostrata il 
 output: form con campo hidden "idUser" che viene settato da js nel momento in cui l'opetatore seleziona un utente (vedi sopra)
 "title" , "description" , "categoryId" , "place" , "time", "photo", "idUser"
 
+=================================================================================
+
 PAGINA PERSONALE UTENTE
 input:
-{
-	"idUser": "<userId>", "name" : "<name>", "surname" : "<surname>" , "telephone" : "<telephone>", "email" : "<email>" , "birthdate" : "birthdate", "rankO" : "<doubleRank>" , "rankR" : "<doubleRank"}
+USER = {
+	"idUser": "<userId>",
+	"name" : "<name>",
+	"surname" : "<surname>" ,
+	"telephone" : "<telephone>",
+	"email" : "<email>" ,
+	"birthdate" : "birthdate",
+	"rankO" : "<doubleRank>" ,
+	"rankR" : "<doubleRank>"
 }
+
 se seleziona la scheda richieste : lista di richieste fatte da lui, user non verrà mostrato (è sempre lo stesso utente)
-[
+REQUESTS = [
 	{
 		"idRequest" : "<requestId>",
-		"user" : 
-			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
-		"request":
-			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}	
-	},
-	{
-		"idRequest" : "<requestId>",
-		"user" : 
-			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
-		"request":
-			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}	
-	}
+		"user" : {
+			"name" : "<incompleteName>",
+			"rankR" : "<rankDouble>"
+		},
+		"request" : {
+			"category" : "<categoryName>",
+			"categoryDescription" : "<shortDescription>",
+			"title" : "<titolo della richiesta>",
+			"description" : "<descrizione richiesta>",
+			"place" : "<place>",
+			"time" : "<time>",
+			"postTimestamp" : "<postTimeStamp>"
+		}
+	}, ***
 ]
 
-se seleziona la scheda offerte: lista di offerte fatte da lui
-[
+se seleziona la scheda offerte: lista di offerte (d'aiuto? -> a richieste fatte da altri??) fatte da lui
+OFFERS = [
 	{
 		"idOffer": "<idOffer>",
 		"isInCharge" : "<boolean>",
-		"user" : 
-			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
-		"request":
-			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}	
-	},
-	{
-		"idOffer": "<idOffer>",
-		"isInCharge" : "<boolean>",
-		"user" : 
-			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
-		"request":
-			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}	
-	}
+		"user" : {
+			"name" : "<incompleteName>",
+			"rankR" : "<rankDouble>"
+		},
+		"request" :{
+			"category" : "<categoryName>",
+			"categoryDescription" : "<shortDescription>",
+			"title" : "<titolo della richiesta>",
+			"description" : "<descrizione richiesta>",
+			"place" : "<place>",
+			"time" : "<time>",
+			"postTimestamp" : "<postTimeStamp>"
+		}
+	}, ***
 ]
 
 output: l'utente può cambiare i suoi dati attraverso una modal (form)
-form: "name", "surname", "email", "birthdate", "oldPassword", "newPassword1", "newPassword2"
+form:
+	"email",
+  "oldPassword",
+	"newPassword1",
+	"newPassword2"
+
+=========================================================================
 
 DETTAGLIO LAVORI UTENTE
 se dalla pagina personale clicca su una richiesta
