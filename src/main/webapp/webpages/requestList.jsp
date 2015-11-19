@@ -29,6 +29,7 @@
 		<div class="col-md-offset-1 col-md-2">
 			<label>Categoria</label>
 			<select class="form-control" id="category">
+				<option value="">Tutte le categorie</option>
 				<script id="category-template" type="text/x-handlebars-template">
 					<option>{{category}}</option>
 				</script>
@@ -36,15 +37,15 @@
 		</div>
 		<div class="col-md-offset-1 col-md-2">
 			<label>Nome Richiedente</label>
-			<input type="text" name="name" class="form-control" id="" value="">
+			<input type="text" name="name" class="form-control" id="name" value="">
 		</div>
 		<div class="col-md-offset-1 col-md-2">
 			<label>Luogo</label>
-			<input type="text" name="place" class="form-control" id="" value="">
+			<input type="text" name="place" class="form-control" id="place" value="">
 		</div>
 
 		<div class="col-md-offset-1 col-md-2">
-			<button class="btn btn-success" style="margin-top: 25px" id="">Cerca </button>
+			<button class="btn btn-success" style="margin-top: 25px" id="btn">Cerca </button>
 		</div>
 	</div>
 
@@ -53,8 +54,9 @@
 
 	<div class="list row" id="list">
 
+	</div>
 		<script id="request-template" type="text/x-handlebars-template">
-			<div class="request col-md-offset-1 col-md-10">
+			<div class="request col-md-offset-1 col-md-10" id="{{id}}">
 
 				<div class="row">
 					<div class="col-md-12">
@@ -123,7 +125,7 @@
 		</div>
 		-->
 
-	</div>
+
 </div>
 
 <c:import url="/prefabs/footer.jsp"></c:import>
