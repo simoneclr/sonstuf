@@ -159,10 +159,30 @@ span.glyphicon-arrow-right {
 }
 
 .panel_admin_info{
-	padding-bottom: 20px;
-	margin-top: 30px;
+	padding-bottom: 0px;
+	margin-top: 60px;
 }
 
 .panel_admin_heading{
-	height:20px;
+	height:50px;
 }
+
+.panel_admin_title{
+	font-size: 25px;
+}
+
+.panel_admin_info{
+	border: none;
+	box-shadow: none;
+}
+
+.admin_p{
+	font-family: 'Karla', sans-serif;
+	font-size:29px;
+	padding-top: 10px;
+}
+
+.row_admin{
+	padding-top: 40px;
+}
+
