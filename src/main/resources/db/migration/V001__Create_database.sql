@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `sonstuf` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_estonian_ci */;
-USE `sonstuf`;
+--CREATE DATABASE  IF NOT EXISTS `sonstuf` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_estonian_ci */;
+--USE `sonstuf`;
 -- MySQL dump 10.13  Distrib 5.6.27, for debian-linux-gnu (x86_64)
 --
 -- Host: 127.0.0.1    Database: sonstuf
