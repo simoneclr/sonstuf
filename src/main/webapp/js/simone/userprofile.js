@@ -102,7 +102,7 @@ var requests = [
 var offers = [
 	{
 		"idOffer": "<1111>",
-		"isInCharge" : "true",
+		"isInCharge" : true,
 		"user" : {
 			"name" : "Darius",
 			"rankR" : 4.8
@@ -118,7 +118,7 @@ var offers = [
 	},
 	{
 		"idOffer": "<1111>",
-		"isInCharge" : "true",
+		"isInCharge" : false,
 		"user" : {
 			"name" : "Darius",
 			"rankR" : 4.8
@@ -134,7 +134,7 @@ var offers = [
 	},
 	{
 		"idOffer": "<1111>",
-		"isInCharge" : "true",
+		"isInCharge" : false,
 		"user" : {
 			"name" : "Darius",
 			"rankR" : 4.8
@@ -150,7 +150,7 @@ var offers = [
 	},
 	{
 		"idOffer": "<1111>",
-		"isInCharge" : "true",
+		"isInCharge" : true,
 		"user" : {
 			"name" : "Darius",
 			"rankR" : 4.8
@@ -166,7 +166,7 @@ var offers = [
 	},
 	{
 		"idOffer": "<1111>",
-		"isInCharge" : "true",
+		"isInCharge" : false,
 		"user" : {
 			"name" : "Darius",
 			"rankR" : 4.8
@@ -235,10 +235,20 @@ function updateOffers(){
 		var context = {
 			title: offers[i].request.title,
 			description: offers[i].request.description,
+			user: offers[i].user.name,
 			place: offers[i].request.place,
-			time: offers[i].request.time
+			time: offers[i].request.time,
+			isInCharge: inChargeClass(offers[i].isInCharge)
 		};
 		var html = template(context);
 		$("#offers").append(html);
+	}
+}
+
+function inChargeClass(isInCharge){
+	if (isInCharge == true){
+		return "in-charge";
+	} else {
+		return "";
 	}
 }

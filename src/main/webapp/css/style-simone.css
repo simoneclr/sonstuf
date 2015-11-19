@@ -1,14 +1,13 @@
 /*userProfile.jsp*/
 
-ul.place-time {
+ul.request-info {
 	padding-left: 0;
 	text-align: right;
 	margin: 0;
 	display: inline;
-	float: right
 }
 
-ul.place-time > li {
+ul.request-info > li {
 	display: inline;
 	padding-left: 10px;
 }
@@ -20,7 +19,7 @@ ul.place-time > li {
 
 div.request-panel > .panel-body {
 	overflow: auto;
-	padding: 2px;
+	padding: 1px;
 }
 
 div.request-panel > .panel-heading {
@@ -29,5 +28,21 @@ div.request-panel > .panel-heading {
 
 .glyphicon-time {
 	padding-right: 5px;
+}
+
+.glyphicon-check {
+	padding-right: 5px;
+}
+
+.in-charge > .panel-heading {
+	background-color: rgba(0, 240, 0, 0.55);
+}
+
+.user-link {
+	color: #363333;
+}
+
+.user-link:hover {
+	color: #363333;
 }
 

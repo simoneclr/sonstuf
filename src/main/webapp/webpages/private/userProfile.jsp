@@ -142,20 +142,23 @@
 						<div class="col-md-12">
 							<div class="panel panel-default request-panel">
 								<div class="panel-heading">
-									<h3 class="panel-title">
-										<a href="#" style="float: left"><strong>{{title}}</strong></a>
-									</h3>
-
-									<ul class="place-time">
-										<li>
-											<span class="glyphicon glyphicon-map-marker"></span> {{place}}
-										</li>
-										<li>
-											<span class="glyphicon glyphicon-time"></span>{{time}}
-										</li>
-									</ul>
-
-									<div style="clear: both"></div>
+									<div class="row">
+										<div class="col-md-6">
+											<h3 class="panel-title">
+												<a href="#"><strong>{{title}}</strong></a>
+											</h3>
+										</div>
+										<div class="col-md-6" style="text-align: right">
+											<ul class="request-info">
+												<li>
+													<span class="glyphicon glyphicon-map-marker"></span> {{place}}
+												</li>
+												<li>
+													<span class="glyphicon glyphicon-time"></span>{{time}}
+												</li>
+											</ul>
+										</div>
+									</div>
 								</div>
 								<div class="panel-body">
 									<img src="http://placehold.it/150x150" class="request-img">
@@ -173,22 +176,29 @@
 				<script id="offers-template" type="text/x-handlebars-template">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="panel panel-default request-panel">
+							<div class="panel panel-default request-panel {{isInCharge}}">
 								<div class="panel-heading">
-									<h3 class="panel-title">
-										<a href="#" style="float: left"><strong>{{title}}</strong></a>
-									</h3>
-
-									<ul class="place-time">
-										<li>
-											<span class="glyphicon glyphicon-map-marker"></span> {{place}}
-										</li>
-										<li>
-											<span class="glyphicon glyphicon-time"></span>{{time}}
-										</li>
-									</ul>
-
-									<div style="clear: both"></div>
+									<div class="row">
+										<div class="col-md-6">
+											<h3 class="panel-title">
+												<a href="#"><strong>{{title}}</strong></a>
+											</h3>
+										</div>
+										<div class="col-md-6" style="text-align: right">
+											<ul class="request-info">
+												<li>
+													<span class="glyphicon glyphicon-user"></span>
+													<a href="#" class="user-link">{{user}}</a>
+												</li>
+												<li>
+													<span class="glyphicon glyphicon-map-marker"></span> {{place}}
+												</li>
+												<li>
+													<span class="glyphicon glyphicon-time"></span>{{time}}
+												</li>
+											</ul>
+										</div>
+									</div>
 								</div>
 								<div class="panel-body">
 									<img src="http://placehold.it/150x150" class="request-img">
