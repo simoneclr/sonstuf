@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hypertesto on 18/11/15.
@@ -41,6 +43,41 @@ public class CategoryModel {
 		} else {
 
 			res = null;
+
+		}
+
+		rs.close();
+		ps.close();
+		connection.close();
+
+		return res;
+
+	}
+
+	public static List<Category> getAllCategories () throws SQLException, NamingException {
+
+		Connection connection;
+		PreparedStatement ps;
+		ResultSet rs;
+		ArrayList<Category> res;
+
+		String query = 	"SELECT * from category;";
+
+		connection = Connector.getConnection();
+
+		ps = connection.prepareStatement(query);
+
+		rs = ps.executeQuery();
+
+		res = new ArrayList<Category>();
+
+		while ( rs.next() ) {
+
+			Category c = new Category();
+
+			c.setIdCategory( rs.getInt("idcategory") );
+			c.setName( rs.getString("name") );
+			c.setDescription( rs.getString("description") );
 
 		}
 
