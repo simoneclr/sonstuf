@@ -203,7 +203,7 @@ public class UserModel {
 		connection = Connector.getConnection();
 
 		ps = connection.prepareStatement(query);
-		ps.setString ( 1, id );
+		ps.setInt ( 1, id );
 
 		rs = ps.executeQuery();
 
