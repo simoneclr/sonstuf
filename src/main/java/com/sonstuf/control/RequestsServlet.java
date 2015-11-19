@@ -3,6 +3,7 @@ package com.sonstuf.control;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -11,8 +12,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.sonstuf.model.CategoryModel;
 import com.sonstuf.model.RequestModel;
 import com.sonstuf.model.UserModel;
@@ -53,10 +61,19 @@ public class RequestsServlet extends HttpServlet {
 					
 					listAllRequests (writer);
 					break;
+					
+				case "view":
+					
+					viewRequest (request, writer);
+					break;
+					
+				default:
+					
+					response.getWriter ().write ("Unsupported operation");
 			}
 		}
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -75,6 +92,12 @@ public class RequestsServlet extends HttpServlet {
 		MiniPacket temp;
 		
 		mapper = new ObjectMapper ();
+		SimpleFilterProvider filters;
+		
+		filters = new SimpleFilterProvider ();
+		filters.addFilter ("filter",
+				SimpleBeanPropertyFilter.serializeAllExcept ("description"));
+		
 		done = false;
 		writer.write ('[');
 		
@@ -94,7 +117,8 @@ public class RequestsServlet extends HttpServlet {
 				
 				if (temp != null) {
 					
-					writer.write (mapper.writeValueAsString (temp));
+					writer.write (mapper.setFilterProvider (filters)
+							.writeValueAsString (temp));
 				}
 			}
 		
@@ -104,6 +128,57 @@ public class RequestsServlet extends HttpServlet {
 		}
 		
 		writer.write (']');
+	}
+	
+	private void viewRequest (HttpServletRequest request, PrintWriter writer) {
+		
+		String requestId;
+		int parsedId;
+		Request r;
+		ObjectMapper mapper;
+		SimpleFilterProvider filters;
+		
+		requestId = request.getParameter ("idRequest");
+		
+		if (requestId == null || requestId.length () == 0) {
+			
+			writer.write ("Invalid operation: the requestId parameter should be specified");
+			return;
+		}
+		
+		try {
+			
+			parsedId = Integer.parseInt (requestId);
+		
+		} catch (NumberFormatException e) {
+			
+			writer.write ("Invalid parameter: the requestId parameter should be a valid integer");
+			return;
+		}
+		
+		try {
+			
+			r = RequestModel.getRequestById (parsedId);
+			
+			mapper = new ObjectMapper ();
+			filters = new SimpleFilterProvider ();
+			
+			filters.addFilter ("filter",
+					SimpleBeanPropertyFilter.serializeAll ());
+			
+			if (r != null) {
+				writer.write (mapper.setFilterProvider (filters)
+						.writeValueAsString (requestToMiniPacket (r)));
+			} else {
+				writer.write ("Invalid request: item not found");
+			}
+		
+		} catch (SQLException | NamingException | JsonProcessingException e) {
+			
+			writer.write ("Backend error");
+			e.printStackTrace ();
+			return;
+		}
 	}
 	
 	private MiniUser userToMiniUser (User user) {
@@ -135,6 +210,7 @@ public class RequestsServlet extends HttpServlet {
 			res.request.place = request.getPlace ();
 			res.request.time = request.getDateTime ();
 			res.request.postTimestamp = request.getPostTime ().toString ();
+			res.request.description = request.getDescription ();
 			
 		} catch (SQLException | NamingException e) {
 			
@@ -218,12 +294,14 @@ public class RequestsServlet extends HttpServlet {
 		}
 	}
 	
+	@JsonFilter("filter")
 	private class MiniRequest {
 		
 		private String category;
 		private String place;
 		private String time;
 		private String postTimestamp;
+		private String description;
 		/**
 		 * @return the category
 		 */
@@ -271,6 +349,18 @@ public class RequestsServlet extends HttpServlet {
 		 */
 		public void setPostTimestamp (String postTimestamp) {
 			this.postTimestamp = postTimestamp;
+		}
+		/**
+		 * @return the description
+		 */
+		public String getDescription () {
+			return description;
+		}
+		/**
+		 * @param description the description to set
+		 */
+		public void setDescription (String description) {
+			this.description = description;
 		}
 	}
 }
