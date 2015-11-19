@@ -55,7 +55,7 @@ public class CategoriesServlet extends HttpServlet {
 					writer.write (',');
 				}
 				
-				writer.write ("\"" + category.getName () + "\"");
+				writer.write ("{\"" + category.getIdCategory () + "\",\"" + category.getName () + "\"}");
 			}
 			
 		} catch (SQLException | NamingException e) {
