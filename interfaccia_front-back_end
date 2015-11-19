@@ -128,7 +128,7 @@ se dalla pagina personale clicca su una richiesta
 input:
 {
 	"request":
-		{"idRequest" : "<requestId>","category" : "<categoryName>", "requestDescription" : "<requestDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>", "photo" : "<link>"},
+		{"idRequest" : "<requestId>","category" : "<categoryName>", "title" : "<requestTitle>", "requesterName" : "userName", "requestDescription" : "<requestDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>", "photo" : "<link>"},
 	"state" : "<can be 0: in corso, 1: in attesa di valutazione (c'è un incaricato), 2: finito>",
 	"offerers" : 
 		[
