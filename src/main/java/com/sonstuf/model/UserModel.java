@@ -190,7 +190,7 @@ public class UserModel {
 		return res;
 	}
 
-	public static User getUserbyId ( int id ) throws SQLException, NamingException {
+	public static User getUserById ( int id ) throws SQLException, NamingException {
 
 		Connection connection;
 		PreparedStatement ps;
