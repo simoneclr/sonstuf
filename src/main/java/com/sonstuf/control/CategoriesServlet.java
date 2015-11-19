@@ -11,10 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sonstuf.model.CategoryModel;
 import com.sonstuf.model.bean.Category;
-import com.sonstuf.utils.Retval;
 
 /**
  * Servlet implementation class CategoriesServlet
