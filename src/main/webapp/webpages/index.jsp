@@ -32,13 +32,13 @@
 				<a href="/webpages/myOfferDetail.jsp">Dettaglio offerta</a>
 			</li>
 			<li>
-				<a href="/webpages/myRequestDetail.jsp">Dettaglio Richiesta</a>
+				<a href="/webpages/myRequestDetail.jsp">Dettaglio mia richiesta</a>
 			</li>
 			<li>
 				<a href="/webpages/register.jsp">Registrazione</a>
 			</li>
 			<li>
-				<a href="/webpages/requestDetail.jsp">Dettaglio richiesta bis (???)</a>
+				<a href="/webpages/requestDetail.jsp">Dettaglio richiesta altrui</a>
 			</li>
 			<li>
 				<a href="/webpages/requestList.jsp">Lista richieste</a>
