@@ -31,7 +31,7 @@ input:
 	"user" : 
 		{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
 	"request":
-		{"category" : "<categoryName>", "requestDescription" : "text", "place" : "<place>", "time" : "<time>", "photo" : "<link>", "postTimestamp" : "<postTimeStamp>"}
+		{"category" : "<categoryName>", "description" : "text", "title" : "title" "place" : "<place>", "time" : "<time>", "photo" : "<link>", "postTimestamp" : "<postTimeStamp>"}
 }
 
 output: per segnalare che si offre per quella richiesta.
