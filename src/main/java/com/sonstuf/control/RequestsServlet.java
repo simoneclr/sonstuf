@@ -2,7 +2,6 @@ package com.sonstuf.control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -19,7 +18,6 @@ import com.sonstuf.model.RequestModel;
 import com.sonstuf.model.UserModel;
 import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.User;
-import com.sonstuf.utils.Retval;
 
 /**
  * Servlet implementation class RequestsServlet
