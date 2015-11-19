@@ -115,6 +115,7 @@ public class RequestModel {
 		Connection connection;
 		PreparedStatement ps;
 		ResultSet rs;
+		ArrayList<Request> res;
 
 		String query = 	"SELECT * from request;";
 
@@ -124,7 +125,7 @@ public class RequestModel {
 
 		rs = ps.executeQuery();
 
-		ArrayList<Request> res;
+		res = new ArrayList<Request>();
 
 		while ( rs.next() ) {
 
