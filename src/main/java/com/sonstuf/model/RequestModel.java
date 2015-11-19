@@ -61,8 +61,7 @@ public class RequestModel {
 		return res;
 
 	}
-
-
+	
 	public static List<Request> getRequestsByUserId ( int id ) throws SQLException, NamingException {
 
 		Connection connection;
