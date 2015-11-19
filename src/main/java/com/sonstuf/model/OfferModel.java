@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hypertesto on 18/11/15.
@@ -87,6 +89,46 @@ public class OfferModel {
 		} else {
 
 			res = null;
+
+		}
+
+		rs.close();
+		ps.close();
+		connection.close();
+
+		return res;
+
+	}
+
+	public static List<Offer> getAllOffers () throws SQLException, NamingException {
+
+		Connection connection;
+		PreparedStatement ps;
+		ResultSet rs;
+		ArrayList<Offer> res;
+
+		String query = 	"SELECT * from offer;";
+
+		connection = Connector.getConnection();
+
+		ps = connection.prepareStatement(query);
+
+		rs = ps.executeQuery();
+
+		res = new ArrayList<Offer>();
+
+		while ( rs.next() ) {
+
+			Offer o = new Offer();
+
+			o.setIdOffer( rs.getInt("idoffer"));
+			o.setInCharge( rs.getBoolean("isincharge"));
+			o.setIdRequest( rs.getInt("idrequest"));
+			o.setIdUser( rs.getInt("iduser"));
+			o.setStatus( rs.getInt("status"));
+			o.setPostTime( rs.getTimestamp("posttime"));
+
+			res.add(o);
 
 		}
 
