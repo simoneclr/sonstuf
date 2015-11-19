@@ -79,6 +79,8 @@ public class CategoryModel {
 			c.setName( rs.getString("name") );
 			c.setDescription( rs.getString("description") );
 
+			res.add(c);
+
 		}
 
 		rs.close();
