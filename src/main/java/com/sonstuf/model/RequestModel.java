@@ -110,4 +110,48 @@ public class RequestModel {
 
 	}
 
+	public static List<Request> getAllRequests () throws SQLException, NamingException {
+
+		Connection connection;
+		PreparedStatement ps;
+		ResultSet rs;
+		ArrayList<Request> res;
+
+		String query = 	"SELECT * from request;";
+
+		connection = Connector.getConnection();
+
+		ps = connection.prepareStatement(query);
+
+		rs = ps.executeQuery();
+
+		res = new ArrayList<Request>();
+
+		while ( rs.next() ) {
+
+			Request r = new Request();
+			r = new Request();
+			r.setIdRequest( rs.getInt("idrequest") );
+			r.setTitle( rs.getString("title"));
+			r.setDescription( rs.getString("description"));
+			r.setPlace( rs.getString("place"));
+			r.setDateTime( rs.getString("datetime"));
+			r.setPhoto( rs.getString("photo"));
+			r.setIdUser( rs.getInt("iduser"));
+			r.setIdCategory( rs.getInt("idcategory"));
+			r.setStatus( rs.getInt("status"));
+			r.setPostTime( rs.getTimestamp("posttime"));
+
+			res.add(r);
+
+		}
+
+		rs.close();
+		ps.close();
+		connection.close();
+
+		return res;
+
+	}
+
 }
