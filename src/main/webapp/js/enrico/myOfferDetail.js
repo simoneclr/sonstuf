@@ -24,8 +24,8 @@ function prepareState2() {
 	var source = $("#doneValuation").html();
 	var template = Handlebars.compile(source);
 	var context = {
-		DELEGATE_NAME: "I'mDelegate",
-		VALUATION_COMMENT: "è stato molto preciso e gentile. Ha lavorato bene"
+		REQUESTER_NAME: "I'mRequester",
+		VALUATION_COMMENT: "è stato molto preciso e gentile. Non ha preteso l'impossibile"
 	};
 	var valuationHtml = template(context);
 	$(".done").empty().append(valuationHtml);
