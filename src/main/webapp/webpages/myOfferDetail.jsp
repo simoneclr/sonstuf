@@ -33,7 +33,8 @@
 					<div class="col-xs-4 text-center" style="padding: 10px">
 						<small><cite> <i class="glyphicon glyphicon-map-marker"></i>{{PLACE}}</cite></small>
 						<small><cite> <i class="glyphicon glyphicon-time"></i>{{TIME}}</cite></small>
-						<small><cite> <i class="glyphicon glyphicon-user"></i><span class="userName"></span></cite></small>
+						<small><cite> <i class="glyphicon glyphicon-user"></i><span class="userName"></span></cite>
+						</small>
 					</div>
 				</div>
 			</script>
@@ -52,48 +53,46 @@
 		</div>
 		<div class="col-xs-4"></div>
 	</div>
+
 	<div class="inAttesaDiValutazione hidden">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-default box-shadow">
-					<div class="panel-heading">
-						<strong>Valuta <span class="userName"></span></strong>
-					</div>
-					<div class="panel body" style="overflow: auto; margin-bottom: 0px">
-						<div class="col-xs-2">
-							<img src="http://placehold.it/150x150"
-							     style="float: left; margin-right: 10px">
+		<script id="waitingValuation" type="text/x-handlebars-template">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default box-shadow">
+						<div class="panel-heading">
+							<strong>Valuta {{REQUESTER_NAME}}</strong>
 						</div>
-						<div class="col-xs-6">
-							<p>
-								"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-								Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-								ut aliquip
-								ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-								voluptate velit
-								esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-								cupidatat
-								non proident, sunt in culpa qui officia deserunt mollit anim id est
-								laborum."
-							</p>
-						</div>
-						<div class="col-xs-4">
-
-							<strong>Valuta come è stato il rapporto con <span class="userName"></span>:</strong>
-
-							<p>
-								<input id="rating-o" type="number" class="rating" min=0 max=5 step=1
-								       data-size="sm">
-												<textarea id="comment" placeholder="commento" rows="4"
-												          cols="50"></textarea>
-							</p>
-							<button type="submit" class="btn btn-default">Spedisci</button>
+						<div class="panel body" style="overflow: auto; margin-bottom: 0px">
+							<div class="col-xs-2" style="padding: 10px;">
+								<small><cite><i
+										class="glyphicon glyphicon-user"></i><span>{{REQUESTER_NAME}}</span></cite>
+								</small>
+							</div>
+							<div class="col-xs-5">
+								<div class="col-xs-3">
+									<small>voto:</small>
+								</div>
+								<div class="col-xs-2">
+									<small><cite>
+										<input id="valuationRank" type="number" class="rating" min=0 max=5
+										       step=1
+										       data-size="xs">
+									</cite></small>
+								</div>
+							</div>
+							<div class="col-xs-3">
+								<textarea id="valuationComment"
+								          placeholder="lascia un tuo commento sull'operato di {{REQUESTER_NAME}}"></textarea>
+							</div>
+							<div class="col-xs-2">
+								<small><cite> <i class="glyphicon glyphicon-ok"></i>Fatto</cite>
+								</small>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</script>
 	</div>
 
 	<div class="done hidden">

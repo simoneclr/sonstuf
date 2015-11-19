@@ -27,7 +27,7 @@ function prepareState1() {
 	var source = $("#waitingValuation").html();
 	var template = Handlebars.compile(source);
 	var context = {
-	DELEGATE_NAME: "I'mDelegate"
+		DELEGATE_NAME: "I'mDelegate"
 	};
 	var offerHtml = template(context);
 	$(".inAttesaDiValutazione").empty().append(offerHtml);
@@ -40,10 +40,22 @@ function prepareState1() {
 }
 
 function prepareState2() {
-
+	var source = $("#doneValuation").html();
+	var template = Handlebars.compile(source);
+	var context = {
+		DELEGATE_NAME: "I'mDelegate",
+		VALUATION_COMMENT: "è stato molto preciso e gentile. Ha lavorato bene"
+	};
+	var valuationHtml = template(context);
+	$(".done").empty().append(valuationHtml);
+	$("#doneValuationRank").rating({
+		'showCaption': false,
+		'showClear': false,
+		'readonly': true
+	}).rating('update', 5);
 	$(".done").removeClass("hidden");
 }
-function modifyState(state) {
+function setState(state) {
 	switch (state) {
 		case 0:
 			prepareState0();
@@ -72,12 +84,6 @@ $(document).ready(function () {
 	var requestHtml = template(context);
 	$("#requestContainer").empty().append(requestHtml);
 	$(".requesterName").empty().append("I'mRequester");
-	modifyState(1);
-
-	$("#rating-oDone").rating({
-		'showCaption': false,
-		'showClear': false,
-		'readonly': true
-	}).rating('update', 5);
+	setState(2);
 });
 
