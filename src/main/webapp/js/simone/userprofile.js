@@ -27,6 +27,8 @@ var requests = [
 		"request": {
 			"category" : "Giardinaggio",
 			"categoryDescription" : loremIpsum,
+			"title" : "Raccogliete 'ste cazzo di foglie",
+			"description" : loremIpsum,
 			"place" : "Dambel",
 			"time" : "quando cazzo volete",
 			"postTimestamp" : "wtf?"
@@ -41,8 +43,10 @@ var requests = [
 		"request": {
 			"category" : "Giardinaggio",
 			"categoryDescription" : loremIpsum,
+			"title" : "Raccogliete 'ste cazzo di foglie",
+			"description" : loremIpsum,
 			"place" : "Dambel",
-			"time" : "13:00-15:33",
+			"time" : "quando cazzo volete",
 			"postTimestamp" : "wtf?"
 		}
 	},
@@ -55,8 +59,10 @@ var requests = [
 		"request": {
 			"category" : "Giardinaggio",
 			"categoryDescription" : loremIpsum,
+			"title" : "Raccogliete 'ste cazzo di foglie",
+			"description" : loremIpsum,
 			"place" : "Dambel",
-			"time" : "13:00-15:33",
+			"time" : "12:40 - 16:50",
 			"postTimestamp" : "wtf?"
 		}
 	},
@@ -69,8 +75,10 @@ var requests = [
 		"request": {
 			"category" : "Giardinaggio",
 			"categoryDescription" : loremIpsum,
+			"title" : "Raccogliete 'ste cazzo di foglie",
+			"description" : loremIpsum,
 			"place" : "Dambel",
-			"time" : "13:00-15:33",
+			"time" : "12:40 - 16:50",
 			"postTimestamp" : "wtf?"
 		}
 	},
@@ -83,8 +91,10 @@ var requests = [
 		"request": {
 			"category" : "Giardinaggio",
 			"categoryDescription" : loremIpsum,
+			"title" : "Raccogliete 'ste cazzo di foglie",
+			"description" : loremIpsum,
 			"place" : "Dambel",
-			"time" : "13:00-15:33",
+			"time" : "12:40 - 16:50",
 			"postTimestamp" : "wtf?"
 		}
 	}];
@@ -92,7 +102,7 @@ var requests = [
 var offers = [
 	{
 		"idOffer": "<1111>",
-		"isInCharge" : "true",
+		"isInCharge" : true,
 		"user" : {
 			"name" : "Darius",
 			"rankR" : 4.8
@@ -100,13 +110,15 @@ var offers = [
 		"request" : {
 			"category" : "DIY",
 			"categoryDescription" : loremIpsum,
+			"title" : "Aggiustatemi il mobile",
+			"description" : loremIpsum,
 			"place" : "Povo",
 			"time" : "11:00-16:00",
 			"postTimestamp" : "omg!"}
 	},
 	{
 		"idOffer": "<1111>",
-		"isInCharge" : "true",
+		"isInCharge" : false,
 		"user" : {
 			"name" : "Darius",
 			"rankR" : 4.8
@@ -114,13 +126,15 @@ var offers = [
 		"request" : {
 			"category" : "DIY",
 			"categoryDescription" : loremIpsum,
+			"title" : "Aggiustatemi il mobile",
+			"description" : loremIpsum,
 			"place" : "Povo",
 			"time" : "11:00-16:00",
 			"postTimestamp" : "omg!"}
 	},
 	{
 		"idOffer": "<1111>",
-		"isInCharge" : "true",
+		"isInCharge" : false,
 		"user" : {
 			"name" : "Darius",
 			"rankR" : 4.8
@@ -128,13 +142,15 @@ var offers = [
 		"request" : {
 			"category" : "DIY",
 			"categoryDescription" : loremIpsum,
+			"title" : "Aggiustatemi il mobile",
+			"description" : loremIpsum,
 			"place" : "Povo",
 			"time" : "11:00-16:00",
 			"postTimestamp" : "omg!"}
 	},
 	{
 		"idOffer": "<1111>",
-		"isInCharge" : "true",
+		"isInCharge" : true,
 		"user" : {
 			"name" : "Darius",
 			"rankR" : 4.8
@@ -142,13 +158,15 @@ var offers = [
 		"request" : {
 			"category" : "DIY",
 			"categoryDescription" : loremIpsum,
+			"title" : "Aggiustatemi il mobile",
+			"description" : loremIpsum,
 			"place" : "Povo",
 			"time" : "11:00-16:00",
 			"postTimestamp" : "omg!"}
 	},
 	{
 		"idOffer": "<1111>",
-		"isInCharge" : "true",
+		"isInCharge" : false,
 		"user" : {
 			"name" : "Darius",
 			"rankR" : 4.8
@@ -156,6 +174,8 @@ var offers = [
 		"request" : {
 			"category" : "DIY",
 			"categoryDescription" : loremIpsum,
+			"title" : "Aggiustatemi il mobile",
+			"description" : loremIpsum,
 			"place" : "Povo",
 			"time" : "11:00-16:00",
 			"postTimestamp" : "omg!"}
@@ -195,8 +215,8 @@ function updateRequests(){
 
 	for (var i = 0; i < requests.length; i++){
 		var context = {
-			title: requests[i].request.category,
-			description: requests[i].request.categoryDescription,
+			title: requests[i].request.title,
+			description: requests[i].request.description,
 			place: requests[i].request.place,
 			time: requests[i].request.time
 		};
@@ -213,12 +233,22 @@ function updateOffers(){
 
 	for (var i = 0; i < offers.length; i++){
 		var context = {
-			title: offers[i].request.category,
-			description: offers[i].request.categoryDescription,
+			title: offers[i].request.title,
+			description: offers[i].request.description,
+			user: offers[i].user.name,
 			place: offers[i].request.place,
-			time: offers[i].request.time
+			time: offers[i].request.time,
+			isInCharge: inChargeClass(offers[i].isInCharge)
 		};
 		var html = template(context);
 		$("#offers").append(html);
+	}
+}
+
+function inChargeClass(isInCharge){
+	if (isInCharge == true){
+		return "in-charge";
+	} else {
+		return "";
 	}
 }
