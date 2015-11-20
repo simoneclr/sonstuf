@@ -31,7 +31,7 @@
 					<h3>INSERISCI RICHIESTA</h3>
 				</div>
 				<div class="col-md-offset-2 col-md-4 col-sm-offset-2 col-sm-4 col-xs-offset-2 col-xs-4 ">
-					<button class="btn btn-default orange-circle-button" href=""><span class="glyphicon glyphicon-arrow-right"><span class="orange-circle-greater-than"></span></button>
+					<button class="btn btn-default orange-circle-button" href=""><span class="glyphicon glyphicon-arrow-right"><span class="orange-circle-greater-than">git</span></button>
 				</div>
 			</div>
 		</div>
