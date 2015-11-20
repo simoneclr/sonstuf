@@ -7,6 +7,7 @@
 
 	<link href="/css/style-roberto.css" rel="stylesheet">
 
+	<script src="/js/roberto/insertAnnouncementAdmin.js"></script>
 
 	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -35,15 +36,15 @@
 	<div class="row">
 		<div class="col-md-offset-1 col-md-3">
 			<label>Nome</label>
-			<input type="text" name="name" class="form-control" id="" value="">
+			<input type="text" name="name" class="form-control" id="name" value="">
 		</div>
 		<div class="col-md-offset-0,5 col-md-3">
 			<label>Cognome</label>
-			<input type="text" name="surname" class="form-control" id="" value="">
+			<input type="text" name="surname" class="form-control" id="surname" value="">
 		</div>
 		<div class="col-md-offset-0,5 col-md-3">
 			<label>Telefono</label>
-			<input type="tel" name="telephone" class="form-control" id="" value="">
+			<input type="tel" name="telephone" class="form-control" id="telephone" value="">
 		</div>
 	</div>
 
@@ -51,15 +52,15 @@
 	<div class="row">
 		<div class="col-md-offset-1 col-md-3">
 			<label>Email</label>
-			<input type="email" name="email" class="form-control" id="" value="">
+			<input type="email" name="email" class="form-control" id="email" value="">
 		</div>
 		<div class="col-md-offset-0,5 col-md-3">
 			<label>Data di nascita</label>
-			<input type="date" name="birthdate" class="form-control" id="" value="">
+			<input type="date" name="birthdate" class="form-control" id="birthdate" value="">
 		</div>
 
 		<div class="col-md-offset-2 col-md-2">
-			<button class="btn btn-success" style="margin-top: 25px" id="">Cerca </button>
+			<button class="btn btn-success" style="margin-top: 25px" id="cerca">Cerca </button>
 		</div>
 	</div>
 
@@ -67,6 +68,17 @@
 	<br>
 
 	<div class="list row">
+		<div class="col-md-offset-1 col-md-10">
+			<div class="col-md-offset-4 col-md-2">
+				<button class="btn btn-success" style="margin-top: 25px" id="registra">Registra Utente e Inserisci Annuncio </button>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<br>
+
+	<div class="list row" id="rowTable">
 		<div class="col-md-offset-1 col-md-10">
 
 			<div class="table-responsive">
@@ -81,120 +93,17 @@
 						<th>Data di nascita</th>
 					</tr>
 					</thead>
-					<tbody>
-					<tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr>
-					<tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr>
-					<tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr>
-					<tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr>
-					<tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr>
-					<tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr>
-					<tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr>
-					<tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr>
-					<tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr>
-					<tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr>
-					<tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr>
-					<tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr>
-					<tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr>
-					<tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr><tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr>
-					<tr>
-						<td>Simone</td>
-						<td>Calciolari</td>
-						<td>3116161919</td>
-						<td>simone.calciolari@studenti.unitn.it</td>
-						<td>01/01/1994</td>
-					</tr>
+					<tbody id="bodyTable">
+					<script id="request-template" type="text/x-handlebars-template">
+						<tr id="{{id}}">
+							<td>{{name}}</td>
+							<td>{{surname}}</td>
+							<td>{{telephone}}</td>
+							<td>{{email}}</td>
+							<td>{{birthdate}}</td>
 
-
+						</tr>
+					</script>
 
 					</tbody>
 				</table>
