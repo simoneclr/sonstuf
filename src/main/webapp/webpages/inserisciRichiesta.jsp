@@ -42,15 +42,15 @@
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-4">
 					<img src="../img/giardinaggio.jpeg" class="img-responsive img_category deselected" id ="category1">
-					<p id="category_p1">Giardinaggio</p>
+					<p id="category_p1">giardinaggio</p>
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-4">
 					<img src="../img/spesa.jpg" class="img-responsive img_category deselected" id ="category2">
-					<p id="category_p2">Spesa</p>
+					<p id="category_p2">spesa</p>
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-4">
 					<img src="../img/elettronica.jpg" class="img-responsive img_category deselected" id ="category3">
-					<p id="category_p3">Elettronica</p>
+					<p id="category_p3">elettronica</p>
 				</div>
 			</div>
 			<div class ="row">
