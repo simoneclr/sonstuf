@@ -1,6 +1,14 @@
 .login{
 	width: 40%;
-	margin: 70px auto;
+	margin: 80px auto;
+}
+
+#submit_login{
+	width: 90px;
+}
+
+#panel_body_login{
+	padding-top: 40px;
 }
 
 hr.colorgraph {
@@ -68,18 +76,21 @@ span.glyphicon-arrow-right {
 	border-radius: 73px;
 	height: 60px;
 	width: 65px;
+	border:3px solid black;
 }
 
 #category2{
 	border-radius: 73px;
 	height: 60px;
 	width: 65px;
+	border:3px solid black;
 }
 
 #category3{
 	border-radius: 73px;
 	height: 60px;
 	width: 65px;
+	border:3px solid black;
 }
 
 .request_category2{
@@ -159,10 +170,34 @@ span.glyphicon-arrow-right {
 }
 
 .panel_admin_info{
-	padding-bottom: 20px;
-	margin-top: 30px;
+	padding-bottom: 0px;
+	margin-top: 60px;
 }
 
 .panel_admin_heading{
-	height:20px;
+	height:50px;
 }
+
+.panel_admin_title{
+	font-size: 25px;
+}
+
+.panel_admin_info{
+	border: none;
+	box-shadow: none;
+}
+
+.admin_p{
+	font-family: 'Karla', sans-serif;
+	font-size:29px;
+	padding-top: 10px;
+}
+
+.row_admin{
+	padding-top: 40px;
+}
+
+#button_submit_register{
+	color:black;
+}
+
