@@ -54,4 +54,8 @@
   	<servlet-name>RequestsServlet</servlet-name>
   	<url-pattern>/RequestsServlet</url-pattern>
   </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetUserRequestServlet</servlet-name>
+		<url-pattern>/getrequest</url-pattern>
+	</servlet-mapping>
 </web-app>
