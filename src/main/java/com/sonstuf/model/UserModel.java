@@ -33,6 +33,7 @@ public class UserModel {
 				User user = new User();
 
 				user.setIdUser(rs.getInt("iduser"));
+				user.setEmail(rs.getString("email"));
 				user.setName(rs.getString("name"));
 				user.setSurname(rs.getString("surname"));
 				user.setPhone(rs.getString("phone"));
@@ -71,7 +72,7 @@ public class UserModel {
 		PreparedStatement ps;
 		ResultSet rs;
 
-		String check = "SELECT COUNT(*) AS count FROM user WHERE email = ?";
+		String check = "SELECT COUNT(*) AS count FROM user WHERE email = ?;";
 
 		String query = "INSERT INTO user\n"
 				+ "(`name`, `surname`, `phone`, `email`, `passwordhash`, `ranko`, `rankp`, `birthdate`, `admin`)\n"
