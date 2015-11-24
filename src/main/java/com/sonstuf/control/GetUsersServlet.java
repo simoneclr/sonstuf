@@ -44,7 +44,7 @@ public class GetUsersServlet extends HttpServlet {
 
 		filters = new SimpleFilterProvider();
 		filters.addFilter("filter",
-				SimpleBeanPropertyFilter.serializeAllExcept("passwordHash"));
+				SimpleBeanPropertyFilter.serializeAllExcept("passwordHash", "rankO", "rankP"));
 		boolean done = false;
 		try {
 			for (User user : userListDB) {
