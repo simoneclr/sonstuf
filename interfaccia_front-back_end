@@ -47,7 +47,7 @@ HOME ADMIN
 
 INSERISCI RICHIESTA OPERATORE SELEZIONE UTENTE (form di inserimento dati utente con sotto la lista di user che matchano i dati inseriti)
 output:
-form per dati utente(può essere già esistente oppure no): "name", "surname", "telephone", "email", "birthdate" ;
+form per dati utente(può essere già esistente oppure no): "name", "surname", "telephone", "email", "birthDate" ;
 a questo form la pagina mi risponde con una lista:
 [
 	{"idUser": "<userId>", "nameame" : "<name>", "surname" : "<surname>" , "telephone" : "<telephone>", "email" : "<email>" , "birthdate" : "birthdate"},
