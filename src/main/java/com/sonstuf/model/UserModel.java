@@ -66,8 +66,7 @@ public class UserModel {
 	 * @throws InvalidKeySpecException
 	 */
 	public static Retval insert(User user) throws SQLException, NamingException, NoSuchAlgorithmException, InvalidKeySpecException {
-
-
+		
 		Connection connection;
 		PreparedStatement ps;
 		ResultSet rs;
@@ -131,6 +130,7 @@ public class UserModel {
 	 * @throws SQLException
 	 */
 	public static User getUserByMail(String email) throws SQLException, NamingException {
+
 		Connection connection;
 
 		String query = "SELECT * from user\n" +
@@ -202,6 +202,7 @@ public class UserModel {
 	}
 
 	public static List<User> getUserByName(String name) throws SQLException, NamingException {
+
 		Connection connection;
 		PreparedStatement ps;
 
@@ -221,6 +222,7 @@ public class UserModel {
 	}
 
 	public static List<User> getUserBySurname(String surname) throws SQLException, NamingException {
+
 		Connection connection;
 		PreparedStatement ps;
 		ResultSet rs;
@@ -242,6 +244,7 @@ public class UserModel {
 	}
 
 	public static List<User> getUserByBirthdate(Date birthdate) throws SQLException, NamingException {
+
 		Connection connection;
 		PreparedStatement ps;
 		ResultSet rs;
@@ -263,6 +266,7 @@ public class UserModel {
 	}
 
 	public static List<User> getAllUsers() throws SQLException, NamingException {
+
 		Connection connection;
 		PreparedStatement ps;
 		ResultSet rs;
