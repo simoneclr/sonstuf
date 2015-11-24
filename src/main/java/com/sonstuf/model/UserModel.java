@@ -22,7 +22,7 @@ import java.util.List;
 public class UserModel {
 
 	private static List<User> executeQuery(PreparedStatement prepStatement) throws SQLException {
-		
+
 		ResultSet rs = prepStatement.executeQuery();
 		List<User> res = new ArrayList<>();
 
@@ -141,10 +141,10 @@ public class UserModel {
 
 		List<User> userList = executeQuery(preparedStatement);
 		connection.close();
-		if (userList.size() > 0)
+		if (userList.size() > 0) {
+			System.out.print(userList.get(0));
 			return userList.get(0);
-		else //if it's empty
-			return null;
+		} else return null;
 	}
 
 	/**
