@@ -143,7 +143,7 @@ public class UserModel {
 		List<User> userList = executeQuery(preparedStatement);
 		connection.close();
 		if (userList.size() > 0) {
-			System.out.print(userList.get(0));
+			System.out.println(userList.get(0));
 			return userList.get(0);
 		} else return null;
 	}
