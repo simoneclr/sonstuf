@@ -20,7 +20,7 @@
 					<hr class="colorgraph">
 				</div>
 			</div>
-			<form>
+			<form id="modulo">
 				<div class="row">
 					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-7">
 						<label>Nome</label>
@@ -57,7 +57,7 @@
 						<input type="password" name="password2" class="form-control" id="password2">
 					</div>
 					<div class="form-group col-md-offset-2 col-md-2 col-sm-3 col-sm-offset-2 col-xs-7">
-						<input id="button_submit_register" type="submit" name="enter" class="btn btn-success btn-lg"  value="Registrati">
+						<button id="button_submit_register"  class="btn btn-success" >Registrati</button>
 					</div>
 				</div>
 			</form>
