@@ -85,7 +85,7 @@ function updateTable(data){
 			id:data[i].id,
 			name:data[i].name,
 			surname: data[i].surname,
-			telephone: data[i].telephone,
+			telephone: data[i].phone,
 			email: data[i].email,
 			birthdate: data[i].birthdate,
 
