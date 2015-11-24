@@ -1,0 +1,70 @@
+/*userProfile.jsp*/
+
+ul.request-info {
+	padding-left: 0;
+	text-align: right;
+	margin: 0;
+	display: inline;
+}
+
+ul.request-info > li {
+	display: inline;
+	padding-left: 10px;
+}
+
+.request-img {
+	float: left;
+	margin-right: 10px;
+}
+
+div.request-panel > .panel-body {
+	overflow: auto;
+	padding: 1px;
+}
+
+div.request-panel > .panel-heading {
+	padding-bottom: 2px;
+}
+
+.glyphicon-time {
+	padding-right: 5px;
+}
+
+.glyphicon-check {
+	padding-right: 5px;
+}
+
+.in-charge > .panel-heading {
+	background-color: rgba(0, 240, 0, 0.55);
+}
+
+.user-link {
+	color: #363333;
+}
+
+.user-link:hover {
+	color: #363333;
+}
+
+.btn-file {
+	position: relative;
+	overflow: hidden;
+}
+
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	filter: alpha(opacity=0);
+	color: black;
+	outline: none;
+	background-color: #597ea2;
+	opacity: 0.0;
+	cursor: inherit;
+	display: block;
+}
+
