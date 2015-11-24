@@ -20,11 +20,16 @@ import java.util.List;
  * @author hypertesto
  */
 public class UserModel {
+
 	private static List<User> executeQuery(PreparedStatement prepStatement) throws SQLException {
+		
 		ResultSet rs = prepStatement.executeQuery();
 		List<User> res = new ArrayList<>();
+
 		try {
+
 			while (rs.next()) {
+
 				User user = new User();
 
 				user.setIdUser(rs.getInt("iduser"));
@@ -39,10 +44,14 @@ public class UserModel {
 
 				res.add(user);
 			}
+
 		} finally {
+
 			rs.close();
 			prepStatement.close();
+
 		}
+
 		return res;
 	}
 
