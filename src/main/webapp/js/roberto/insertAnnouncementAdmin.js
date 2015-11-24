@@ -1,7 +1,7 @@
 var user={
 	name:"",
 	surname:"",
-	telephone:"",
+	phone:"",
 	email:"",
 	birthdate:""
 }
@@ -21,7 +21,7 @@ function eventCerca(){
 	$("#cerca").click(function(){
 		user.name=$("#name").val();
 		user.surname=$("#surname").val();
-		user.telephone=$("#telephone").val();
+		user.phone=$("#telephone").val();
 		user.email=$("#email").val();
 		user.birthdate=$("#birthdate").val();
 
