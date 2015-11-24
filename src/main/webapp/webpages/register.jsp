@@ -20,31 +20,31 @@
 					<hr class="colorgraph">
 				</div>
 			</div>
-			<form id="modulo">
+			<form name="myForm" onsubmit="return validateForm()">
 				<div class="row">
 					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-7">
 						<label>Nome</label>
-						<input type="text" name="name" class="form-control">
+						<input type="text" name="name" class="form-control" id="name">
 					</div>
 					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-7">
 						<label>Cognome</label>
-						<input type="text" name="surname" class="form-control">
+						<input type="text" name="surname" class="form-control" id="surname">
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-7">
 						<label>Data di nascita</label>
-						<input type="tel" name="birthdate" class="form-control">
+						<input type="tel" name="birthdate" id="birthdate" class="form-control">
 					</div>
 					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-7">
 						<label>Email</label>
-						<input type="password" name="email" class="form-control">
+						<input type="text" name="email" id="email" class="form-control">
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-7">
 						<label>Telefono</label>
-						<input type="tel" name="phone" class="form-control">
+						<input type="tel" name="phone" id="phone" class="form-control">
 					</div>
 					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-7">
 						<label>Password</label>
