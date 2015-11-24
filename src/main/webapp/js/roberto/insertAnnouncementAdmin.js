@@ -3,7 +3,7 @@ var user={
 	surname:"",
 	phone:"",
 	email:"",
-	birthdate:""
+	birthDate:""
 }
 
 $(document).ready(function(){
@@ -23,19 +23,20 @@ function eventCerca(){
 		user.surname=$("#surname").val();
 		user.phone=$("#telephone").val();
 		user.email=$("#email").val();
-		user.birthdate=$("#birthdate").val();
+		user.birthDate=$("#birthdate").val();
 
 
 		var json=jQuery.extend(true, {}, user);
-		console.log(json);
+		console.log(JSON.stringify(json));
 		$.ajax({
 			type: "POST",
 			url: "/GetUsers",
-			data: json,
+			data: JSON.stringify(json),
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
 			success: function(data){
-
+				console.log(data);
+				console.log(JSON.stringify(data));
 				if(data.length==0){
 					registraUtente(json);
 				} else{

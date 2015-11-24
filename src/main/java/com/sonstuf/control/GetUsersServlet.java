@@ -28,13 +28,21 @@ public class GetUsersServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa ");
 		User pattern = parseJson(request.getReader());
+
+
 		List<User> userListDB = null;
 		try {
+			System.out.println("1");
 			userListDB = requestDataFromDB(pattern);
+			System.out.println("2");
 		} catch (SQLException | NamingException e) {
+			System.out.println("3");
 			response.getWriter().write(e.toString());
+			System.out.println("4");
 		}
+		System.out.println("\t\t\tdim "+ userListDB.size());
 		//filtrate userList based on the pattern
 		PrintWriter writer = response.getWriter();
 		ObjectMapper mapper = new ObjectMapper();
@@ -54,6 +62,7 @@ public class GetUsersServlet extends HttpServlet {
 					} else {
 						writer.write(',');
 					}
+					System.out.println("user: "+user.getName());
 					writer.write(mapper.setFilterProvider(filters)
 							.writeValueAsString(user));
 
@@ -86,7 +95,7 @@ public class GetUsersServlet extends HttpServlet {
 		else if (pattern.getBirthDate() != null)
 			userList = UserModel.getUserByBirthdate(pattern.getBirthDate());
 		else userList = UserModel.getAllUsers();
-
+		System.out.println("list: "+userList.get(0).getName());
 		return userList;
 	}
 
@@ -101,9 +110,13 @@ public class GetUsersServlet extends HttpServlet {
 			throw new IOException("impossible to read the json");
 		}
 
+		String jsonUser=jb.toString();
+		System.out.println("jsonUser: "+jsonUser + "" + System.currentTimeMillis());
 		ObjectMapper mapper = new ObjectMapper();
 		res = mapper.readValue(jb.toString(), User.class);
+		System.out.println("name: "+res.getName());
 
+		System.out.println("Sono qui");
 		return res;
 	}
 
