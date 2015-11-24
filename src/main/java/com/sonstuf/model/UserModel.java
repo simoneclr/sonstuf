@@ -16,9 +16,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author hypertesto
- */
 public class UserModel {
 	private static List<User> executeQuery(PreparedStatement prepStatement) throws SQLException {
 		ResultSet rs = prepStatement.executeQuery();
