@@ -5,14 +5,14 @@ LISTA RICHIESTE (input)
 	"user" : 
 		{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
 	"request":
-		{"category" : "<categoryName>", "place" : "<place>", "time" : "<time>"}	
+		{"category" : "<categoryName>", "title" : "<title>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}	
 	},
 	{
 	"idRequest" : "<requestId>",
 	"user" : 
 		{"nome" : "<nomeIncompleto>", "rankR" : "<rankDouble>"},
 	"request":
-		{"category" : "<nomeCategoria>", "place" : "<place>", "time" : "<time>"}	
+		{"category" : "<categoryName>", "title" : "<title>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>"}
 	}			
 ]
 
@@ -31,7 +31,7 @@ input:
 	"user" : 
 		{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
 	"request":
-		{"category" : "<categoryName>", "requestDescription" : "text", "place" : "<place>", "time" : "<time>", "photo" : "<link>"}
+		{"category" : "<categoryName>", "requestDescription" : "text", "place" : "<place>", "time" : "<time>", "photo" : "<link>", "postTimestamp" : "<postTimeStamp>"}
 }
 
 output: per segnalare che si offre per quella richiesta.
@@ -39,8 +39,8 @@ campi del form: "idRequest"
 La servlet che accetta il form dovrà reindirizzare su una pagina di success o fail a seconda.
 
 LOGIN
-output: userName può essere email o numero di telefono
-form: "userName", "password"
+output: userName può essere email o numero di telefono, remeber me per settare i cookies
+form: "userName", "password, remeberMe"
 
 HOME ADMIN
 --
@@ -58,58 +58,77 @@ l'operatore seleziona uno fra i diversi utenti e questo punto viene mostrata il 
 output: form con campo hidden "idUser" che viene settato da js nel momento in cui l'opetatore seleziona un utente (vedi sopra)
 "title" , "description" , "categoryId" , "place" , "time", "photo", "idUser"
 
+=================================================================================
+
 PAGINA PERSONALE UTENTE
 input:
-{
-	"idUser": "<userId>", "name" : "<name>", "surname" : "<surname>" , "telephone" : "<telephone>", "email" : "<email>" , "birthdate" : "birthdate", "rankO" : "<doubleRank>" , "rankR" : "<doubleRank"}
+USER = {
+	"idUser": "<userId>",
+	"name" : "<name>",
+	"surname" : "<surname>" ,
+	"telephone" : "<telephone>",
+	"email" : "<email>" ,
+	"birthdate" : "birthdate",
+	"rankO" : "<doubleRank>" ,
+	"rankR" : "<doubleRank>"
 }
+
 se seleziona la scheda richieste : lista di richieste fatte da lui, user non verrà mostrato (è sempre lo stesso utente)
-[
+REQUESTS = [
 	{
 		"idRequest" : "<requestId>",
-		"user" : 
-			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
-		"request":
-			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>"}	
-	},
-	{
-		"idRequest" : "<requestId>",
-		"user" : 
-			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
-		"request":
-			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>"}	
-	}
+		"user" : {
+			"name" : "<incompleteName>",
+			"rankR" : "<rankDouble>"
+		},
+		"request" : {
+			"category" : "<categoryName>",
+			"categoryDescription" : "<shortDescription>",
+			"title" : "<titolo della richiesta>",
+			"description" : "<descrizione richiesta>",
+			"place" : "<place>",
+			"time" : "<time>",
+			"postTimestamp" : "<postTimeStamp>"
+		}
+	}, ***
 ]
 
-se seleziona la scheda offerte: lista di offerte fatte da lui
-[
+se seleziona la scheda offerte: lista di offerte (d'aiuto? -> a richieste fatte da altri??) fatte da lui
+OFFERS = [
 	{
 		"idOffer": "<idOffer>",
 		"isInCharge" : "<boolean>",
-		"user" : 
-			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
-		"request":
-			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>"}	
-	},
-	{
-		"idOffer": "<idOffer>",
-		"isInCharge" : "<boolean>",
-		"user" : 
-			{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
-		"request":
-			{"category" : "<categoryName>", "categoryDescription" : "<shortDescription>", "place" : "<place>", "time" : "<time>"}	
-	}
+		"user" : {
+			"name" : "<incompleteName>",
+			"rankR" : "<rankDouble>"
+		},
+		"request" :{
+			"category" : "<categoryName>",
+			"categoryDescription" : "<shortDescription>",
+			"title" : "<titolo della richiesta>",
+			"description" : "<descrizione richiesta>",
+			"place" : "<place>",
+			"time" : "<time>",
+			"postTimestamp" : "<postTimeStamp>"
+		}
+	}, ***
 ]
 
 output: l'utente può cambiare i suoi dati attraverso una modal (form)
-form: "name", "surname", "email", "birthdate", "oldPassword", "newPassword1", "newPassword2"
+form:
+	"email",
+  "oldPassword",
+	"newPassword1",
+	"newPassword2"
+
+=========================================================================
 
 DETTAGLIO LAVORI UTENTE
 se dalla pagina personale clicca su una richiesta
 input:
 {
 	"request":
-		{"idRequest" : "<requestId>","category" : "<categoryName>", "requestDescription" : "<requestDescription>", "place" : "<place>", "time" : "<time>", "photo" : "<link>"},
+		{"idRequest" : "<requestId>","category" : "<categoryName>", "requestDescription" : "<requestDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>", "photo" : "<link>"},
 	"state" : "<can be 0: in corso, 1: in attesa di valutazione (c'è un incaricato), 2: finito>",
 	"offerers" : 
 		[
@@ -131,7 +150,7 @@ output:
 se dalla pagina pesonale clicco su un offerta
 {
 	"request":
-		{"idRequest" : "<RequestId>","category" : "<categoryName>", "requestDescription" : "<requestDescription>", "place" : "<place>", "time" : "<time>", "photo" : "<link>"},
+		{"idRequest" : "<RequestId>","category" : "<categoryName>", "requestDescription" : "<requestDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>", "photo" : "<link>"},
 	"state" : "<can be 0: in attesa di ricevere incarico, 1: in attesa di valutazione (c'è un incaricato), 2: finito>",
 	"requestingUser": {"id" : "<userId>", "name" : "<incompleteName>", "rankR" : "<rank as requester>"},
 	"valuation" : {"rank" : "double" , "comment" : "text"}		
@@ -148,6 +167,8 @@ REGISTRAZIONE
 
 form: "name", "surname", "email", "phone", "birthdate", "password1", "password2"
 
+formato birthdate: dd/MM/yyyy (su notazione java.text.SimpleDateFormat http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html)
+NOTA: i controlli verranno effettuati a lato servlet
 		
 		
 

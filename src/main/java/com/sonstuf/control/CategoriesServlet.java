@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sonstuf.model.CategoryModel;
 import com.sonstuf.model.bean.Category;
 
@@ -37,8 +38,10 @@ public class CategoriesServlet extends HttpServlet {
 		List<Category> categories;
 		PrintWriter writer;
 		boolean comma;
+		ObjectMapper mapper;
 		
 		writer = response.getWriter ();
+		mapper = new ObjectMapper ();
 		
 		writer.write ('[');
 		comma = false;
@@ -55,7 +58,11 @@ public class CategoriesServlet extends HttpServlet {
 					writer.write (',');
 				}
 				
-				writer.write ("\"" + category.getName () + "\"");
+//				writer.write ("{\"" + category.getIdCategory () + "\",\"" + category.getName () + "\"}");
+				
+				
+				writer.write (mapper.writeValueAsString (
+						MiniPacket.categoryToMiniPacket (category)));
 			}
 			
 		} catch (SQLException | NamingException e) {
@@ -75,6 +82,51 @@ public class CategoriesServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		doGet (request, response);
+	}
+	
+	private static class MiniPacket {
+		
+		private int idcategory;
+		private String category;
+		
+		public static MiniPacket categoryToMiniPacket (Category category) {
+			
+			MiniPacket res;
+			
+			res = new MiniPacket ();
+			
+			res.setIdcategory (category.getIdCategory ());
+			res.setCategory (category.getName ());
+			
+			return res;
+		}
+		
+		/**
+		 * @return the idcategory
+		 */
+		public int getIdcategory () {
+			return idcategory;
+		}
+		/**
+		 * @param idcategory the idcategory to set
+		 */
+		public void setIdcategory (int idcategory) {
+			this.idcategory = idcategory;
+		}
+
+		/**
+		 * @return the category
+		 */
+		public String getCategory () {
+			return category;
+		}
+
+		/**
+		 * @param category the category to set
+		 */
+		public void setCategory (String category) {
+			this.category = category;
+		}
 	}
 	
 }

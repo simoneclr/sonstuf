@@ -1,6 +1,6 @@
 .navbar {
-	border: 0px;
-	border-radius: 0px;
+	border: 0px !important;
+	border-radius: 0px !important;
 }
 
 .navbar-footer {

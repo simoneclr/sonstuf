@@ -1,95 +1,107 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: roberto
-  Date: 14/11/15
-  Time: 11.37
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 	<head>
 		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<c:import url="/prefabs/header.jsp"></c:import>
+		<!--
+		<link href="/css/style-gianluca.css" rel="stylesheet">
+		-->
+		<link rel="stylesheet" href="/css/style-simone.css">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Inserisci richiesta</title>
+		<title>Inserisci richiesta | Sonstuf</title>
 	</head>
+
 	<body>
-	<c:import url="/prefabs/navbar.jsp"></c:import>
 
-	<div class="container">
-		<div class ="row">
-			<div class="col-md-offset-1 col-md-10">
-				<p class="request_title">Inserisci una richiesta</p>
-				<hr>
+		<c:import url="/prefabs/navbar.jsp"></c:import>
+
+		<div class="container">
+			<div class ="row">
+				<div class="col-md-12">
+					<h1>Inserisci una richiesta</h1>
+					<hr>
+				</div>
 			</div>
 
+			<br>
+
+			<form class="form-horizontal" role="form">
+
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label class="control-label col-md-3" for="title">Ttitolo:</label>
+							<div class="col-md-9">
+								<input type="text" id="title" class="form-control" name="title"
+											 placeholder="Inserisci un titolo per la richiesta"/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3" for="category">Categoria:</label>
+							<div class="col-md-9">
+								<select class="form-control" id="category" name="category">
+									<option value="" disabled selected> Scegli una categoria</option>
+									<option value="">Giardinaggio</option>
+									<option value="">Spesa</option>
+									<option value="">Elettronica</option>
+									<option value="">DIY</option>
+									<option value="">Compagnia</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3" for="place">Luogo:</label>
+							<div class="col-md-9">
+								<input type="text" id="place" class="form-control" name="place" placeholder="Dove?"/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3" for="time">Quando:</label>
+							<div class="col-md-9">
+								<input type="text" id="time" class="form-control" name="time" placeholder="Quando?"/>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4" style="text-align: center">
+						<img src="http://www.placehold.it/350x180">
+					</div>
+				</div>
+
+
+
+				<div class="form-group">
+					<label class="control-label col-md-2" for="description">Descrizione:</label>
+					<div class="col-md-10">
+						<textarea class="form-control" rows="5" id="description" name="description"></textarea>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-2">
+						<span class="btn btn-primary btn-file btn-block">
+							Carica immagine
+							<input id="picture" type="file" class="file">
+						</span>
+					</div>
+
+					<div class="col-md-8"></div>
+
+					<div class="col-md-2">
+						<input type="submit" class="btn btn-success btn-block" id="btn-submit" value="Conferma">
+					</div>
+				</div>
+
+			</form>
 		</div>
-		<br>
-		<form class="form-horizontal">
-			<div class ="row">
-				<div class="col-md-offset-2 col-md-2 col-sm-offset-2 col-sm-3">
-					<p class="request_category">Categoria :</p>
-				</div>
-				<div class="col-md-1 col-sm-3">
-					<img src="../img/giardinaggio.jpeg" class="img-responsive" id ="category2">
-				</div>
-				<div class="col-md-1  col-sm-3">
-					<img src="../img/spesa.jpg" class="img-responsive" id ="category2">
-				</div>
-				<div class="col-md-1  col-sm-3">
-					<img src="../img/elettronica.jpg" class="img-responsive" id ="category3">
-				</div>
-			</div>
-			<div class ="row">
-				<div class="col-md-2 col-md-offset-2">
-					<p class="request_category2">Luogo :</p>
-				</div>
-				<div class="col-md-2 field_input">
-					<input type="text"  class="form-control" name="place" placeholder="luogo"/>
-				</div>
-			</div>
-			<div class ="row">
-				<div class="col-md-2 col-md-offset-2">
-					<p class="request_category2">Data :</p>
-				</div>
-				<div class="col-md-2 field_input">
-					<input type="text"  class="form-control" name="date" placeholder="data"/>
-				</div>
-			</div>
-			<div class ="row">
-				<div class="col-md-2 col-md-offset-2">
-					<p class="request_category2">Orario :</p>
-				</div>
-				<div class="col-md-2 field_input">
-					<input type="text"  class="form-control" name="date" placeholder="orario"/>
-				</div>
-			</div>
-			<div class ="row">
-				<div class="col-md-2 col-md-offset-2">
-					<p class="request_category2">Immagine :</p>
-				</div>
-				<div class="col-md-2 field_input2">
-					<span class="btn btn-default btn-file">
-						Carica immagine<input type="file">
-					</span>
-				</div>
-			</div>
-			<div class ="row">
-				<div class="col-md-2 col-md-offset-2">
-					<p class="request_category2">Descrizione :</p>
-				</div>
-				<div class="col-md-2 field_input">
-					<input type="text"  class="form-control" name="date" placeholder="descrzione"/>
-				</div>
-			</div>
 
+		<%--
+		<c:import url="/prefabs/footer.jsp"></c:import>
+		--%>
 
-		</form>
-	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<c:import url="/prefabs/footer.jsp"></c:import>
 	</body>
 </html>

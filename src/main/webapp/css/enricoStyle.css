@@ -1,0 +1,44 @@
+small {
+	display: block;
+	line-height: 1.428571429;
+	color: #585858;
+	font-size: 20px;
+}
+
+.assign > img {
+	width: 100%;
+}
+
+.request {
+	padding: 47px;
+}
+
+.offer {
+	overflow: hidden;
+	background-color: #819b90;
+}
+
+.icon {
+	width: 70%;
+	margin: 4px;
+}
+
+.panel {
+	background-color: #FFFFFF;
+	margin: 4px;
+	padding: 4px;
+}
+
+.box-shadow {
+	-webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, .10);
+	box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, .10);
+}
+
+.status {
+	padding-top: 240px;
+	width: 80%;
+}
+
+.hidden{
+	display: none;
+}
