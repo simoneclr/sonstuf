@@ -337,6 +337,39 @@ public class UserModel {
 		return res;
 	}
 
+	public static List<User> getAllUsers() throws SQLException, NamingException {
+		Connection connection;
+		PreparedStatement ps;
+		ResultSet rs;
+		List<User> res = new ArrayList<>();
+
+		String query = "SELECT * from user;";
+
+		connection = Connector.getConnection();
+
+		ps = connection.prepareStatement(query);
+
+		rs = ps.executeQuery();
+		while (rs.next()) {
+
+			User user = new User();
+
+			user.setIdUser(rs.getInt("iduser"));
+			user.setName(rs.getString("name"));
+			user.setSurname(rs.getString("surname"));
+			user.setPhone(rs.getString("phone"));
+			user.setPasswordHash(rs.getString("passwordhash"));
+			user.setRankO(rs.getFloat("ranko"));
+			user.setRankP(rs.getFloat("rankp"));
+			user.setBirthDate(rs.getDate("birthdate"));
+			user.setAdmin(rs.getBoolean("admin"));
+
+			res.add(user);
+		}
+		return res;
+	}
+
+
 	/**
 	 * todo
 	 *

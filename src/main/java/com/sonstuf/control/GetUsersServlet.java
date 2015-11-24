@@ -65,6 +65,14 @@ public class GetUsersServlet extends HttpServlet {
 		writer.write(']');
 	}
 
+	/**
+	 * stops at the first not null field of the pattern.
+	 * fields order: phone, email, name, surname, birthdate.
+	 * @param pattern the user pattern, some field can be null, if all fields are null all the users are retrieved.
+	 * @return the list of users that match the first constraint.
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
 	private List<User> requestDataFromDB(User pattern) throws SQLException, NamingException {
 		List<User> userList = new ArrayList<>();
 		if (pattern.getPhone() != null)
@@ -77,6 +85,7 @@ public class GetUsersServlet extends HttpServlet {
 			userList = UserModel.getUserBySurname(pattern.getSurname());
 		else if (pattern.getBirthDate() != null)
 			userList = UserModel.getUserByBirthdate(pattern.getBirthDate());
+		else userList = UserModel.getAllUsers();
 
 		return userList;
 	}
