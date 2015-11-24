@@ -82,6 +82,6 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>UserProfileServlet</servlet-name>
-		<url-pattern>/private/UserProfileServlet</url-pattern>
+		<url-pattern>/webpages/private/UserProfileServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

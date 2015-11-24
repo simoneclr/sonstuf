@@ -31,14 +31,12 @@ public class UserProfileServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String op;
-		Retval operationStatus;
-		ObjectMapper mapper;
 		
 		op = request.getParameter ("op");
 		
 		if (op == null) {
 			
-			operationStatus = new Retval (false, "Invalid request: missing op parameter");
+			response.getWriter ().write ("Invalid request: missing op parameter");
 		
 		} else {
 		
