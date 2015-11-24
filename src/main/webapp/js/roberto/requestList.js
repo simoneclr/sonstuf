@@ -160,7 +160,7 @@ function eventList(){
 
 	$( "#list" ).on( "click", "div", function() {
 		var idRequest=$(this).attr("id");
-		location.href = 'myRequestDetail.jsp?idRequest='+idRequest;
+		location.href = 'requestDetail.jsp?idRequest='+idRequest;
 	});
 
 }
