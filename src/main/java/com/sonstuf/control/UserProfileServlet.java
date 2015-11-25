@@ -19,7 +19,6 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.sonstuf.model.RequestModel;
 import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.User;
-import com.sonstuf.utils.Retval;
 
 /**
  * Servlet implementation class UserProfileServlet
@@ -204,7 +203,7 @@ public class UserProfileServlet extends HttpServlet {
 		private String surname;
 		private String telephone;
 		private String email;
-		private String bithdate;
+		private String birthdate;
 		private double rankO;
 		private double rankR;
 		
@@ -258,11 +257,11 @@ public class UserProfileServlet extends HttpServlet {
 		public void setEmail (String email) {
 			this.email = email;
 		}
-		public String getBithdate () {
-			return bithdate;
+		public String getBirthdate () {
+			return birthdate;
 		}
-		public void setBithdate (String bithdate) {
-			this.bithdate = bithdate;
+		public void setBirthdate (String bithdate) {
+			this.birthdate = bithdate;
 		}
 		public double getRankO () {
 			return rankO;

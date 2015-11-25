@@ -1,5 +1,7 @@
 package com.sonstuf.model.bean;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.sql.Timestamp;
 
 /**
@@ -61,4 +63,9 @@ public class Offer {
 	public void setPostTime(Timestamp postTime) {
 		this.postTime = postTime;
 	}
+
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
+
 }

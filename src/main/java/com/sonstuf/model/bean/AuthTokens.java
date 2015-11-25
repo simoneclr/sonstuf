@@ -1,5 +1,7 @@
 package com.sonstuf.model.bean;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Created by hypertesto on 18/11/15.
  */
@@ -32,4 +34,9 @@ public class AuthTokens {
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
+
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
+
 }
