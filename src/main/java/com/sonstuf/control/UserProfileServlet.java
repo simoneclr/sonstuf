@@ -1,6 +1,8 @@
 package com.sonstuf.control;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -125,15 +127,17 @@ public class UserProfileServlet extends HttpServlet {
 		public static MiniPacket userToMiniPacket (User user) {
 			
 			MiniPacket res;
+			SimpleDateFormat sdf;
 			
 			res = new MiniPacket ();
+			sdf = new SimpleDateFormat ("dd/MM/yyyy");
 			
 			res.setIdUser (user.getIdUser ());
 			res.setName (user.getName ());
 			res.setSurname (user.getSurname ());
 			res.setTelephone (user.getPhone ());
 			res.setEmail (user.getEmail ());
-			res.setBithdate (user.getBirthDate ().toString ()); //TODO: time format?
+			res.setBithdate (sdf.format (user.getBirthDate ()));
 			res.setRankO (user.getRankO ());
 			res.setRankR (user.getRankP ());
 			
