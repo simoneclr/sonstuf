@@ -1,4 +1,4 @@
-//Static, temporary data
+/* Static, temporary data
 var loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt" +
 		"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation" +
 		"ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in " +
@@ -180,18 +180,28 @@ var offers = [
 			"time" : "11:00-16:00",
 			"postTimestamp" : "omg!"}
 	}];
+*/
+
+var user;
+var requests;
+var offers;
 
 $(document).ready(function(){
-
-	updatePersonalData();
-
-	updateUserRatings();
-
-	updateRequests();
-
-	updateOffers();
-
+	loadUser();
 });
+
+function loadUser(){
+	$.getJSON("/webpages/private/UserProfileServlet?op=profile", function(data){
+
+	}).done(function(data){
+		user = data;
+		updatePersonalData();
+		updateUserRatings();
+
+	}).fail(function(){
+		alert("Errore!");
+	});
+}
 
 function updatePersonalData(){
 	var completeName = user.name + " " + user.surname;
@@ -203,7 +213,7 @@ function updatePersonalData(){
 }
 
 function updateUserRatings(){
-	$("#rating-o").rating('update', user.rankO)
+	$("#rating-o").rating('update', user.rankO);
 	$("#rating-r").rating('update', user.rankR);
 }
 
@@ -220,6 +230,7 @@ function updateRequests(){
 			place: requests[i].request.place,
 			time: requests[i].request.time
 		};
+
 		var html = template(context);
 		$("#requests").append(html);
 	}
@@ -240,6 +251,7 @@ function updateOffers(){
 			time: offers[i].request.time,
 			isInCharge: inChargeClass(offers[i].isInCharge)
 		};
+
 		var html = template(context);
 		$("#offers").append(html);
 	}

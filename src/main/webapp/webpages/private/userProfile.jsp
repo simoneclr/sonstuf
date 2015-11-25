@@ -17,7 +17,7 @@
 
 		<div class="row title-row" style="margin-bottom: 30px; margin-top: 30px">
 			<div class="col-md-9">
-				<h1 id="ucname">Roberto 'Amumu' Fellin</h1>
+				<h1 id="ucname"></h1>
 			</div>
 
 			<div class="col-md-3">
@@ -113,9 +113,9 @@
 				<img src="http://placehold.it/250x300">
 			</div>
 			<div class="col-md-9">
-				<h4><strong>Data di nascita:</strong> <span id="bdate">21/12/2012</span></h4>
-				<h4><strong>Email:</strong> <span id="email">rf.garenlol@dambel.zum</span></h4>
-				<h4><strong>Telefono:</strong> <span id="telnum">Non te lo dico gné gné!</span></h4>
+				<h4><strong>Data di nascita:</strong> <span id="bdate"></span></h4>
+				<h4><strong>Email:</strong> <span id="email"></span></h4>
+				<h4><strong>Telefono:</strong> <span id="telnum"></span></h4>
 				<br>
 				<h4>
 					<strong>Rating O:</strong>
