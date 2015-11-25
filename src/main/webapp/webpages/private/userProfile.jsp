@@ -228,5 +228,7 @@
 		});
 	</script>
 
+	<c:import url="/prefabs/footer.jsp"></c:import>
+
 </body>
 </html>
