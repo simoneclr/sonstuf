@@ -83,7 +83,6 @@ REQUESTS = [
 		},
 		"request" : {
 			"category" : "<categoryName>",
-			"categoryDescription" : "<shortDescription>",
 			"title" : "<titolo della richiesta>",
 			"description" : "<descrizione richiesta>",
 			"place" : "<place>",
