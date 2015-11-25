@@ -1,8 +1,12 @@
 package com.sonstuf.control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.sonstuf.model.RequestModel;
+import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.User;
 import com.sonstuf.utils.Retval;
 
@@ -49,6 +57,11 @@ public class UserProfileServlet extends HttpServlet {
 					sendProfile (request, response);
 					break;
 					
+				case "userRequests":
+					
+					sendUserRequests (request, response);
+					break;
+					
 				default:
 					
 					response.getWriter ().println ("Unknown operation");
@@ -58,11 +71,27 @@ public class UserProfileServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost (HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+			
+		doGet (request, response);
+	}
+	
+	private User getUserFromSession (HttpSession session) {
 		
-		doGet(request, response);
+		User res;
+		
+		res = null;
+		
+		if (session != null) {
+			
+			res = (User) session.getAttribute ("user");
+		}
+		
+		return res;
 	}
 	
 	private void sendProfile (HttpServletRequest request, HttpServletResponse response) {
@@ -94,6 +123,61 @@ public class UserProfileServlet extends HttpServlet {
 					
 					e.printStackTrace();
 				}
+			}
+		}
+	}
+	
+	private void sendUserRequests (HttpServletRequest request,
+			HttpServletResponse response)throws IOException {
+		
+		User currentUser;
+		List<Request> userRequests;
+		PrintWriter writer;
+		ObjectMapper mapper;
+		SimpleFilterProvider filters;
+		boolean comma;
+		
+		comma = false;
+		
+		currentUser = getUserFromSession (request.getSession ());
+		writer = response.getWriter ();
+		
+		if (currentUser != null) {
+			
+			try {
+				
+				mapper = new ObjectMapper ();
+				filters = new SimpleFilterProvider();
+
+				filters.addFilter("rankFilter",
+						SimpleBeanPropertyFilter.serializeAllExcept ("rankO"));
+				filters.addFilter ("filter",
+						SimpleBeanPropertyFilter.serializeAll ());
+						
+				userRequests = RequestModel
+						.getRequestsByUserId (currentUser.getIdUser ());
+				
+				writer.write ("[");
+				
+				
+				for (Request r : userRequests) {
+					
+					if (!comma) {
+						comma = true;
+					} else {
+						writer.write(',');
+					}
+					
+					writer.write (mapper.setFilterProvider (filters)
+							.writeValueAsString (com.sonstuf.control.MiniPacket
+									.requestToMiniPacket (r)));
+				}
+				
+				writer.write ("]");
+				
+			} catch (SQLException | NamingException e) {
+				
+				e.printStackTrace();
 			}
 		}
 	}

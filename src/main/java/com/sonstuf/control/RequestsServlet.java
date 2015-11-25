@@ -1,8 +1,10 @@
 package com.sonstuf.control;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.sonstuf.model.CategoryModel;
@@ -53,18 +55,21 @@ public class RequestsServlet extends HttpServlet {
 
 				case "listAll":
 
-					listAllRequests(writer);
+					listAllRequests (writer);
 					break;
 
 				case "view":
 
-					viewRequest(request, writer);
+					viewRequest (request, writer);
 					break;
 
 				default:
 
 					response.getWriter().write("Unsupported operation");
 			}
+		} else {
+			
+			response.getWriter ().write ("Missing op parameter");
 		}
 	}
 
@@ -82,32 +87,35 @@ public class RequestsServlet extends HttpServlet {
 
 		List<Request> requests;
 		ObjectMapper mapper;
-		boolean done;
+		boolean comma;
 		MiniPacket temp;
 
 		mapper = new ObjectMapper();
 		SimpleFilterProvider filters;
 
 		filters = new SimpleFilterProvider();
-		filters.addFilter("filter",
-				SimpleBeanPropertyFilter.serializeAllExcept("description"));
+		
+		filters.addFilter ("rankFilter",
+				SimpleBeanPropertyFilter.serializeAllExcept ("rankO"));
+		filters.addFilter ("filter",
+				SimpleBeanPropertyFilter.serializeAllExcept ("description"));
 
-		done = false;
+		comma = false;
 		writer.write('[');
 
 		try {
 
 			requests = RequestModel.getAllRequests();
-
+			
 			for (Request request : requests) {
 
-				if (!done) {
-					done = true;
+				if (!comma) {
+					comma = true;
 				} else {
 					writer.write(',');
 				}
 
-				temp = requestToMiniPacket(request);
+				temp = MiniPacket.requestToMiniPacket(request);
 
 				if (temp != null) {
 
@@ -124,8 +132,8 @@ public class RequestsServlet extends HttpServlet {
 		writer.write(']');
 	}
 
-	private void viewRequest(HttpServletRequest request, PrintWriter writer) {
-
+	private void viewRequest (HttpServletRequest request, PrintWriter writer) {
+		
 		String requestId;
 		int parsedId;
 		Request r;
@@ -136,7 +144,7 @@ public class RequestsServlet extends HttpServlet {
 
 		if (requestId == null || requestId.length() == 0) {
 
-			writer.write("Invalid operation: the requestId parameter should be specified");
+			writer.write("Invalid operation: the idRequest parameter should be specified");
 			return;
 		}
 
@@ -156,13 +164,15 @@ public class RequestsServlet extends HttpServlet {
 
 			mapper = new ObjectMapper();
 			filters = new SimpleFilterProvider();
-
+			
+			filters.addFilter("rankFilter",
+					SimpleBeanPropertyFilter.serializeAllExcept ("rankO"));
 			filters.addFilter("filter",
 					SimpleBeanPropertyFilter.serializeAll());
 
 			if (r != null) {
 				writer.write(mapper.setFilterProvider(filters)
-						.writeValueAsString(requestToMiniPacket(r)));
+						.writeValueAsString(MiniPacket.requestToMiniPacket(r)));
 			} else {
 				writer.write("Invalid request: item not found");
 			}
@@ -174,8 +184,93 @@ public class RequestsServlet extends HttpServlet {
 			return;
 		}
 	}
+}
 
-	private MiniUser userToMiniUser(User user) {
+class MiniPacket {
+
+	private int idRequest;
+	private MiniUser user;
+	private MiniRequest request;
+	
+	public static MiniPacket requestToMiniPacket(Request request) {
+
+		MiniPacket res;
+
+		try {
+
+			res = new MiniPacket();
+
+			res.idRequest = request.getIdRequest();
+			res.user = MiniUser.userToMiniUser(
+					UserModel.getUserById(request.getIdUser()));
+			res.request = new MiniRequest();
+			res.request.setCategory (CategoryModel
+					.getCategoryById(request.getIdCategory()).getName());
+			res.request.setPlace (request.getPlace());
+			res.request.setTime (request.getDateTime());
+			res.request.setPostTimestamp (request.getPostTime().toString());
+			res.request.setDescription (request.getDescription());
+			res.request.setTitle (request.getTitle ());
+
+		} catch (SQLException | NamingException e) {
+
+			e.printStackTrace();
+			res = null;
+		}
+
+		return res;
+	}
+	
+	/**
+	 * @return the idRequest
+	 */
+	public int getIdRequest() {
+		return idRequest;
+	}
+
+	/**
+	 * @param idRequest the idRequest to set
+	 */
+	public void setIdRequest(int idRequest) {
+		this.idRequest = idRequest;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public MiniUser getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(MiniUser user) {
+		this.user = user;
+	}
+
+	/**
+	 * @return the request
+	 */
+	public MiniRequest getRequest() {
+		return request;
+	}
+
+	/**
+	 * @param request the request to set
+	 */
+	public void setRequest(MiniRequest request) {
+		this.request = request;
+	}
+}
+
+@JsonFilter ("rankFilter")
+class MiniUser {
+
+	private String name = "ciao";
+	private double rankR = 5.4;
+	
+	public static MiniUser userToMiniUser(User user) {
 
 		MiniUser res;
 
@@ -186,195 +281,121 @@ public class RequestsServlet extends HttpServlet {
 
 		return res;
 	}
-
-	public MiniPacket requestToMiniPacket(Request request) {
-
-		MiniPacket res;
-
-		try {
-
-			res = new MiniPacket();
-
-			res.idRequest = request.getIdRequest();
-			res.user = userToMiniUser(
-					UserModel.getUserById(request.getIdUser()));
-			res.request = new MiniRequest();
-			res.request.category = CategoryModel
-					.getCategoryById(request.getIdCategory()).getName();
-			res.request.place = request.getPlace();
-			res.request.time = request.getDateTime();
-			res.request.postTimestamp = request.getPostTime().toString();
-			res.request.description = request.getDescription();
-
-		} catch (SQLException | NamingException e) {
-
-			e.printStackTrace();
-			res = null;
-		}
-
-		return res;
+	
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
 	}
 
-	private class MiniPacket {
-
-		private int idRequest;
-		private MiniUser user;
-		private MiniRequest request;
-
-		/**
-		 * @return the idRequest
-		 */
-		public int getIdRequest() {
-			return idRequest;
-		}
-
-		/**
-		 * @param idRequest the idRequest to set
-		 */
-		public void setIdRequest(int idRequest) {
-			this.idRequest = idRequest;
-		}
-
-		/**
-		 * @return the user
-		 */
-		public MiniUser getUser() {
-			return user;
-		}
-
-		/**
-		 * @param user the user to set
-		 */
-		public void setUser(MiniUser user) {
-			this.user = user;
-		}
-
-		/**
-		 * @return the request
-		 */
-		public MiniRequest getRequest() {
-			return request;
-		}
-
-		/**
-		 * @param request the request to set
-		 */
-		public void setRequest(MiniRequest request) {
-			this.request = request;
-		}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	private class MiniUser {
-
-		private String name = "ciao";
-		private double rankR = 5.4;
-
-		/**
-		 * @return the name
-		 */
-		public String getName() {
-			return name;
-		}
-
-		/**
-		 * @param name the name to set
-		 */
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		/**
-		 * @return the rankR
-		 */
-		public double getRankR() {
-			return rankR;
-		}
-
-		/**
-		 * @param rankR the rankR to set
-		 */
-		public void setRankR(double rankR) {
-			this.rankR = rankR;
-		}
+	/**
+	 * @return the rankR
+	 */
+	public double getRankR() {
+		return rankR;
 	}
 
-	@JsonFilter("filter")
-	private class MiniRequest {
+	/**
+	 * @param rankR the rankR to set
+	 */
+	public void setRankR(double rankR) {
+		this.rankR = rankR;
+	}
+}
 
-		private String category;
-		private String place;
-		private String time;
-		private String postTimestamp;
-		private String description;
+@JsonFilter("filter")
+class MiniRequest {
 
-		/**
-		 * @return the category
-		 */
-		public String getCategory() {
-			return category;
-		}
+	private String category;
+	private String place;
+	private String time;
+	private String postTimestamp;
+	private String description;
+	private String title;
 
-		/**
-		 * @param category the category to set
-		 */
-		public void setCategory(String category) {
-			this.category = category;
-		}
+	/**
+	 * @return the category
+	 */
+	public String getCategory() {
+		return category;
+	}
 
-		/**
-		 * @return the place
-		 */
-		public String getPlace() {
-			return place;
-		}
+	/**
+	 * @param category the category to set
+	 */
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
-		/**
-		 * @param place the place to set
-		 */
-		public void setPlace(String place) {
-			this.place = place;
-		}
+	/**
+	 * @return the place
+	 */
+	public String getPlace() {
+		return place;
+	}
 
-		/**
-		 * @return the time
-		 */
-		public String getTime() {
-			return time;
-		}
+	/**
+	 * @param place the place to set
+	 */
+	public void setPlace(String place) {
+		this.place = place;
+	}
 
-		/**
-		 * @param time the time to set
-		 */
-		public void setTime(String time) {
-			this.time = time;
-		}
+	/**
+	 * @return the time
+	 */
+	public String getTime() {
+		return time;
+	}
 
-		/**
-		 * @return the postTimestamp
-		 */
-		public String getPostTimestamp() {
-			return postTimestamp;
-		}
+	/**
+	 * @param time the time to set
+	 */
+	public void setTime(String time) {
+		this.time = time;
+	}
 
-		/**
-		 * @param postTimestamp the postTimestamp to set
-		 */
-		public void setPostTimestamp(String postTimestamp) {
-			this.postTimestamp = postTimestamp;
-		}
+	/**
+	 * @return the postTimestamp
+	 */
+	public String getPostTimestamp() {
+		return postTimestamp;
+	}
 
-		/**
-		 * @return the description
-		 */
-		public String getDescription() {
-			return description;
-		}
+	/**
+	 * @param postTimestamp the postTimestamp to set
+	 */
+	public void setPostTimestamp(String postTimestamp) {
+		this.postTimestamp = postTimestamp;
+	}
 
-		/**
-		 * @param description the description to set
-		 */
-		public void setDescription(String description) {
-			this.description = description;
-		}
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getTitle () {
+		return title;
+	}
+
+	public void setTitle (String title) {
+		this.title = title;
 	}
 }
