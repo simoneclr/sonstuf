@@ -188,6 +188,8 @@ var offers;
 
 $(document).ready(function(){
 	loadUser();
+
+	loadRequests();
 });
 
 function loadUser(){
@@ -215,6 +217,18 @@ function updatePersonalData(){
 function updateUserRatings(){
 	$("#rating-o").rating('update', user.rankO);
 	$("#rating-r").rating('update', user.rankR);
+}
+
+function loadRequests(){
+	$.getJSON("/webpages/private/UserProfileServlet?op=userRequests", function(data){
+
+	}).done(function(data){
+		requests = data;
+		updateRequests();
+
+	}).fail(function(){
+		alert("Errore!");
+	});
 }
 
 function updateRequests(){
