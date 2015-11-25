@@ -220,7 +220,7 @@ public class UserProfileServlet extends HttpServlet {
 			res.setSurname (user.getSurname ());
 			res.setTelephone (user.getPhone ());
 			res.setEmail (user.getEmail ());
-			res.setBithdate (sdf.format (user.getBirthDate ()));
+			res.setBirthdate (sdf.format (user.getBirthDate ()));
 			res.setRankO (user.getRankO ());
 			res.setRankR (user.getRankP ());
 			
