@@ -1,7 +1,7 @@
 var user={
 	name:"",
 	surname:"",
-	telephone:"",
+	phone:"",
 	email:"",
 	birthdate:""
 }
@@ -21,7 +21,7 @@ function eventCerca(){
 	$("#cerca").click(function(){
 		user.name=$("#name").val();
 		user.surname=$("#surname").val();
-		user.telephone=$("#telephone").val();
+		user.phone=$("#telephone").val();
 		user.email=$("#email").val();
 		user.birthdate=$("#birthdate").val();
 
@@ -85,7 +85,7 @@ function updateTable(data){
 			id:data[i].id,
 			name:data[i].name,
 			surname: data[i].surname,
-			telephone: data[i].telephone,
+			telephone: data[i].phone,
 			email: data[i].email,
 			birthdate: data[i].birthdate,
 
