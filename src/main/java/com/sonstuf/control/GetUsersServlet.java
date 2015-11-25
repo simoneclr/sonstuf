@@ -54,9 +54,12 @@ public class GetUsersServlet extends HttpServlet {
 		filters.addFilter("filter",
 				SimpleBeanPropertyFilter.serializeAllExcept("passwordHash", "rankO", "rankP"));
 		boolean done = false;
+		System.out.println("11");
 		try {
 			for (User user : userListDB) {
+				System.out.println("user: "+user.getName());
 				if (pattern.equalsIgnoringNullFields(user)) { //retain only the Users that match the pattern
+					System.out.println("13");
 					if (!done) {
 						done = true;
 					} else {
@@ -69,6 +72,7 @@ public class GetUsersServlet extends HttpServlet {
 				}
 			}
 		} catch (JsonProcessingException e) {
+			System.out.println("14");
 			e.printStackTrace();
 		}
 		writer.write(']');
@@ -84,17 +88,26 @@ public class GetUsersServlet extends HttpServlet {
 	 */
 	private List<User> requestDataFromDB(User pattern) throws SQLException, NamingException {
 		List<User> userList = new ArrayList<>();
-		if (pattern.getPhone() != null)
+		if (pattern.getPhone() != null && pattern.getPhone() != ""){
+			System.out.println("9");
 			userList.add(UserModel.getUserByPhone(pattern.getPhone()));
-		else if (pattern.getEmail() != null)
+			System.out.println("10");}
+		else if (pattern.getEmail() != null && pattern.getEmail() != ""){
+			System.out.println("5");
 			userList.add(UserModel.getUserByMail(pattern.getEmail()));
-		else if (pattern.getName() != null)
+			System.out.println("6");
+		}
+		else if (pattern.getName() != null && pattern.getName() != ""){
+			System.out.println("7");
 			userList = UserModel.getUserByName(pattern.getName());
-		else if (pattern.getSurname() != null)
+			System.out.println("8");
+		}
+		else if (pattern.getSurname() != null && pattern.getSurname() != "")
 			userList = UserModel.getUserBySurname(pattern.getSurname());
 		else if (pattern.getBirthDate() != null)
 			userList = UserModel.getUserByBirthdate(pattern.getBirthDate());
 		else userList = UserModel.getAllUsers();
+
 		System.out.println("list: "+userList.get(0).getName());
 		return userList;
 	}

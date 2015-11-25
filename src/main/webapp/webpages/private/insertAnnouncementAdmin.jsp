@@ -94,6 +94,9 @@
 					</tr>
 					</thead>
 					<tbody id="bodyTable">
+
+
+					</tbody>
 					<script id="request-template" type="text/x-handlebars-template">
 						<tr id="{{id}}">
 							<td>{{name}}</td>
@@ -104,8 +107,6 @@
 
 						</tr>
 					</script>
-
-					</tbody>
 				</table>
 			</div>
 
