@@ -1,5 +1,7 @@
 package com.sonstuf.model.bean;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -135,5 +137,9 @@ public class User implements Serializable {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }

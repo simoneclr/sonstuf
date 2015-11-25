@@ -17,14 +17,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserModel {
+
 	private static List<User> executeQuery(PreparedStatement prepStatement) throws SQLException {
+
 		ResultSet rs = prepStatement.executeQuery();
 		List<User> res = new ArrayList<>();
+
 		try {
+
 			while (rs.next()) {
+
 				User user = new User();
 
 				user.setIdUser(rs.getInt("iduser"));
+				user.setEmail(rs.getString("email"));
 				user.setName(rs.getString("name"));
 				user.setSurname(rs.getString("surname"));
 				user.setPhone(rs.getString("phone"));
@@ -36,10 +42,14 @@ public class UserModel {
 
 				res.add(user);
 			}
+
 		} finally {
+
 			rs.close();
 			prepStatement.close();
+
 		}
+
 		return res;
 	}
 
@@ -53,13 +63,12 @@ public class UserModel {
 	 * @throws InvalidKeySpecException
 	 */
 	public static Retval insert(User user) throws SQLException, NamingException, NoSuchAlgorithmException, InvalidKeySpecException {
-
-
+		
 		Connection connection;
 		PreparedStatement ps;
 		ResultSet rs;
 
-		String check = "SELECT COUNT(*) AS count FROM user WHERE email = ?";
+		String check = "SELECT COUNT(*) AS count FROM user WHERE email = ?;";
 
 		String query = "INSERT INTO user\n"
 				+ "(`name`, `surname`, `phone`, `email`, `passwordhash`, `ranko`, `rankp`, `birthdate`, `admin`)\n"
@@ -118,6 +127,7 @@ public class UserModel {
 	 * @throws SQLException
 	 */
 	public static User getUserByMail(String email) throws SQLException, NamingException {
+
 		Connection connection;
 
 		String query = "SELECT * from user\n" +
@@ -129,10 +139,10 @@ public class UserModel {
 
 		List<User> userList = executeQuery(preparedStatement);
 		connection.close();
-		if (userList.size() > 0)
+		if (userList.size() > 0) {
+			System.out.println(userList.get(0));
 			return userList.get(0);
-		else //if it's empty
-			return null;
+		} else return null;
 	}
 
 	/**
@@ -189,6 +199,7 @@ public class UserModel {
 	}
 
 	public static List<User> getUserByName(String name) throws SQLException, NamingException {
+
 		Connection connection;
 		PreparedStatement ps;
 
@@ -208,6 +219,7 @@ public class UserModel {
 	}
 
 	public static List<User> getUserBySurname(String surname) throws SQLException, NamingException {
+
 		Connection connection;
 		PreparedStatement ps;
 		ResultSet rs;
@@ -229,6 +241,7 @@ public class UserModel {
 	}
 
 	public static List<User> getUserByBirthdate(Date birthdate) throws SQLException, NamingException {
+
 		Connection connection;
 		PreparedStatement ps;
 		ResultSet rs;
@@ -250,6 +263,7 @@ public class UserModel {
 	}
 
 	public static List<User> getAllUsers() throws SQLException, NamingException {
+
 		Connection connection;
 		PreparedStatement ps;
 		ResultSet rs;
