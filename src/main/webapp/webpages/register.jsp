@@ -20,6 +20,12 @@
 					<hr class="colorgraph">
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="msg">
+					</div>
+				</div>
+			</div>
 			<form name="myForm" onsubmit="return validateForm()">
 				<div class="row">
 					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-7">

@@ -15,6 +15,7 @@ function start(){
 
 function validateEmail_Support(email) {
 	var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	if(email=="") return false;
 	return emailReg.test(email);
 }
 
@@ -36,6 +37,7 @@ function validate1(){
 
 
 	if ((password1 != "")) {
+		$("#password2").val("");
 		$("#password2").prop("disabled",false);
 		if (password1 == password2) {
 			//$("#password2").prop("disabled",true);
@@ -44,6 +46,8 @@ function validate1(){
 		}
 	}
 	else{
+		$("#password1").parent('div').removeClass("has-success has-feedback");
+		$("#password2").parent('div').removeClass("has-success has-feedback");
 		$("#password1").parent('div').removeClass("has-error has-feedback");
 		$("#password2").parent('div').removeClass("has-error has-feedback");
 		$("#password2").prop("disabled",true);
@@ -104,26 +108,59 @@ function checkPhone(){
 	return true;
 }
 
+function checkPassword(){
+	if (($("#password1").val()=="")||($("#password2").val()=="")){
+		return false;
+	}
+	return true;
+}
 function checkFields(){
 	if(!checkName()){
 		$("#name").parent('div').addClass("has-error has-feedback");
 	}
+	else{
+		$("#name").parent('div').removeClass("has-error has-feedback");
+	}
 	if(!checkSurname()){
 		$("#surname").parent('div').addClass("has-error has-feedback");
+	}
+	else{
+		$("#surname").parent('div').removeClass("has-error has-feedback");
 	}
 	if(!checkBirthdate()){
 		$("#birthdate").parent('div').addClass("has-error has-feedback");
 	}
+	else{
+		$("#birthdate").parent('div').removeClass("has-error has-feedback");
+	}
 	if(!checkEmail()){
 		$("#email").parent('div').addClass("has-error has-feedback");
 	}
+	else{
+
+		$("#email").parent('div').removeClass("has-error has-feedback");
+	}
 	if(!checkPhone()){
 		$("#phone").parent('div').addClass("has-error has-feedback");
+	}
+	else{
+		$("#phone").parent('div').removeClass("has-error has-feedback");
+	}
+	if(!checkPassword()){
+		$("#password1").parent('div').addClass("has-error has-feedback");
+		$("#password2").parent('div').addClass("has-error has-feedback");
+	}
+	else{
+		$("#password1").parent('div').removeClass("has-error has-feedback");
+		$("#password2").parent('div').removeClass("has-error has-feedback");
 	}
 }
 
 function validateForm() {
 	if (!checkFields()){
+		$(".msg").empty();
+		$(".msg").addClass("alert alert-danger bs-alert-old-docs");
+		$(".msg").append("<p>È stato riscontrato un errore nei seguenti campi</p>");
 		return false;
 	}
 }
