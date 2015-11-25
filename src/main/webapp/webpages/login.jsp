@@ -6,9 +6,11 @@
 		<c:import url="../prefabs/header.jsp"></c:import>
 		<link href="../css/style-gianluca.css" rel="stylesheet">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" href="/css/style-simone.css">
 		<script src="/js/simone/login.js"></script>
 		<title>Login</title>
 	</head>
+
 	<body>
 		<c:import url="../prefabs/navbar.jsp"></c:import>
 
@@ -21,6 +23,12 @@
 				</div>
 
 				<div class="panel-body" id="panel_body_login">
+
+					<div class="alert alert-danger fade in hidden" id="error-alert">
+						<strong>Errore!</strong>
+						<span id="error-message"></span>
+					</div>
+
 					<form name="form-login" class="form-horizontal" action="/AuthenticationServlet">
 						<div class="form-group">
 							<label for="userName" class="col-md-offset-1 col-md-2 col-sm-3 col-sm-offset-1 col-xs-10 control-label">
@@ -58,9 +66,6 @@
 				</div>
 			</div>
 		</div>
-
-		<c:import url="../prefabs/footer.jsp"></c:import>
-
 	</body>
 
 </html>
