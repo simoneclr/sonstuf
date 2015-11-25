@@ -1,5 +1,7 @@
 package com.sonstuf.model.bean;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.sql.Timestamp;
 
 /**
@@ -52,4 +54,9 @@ public class Message {
 	public void setIdSender(int idSender) {
 		this.idSender = idSender;
 	}
+
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
+
 }

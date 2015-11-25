@@ -1,5 +1,7 @@
 package com.sonstuf.model.bean;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Bean della categoria
  * Created by hypertesto on 17/11/15.
@@ -33,4 +35,9 @@ public class Category {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
+
 }
