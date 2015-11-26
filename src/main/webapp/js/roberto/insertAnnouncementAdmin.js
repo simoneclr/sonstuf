@@ -3,7 +3,7 @@ var user={
 	surname:"",
 	phone:"",
 	email:"",
-	birthdate:""
+	birthDate:""
 }
 
 $(document).ready(function(){
@@ -23,22 +23,24 @@ function eventCerca(){
 		user.surname=$("#surname").val();
 		user.phone=$("#telephone").val();
 		user.email=$("#email").val();
-		user.birthdate=$("#birthdate").val();
+		user.birthDate=$("#birthdate").val();
 
 
 		var json=jQuery.extend(true, {}, user);
-		console.log(json);
+		console.log(JSON.stringify(json));
 		$.ajax({
 			type: "POST",
 			url: "/GetUsers",
-			data: json,
+			data: JSON.stringify(json),
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
-			success: function(data){
-
+			success: function(input){
+				console.log("json: " + JSON.stringify(input));
+				var data= JSON.parse(JSON.stringify(input));
 				if(data.length==0){
 					registraUtente(json);
 				} else{
+					console.log("2");
 					updateTable(data);
 				}
 
@@ -74,27 +76,22 @@ function registraUtente(json){
 	});
 }
 function updateTable(data){
-
 	$("#rowTable").show();
-
+	$("#bodyTable").empty();
 	var source = $("#request-template").html();
 	var template = Handlebars.compile(source);
-
 	for (var i = 0; i < data.length; i++){
 		var context = {
-			id:data[i].id,
+			id:data[i].idUser,
 			name:data[i].name,
 			surname: data[i].surname,
 			telephone: data[i].phone,
 			email: data[i].email,
-			birthdate: data[i].birthdate,
+			birthdate: data[i].birthDate,
 
 		};
 		var html = template(context);
 		$("#bodyTable").append(html);
-
-
-
 
 	}
 

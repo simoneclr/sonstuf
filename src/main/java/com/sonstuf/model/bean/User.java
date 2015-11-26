@@ -1,8 +1,8 @@
 package com.sonstuf.model.bean;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
@@ -13,6 +13,7 @@ import java.sql.Date;
  *
  * @author enrico.t
  */
+
 @JsonFilter ("userFilter")
 public class User implements Serializable {
 
@@ -28,7 +29,6 @@ public class User implements Serializable {
 	private float rankR;
 	private Date birthDate;
 	private boolean admin;
-
 	/**
 	 * checks if user and this are the same User ignoring null fields
 	 * @param user
