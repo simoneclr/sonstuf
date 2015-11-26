@@ -103,9 +103,8 @@ OFFERS = [
 		},
 		"request" :{
 			"category" : "<categoryName>",
-			"categoryDescription" : "<shortDescription>",
 			"title" : "<titolo della richiesta>",
-			"description" : "<descrizione richiesta>",
+		//	"description" : "<descrizione richiesta>", da togliere?
 			"place" : "<place>",
 			"time" : "<time>",
 			"postTimestamp" : "<postTimeStamp>"
