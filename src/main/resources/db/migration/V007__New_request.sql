@@ -1,0 +1,2 @@
+INSERT INTO `sonstuf`.`request` (`title`, `description`, `place`, `datetime`, `iduser`, `idcategory`, `status`) VALUES ('Spostamento divano', 'Devo spostare il divano ma da sola non riesco. Mi servirebbero due omaccioni belli e robusti!', 'Belluno', 'Ore serali','3', '2', '0');
+INSERT INTO `sonstuf`.`request` (`title`, `description`, `place`, `datetime`, `iduser`, `idcategory`, `status`) VALUES ('Aiuto con la TV', 'Non vedo più i canali! Se qualcuno mi risolve il problemi gli offro una pizza!', 'Dambel', 'Pomeriggio dalle 2 alle 4 oppure la sera dopo le 7','3', '2', '0');
