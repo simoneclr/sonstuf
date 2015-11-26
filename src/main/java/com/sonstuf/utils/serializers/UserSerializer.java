@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.sonstuf.model.bean.User;
+import com.sonstuf.utils.ProjectGlobals;
 
 public class UserSerializer<T extends User> extends JsonSerializer<T> {
 	
@@ -17,7 +18,7 @@ public class UserSerializer<T extends User> extends JsonSerializer<T> {
 		
 		SimpleDateFormat sdf;
 		
-		sdf = new SimpleDateFormat ("dd-MM-yyyy HH:mm");
+		sdf = new SimpleDateFormat (ProjectGlobals.DATE_OUTPUT_FORMAT);
 		
 		jsonGenerator.writeStartObject ();
 		
