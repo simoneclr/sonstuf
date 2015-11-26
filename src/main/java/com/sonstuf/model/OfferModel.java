@@ -58,46 +58,7 @@ public class OfferModel {
 
 	}
 
-	public static List<Offer> getOfferByUser ( User u ) throws SQLException, NamingException {
-
-		Connection connection;
-		PreparedStatement ps;
-		ResultSet rs;
-		List<Offer> res;
-
-		String query = 	"SELECT * from offer\n" +
-				"WHERE iduser = ? ;";
-
-		connection = Connector.getConnection();
-
-		ps = connection.prepareStatement(query);
-		ps.setInt( 1, id );
-
-		rs = ps.executeQuery();
-
-		res = new ArrayList<Offer>();
-
-		while ( rs.next() ) {
-
-			Offer o = new Offer();
-			o.setIdOffer( rs.getInt("idoffer"));
-			o.setInCharge( rs.getBoolean("isincharge"));
-			o.setIdRequest( rs.getInt("idrequest"));
-			o.setIdUser( rs.getInt("iduser"));
-			o.setStatus( rs.getInt("status"));
-			o.setPostTime( rs.getTimestamp("posttime"));
-
-		}
-
-		rs.close();
-		ps.close();
-		connection.close();
-
-		return res;
-
-	}
-
-	public static List<Offer> getOfferByUserId ( int id ) throws SQLException, NamingException {
+	public static List<Offer> getOffersByUserId ( int id ) throws SQLException, NamingException {
 
 		Connection connection;
 		PreparedStatement ps;
