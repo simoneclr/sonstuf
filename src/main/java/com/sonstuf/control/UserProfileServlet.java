@@ -16,9 +16,13 @@ import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.sonstuf.model.OfferModel;
 import com.sonstuf.model.RequestModel;
+import com.sonstuf.model.bean.Offer;
+import com.sonstuf.model.bean.OfferPacket;
 import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.User;
+import com.sonstuf.utils.Logger;
 
 /**
  * Servlet implementation class UserProfileServlet
@@ -59,6 +63,11 @@ public class UserProfileServlet extends HttpServlet {
 				case "userRequests":
 					
 					sendUserRequests (request, response);
+					break;
+				
+				case "userOffers":
+					
+					sendUserOffers (request, response);
 					break;
 					
 				default:
@@ -170,6 +179,51 @@ public class UserProfileServlet extends HttpServlet {
 					writer.write (mapper.setFilterProvider (filters)
 							.writeValueAsString (com.sonstuf.control.MiniPacket
 									.requestToMiniPacket (r)));
+				}
+				
+				writer.write ("]");
+				
+			} catch (SQLException | NamingException e) {
+				
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void sendUserOffers (HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		
+		User currentUser;
+		List<Offer> userOffers;
+		PrintWriter writer;
+		boolean comma;
+		
+		comma = false;
+		
+		currentUser = getUserFromSession (request.getSession ());
+		writer = response.getWriter ();
+		userOffers = null;
+		
+		if (currentUser != null) {
+			
+			try {
+				
+				userOffers = OfferModel.getOffersByUserId (currentUser.getIdUser ());
+				
+				Logger.debug ("User" + currentUser);
+				Logger.debug ("offers " + userOffers.size ());
+				writer.write ("[");
+				
+				for (Offer offer : userOffers) {
+					
+					if (!comma) {
+						comma = true;
+					} else {
+						writer.write(',');
+					}
+					
+					writer.write (OfferPacket.getOfferPacketFromOffer (offer)
+							.toJSON ());
 				}
 				
 				writer.write ("]");

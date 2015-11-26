@@ -1,7 +1,9 @@
 package com.sonstuf.model.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
@@ -53,6 +55,7 @@ public class OfferPacket {
 		requestPacket.setPlace(request.getPlace());
 		requestPacket.setPostTimestamp(sdf.format(request.getPostTime()));
 		requestPacket.setTime(request.getDateTime());
+		requestPacket.setTitle (request.getTitle ());
 
 		res = new OfferPacket();
 
@@ -89,6 +92,7 @@ public class OfferPacket {
 		this.idOffer = idOffer;
 	}
 
+	@JsonProperty("isInCharge")
 	public boolean isInCharge() {
 		return isInCharge;
 	}

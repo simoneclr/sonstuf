@@ -13,6 +13,7 @@ public class RequestPacket {
 	private String time;
 	private String postTimestamp;
 	private String description;
+	private String title;
 
 	public String getCategory() {
 		return category;
@@ -52,5 +53,13 @@ public class RequestPacket {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getTitle () {
+		return title;
+	}
+
+	public void setTitle (String title) {
+		this.title = title;
 	}
 }

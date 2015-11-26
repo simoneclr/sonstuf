@@ -9,7 +9,7 @@ package com.sonstuf.utils;
  */
 public class Logger {
 
-	private static int LOG_LEVEL = 0;
+	private static int LOG_LEVEL = 2;
 
 	/**
 	 * Stampa un messaggio a log level >= 1
