@@ -87,6 +87,8 @@ public class OfferModel {
 			o.setStatus( rs.getInt("status"));
 			o.setPostTime( rs.getTimestamp("posttime"));
 
+			res.add(o);
+
 		}
 
 		rs.close();
