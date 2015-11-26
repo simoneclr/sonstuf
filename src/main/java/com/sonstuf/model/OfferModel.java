@@ -58,37 +58,34 @@ public class OfferModel {
 
 	}
 
-	public static Offer getOfferByUser ( User u ) throws SQLException, NamingException {
+	public static List<Offer> getOfferByUser ( User u ) throws SQLException, NamingException {
 
 		Connection connection;
 		PreparedStatement ps;
 		ResultSet rs;
-		Offer res;
-
+		List<Offer> res;
 
 		String query = 	"SELECT * from offer\n" +
-						"WHERE idoffer = ? ;";
+				"WHERE iduser = ? ;";
 
 		connection = Connector.getConnection();
 
 		ps = connection.prepareStatement(query);
-		ps.setInt( 1, u.getIdUser() );
+		ps.setInt( 1, id );
 
 		rs = ps.executeQuery();
 
-		if ( rs.next() ) {
+		res = new ArrayList<Offer>();
 
-			res = new Offer();
-			res.setIdOffer( rs.getInt("idoffer"));
-			res.setInCharge( rs.getBoolean("isincharge"));
-			res.setIdRequest( rs.getInt("idrequest"));
-			res.setIdUser( rs.getInt("iduser"));
-			res.setStatus( rs.getInt("status"));
-			res.setPostTime( rs.getTimestamp("posttime"));
+		while ( rs.next() ) {
 
-		} else {
-
-			res = null;
+			Offer o = new Offer();
+			o.setIdOffer( rs.getInt("idoffer"));
+			o.setInCharge( rs.getBoolean("isincharge"));
+			o.setIdRequest( rs.getInt("idrequest"));
+			o.setIdUser( rs.getInt("iduser"));
+			o.setStatus( rs.getInt("status"));
+			o.setPostTime( rs.getTimestamp("posttime"));
 
 		}
 
@@ -100,16 +97,15 @@ public class OfferModel {
 
 	}
 
-	public static Offer getOfferByUserId ( int id ) throws SQLException, NamingException {
+	public static List<Offer> getOfferByUserId ( int id ) throws SQLException, NamingException {
 
 		Connection connection;
 		PreparedStatement ps;
 		ResultSet rs;
-		Offer res;
-
+		List<Offer> res;
 
 		String query = 	"SELECT * from offer\n" +
-						"WHERE idoffer = ? ;";
+						"WHERE iduser = ? ;";
 
 		connection = Connector.getConnection();
 
@@ -118,19 +114,17 @@ public class OfferModel {
 
 		rs = ps.executeQuery();
 
-		if ( rs.next() ) {
+		res = new ArrayList<Offer>();
 
-			res = new Offer();
-			res.setIdOffer( rs.getInt("idoffer"));
-			res.setInCharge( rs.getBoolean("isincharge"));
-			res.setIdRequest( rs.getInt("idrequest"));
-			res.setIdUser( rs.getInt("iduser"));
-			res.setStatus( rs.getInt("status"));
-			res.setPostTime( rs.getTimestamp("posttime"));
+		while ( rs.next() ) {
 
-		} else {
-
-			res = null;
+			Offer o = new Offer();
+			o.setIdOffer( rs.getInt("idoffer"));
+			o.setInCharge( rs.getBoolean("isincharge"));
+			o.setIdRequest( rs.getInt("idrequest"));
+			o.setIdUser( rs.getInt("iduser"));
+			o.setStatus( rs.getInt("status"));
+			o.setPostTime( rs.getTimestamp("posttime"));
 
 		}
 
