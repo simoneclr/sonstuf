@@ -3,7 +3,6 @@ package com.sonstuf.control;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -13,16 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.sonstuf.model.OfferModel;
 import com.sonstuf.model.RequestModel;
+import com.sonstuf.model.UserModel;
 import com.sonstuf.model.bean.Offer;
 import com.sonstuf.model.bean.OfferPacket;
 import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.User;
-import com.sonstuf.utils.Logger;
+import com.sonstuf.utils.JsonPacket;
+import com.sonstuf.utils.serializers.RequestSerializerNoDescription;
+import com.sonstuf.utils.serializers.UserSerializer;
 
 /**
  * Servlet implementation class UserProfileServlet
@@ -102,35 +106,32 @@ public class UserProfileServlet extends HttpServlet {
 		return res;
 	}
 	
-	private void sendProfile (HttpServletRequest request, HttpServletResponse response) {
-		
-		ObjectMapper mapper;
+	private void sendProfile (HttpServletRequest request,
+			HttpServletResponse response) {
+			
 		User user;
-		HttpSession session;
+		ObjectMapper mapper;
+		SimpleModule module;
 		
-		session = request.getSession ();
-		
-		if (session != null) {
+		user = getUserFromSession (request.getSession ());
 			
-			/* NOTA: due to the loginFilter, session here should never be null since
-			 * to access this servlet we require a logged user
-			 */
+		if (user != null) {
 			
-			user = (User) session.getAttribute ("user");
-			
-			if (user != null) {
+			try {
 				
-				/* NOTA: same as before, here we should always find a user */
+				mapper = new ObjectMapper ();
 				
-				mapper = new ObjectMapper (); 
+				module = new SimpleModule ();
+				module.addSerializer (User.class,
+						new UserSerializer<User> ());
+				mapper.registerModule (module);
 				
-				try {
-					response.getWriter ().write (mapper.writeValueAsString (
-							MiniPacket.userToMiniPacket (user)));
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
+				response.getWriter ()
+						.write (mapper.writeValueAsString ((user)));
+				
+			} catch (IOException e) {
+				
+				e.printStackTrace ();
 			}
 		}
 	}
@@ -141,7 +142,6 @@ public class UserProfileServlet extends HttpServlet {
 		User currentUser;
 		List<Request> userRequests;
 		PrintWriter writer;
-		ObjectMapper mapper;
 		SimpleFilterProvider filters;
 		boolean comma;
 		
@@ -154,7 +154,6 @@ public class UserProfileServlet extends HttpServlet {
 			
 			try {
 				
-				mapper = new ObjectMapper ();
 				filters = new SimpleFilterProvider();
 
 				filters.addFilter("rankFilter",
@@ -176,9 +175,8 @@ public class UserProfileServlet extends HttpServlet {
 						writer.write(',');
 					}
 					
-					writer.write (mapper.setFilterProvider (filters)
-							.writeValueAsString (com.sonstuf.control.MiniPacket
-									.requestToMiniPacket (r)));
+					writer.write (new Packet (r).toJSON ());
+					
 				}
 				
 				writer.write ("]");
@@ -210,8 +208,6 @@ public class UserProfileServlet extends HttpServlet {
 				
 				userOffers = OfferModel.getOffersByUserId (currentUser.getIdUser ());
 				
-				Logger.debug ("User" + currentUser);
-				Logger.debug ("offers " + userOffers.size ());
 				writer.write ("[");
 				
 				for (Offer offer : userOffers) {
@@ -235,100 +231,65 @@ public class UserProfileServlet extends HttpServlet {
 		}
 	}
 	
-	/*
-	 * PAGINA PERSONALE UTENTE
-	input:
-	USER = {
-		"idUser": "<userId>",
-		"name" : "<name>",
-		"surname" : "<surname>" ,
-		"telephone" : "<telephone>",
-		"email" : "<email>" ,
-		"birthdate" : "birthdate",
-		"rankO" : "<doubleRank>" ,
-		"rankR" : "<doubleRank>"
-	}
-	*/
-	
-	private static class MiniPacket {
+	private class Packet implements JsonPacket {
 		
-		private int idUser;
-		private String name;
-		private String surname;
-		private String telephone;
-		private String email;
-		private String birthdate;
-		private double rankO;
-		private double rankR;
+		private int idRequest;
+		private User user;
+		private Request request;
 		
-		public static MiniPacket userToMiniPacket (User user) {
+		public Packet (Request request) throws SQLException, NamingException {
 			
-			MiniPacket res;
-			SimpleDateFormat sdf;
-			
-			res = new MiniPacket ();
-			sdf = new SimpleDateFormat ("dd/MM/yyyy");
-			
-			res.setIdUser (user.getIdUser ());
-			res.setName (user.getName ());
-			res.setSurname (user.getSurname ());
-			res.setTelephone (user.getPhone ());
-			res.setEmail (user.getEmail ());
-			res.setBirthdate (sdf.format (user.getBirthDate ()));
-			res.setRankO (user.getRankO ());
-			res.setRankR (user.getRankP ());
-			
-			return res;
+			this.idRequest = request.getIdRequest ();
+			this.user = UserModel.getUserById (request.getIdUser ());
+			this.request = request;
 		}
 		
-		public int getIdUser () {
-			return idUser;
+		@Override
+		public String toJSON () throws JsonProcessingException {
+			
+			ObjectMapper mapper;
+			SimpleFilterProvider filters;
+			SimpleModule module;
+			
+			mapper = new ObjectMapper ();
+			filters = new SimpleFilterProvider();
+			
+			module = new SimpleModule ();
+			module.addSerializer (Request.class,
+					new RequestSerializerNoDescription<Request> ());
+			mapper.registerModule (module);
+			
+			filters.addFilter("userFilter",
+					SimpleBeanPropertyFilter.filterOutAllExcept (
+							"name",
+							"rankR"
+					));
+			
+			return mapper.setFilterProvider (filters).writeValueAsString (this);
 		}
-		public void setIdUser (int idUser) {
-			this.idUser = idUser;
+		
+		public int getIdRequest () {
+			return idRequest;
 		}
-		public String getName () {
-			return name;
+		
+		public void setIdRequest (int idRequest) {
+			this.idRequest = idRequest;
 		}
-		public void setName (String name) {
-			this.name = name;
+		
+		public User getUser () {
+			return user;
 		}
-		public String getSurname () {
-			return surname;
+		
+		public void setUser (User user) {
+			this.user = user;
 		}
-		public void setSurname (String surname) {
-			this.surname = surname;
+		
+		public Request getRequest () {
+			return request;
 		}
-		public String getTelephone () {
-			return telephone;
-		}
-		public void setTelephone (String telephone) {
-			this.telephone = telephone;
-		}
-		public String getEmail () {
-			return email;
-		}
-		public void setEmail (String email) {
-			this.email = email;
-		}
-		public String getBirthdate () {
-			return birthdate;
-		}
-		public void setBirthdate (String bithdate) {
-			this.birthdate = bithdate;
-		}
-		public double getRankO () {
-			return rankO;
-		}
-		public void setRankO (double rankO) {
-			this.rankO = rankO;
-		}
-		public double getRankR () {
-			return rankR;
-		}
-		public void setRankR (double rankR) {
-			this.rankR = rankR;
+		
+		public void setRequest (Request request) {
+			this.request = request;
 		}
 	}
-
 }

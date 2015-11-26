@@ -3,8 +3,6 @@ package com.sonstuf.model.bean;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.sonstuf.model.CategoryModel;
@@ -45,7 +43,7 @@ public class OfferPacket {
 		user = UserModel.getUserById(offer.getIdUser());
 
 		userPacket.setName(user.getName());
-		userPacket.setRankR(user.getRankP());
+		userPacket.setRankR(user.getRankR());
 		userPacket.setRankO(user.getRankO());
 		requestPacket = new RequestPacket();
 		request = RequestModel.getRequestById(offer.getIdRequest());

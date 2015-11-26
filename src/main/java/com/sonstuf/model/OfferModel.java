@@ -1,7 +1,6 @@
 package com.sonstuf.model;
 
 import com.sonstuf.model.bean.Offer;
-import com.sonstuf.model.bean.User;
 
 import javax.naming.NamingException;
 import java.sql.Connection;

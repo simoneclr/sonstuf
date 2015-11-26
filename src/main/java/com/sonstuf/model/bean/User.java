@@ -2,6 +2,9 @@ package com.sonstuf.model.bean;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -10,18 +13,19 @@ import java.sql.Date;
  *
  * @author enrico.t
  */
+@JsonFilter ("userFilter")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private int idUser = -1;
+	private int idUser;
 	private String name;
 	private String surname;
 	private String phone;
 	private String email;
 	private String passwordHash;
-	private float rankO = -1;
-	private float rankP = -1;
+	private float rankO;
+	private float rankR;
 	private Date birthDate;
 	private boolean admin;
 
@@ -47,8 +51,8 @@ public class User implements Serializable {
 			if (!this.getPhone().equals(user.getPhone())) return false;
 		if(this.getRankO() != -1 && user.getRankO() != -1)
 			if(this.getRankO() != user.getRankO()) return false;
-		if(this.getRankP() != -1 && user.getRankP() != -1)
-			if(this.getRankP() != user.getRankP()) return false;
+		if(this.getRankR() != -1 && user.getRankR() != -1)
+			if(this.getRankR() != user.getRankR()) return false;
 		if(this.getPasswordHash() != null && user.getPasswordHash() != null)
 			if(!this.getPasswordHash().equals(user.getPasswordHash())) return false;
 
@@ -83,6 +87,7 @@ public class User implements Serializable {
 		this.surname = surname;
 	}
 
+	@JsonProperty ("telephone")
 	public String getPhone() {
 		return phone;
 	}
@@ -115,12 +120,12 @@ public class User implements Serializable {
 		this.rankO = rankO;
 	}
 
-	public float getRankP() {
-		return rankP;
+	public float getRankR() {
+		return rankR;
 	}
 
-	public void setRankP(float rankP) {
-		this.rankP = rankP;
+	public void setRankR(float rankP) {
+		this.rankR = rankP;
 	}
 
 	public Date getBirthDate() {

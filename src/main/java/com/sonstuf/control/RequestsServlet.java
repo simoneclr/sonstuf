@@ -1,17 +1,17 @@
 package com.sonstuf.control;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-import com.sonstuf.model.CategoryModel;
 import com.sonstuf.model.RequestModel;
 import com.sonstuf.model.UserModel;
 import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.User;
+import com.sonstuf.utils.JsonPacket;
+import com.sonstuf.utils.serializers.RequestSerializer;
+import com.sonstuf.utils.serializers.RequestSerializerNoDescription;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -86,19 +86,7 @@ public class RequestsServlet extends HttpServlet {
 	private void listAllRequests(PrintWriter writer) {
 
 		List<Request> requests;
-		ObjectMapper mapper;
 		boolean comma;
-		MiniPacket temp;
-
-		mapper = new ObjectMapper();
-		SimpleFilterProvider filters;
-
-		filters = new SimpleFilterProvider();
-		
-		filters.addFilter ("rankFilter",
-				SimpleBeanPropertyFilter.serializeAllExcept ("rankO"));
-		filters.addFilter ("filter",
-				SimpleBeanPropertyFilter.serializeAllExcept ("description"));
 
 		comma = false;
 		writer.write('[');
@@ -114,14 +102,8 @@ public class RequestsServlet extends HttpServlet {
 				} else {
 					writer.write(',');
 				}
-
-				temp = MiniPacket.requestToMiniPacket(request);
-
-				if (temp != null) {
-
-					writer.write(mapper.setFilterProvider(filters)
-							.writeValueAsString(temp));
-				}
+				
+				writer.write (new PacketNoDescription (request).toJSON ());
 			}
 
 		} catch (SQLException | NamingException | JsonProcessingException e) {
@@ -137,8 +119,6 @@ public class RequestsServlet extends HttpServlet {
 		String requestId;
 		int parsedId;
 		Request r;
-		ObjectMapper mapper;
-		SimpleFilterProvider filters;
 
 		requestId = request.getParameter("idRequest");
 
@@ -162,17 +142,8 @@ public class RequestsServlet extends HttpServlet {
 
 			r = RequestModel.getRequestById(parsedId);
 
-			mapper = new ObjectMapper();
-			filters = new SimpleFilterProvider();
-			
-			filters.addFilter("rankFilter",
-					SimpleBeanPropertyFilter.serializeAllExcept ("rankO"));
-			filters.addFilter("filter",
-					SimpleBeanPropertyFilter.serializeAll());
-
 			if (r != null) {
-				writer.write(mapper.setFilterProvider(filters)
-						.writeValueAsString(MiniPacket.requestToMiniPacket(r)));
+				writer.write(new Packet (r).toJSON ());
 			} else {
 				writer.write("Invalid request: item not found");
 			}
@@ -184,218 +155,99 @@ public class RequestsServlet extends HttpServlet {
 			return;
 		}
 	}
-}
-
-class MiniPacket {
-
-	private int idRequest;
-	private MiniUser user;
-	private MiniRequest request;
 	
-	public static MiniPacket requestToMiniPacket(Request request) {
-
-		MiniPacket res;
-
-		try {
-
-			res = new MiniPacket();
-
-			res.idRequest = request.getIdRequest();
-			res.user = MiniUser.userToMiniUser(
-					UserModel.getUserById(request.getIdUser()));
-			res.request = new MiniRequest();
-			res.request.setCategory (CategoryModel
-					.getCategoryById(request.getIdCategory()).getName());
-			res.request.setPlace (request.getPlace());
-			res.request.setTime (request.getDateTime());
-			res.request.setPostTimestamp (request.getPostTime().toString());
-			res.request.setDescription (request.getDescription());
-			res.request.setTitle (request.getTitle ());
-
-		} catch (SQLException | NamingException e) {
-
-			e.printStackTrace();
-			res = null;
+	private class Packet implements JsonPacket {
+		
+		private int idRequest;
+		private User user;
+		private Request request;
+		
+		public Packet (Request request)
+				throws SQLException, NamingException {
+			
+			this.idRequest = request.getIdRequest ();
+			this.user = UserModel.getUserById (request.getIdUser ());
+			this.request = request;
 		}
 
-		return res;
+		@Override
+		public String toJSON () throws JsonProcessingException {
+			
+			ObjectMapper mapper;
+			SimpleFilterProvider filters;
+			SimpleModule module;
+			
+			mapper = new ObjectMapper ();
+			filters = new SimpleFilterProvider();
+			
+			module = new SimpleModule ();
+			module.addSerializer (Request.class,
+					new RequestSerializer<Request> ());
+			mapper.registerModule (module);
+			
+			filters.addFilter("userFilter",
+					SimpleBeanPropertyFilter.filterOutAllExcept (
+							"name",
+							"rankR"
+					));
+			
+			return mapper.setFilterProvider (filters).writeValueAsString (this);
+		}
+
+		public int getIdRequest () {
+			return idRequest;
+		}
+
+		public void setIdRequest (int idRequest) {
+			this.idRequest = idRequest;
+		}
+
+		public User getUser () {
+			return user;
+		}
+
+		public void setUser (User user) {
+			this.user = user;
+		}
+
+		public Request getRequest () {
+			return request;
+		}
+
+		public void setRequest (Request request) {
+			this.request = request;
+		}
 	}
 	
-	/**
-	 * @return the idRequest
-	 */
-	public int getIdRequest() {
-		return idRequest;
-	}
+	private class PacketNoDescription extends Packet {
 
-	/**
-	 * @param idRequest the idRequest to set
-	 */
-	public void setIdRequest(int idRequest) {
-		this.idRequest = idRequest;
-	}
-
-	/**
-	 * @return the user
-	 */
-	public MiniUser getUser() {
-		return user;
-	}
-
-	/**
-	 * @param user the user to set
-	 */
-	public void setUser(MiniUser user) {
-		this.user = user;
-	}
-
-	/**
-	 * @return the request
-	 */
-	public MiniRequest getRequest() {
-		return request;
-	}
-
-	/**
-	 * @param request the request to set
-	 */
-	public void setRequest(MiniRequest request) {
-		this.request = request;
-	}
-}
-
-@JsonFilter ("rankFilter")
-class MiniUser {
-
-	private String name = "ciao";
-	private double rankR = 5.4;
-	
-	public static MiniUser userToMiniUser(User user) {
-
-		MiniUser res;
-
-		res = new MiniUser();
-
-		res.name = user.getName();
-		res.rankR = user.getRankP();
-
-		return res;
-	}
-	
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the rankR
-	 */
-	public double getRankR() {
-		return rankR;
-	}
-
-	/**
-	 * @param rankR the rankR to set
-	 */
-	public void setRankR(double rankR) {
-		this.rankR = rankR;
-	}
-}
-
-@JsonFilter("filter")
-class MiniRequest {
-
-	private String category;
-	private String place;
-	private String time;
-	private String postTimestamp;
-	private String description;
-	private String title;
-
-	/**
-	 * @return the category
-	 */
-	public String getCategory() {
-		return category;
-	}
-
-	/**
-	 * @param category the category to set
-	 */
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	/**
-	 * @return the place
-	 */
-	public String getPlace() {
-		return place;
-	}
-
-	/**
-	 * @param place the place to set
-	 */
-	public void setPlace(String place) {
-		this.place = place;
-	}
-
-	/**
-	 * @return the time
-	 */
-	public String getTime() {
-		return time;
-	}
-
-	/**
-	 * @param time the time to set
-	 */
-	public void setTime(String time) {
-		this.time = time;
-	}
-
-	/**
-	 * @return the postTimestamp
-	 */
-	public String getPostTimestamp() {
-		return postTimestamp;
-	}
-
-	/**
-	 * @param postTimestamp the postTimestamp to set
-	 */
-	public void setPostTimestamp(String postTimestamp) {
-		this.postTimestamp = postTimestamp;
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getTitle () {
-		return title;
-	}
-
-	public void setTitle (String title) {
-		this.title = title;
+		public PacketNoDescription (Request request)
+				throws SQLException, NamingException {
+			super (request);
+		}
+		
+		@Override
+		public String toJSON () throws JsonProcessingException {
+			
+			ObjectMapper mapper;
+			SimpleFilterProvider filters;
+			SimpleModule module;
+			
+			mapper = new ObjectMapper ();
+			filters = new SimpleFilterProvider();
+			
+			module = new SimpleModule ();
+			module.addSerializer (Request.class,
+					new RequestSerializerNoDescription<Request> ());
+			mapper.registerModule (module);
+			
+			filters.addFilter("userFilter",
+					SimpleBeanPropertyFilter.filterOutAllExcept (
+							"name",
+							"rankR"
+					));
+			
+			return mapper.setFilterProvider (filters).writeValueAsString (this);
+		}
 	}
 }
