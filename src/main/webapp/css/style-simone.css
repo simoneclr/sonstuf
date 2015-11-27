@@ -68,3 +68,8 @@ div.request-panel > .panel-heading {
 	display: block;
 }
 
+/* Login */
+
+.hidden {
+	display: none;
+}

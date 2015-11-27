@@ -1,4 +1,4 @@
-//Static, temporary data
+/* Static, temporary data
 var loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt" +
 		"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation" +
 		"ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in " +
@@ -180,75 +180,131 @@ var offers = [
 			"time" : "11:00-16:00",
 			"postTimestamp" : "omg!"}
 	}];
+*/
 
 $(document).ready(function(){
-
-	updatePersonalData();
-
-	updateUserRatings();
-
-	updateRequests();
-
-	updateOffers();
-
+	octopus.init();
 });
 
-function updatePersonalData(){
-	var completeName = user.name + " " + user.surname;
-	document.title = completeName + "| Sonstuf";
-	$("#ucname").text(completeName);
-	$("#telnum").text(user.telephone);
-	$("#bdate").text(user.birthdate);
-	$("#email").text(user.email);
-}
+//MODEL
+var model = {
+	user: undefined,
+	requests: undefined,
+	offers: undefined
+};
 
-function updateUserRatings(){
-	$("#rating-o").rating('update', user.rankO)
-	$("#rating-r").rating('update', user.rankR);
-}
+//OCTOPUS
+var octopus = {
+	init: function(){
+		view.init();
 
-function updateRequests(){
-	var source = $("#request-template").html();
-	var template = Handlebars.compile(source);
+		this.loadUser();
+		this.loadRequests();
+	},
 
-	$("#requests").empty();
+	loadUser: function(){
+		$.getJSON("/webpages/private/UserProfileServlet?op=profile", function(data){
 
-	for (var i = 0; i < requests.length; i++){
-		var context = {
-			title: requests[i].request.title,
-			description: requests[i].request.description,
-			place: requests[i].request.place,
-			time: requests[i].request.time
-		};
-		var html = template(context);
-		$("#requests").append(html);
+		}).done(function(data){
+			model.user = data;
+			view.renderUser(model.user);
+
+		}).fail(function(){
+			alert("Errore!");
+		});
+	},
+
+	loadRequests: function(){
+		$.getJSON("/webpages/private/UserProfileServlet?op=userRequests", function(data){
+
+		}).done(function(data){
+			model.requests = data;
+			view.renderRequests(model.requests);
+
+		}).fail(function(){
+			alert("Errore!");
+		});
+	},
+
+	loadOffers: function(){
+		$.getJSON("/webpages/private/UserProfileServlet?op=userOffers", function(data){
+
+		}).done(function(data){
+			model.offers = data;
+			view.renderRequests(model.offers);
+
+		}).fail(function(){
+			alert("Errore!");
+		});
 	}
-}
+};
 
-function updateOffers(){
-	var source = $("#offers-template").html();
-	var template = Handlebars.compile(source);
+//VIEW
+var view = {
+	requestTemplate: undefined,
+	offerTemplate: undefined,
 
-	$("#offers").empty();
+	init: function(){
+		//Compile request template
+		var source = $("#request-template").html();
+		this.requestTemplate = Handlebars.compile(source);
 
-	for (var i = 0; i < offers.length; i++){
-		var context = {
-			title: offers[i].request.title,
-			description: offers[i].request.description,
-			user: offers[i].user.name,
-			place: offers[i].request.place,
-			time: offers[i].request.time,
-			isInCharge: inChargeClass(offers[i].isInCharge)
-		};
-		var html = template(context);
-		$("#offers").append(html);
+		//Compile offer template
+		var source = $("#offers-template").html();
+		this.offerTemplate = Handlebars.compile(source);
+	},
+
+	renderUser: function(user){
+		var completeName = user.name + " " + user.surname;
+		document.title = completeName + "| Sonstuf";
+		$("#ucname").text(completeName);
+		$("#telnum").text(user.telephone);
+		$("#bdate").text(user.birthdate);
+		$("#email").text(user.email);
+		$("#rating-o").rating('update', user.rankO);
+		$("#rating-r").rating('update', user.rankR);
+	},
+
+	renderRequests: function(requests){
+		$("#requests").empty();
+
+		for (var i = 0; i < requests.length; i++){
+			var context = {
+				title: requests[i].request.title,
+				description: requests[i].request.description,
+				place: requests[i].request.place,
+				time: requests[i].request.time
+			};
+
+			var html = this.requestTemplate(context);
+			$("#requests").append(html);
+		}
+	},
+
+	renderOffers: function(offers){
+		$("#offers").empty();
+
+		for (var i = 0; i < offers.length; i++){
+			var context = {
+				title: offers[i].request.title,
+				description: offers[i].request.description,
+				user: offers[i].user.name,
+				place: offers[i].request.place,
+				time: offers[i].request.time,
+				isInCharge: this.inChargeClass(offers[i].isInCharge)
+			};
+
+			var html = template(context);
+			$("#offers").append(html);
+		}
+	},
+
+	inChargeClass: function(isInCharge){
+		if (isInCharge == true){
+			return "in-charge";
+		} else {
+			return "";
+		}
 	}
-}
+};
 
-function inChargeClass(isInCharge){
-	if (isInCharge == true){
-		return "in-charge";
-	} else {
-		return "";
-	}
-}

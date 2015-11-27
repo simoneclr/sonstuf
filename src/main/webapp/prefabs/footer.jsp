@@ -1,7 +1,5 @@
-<nav class="navbar navbar-inverse navbar-footer">
+<footer class="footer">
 	<div class="container">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">SonStuf</a>
-		</div>
+		<h3>&copy; Sonstuf.com</h3>
 	</div>
-</nav>
+</footer>
