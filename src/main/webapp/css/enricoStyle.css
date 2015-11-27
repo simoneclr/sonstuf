@@ -42,3 +42,19 @@ small {
 .hidden{
 	display: none;
 }
+
+.userInfo{
+	padding-top: 50px;
+}
+
+.panel_heading_requestDetail{
+	font-size: 25px;
+}
+
+.body_box{
+	overflow: auto;
+}
+
+.check_offriti{
+	padding-top: 20px;
+}
