@@ -24,7 +24,7 @@ function eventCerca(){
 		user.phone=$("#telephone").val();
 		user.email=$("#email").val();
 		user.birthDate=$("#birthdate").val();
-
+console.log("birthDate: "+user.birthDate);
 
 		var json=jQuery.extend(true, {}, user);
 		console.log(JSON.stringify(json));
