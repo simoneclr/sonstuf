@@ -69,6 +69,8 @@ function validate2(){
 		$("#password2").parent('div').removeClass("has-error has-feedback");
 		$("#password1").parent('div').addClass("has-success has-feedback");
 		$("#password2").parent('div').addClass("has-success has-feedback");
+		$("#confirmMessage").empty();
+		$("#confirmMessage").append("cacca");
 
 	}
 }
