@@ -23,10 +23,10 @@ small {
 	margin: 4px;
 }
 
-.panel {
+.panel_requestDetail {
 	background-color: #FFFFFF;
 	margin: 4px;
-	padding: 4px;
+	padding-top: 50px;
 }
 
 .box-shadow {

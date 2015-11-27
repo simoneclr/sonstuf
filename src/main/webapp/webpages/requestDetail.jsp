@@ -48,20 +48,18 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-12">
-			<div class="panel box-shadow">
-				<div class="panel">
-					<strong>Offriti</strong>
-				</div>
+		<div class="panel panel_requestDetail">
+			<div class ="panel-heading">
+				<strong>Offriti</strong>
+			</div>
+			<div class="panel-body">
 				<div class="well well-xm box-shadow" style="overflow: auto; margin-bottom: 0px">
-					<div class="col-xs-3"></div>
-					<div class="col-xs-3">
-						<h3>desideri aiutare <span class="requesterName"></span>?</h3>
+					<div class="col-md-3 col-md-offset-3 col-sm-offset-2 col-sm-4 col-xs-5 col-xs-offset-1">
+						<h3>desideri aiutare<span class="requesterName"></span>?</h3>
 					</div>
-					<div class="col-xs-3" style="padding-top: 20px;">
+					<div class="col-md-2 col-md-offset-1 col-sm-offset-1 col-sm-4 col-xs-offset-1 col-xs-5" style="padding-top: 20px;">
 						<small><cite><i class="glyphicon glyphicon-ok"></i>Accetta</cite></small>
 					</div>
-					<div class="col-xs-3"></div>
 				</div>
 			</div>
 		</div>
