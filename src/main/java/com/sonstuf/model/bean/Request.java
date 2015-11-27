@@ -1,10 +1,15 @@
 package com.sonstuf.model.bean;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.sql.Timestamp;
 
 /**
  * Created by hypertesto on 18/11/15.
  */
+@JsonFilter ("requestFilter")
 public class Request {
 
 	private int idRequest;
@@ -53,6 +58,7 @@ public class Request {
 		this.place = place;
 	}
 
+	@JsonProperty("time")
 	public String getDateTime() {
 		return dateTime;
 	}
@@ -92,7 +98,8 @@ public class Request {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-
+	
+	@JsonProperty("postTimeStamp")
 	public Timestamp getPostTime() {
 		return postTime;
 	}
@@ -100,4 +107,9 @@ public class Request {
 	public void setPostTime(Timestamp postTime) {
 		this.postTime = postTime;
 	}
+
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
+
 }

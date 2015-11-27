@@ -16,9 +16,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author hypertesto
- */
 public class UserModel {
 
 	private static List<User> executeQuery(PreparedStatement prepStatement) throws SQLException {
@@ -39,7 +36,7 @@ public class UserModel {
 				user.setPhone(rs.getString("phone"));
 				user.setPasswordHash(rs.getString("passwordhash"));
 				user.setRankO(rs.getFloat("ranko"));
-				user.setRankP(rs.getFloat("rankp"));
+				user.setRankR(rs.getFloat("rankp"));
 				user.setBirthDate(rs.getDate("birthdate"));
 				user.setAdmin(rs.getBoolean("admin"));
 
@@ -105,7 +102,7 @@ public class UserModel {
 		ps.setString(4, user.getEmail());
 		ps.setString(5, user.getPasswordHash());
 		ps.setFloat(6, user.getRankO());
-		ps.setFloat(7, user.getRankP());
+		ps.setFloat(7, user.getRankR());
 		ps.setDate(8, user.getBirthDate());
 		ps.setBoolean(9, user.isAdmin());
 

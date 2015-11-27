@@ -35,6 +35,7 @@ console.log("birthDate: "+user.birthDate);
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
 			success: function(input){
+				console.log("json: " + JSON.stringify(input));
 				var data= JSON.parse(JSON.stringify(input));
 				if(data.length==0){
 					registraUtente(json);
@@ -76,6 +77,7 @@ function registraUtente(json){
 }
 function updateTable(data){
 	$("#rowTable").show();
+	$("#bodyTable").empty();
 	var source = $("#request-template").html();
 	var template = Handlebars.compile(source);
 	for (var i = 0; i < data.length; i++){

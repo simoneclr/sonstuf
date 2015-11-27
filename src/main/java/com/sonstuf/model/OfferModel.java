@@ -1,7 +1,6 @@
 package com.sonstuf.model;
 
 import com.sonstuf.model.bean.Offer;
-import com.sonstuf.model.bean.User;
 
 import javax.naming.NamingException;
 import java.sql.Connection;
@@ -58,58 +57,15 @@ public class OfferModel {
 
 	}
 
-	public static Offer getOfferByUser ( User u ) throws SQLException, NamingException {
+	public static List<Offer> getOffersByUserId ( int id ) throws SQLException, NamingException {
 
 		Connection connection;
 		PreparedStatement ps;
 		ResultSet rs;
-		Offer res;
-
-
-		String query = 	"SELECT * from offer\n" +
-						"WHERE idoffer = ? ;";
-
-		connection = Connector.getConnection();
-
-		ps = connection.prepareStatement(query);
-		ps.setInt( 1, u.getIdUser() );
-
-		rs = ps.executeQuery();
-
-		if ( rs.next() ) {
-
-			res = new Offer();
-			res.setIdOffer( rs.getInt("idoffer"));
-			res.setInCharge( rs.getBoolean("isincharge"));
-			res.setIdRequest( rs.getInt("idrequest"));
-			res.setIdUser( rs.getInt("iduser"));
-			res.setStatus( rs.getInt("status"));
-			res.setPostTime( rs.getTimestamp("posttime"));
-
-		} else {
-
-			res = null;
-
-		}
-
-		rs.close();
-		ps.close();
-		connection.close();
-
-		return res;
-
-	}
-
-	public static Offer getOfferByUserId ( int id ) throws SQLException, NamingException {
-
-		Connection connection;
-		PreparedStatement ps;
-		ResultSet rs;
-		Offer res;
-
+		List<Offer> res;
 
 		String query = 	"SELECT * from offer\n" +
-						"WHERE idoffer = ? ;";
+						"WHERE iduser = ? ;";
 
 		connection = Connector.getConnection();
 
@@ -118,19 +74,19 @@ public class OfferModel {
 
 		rs = ps.executeQuery();
 
-		if ( rs.next() ) {
+		res = new ArrayList<Offer>();
 
-			res = new Offer();
-			res.setIdOffer( rs.getInt("idoffer"));
-			res.setInCharge( rs.getBoolean("isincharge"));
-			res.setIdRequest( rs.getInt("idrequest"));
-			res.setIdUser( rs.getInt("iduser"));
-			res.setStatus( rs.getInt("status"));
-			res.setPostTime( rs.getTimestamp("posttime"));
+		while ( rs.next() ) {
 
-		} else {
+			Offer o = new Offer();
+			o.setIdOffer( rs.getInt("idoffer"));
+			o.setInCharge( rs.getBoolean("isincharge"));
+			o.setIdRequest( rs.getInt("idrequest"));
+			o.setIdUser( rs.getInt("iduser"));
+			o.setStatus( rs.getInt("status"));
+			o.setPostTime( rs.getTimestamp("posttime"));
 
-			res = null;
+			res.add(o);
 
 		}
 

@@ -1,15 +1,17 @@
 package com.sonstuf.control;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-import com.sonstuf.model.CategoryModel;
 import com.sonstuf.model.RequestModel;
 import com.sonstuf.model.UserModel;
 import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.User;
+import com.sonstuf.utils.JsonPacket;
+import com.sonstuf.utils.serializers.RequestSerializer;
+import com.sonstuf.utils.serializers.RequestSerializerNoDescription;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -53,18 +55,21 @@ public class RequestsServlet extends HttpServlet {
 
 				case "listAll":
 
-					listAllRequests(writer);
+					listAllRequests (writer);
 					break;
 
 				case "view":
 
-					viewRequest(request, writer);
+					viewRequest (request, writer);
 					break;
 
 				default:
 
 					response.getWriter().write("Unsupported operation");
 			}
+		} else {
+			
+			response.getWriter ().write ("Missing op parameter");
 		}
 	}
 
@@ -81,39 +86,24 @@ public class RequestsServlet extends HttpServlet {
 	private void listAllRequests(PrintWriter writer) {
 
 		List<Request> requests;
-		ObjectMapper mapper;
-		boolean done;
-		MiniPacket temp;
+		boolean comma;
 
-		mapper = new ObjectMapper();
-		SimpleFilterProvider filters;
-
-		filters = new SimpleFilterProvider();
-		filters.addFilter("filter",
-				SimpleBeanPropertyFilter.serializeAllExcept("description"));
-
-		done = false;
+		comma = false;
 		writer.write('[');
 
 		try {
 
 			requests = RequestModel.getAllRequests();
-
+			
 			for (Request request : requests) {
 
-				if (!done) {
-					done = true;
+				if (!comma) {
+					comma = true;
 				} else {
 					writer.write(',');
 				}
-
-				temp = requestToMiniPacket(request);
-
-				if (temp != null) {
-
-					writer.write(mapper.setFilterProvider(filters)
-							.writeValueAsString(temp));
-				}
+				
+				writer.write (new PacketNoDescription (request).toJSON ());
 			}
 
 		} catch (SQLException | NamingException | JsonProcessingException e) {
@@ -124,19 +114,17 @@ public class RequestsServlet extends HttpServlet {
 		writer.write(']');
 	}
 
-	private void viewRequest(HttpServletRequest request, PrintWriter writer) {
-
+	private void viewRequest (HttpServletRequest request, PrintWriter writer) {
+		
 		String requestId;
 		int parsedId;
 		Request r;
-		ObjectMapper mapper;
-		SimpleFilterProvider filters;
 
 		requestId = request.getParameter("idRequest");
 
 		if (requestId == null || requestId.length() == 0) {
 
-			writer.write("Invalid operation: the requestId parameter should be specified");
+			writer.write("Invalid operation: the idRequest parameter should be specified");
 			return;
 		}
 
@@ -154,15 +142,8 @@ public class RequestsServlet extends HttpServlet {
 
 			r = RequestModel.getRequestById(parsedId);
 
-			mapper = new ObjectMapper();
-			filters = new SimpleFilterProvider();
-
-			filters.addFilter("filter",
-					SimpleBeanPropertyFilter.serializeAll());
-
 			if (r != null) {
-				writer.write(mapper.setFilterProvider(filters)
-						.writeValueAsString(requestToMiniPacket(r)));
+				writer.write(new Packet (r).toJSON ());
 			} else {
 				writer.write("Invalid request: item not found");
 			}
@@ -174,207 +155,99 @@ public class RequestsServlet extends HttpServlet {
 			return;
 		}
 	}
-
-	private MiniUser userToMiniUser(User user) {
-
-		MiniUser res;
-
-		res = new MiniUser();
-
-		res.name = user.getName();
-		res.rankR = user.getRankP();
-
-		return res;
-	}
-
-	public MiniPacket requestToMiniPacket(Request request) {
-
-		MiniPacket res;
-
-		try {
-
-			res = new MiniPacket();
-
-			res.idRequest = request.getIdRequest();
-			res.user = userToMiniUser(
-					UserModel.getUserById(request.getIdUser()));
-			res.request = new MiniRequest();
-			res.request.category = CategoryModel
-					.getCategoryById(request.getIdCategory()).getName();
-			res.request.place = request.getPlace();
-			res.request.time = request.getDateTime();
-			res.request.postTimestamp = request.getPostTime().toString();
-			res.request.description = request.getDescription();
-
-		} catch (SQLException | NamingException e) {
-
-			e.printStackTrace();
-			res = null;
+	
+	private class Packet implements JsonPacket {
+		
+		private int idRequest;
+		private User user;
+		private Request request;
+		
+		public Packet (Request request)
+				throws SQLException, NamingException {
+			
+			this.idRequest = request.getIdRequest ();
+			this.user = UserModel.getUserById (request.getIdUser ());
+			this.request = request;
 		}
 
-		return res;
-	}
+		@Override
+		public String toJSON () throws JsonProcessingException {
+			
+			ObjectMapper mapper;
+			SimpleFilterProvider filters;
+			SimpleModule module;
+			
+			mapper = new ObjectMapper ();
+			filters = new SimpleFilterProvider();
+			
+			module = new SimpleModule ();
+			module.addSerializer (Request.class,
+					new RequestSerializer<Request> ());
+			mapper.registerModule (module);
+			
+			filters.addFilter("userFilter",
+					SimpleBeanPropertyFilter.filterOutAllExcept (
+							"name",
+							"rankR"
+					));
+			
+			return mapper.setFilterProvider (filters).writeValueAsString (this);
+		}
 
-	private class MiniPacket {
-
-		private int idRequest;
-		private MiniUser user;
-		private MiniRequest request;
-
-		/**
-		 * @return the idRequest
-		 */
-		public int getIdRequest() {
+		public int getIdRequest () {
 			return idRequest;
 		}
 
-		/**
-		 * @param idRequest the idRequest to set
-		 */
-		public void setIdRequest(int idRequest) {
+		public void setIdRequest (int idRequest) {
 			this.idRequest = idRequest;
 		}
 
-		/**
-		 * @return the user
-		 */
-		public MiniUser getUser() {
+		public User getUser () {
 			return user;
 		}
 
-		/**
-		 * @param user the user to set
-		 */
-		public void setUser(MiniUser user) {
+		public void setUser (User user) {
 			this.user = user;
 		}
 
-		/**
-		 * @return the request
-		 */
-		public MiniRequest getRequest() {
+		public Request getRequest () {
 			return request;
 		}
 
-		/**
-		 * @param request the request to set
-		 */
-		public void setRequest(MiniRequest request) {
+		public void setRequest (Request request) {
 			this.request = request;
 		}
 	}
+	
+	private class PacketNoDescription extends Packet {
 
-	private class MiniUser {
-
-		private String name = "ciao";
-		private double rankR = 5.4;
-
-		/**
-		 * @return the name
-		 */
-		public String getName() {
-			return name;
+		public PacketNoDescription (Request request)
+				throws SQLException, NamingException {
+			super (request);
 		}
-
-		/**
-		 * @param name the name to set
-		 */
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		/**
-		 * @return the rankR
-		 */
-		public double getRankR() {
-			return rankR;
-		}
-
-		/**
-		 * @param rankR the rankR to set
-		 */
-		public void setRankR(double rankR) {
-			this.rankR = rankR;
-		}
-	}
-
-	@JsonFilter("filter")
-	private class MiniRequest {
-
-		private String category;
-		private String place;
-		private String time;
-		private String postTimestamp;
-		private String description;
-
-		/**
-		 * @return the category
-		 */
-		public String getCategory() {
-			return category;
-		}
-
-		/**
-		 * @param category the category to set
-		 */
-		public void setCategory(String category) {
-			this.category = category;
-		}
-
-		/**
-		 * @return the place
-		 */
-		public String getPlace() {
-			return place;
-		}
-
-		/**
-		 * @param place the place to set
-		 */
-		public void setPlace(String place) {
-			this.place = place;
-		}
-
-		/**
-		 * @return the time
-		 */
-		public String getTime() {
-			return time;
-		}
-
-		/**
-		 * @param time the time to set
-		 */
-		public void setTime(String time) {
-			this.time = time;
-		}
-
-		/**
-		 * @return the postTimestamp
-		 */
-		public String getPostTimestamp() {
-			return postTimestamp;
-		}
-
-		/**
-		 * @param postTimestamp the postTimestamp to set
-		 */
-		public void setPostTimestamp(String postTimestamp) {
-			this.postTimestamp = postTimestamp;
-		}
-
-		/**
-		 * @return the description
-		 */
-		public String getDescription() {
-			return description;
-		}
-
-		/**
-		 * @param description the description to set
-		 */
-		public void setDescription(String description) {
-			this.description = description;
+		
+		@Override
+		public String toJSON () throws JsonProcessingException {
+			
+			ObjectMapper mapper;
+			SimpleFilterProvider filters;
+			SimpleModule module;
+			
+			mapper = new ObjectMapper ();
+			filters = new SimpleFilterProvider();
+			
+			module = new SimpleModule ();
+			module.addSerializer (Request.class,
+					new RequestSerializerNoDescription<Request> ());
+			mapper.registerModule (module);
+			
+			filters.addFilter("userFilter",
+					SimpleBeanPropertyFilter.filterOutAllExcept (
+							"name",
+							"rankR"
+					));
+			
+			return mapper.setFilterProvider (filters).writeValueAsString (this);
 		}
 	}
 }

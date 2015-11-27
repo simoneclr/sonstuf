@@ -1,6 +1,9 @@
 package com.sonstuf.model.bean;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -10,80 +13,48 @@ import java.sql.Date;
  *
  * @author enrico.t
  */
+
+@JsonFilter ("userFilter")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private int idUser = -1;
+	private int idUser;
 	private String name;
 	private String surname;
 	private String phone;
 	private String email;
 	private String passwordHash;
-	private float rankO = -1;
-	private float rankP = -1;
+	private float rankO;
+	private float rankR;
 	private Date birthDate;
 	private boolean admin;
-
 	/**
 	 * checks if user and this are the same User ignoring null fields
 	 * @param user
 	 * @return false if user is null. true if all the not null fields in both user and this are equals.
 	 */
 	public boolean equalsIgnoringNullFields(User user) {
-		System.out.println("21user.getSurname()"+user.getSurname()+"-");
 		if(user == null) return false;
-		/*if(this.hashCode() != user.hashCode()) {
-			System.out.println("26");
-			return false;}*/
+		if(this.hashCode() != user.hashCode()) return false;
 		if (this.getIdUser() != -1 && user.getIdUser() != -1)
-			if (this.getIdUser() != user.getIdUser()) {
-				System.out.println("27");
-				return false;}
-		if ((this.getSurname() != null && user.getSurname() != null) && this.getSurname() !=""){
-			System.out.println("24");
-
-			if (!this.getSurname().equals(user.getSurname())) {
-				System.out.println("25");
-				return false;
-			}
-		}
-		if ((this.getName() != null && user.getName() != null) && this.getEmail() !=""){
-			System.out.println("22");
-			if (!this.getName().equals(user.getName())){
-				System.out.println("23");
-				return false;
-			}
-		}
-		if ((this.getBirthDate() != null && user.getBirthDate() != null))
-			if (!this.getBirthDate().equals(user.getBirthDate())) {
-				System.out.println("31");
-				return false;}
-		if ((this.getEmail() != null && user.getEmail() != null) && this.getEmail() !="")
-			if (!this.getEmail().equals(user.getEmail())){
-				System.out.println("32");
-				return false;
-			}
-		if ((this.getPhone() != null && user.getPhone() != null) && this.getEmail() !="")
-			if (!this.getPhone().equals(user.getPhone())) {
-				System.out.println("33");
-				return false;
-			}
+			if (this.getIdUser() != user.getIdUser()) return false;
+		if (this.getSurname() != null && user.getSurname() != null)
+			if (!this.getSurname().equals(user.getSurname())) return false;
+		if (this.getName() != null && user.getName() != null)
+			if (!this.getName().equals(user.getName())) return false;
+		if (this.getBirthDate() != null && user.getBirthDate() != null)
+			if (!this.getBirthDate().equals(user.getBirthDate())) return false;
+		if (this.getEmail() != null && user.getEmail() != null)
+			if (!this.getEmail().equals(user.getEmail())) return false;
+		if (this.getPhone() != null && user.getPhone() != null)
+			if (!this.getPhone().equals(user.getPhone())) return false;
 		if(this.getRankO() != -1 && user.getRankO() != -1)
-			if(this.getRankO() != user.getRankO()) {
-				System.out.println("33");
-				return false;
-			}
-		if(this.getRankP() != -1 && user.getRankP() != -1)
-			if(this.getRankP() != user.getRankP()) {
-				System.out.println("34");
-				return false;
-			}
+			if(this.getRankO() != user.getRankO()) return false;
+		if(this.getRankR() != -1 && user.getRankR() != -1)
+			if(this.getRankR() != user.getRankR()) return false;
 		if(this.getPasswordHash() != null && user.getPasswordHash() != null)
-			if(!this.getPasswordHash().equals(user.getPasswordHash())) {
-				System.out.println("35");
-				return false;
-			}
+			if(!this.getPasswordHash().equals(user.getPasswordHash())) return false;
 
 		return true;
 	}
@@ -116,6 +87,7 @@ public class User implements Serializable {
 		this.surname = surname;
 	}
 
+	@JsonProperty ("telephone")
 	public String getPhone() {
 		return phone;
 	}
@@ -148,12 +120,12 @@ public class User implements Serializable {
 		this.rankO = rankO;
 	}
 
-	public float getRankP() {
-		return rankP;
+	public float getRankR() {
+		return rankR;
 	}
 
-	public void setRankP(float rankP) {
-		this.rankP = rankP;
+	public void setRankR(float rankP) {
+		this.rankR = rankP;
 	}
 
 	public Date getBirthDate() {

@@ -50,6 +50,12 @@
 		<description></description>
 		<servlet-class>com.sonstuf.control.RequestsServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>UserProfileServlet</servlet-name>
+		<display-name>UserProfileServlet</display-name>
+		<description></description>
+		<servlet-class>com.sonstuf.control.UserProfileServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>AuthenticationServlet</servlet-name>
 		<url-pattern>/AuthenticationServlet</url-pattern>
@@ -73,5 +79,9 @@
 	<servlet-mapping>
 		<servlet-name>GetUsersServlet</servlet-name>
 		<url-pattern>/GetUsers</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserProfileServlet</servlet-name>
+		<url-pattern>/webpages/private/UserProfileServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

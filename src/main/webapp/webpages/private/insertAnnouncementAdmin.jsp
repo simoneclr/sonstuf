@@ -49,6 +49,7 @@
 	</div>
 
 	<br>
+
 	<div class="row">
 		<div class="col-md-offset-1 col-md-3">
 			<label>Email</label>
@@ -60,7 +61,7 @@
 		</div>
 
 		<div class="col-md-offset-2 col-md-2">
-			<button class="btn btn-success" style="margin-top: 25px" id="cerca">Cerca </button>
+			<button class="btn btn-success" style="margin-top: 25px" id="cerca">Cerca</button>
 		</div>
 	</div>
 
@@ -70,7 +71,9 @@
 	<div class="list row">
 		<div class="col-md-offset-1 col-md-10">
 			<div class="col-md-offset-4 col-md-2">
-				<button class="btn btn-success" style="margin-top: 25px" id="registra">Registra Utente e Inserisci Annuncio </button>
+				<button class="btn btn-success" style="margin-top: 25px" id="registra">Registra Utente e Inserisci
+					Annuncio
+				</button>
 			</div>
 		</div>
 	</div>
@@ -82,7 +85,7 @@
 		<div class="col-md-offset-1 col-md-10">
 
 			<div class="table-responsive">
-				<table id="myTable" class="display table" width="100%" >
+				<table id="myTable" class="display table" width="100%">
 
 					<thead>
 					<tr>
@@ -94,7 +97,13 @@
 					</tr>
 					</thead>
 					<tbody id="bodyTable">
-
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
 
 					</tbody>
 					<script id="request-template" type="text/x-handlebars-template">
@@ -117,7 +126,7 @@
 </div>
 
 <script>
-	$(document).ready(function(){
+	$(document).ready(function () {
 		$('#myTable').dataTable();
 	});
 </script>
