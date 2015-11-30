@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class RequestModel {
 
+	//TODO: insert
+
 	public static Request getRequestById ( int id ) throws SQLException, NamingException {
 
 		Connection connection;

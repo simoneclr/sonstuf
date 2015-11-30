@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class OfferModel {
 
+	//TODO: insert
+
 	public static Offer getOfferById(int id ) throws SQLException, NamingException {
 
 		Connection connection;
