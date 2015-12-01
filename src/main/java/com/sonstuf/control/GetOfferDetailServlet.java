@@ -1,7 +1,9 @@
 package com.sonstuf.control;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.sonstuf.model.OfferModel;
 import com.sonstuf.model.RequestModel;
@@ -26,7 +28,7 @@ import java.sql.SQLException;
  * Servlet implementation class CategoriesServlet
  */
 public class GetOfferDetailServlet extends HttpServlet {
-	private static class MiniPacket {
+	private static final class MiniPacket extends JsonSerializer<MiniPacket> {
 		private User user;
 		private Request request;
 		private RequestRank requestRank;
@@ -64,38 +66,43 @@ public class GetOfferDetailServlet extends HttpServlet {
 			this.requestRank = requestRank;
 		}
 
-		public String toJson() throws JsonProcessingException {
-			String json = "";
+		@Override
+		public void serialize(MiniPacket o, JsonGenerator jsonGenerator, SerializerProvider provider) throws IOException {
+			jsonGenerator.writeStartObject();
+
 			//serialize User
-			ObjectMapper mapper = new ObjectMapper();
-			SimpleModule module = new SimpleModule();
-			module.addSerializer(User.class, new UserSerializer<>("idUser", "name", "rankO"));
-			mapper.registerModule(module);
-			String jsonUser = mapper.writeValueAsString(this.user);
-			json += "requestingUser : " + jsonUser;
-			System.out.println("requestingUser -> " + jsonUser);
+			{
+				ObjectMapper mapper = new ObjectMapper();
+				SimpleModule module = new SimpleModule();
+				module.addSerializer(User.class, new UserSerializer<>("idUser", "name", "rankO"));
+				mapper.registerModule(module);
+				jsonGenerator.writeStringField("requestingUser", mapper.writeValueAsString(this.user));
+			}
 
 			//serialize Request
-			mapper = new ObjectMapper();
-			module = new SimpleModule();
-			module.addSerializer(Request.class, new RequestSerializer<>());
-			mapper.registerModule(module);
-			String jsonRequest = mapper.writeValueAsString(this.request);
-			json += ", request : " + jsonRequest;
-			System.out.println("request -> " + jsonRequest);
+			{
+				ObjectMapper mapper = new ObjectMapper();
+				SimpleModule module = new SimpleModule();
+				module.addSerializer(Request.class, new RequestSerializer<>());
+				mapper.registerModule(module);
+				jsonGenerator.writeStringField("request", mapper.writeValueAsString(this.request));
+			}
 
-			//serialize RequestRank.
-			mapper = new ObjectMapper();
-			module = new SimpleModule();
-			module.addSerializer(RequestRank.class, new RequestRankSerializer<>("rank", "comment"));
-			mapper.registerModule(module);
-			String jsonRequestRank = mapper.writeValueAsString(this.requestRank);
-			json += ", valuation : " + jsonRequestRank;
-			System.out.println("requestRank -> " + jsonRequestRank);
+			//serialize RequestRank if present
+			if (this.requestRank != null) {
+				ObjectMapper mapper = new ObjectMapper();
+				SimpleModule module = new SimpleModule();
+				module.addSerializer(RequestRank.class, new RequestRankSerializer<>("rank", "comment"));
+				mapper.registerModule(module);
+				jsonGenerator.writeStringField("valuation", mapper.writeValueAsString(this.requestRank));
+			}
 
-			json += ", state: " + this.request.getStatus();
-			System.out.println("state: " + this.request.getStatus());
-			return json;
+			//serialize state
+			{
+				jsonGenerator.writeNumberField("state", this.request.getStatus());
+			}
+
+			jsonGenerator.writeEndObject();
 		}
 	}
 
@@ -142,15 +149,16 @@ public class GetOfferDetailServlet extends HttpServlet {
 		}
 
 		//get the rank given to the request.
-		RequestRank requestRank;
-		try {
-			requestRank = RequestModel.getRankById(request.getIdRequest());
-		} catch (SQLException | NamingException e) {
-			e.printStackTrace();
-			response.getWriter().write("can not retrieve the requestRank from the database");
-			return;
+		RequestRank requestRank = null;
+		if (request.getStatus() == 2) {
+			try {
+				requestRank = RequestModel.getRankById(request.getIdRequest());
+			} catch (SQLException | NamingException e) {
+				e.printStackTrace();
+				response.getWriter().write("can not retrieve the requestRank from the database");
+				return;
+			}
 		}
-
 		//get the User that made the request.
 		User requestingUser = null;
 		try {
@@ -162,7 +170,15 @@ public class GetOfferDetailServlet extends HttpServlet {
 		}
 
 		MiniPacket outputObject = MiniPacket.ToMiniPacket(requestingUser, request, requestRank);
-		response.getWriter().write(outputObject.toJson());
+
+		ObjectMapper mapper = new ObjectMapper();
+		SimpleModule module = new SimpleModule();
+		module.addSerializer(MiniPacket.class, new MiniPacket());
+		mapper.registerModule(module);
+		
+		String json = mapper.writeValueAsString(outputObject);
+		System.out.println("json: " + json);
+		response.getWriter().write(json);
 	}
 
 	/**
