@@ -2,6 +2,8 @@ package com.sonstuf.utils.serializers;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Set;
+import java.util.TreeSet;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -12,8 +14,26 @@ import com.sonstuf.utils.ProjectGlobals;
 
 public class UserSerializer<T extends User> extends JsonSerializer<T> {
 	
+	private Set<String> attributesToSerialize;
+	
+	public UserSerializer () {
+		super ();
+		
+		attributesToSerialize = null;
+	}
+	
+	public UserSerializer (String... attributes) {
+		super ();
+		
+		attributesToSerialize = new TreeSet<String> ();
+		
+		for (String attribute : attributes) {
+			attributesToSerialize.add (attribute);
+		}
+	}
+	
 	@Override
-	public void serialize (T object, JsonGenerator jsonGenerator, SerializerProvider arg2)
+	public void serialize (T object, JsonGenerator jsonGenerator, SerializerProvider provider)
 			throws IOException, JsonProcessingException {
 		
 		SimpleDateFormat sdf;
@@ -22,15 +42,29 @@ public class UserSerializer<T extends User> extends JsonSerializer<T> {
 		
 		jsonGenerator.writeStartObject ();
 		
-		jsonGenerator.writeNumberField ("idUser", object.getIdUser ());
-		jsonGenerator.writeStringField ("name", object.getName ());
-		jsonGenerator.writeStringField ("surname", object.getSurname ());
-		jsonGenerator.writeStringField ("telephone", object.getPhone ());
-		jsonGenerator.writeStringField ("email", object.getEmail ());
-		jsonGenerator.writeStringField ("bithdate", sdf.format (object.getBirthDate ()));
-		jsonGenerator.writeNumberField ("rankO", object.getRankO ());
-		jsonGenerator.writeNumberField ("rankR", object.getRankR ());
+		if (attributesToSerialize == null || attributesToSerialize.contains ("idUser"))
+			jsonGenerator.writeNumberField ("idUser", object.getIdUser ());
 		
+		if (attributesToSerialize == null || attributesToSerialize.contains ("name"))
+			jsonGenerator.writeStringField ("name", object.getName ());
+
+		if (attributesToSerialize == null || attributesToSerialize.contains ("surname"))
+			jsonGenerator.writeStringField ("surname", object.getSurname ());
+
+		if (attributesToSerialize == null || attributesToSerialize.contains ("telephone"))
+			jsonGenerator.writeStringField ("telephone", object.getPhone ());
+
+		if (attributesToSerialize == null || attributesToSerialize.contains ("email"))
+			jsonGenerator.writeStringField ("email", object.getEmail ());
+
+		if (attributesToSerialize == null || attributesToSerialize.contains ("bithdate"))
+			jsonGenerator.writeStringField ("bithdate", sdf.format (object.getBirthDate ()));
+
+		if (attributesToSerialize == null || attributesToSerialize.contains ("rankO"))
+			jsonGenerator.writeNumberField ("rankO", object.getRankO ());
+
+		if (attributesToSerialize == null || attributesToSerialize.contains ("rankR"))
+			jsonGenerator.writeNumberField ("rankR", object.getRankR ());
 		
 		jsonGenerator.writeEndObject ();
 	}
