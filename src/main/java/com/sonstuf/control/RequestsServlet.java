@@ -80,6 +80,7 @@ public class RequestsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 	                      HttpServletResponse response) throws ServletException, IOException {
 
+		//TODO: inserimento richiesta
 		doGet(request, response);
 	}
 
