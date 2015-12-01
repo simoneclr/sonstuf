@@ -175,7 +175,7 @@ public class GetOfferDetailServlet extends HttpServlet {
 		SimpleModule module = new SimpleModule();
 		module.addSerializer(MiniPacket.class, new MiniPacket());
 		mapper.registerModule(module);
-		
+
 		String json = mapper.writeValueAsString(outputObject);
 		System.out.println("json: " + json);
 		response.getWriter().write(json);
