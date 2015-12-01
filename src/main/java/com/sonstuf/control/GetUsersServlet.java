@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.sonstuf.model.UserModel;
 import com.sonstuf.model.bean.User;
-import com.sonstuf.utils.ProjectGlobals;
 import com.sonstuf.utils.serializers.UserSerializer;
 
 import javax.naming.NamingException;
@@ -18,8 +17,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -143,20 +140,6 @@ public class GetUsersServlet extends HttpServlet {
 		public Date getBirthDate() {
 			return birthDate;
 		}
-
-		public void setBirthDate(String birthDate) {
-			if (birthDate == null || birthDate.equals(""))
-				this.birthDate = null;
-			else {
-				SimpleDateFormat dateFormat = new SimpleDateFormat(ProjectGlobals.DATE_INPUT_FORMAT);
-				try {
-					this.birthDate = new Date(dateFormat.parse(birthDate).getTime());
-				} catch (ParseException e) {
-					this.birthDate = null;
-					//LOG THAT BIRTHDATE FORMAT WAS WRONG.
-				}
-			}
-		}
 	}
 
 	public GetUsersServlet() {
@@ -172,7 +155,7 @@ public class GetUsersServlet extends HttpServlet {
 		try {
 			userListDB = requestDataFromDB(pattern);
 		} catch (SQLException | NamingException e) {
-			response.getWriter().write("fail");
+			response.getWriter().write(e.toString());
 		}
 
 		sendMatchingUsers(userListDB, pattern, response);
@@ -208,6 +191,7 @@ public class GetUsersServlet extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	/**
