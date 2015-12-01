@@ -1,11 +1,5 @@
 package com.sonstuf.utils.serializers;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-
-import javax.naming.NamingException;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -13,6 +7,11 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.sonstuf.model.CategoryModel;
 import com.sonstuf.model.bean.Request;
 import com.sonstuf.utils.ProjectGlobals;
+
+import javax.naming.NamingException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 public class RequestSerializer<T extends Request> extends JsonSerializer<T> {
 
@@ -40,6 +39,8 @@ public class RequestSerializer<T extends Request> extends JsonSerializer<T> {
 		jsonGenerator.writeStringField ("postTimeStamp", sdf.format (o.getPostTime ()));
 		
 		jsonGenerator.writeEndObject ();
+
+		provider.getFilterProvider();
 	}
 
 }

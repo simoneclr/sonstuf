@@ -266,8 +266,6 @@ public class UserModel {
 
 		Connection connection;
 		PreparedStatement ps;
-		ResultSet rs;
-		List<User> res = new ArrayList<>();
 
 		String query = "SELECT * from user;";
 
