@@ -65,12 +65,14 @@ public class GetOfferDetailServlet extends HttpServlet {
 		}
 
 		public String toJson() throws JsonProcessingException {
+			String json = "";
 			//serialize User
 			ObjectMapper mapper = new ObjectMapper();
 			SimpleModule module = new SimpleModule();
 			module.addSerializer(User.class, new UserSerializer<>("idUser", "name", "rankO"));
 			mapper.registerModule(module);
 			String jsonUser = mapper.writeValueAsString(this.user);
+			json += "requestingUser : " + jsonUser;
 			System.out.println("requestingUser -> " + jsonUser);
 
 			//serialize Request
@@ -79,6 +81,7 @@ public class GetOfferDetailServlet extends HttpServlet {
 			module.addSerializer(Request.class, new RequestSerializer<>());
 			mapper.registerModule(module);
 			String jsonRequest = mapper.writeValueAsString(this.request);
+			json += ", request : " + jsonRequest;
 			System.out.println("request -> " + jsonRequest);
 
 			//serialize RequestRank.
@@ -87,8 +90,12 @@ public class GetOfferDetailServlet extends HttpServlet {
 			module.addSerializer(RequestRank.class, new RequestRankSerializer<>("rank", "comment"));
 			mapper.registerModule(module);
 			String jsonRequestRank = mapper.writeValueAsString(this.requestRank);
+			json += ", valuation : " + jsonRequestRank;
 			System.out.println("requestRank -> " + jsonRequestRank);
 
+			json += ", state: " + this.request.getStatus();
+			System.out.println("state: " + this.request.getStatus());
+			return json;
 		}
 	}
 
