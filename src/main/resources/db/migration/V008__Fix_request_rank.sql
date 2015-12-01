@@ -3,5 +3,5 @@ ALTER TABLE sonstuf.requesterrank DROP PRIMARY KEY;
 ALTER TABLE sonstuf.requesterrank CHANGE idoffer idrequest int NOT NULL;
 ALTER TABLE sonstuf.requesterrank
 ADD CONSTRAINT fk_requesterrank_offer1
-FOREIGN KEY (idrequest) REFERENCES offer (idoffer);
+FOREIGN KEY (idrequest) REFERENCES request (idrequest);
 ALTER TABLE sonstuf.requesterrank ADD PRIMARY KEY (idrequest);
