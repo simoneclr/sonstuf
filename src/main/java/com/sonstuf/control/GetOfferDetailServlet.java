@@ -1,10 +1,12 @@
 package com.sonstuf.control;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.sonstuf.model.RequestModel;
 import com.sonstuf.model.UserModel;
 import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.User;
+import com.sonstuf.utils.serializers.UserSerializer;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -77,27 +79,39 @@ public class GetOfferDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int idRequest = -1;
+
+		int idOffer = -1;
 		try {
-			idRequest = (int) request.getAttribute("idRequest");
+			idOffer = (int) request.getAttribute("idOffer");
 		} catch (ClassCastException e) {
 			response.getWriter().write("bad request attributes");
 			return;
 		}
 
-		PrintWriter writer;
+		User user=null;
+		ObjectMapper mapper;
+		SimpleModule module;
 
-		ObjectMapper mapper = new ObjectMapper();
 
-		writer = response.getWriter();
 
 		try {
-			Request request2 = RequestModel.getRequestById(idRequest);
-			User user = UserModel.getUserById(request2.getIdUser());
-			writer.write(mapper.writeValueAsString(MiniPacket.ToMiniPacket(user, request2)));
-		} catch (SQLException | NamingException e) {
-			writer.write(e.toString());
+
+			mapper = new ObjectMapper ();
+
+			module = new SimpleModule ();
+			module.addSerializer (User.class,
+					new UserSerializer<User>());
+			mapper.registerModule (module);
+
+			response.getWriter ()
+					.write (mapper.writeValueAsString ((user)));
+
+		} catch (IOException e) {
+
+			e.printStackTrace ();
 		}
+
+
 	}
 
 	/**
@@ -109,5 +123,9 @@ public class GetOfferDetailServlet extends HttpServlet {
 
 		doGet(request, response);
 	}
+
+
+
+
 }
 
