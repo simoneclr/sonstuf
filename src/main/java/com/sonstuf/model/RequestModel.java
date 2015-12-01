@@ -25,7 +25,7 @@ public class RequestModel {
 
 		String query = "INSERT INTO request\n"
 				+ "(`title`, `description`, `place`, `datetime`, `photo`, `iduser`, `idcategory`, `status`, `posttime`)\n"
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW());";
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP ());";
 
 		connection = Connector.getConnection();
 
