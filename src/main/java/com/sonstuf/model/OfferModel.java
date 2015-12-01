@@ -1,6 +1,8 @@
 package com.sonstuf.model;
 
 import com.sonstuf.model.bean.Offer;
+import com.sonstuf.model.bean.OfferRank;
+import com.sonstuf.model.bean.RequestRank;
 import com.sonstuf.utils.Retval;
 
 import javax.naming.NamingException;
@@ -158,6 +160,44 @@ public class OfferModel {
 			o.setPostTime( rs.getTimestamp("posttime"));
 
 			res.add(o);
+
+		}
+
+		rs.close();
+		ps.close();
+		connection.close();
+
+		return res;
+
+	}
+
+	public static OfferRank getRankById ( int id ) throws SQLException, NamingException {
+
+		Connection connection;
+		PreparedStatement ps;
+		ResultSet rs;
+		OfferRank res;
+
+		String query = 	"SELECT * from offererrank\n" +
+						"WHERE idoffer = ? ;";
+
+		connection = Connector.getConnection();
+
+		ps = connection.prepareStatement(query);
+		ps.setInt( 1, id );
+
+		rs = ps.executeQuery();
+
+		if ( rs.next() ) {
+
+			res = new OfferRank();
+			res.setIdOffer(rs.getInt("idoffer"));
+			res.setRank(rs.getInt("rank"));
+			res.setComment(rs.getString("comment"));
+
+		} else {
+
+			res = null;
 
 		}
 

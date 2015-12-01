@@ -2,6 +2,7 @@ package com.sonstuf.model;
 
 import com.sonstuf.model.bean.Category;
 import com.sonstuf.model.bean.Request;
+import com.sonstuf.model.bean.RequestRank;
 import com.sonstuf.utils.Retval;
 
 import javax.naming.NamingException;
@@ -187,6 +188,45 @@ public class RequestModel {
 		connection.close();
 
 		return res;
+
+	}
+
+	public static RequestRank getRankById ( int id ) throws SQLException, NamingException {
+
+		Connection connection;
+		PreparedStatement ps;
+		ResultSet rs;
+		RequestRank res;
+
+		String query = 	"SELECT * from requesterrank\n" +
+						"WHERE idrequest = ? ;";
+
+		connection = Connector.getConnection();
+
+		ps = connection.prepareStatement(query);
+		ps.setInt( 1, id );
+
+		rs = ps.executeQuery();
+
+		if ( rs.next() ) {
+
+			res = new RequestRank();
+			res.setIdRequest(rs.getInt("idrequest"));
+			res.setRank(rs.getInt("rank"));
+			res.setComment(rs.getString("comment"));
+
+		} else {
+
+			res = null;
+
+		}
+
+		rs.close();
+		ps.close();
+		connection.close();
+
+		return res;
+
 
 	}
 
