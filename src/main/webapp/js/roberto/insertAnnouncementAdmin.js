@@ -33,8 +33,6 @@ function eventCerca(){
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
 			success: function(input){
-				console.log("input: " + input);
-				console.log("json: " + JSON.stringify(input));
 				var data= JSON.parse(JSON.stringify(input));
 				if(data.length==0){
 					registraUtente(json);
@@ -57,6 +55,7 @@ function eventCerca(){
 
 function registraUtente(json){
 	$("#registra").show();
+	$("#rowTable").hide();
 	$("#registra").click(function(){
 		$.ajax({
 			type: "POST",
@@ -83,7 +82,7 @@ function updateTable(data){
 			id:data[i].idUser,
 			name:data[i].name,
 			surname: data[i].surname,
-			telephone: data[i].phone,
+			telephone: data[i].telephone,
 			email: data[i].email,
 			birthdate: data[i].birthdate,
 

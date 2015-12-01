@@ -57,7 +57,7 @@ public class UserSerializer<T extends User> extends JsonSerializer<T> {
 		if (attributesToSerialize == null || attributesToSerialize.contains ("email"))
 			jsonGenerator.writeStringField ("email", object.getEmail ());
 
-		if (attributesToSerialize == null || attributesToSerialize.contains ("bithdate"))
+		if (attributesToSerialize == null || attributesToSerialize.contains ("birthdate"))
 			jsonGenerator.writeStringField ("birthdate", sdf.format (object.getBirthDate ()));
 
 		if (attributesToSerialize == null || attributesToSerialize.contains ("rankO"))

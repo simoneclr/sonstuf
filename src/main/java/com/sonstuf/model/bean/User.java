@@ -29,14 +29,11 @@ public class User implements Serializable {
 	private float rankR;
 	private Date birthDate;
 	private boolean admin;
-<<<<<<< HEAD
-=======
 	/**
 	 * checks if user and this are the same User ignoring null fields
 	 * @param user
 	 * @return false if user is null. true if all the not null fields in both user and this are equals.
 	 */
->>>>>>> 5102026b79d44e1c82158aadaa0b58527d83c003
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
