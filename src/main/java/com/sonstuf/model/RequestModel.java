@@ -2,6 +2,7 @@ package com.sonstuf.model;
 
 import com.sonstuf.model.bean.Category;
 import com.sonstuf.model.bean.Request;
+import com.sonstuf.utils.Retval;
 
 import javax.naming.NamingException;
 import java.sql.Connection;
@@ -15,6 +16,42 @@ import java.util.List;
  * Created by hypertesto on 18/11/15.
  */
 public class RequestModel {
+
+	public static Retval insert ( Request request ) throws SQLException, NamingException {
+
+		Connection connection;
+		PreparedStatement ps;
+		boolean rs;
+
+		String query = "INSERT INTO request\n"
+				+ "(`title`, `description`, `place`, `datetime`, `photo`, `iduser`, `idcategory`, `status`, `posttime`)\n"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP ());";
+
+		connection = Connector.getConnection();
+
+		ps = connection.prepareStatement(query);
+		ps.setString(1, request.getTitle());
+		ps.setString(2, request.getDescription());
+		ps.setString(3, request.getPlace());
+		ps.setString(4, request.getDateTime());
+		ps.setString(5, request.getPhoto());
+		ps.setInt(6, request.getIdUser());
+		ps.setInt(7, request.getIdCategory());
+		ps.setInt(8, request.getStatus());
+		//ps.setTimestamp(9, request.getPostTime());
+
+		rs = ps.execute();
+
+		if( rs ) {
+
+			return new Retval(true);
+
+		} else {
+
+			return new Retval(false, "Could not insert request");
+		}
+
+	}
 
 	public static Request getRequestById ( int id ) throws SQLException, NamingException {
 
