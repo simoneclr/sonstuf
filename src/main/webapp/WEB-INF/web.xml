@@ -64,7 +64,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>GetOfferDetailServlet</servlet-name>
-		<url-pattern>/GetOfferDetail</url-pattern>
+		<url-pattern>/getmyoffer</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>AuthenticationServlet</servlet-name>

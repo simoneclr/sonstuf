@@ -123,7 +123,7 @@ public class GetOfferDetailServlet extends HttpServlet {
 		int idOffer;
 		try {
 			idOffer = (int) requestHttp.getAttribute("idOffer");
-		} catch (ClassCastException e) {
+		} catch (ClassCastException | NullPointerException e) {
 			response.getWriter().write("bad request attributes");
 			return;
 		}
