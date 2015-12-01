@@ -57,10 +57,7 @@ public class CategoriesServlet extends HttpServlet {
 				} else {
 					writer.write (',');
 				}
-				
-//				writer.write ("{\"" + category.getIdCategory () + "\",\"" + category.getName () + "\"}");
-				
-				
+
 				writer.write (mapper.writeValueAsString (
 						MiniPacket.categoryToMiniPacket (category)));
 			}
