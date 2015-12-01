@@ -200,6 +200,7 @@ var octopus = {
 
 		this.loadUser();
 		this.loadRequests();
+		this.loadOffers();
 	},
 
 	loadUser: function(){
@@ -231,7 +232,7 @@ var octopus = {
 
 		}).done(function(data){
 			model.offers = data;
-			view.renderRequests(model.offers);
+			view.renderOffers(model.offers);
 
 		}).fail(function(){
 			alert("Errore!");
