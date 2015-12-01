@@ -34,30 +34,6 @@ public class User implements Serializable {
 	 * @param user
 	 * @return false if user is null. true if all the not null fields in both user and this are equals.
 	 */
-	public boolean equalsIgnoringNullFields(User user) {
-		if(user == null) return false;
-		if(this.hashCode() != user.hashCode()) return false;
-		if (this.getIdUser() != -1 && user.getIdUser() != -1)
-			if (this.getIdUser() != user.getIdUser()) return false;
-		if (this.getSurname() != null && user.getSurname() != null)
-			if (!this.getSurname().equals(user.getSurname())) return false;
-		if (this.getName() != null && user.getName() != null)
-			if (!this.getName().equals(user.getName())) return false;
-		if (this.getBirthDate() != null && user.getBirthDate() != null)
-			if (!this.getBirthDate().equals(user.getBirthDate())) return false;
-		if (this.getEmail() != null && user.getEmail() != null)
-			if (!this.getEmail().equals(user.getEmail())) return false;
-		if (this.getPhone() != null && user.getPhone() != null)
-			if (!this.getPhone().equals(user.getPhone())) return false;
-		if(this.getRankO() != -1 && user.getRankO() != -1)
-			if(this.getRankO() != user.getRankO()) return false;
-		if(this.getRankR() != -1 && user.getRankR() != -1)
-			if(this.getRankR() != user.getRankR()) return false;
-		if(this.getPasswordHash() != null && user.getPasswordHash() != null)
-			if(!this.getPasswordHash().equals(user.getPasswordHash())) return false;
-
-		return true;
-	}
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;

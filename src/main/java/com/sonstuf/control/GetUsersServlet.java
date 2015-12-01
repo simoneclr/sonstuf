@@ -87,13 +87,21 @@ public class GetUsersServlet extends HttpServlet {
 			User user = (User) obj;
 
 			//if the user name is in the pattern.
-			if (this.isNameSetted())
-				if (!this.getName().equals(user.getName())) return false; //if different user names.
+			if (this.isNameSetted()){
+				System.out.println("1");
+				if (!this.getName().equals(user.getName())) {
+					System.out.println("2");
+					return false;
+				}} //if different user names.
 
 			//if the surname is in the pattern.
-			if (this.isSurnameSetted())
-				if (!this.getSurname().equals(user.getSurname())) return false; //if different surnames.
-
+			if (this.isSurnameSetted()) {
+				System.out.println("3");
+				if (!this.getSurname().equals(user.getSurname())) {
+					System.out.println("4");
+					return false; //if different surnames.
+				}
+			}
 			//if the phone number is in the pattern.
 			if (this.isPhoneSetted())
 				if (!this.getPhone().equals(user.getPhone())) return false; //if different phones.
@@ -166,6 +174,7 @@ public class GetUsersServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("bbbbbbbbbbbbbb");
 		UserPattern pattern = parseJson(request.getReader());
 
 
@@ -189,12 +198,17 @@ public class GetUsersServlet extends HttpServlet {
 		boolean done = false; //flag for check if it's the first iteration.
 		try {
 			for (User user : userListDB) {
+				System.out.println("uDB: "+user.getName());
+				System.out.println("upatt: "+pattern.getName());
 				if (pattern.equals(user)) { //retain only the Users that match the pattern
+					System.out.println("entrato");
 					if (!done) {
 						done = true;
 					} else {
 						writer.write(',');
 					}
+					System.out.print("user: "+mapper.setFilterProvider(filters)
+							.writeValueAsString(user));
 					writer.write(mapper.setFilterProvider(filters)
 							.writeValueAsString(user));
 
@@ -240,6 +254,7 @@ public class GetUsersServlet extends HttpServlet {
 	}
 
 	private UserPattern parseJson(BufferedReader jsonReader) throws IOException {
+		System.out.println("aaaaaaaaaaaaaaaaaa");
 		UserPattern res = null;
 		StringBuffer jb = new StringBuffer();
 		String line = null;
@@ -252,7 +267,9 @@ public class GetUsersServlet extends HttpServlet {
 
 		String jsonUser = jb.toString();
 		ObjectMapper mapper = new ObjectMapper();
+
 		res = mapper.readValue(jb.toString(), UserPattern.class);
+		System.out.println("u: "+res.getName());
 		return res;
 	}
 
