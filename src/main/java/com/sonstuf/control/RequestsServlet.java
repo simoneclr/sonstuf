@@ -5,11 +5,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.sonstuf.model.CategoryModel;
 import com.sonstuf.model.RequestModel;
 import com.sonstuf.model.UserModel;
 import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.User;
 import com.sonstuf.utils.JsonPacket;
+import com.sonstuf.utils.Retval;
 import com.sonstuf.utils.serializers.RequestSerializer;
 import com.sonstuf.utils.serializers.RequestSerializerNoDescription;
 
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -61,6 +64,11 @@ public class RequestsServlet extends HttpServlet {
 				case "view":
 
 					viewRequest (request, writer);
+					break;
+					
+				case "insert":
+					
+					insertRequest (request, writer);
 					break;
 
 				default:
@@ -155,6 +163,50 @@ public class RequestsServlet extends HttpServlet {
 			e.printStackTrace();
 			return;
 		}
+	}
+	
+	private Retval insertRequest (HttpServletRequest request,
+			PrintWriter swriter) {		
+		
+		String title, description, place, category;
+		int categoryId;
+		
+		title = request.getParameter ("title");
+		description = request.getParameter ("description");
+		place = request.getParameter ("place");
+		category = request.getParameter ("categoryId");
+		
+		if (title == null)
+			return new Retval (false, "Missing \"title\" parameter");
+		
+		if (description == null) 
+			return new Retval (false, "Missing \"description\" parameter");
+		
+		if (place == null)
+			return new Retval (false, "Missing \"place\" parameter");
+		
+		if (category == null) 
+			return new Retval (false, "Missing \"categoryId\" parameter");
+		
+		try {
+			
+			categoryId = Integer.parseInt (category);
+			
+		} catch (NumberFormatException e) {
+			
+			return new Retval (false, "Invalid categoryId integer");
+		}
+		
+		try {
+			if (CategoryModel.getCategoryById (categoryId) == null)
+				return new Retval (false, "Invalid categoryId: category not found");
+		} catch (SQLException | NamingException e) {
+			
+			e.printStackTrace();
+			return new Retval (false, "Backend error: " + e.getMessage ());
+		}
+		
+		return null;
 	}
 	
 	private class Packet implements JsonPacket {
