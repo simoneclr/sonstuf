@@ -6,8 +6,10 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.sonstuf.model.CategoryModel;
+import com.sonstuf.model.OfferModel;
 import com.sonstuf.model.RequestModel;
 import com.sonstuf.model.UserModel;
+import com.sonstuf.model.bean.Offer;
 import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.User;
 import com.sonstuf.utils.JsonPacket;
@@ -49,6 +51,7 @@ public class RequestsServlet extends HttpServlet {
 
 		String op;
 		PrintWriter writer;
+		ObjectMapper mapper;
 
 		writer = response.getWriter();
 		op = request.getParameter("op");
@@ -69,13 +72,19 @@ public class RequestsServlet extends HttpServlet {
 					
 				case "insert":
 					
-					ObjectMapper mapper;
-					
 					mapper = new ObjectMapper ();
 					writer.write (mapper
 							.writeValueAsString (insertRequest (request)));
 					break;
-
+				
+				case "register":
+					
+					mapper = new ObjectMapper ();
+					writer.write (mapper
+							.writeValueAsString (registerForRequest (request)));
+							
+					break;
+					
 				default:
 
 					response.getWriter().write("Unsupported operation");
@@ -170,28 +179,27 @@ public class RequestsServlet extends HttpServlet {
 		}
 	}
 	
+	private User getUserFromSession (HttpSession session) {
+		
+		if (session != null) {
+			
+			return (User) session.getAttribute ("user");
+		}
+		
+		return null;
+	}
+	
 	private Retval insertRequest (HttpServletRequest request) {		
 		
 		String title, description, place, category, time;
 		int categoryId;
 		Request newRequest;
 		User user;
-		HttpSession session;
 		
-		session = request.getSession ();
+		user = getUserFromSession (request.getSession ());
 		
-		if (session != null) {
-			
-			user = (User) session.getAttribute ("user");
-			
-			if (user == null) {
-				
-				return new Retval (false, "Login needed");
-			}
-		} else {
-			
-			return new Retval (false, "Login needed");
-		}
+		if (user == null)
+			return new Retval (false, "Login nedded");
 		
 		title = request.getParameter ("title");
 		description = request.getParameter ("description");
@@ -243,6 +251,63 @@ public class RequestsServlet extends HttpServlet {
 		
 		try {
 			RequestModel.insert (newRequest);
+		} catch (SQLException | NamingException e) {
+			
+			e.printStackTrace();
+			return new Retval (false, "Backend error: " + e.getMessage ());
+		}
+		
+		return new Retval (true);
+	}
+	
+	private Retval registerForRequest (HttpServletRequest servletRequest) {
+		
+		String request;
+		int idRequest;
+		Offer newOffer;
+		User user;
+		
+		user = getUserFromSession (servletRequest.getSession ());
+		
+		if (user == null) 
+			return new Retval (false, "Login required");
+		
+		request = servletRequest.getParameter ("requestId");
+		
+		if (request == null) 
+			return new Retval (false, "Missing parameter \"requestId\"");
+		
+		try {
+			
+			idRequest = Integer.parseInt (request);
+			
+		} catch (NumberFormatException e) {
+			
+			return new Retval (false, "Invalid parameter \"requestId\"");
+		}
+		
+		try {
+			
+			if (RequestModel.getRequestById (idRequest) == null) {
+				
+				return new Retval (false, "Ivalid parameter \"requestId\": request not found");
+			}
+		
+		} catch (SQLException | NamingException e) {
+			
+			e.printStackTrace();
+			return new Retval (false, "Backend error: " + e.getMessage ());
+		}
+		
+		newOffer = new Offer ();
+		
+		newOffer.setIdRequest (idRequest);
+		newOffer.setIdUser (user.getIdUser ());
+		newOffer.setInCharge (false);
+		//newOffer.setStatus (0); //Unuseful, by default is 0
+		
+		try {
+			OfferModel.insert (newOffer);
 		} catch (SQLException | NamingException e) {
 			
 			e.printStackTrace();
