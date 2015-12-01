@@ -68,7 +68,11 @@ public class RequestsServlet extends HttpServlet {
 					
 				case "insert":
 					
-					insertRequest (request, writer);
+					ObjectMapper mapper;
+					
+					mapper = new ObjectMapper ();
+					writer.write (mapper
+							.writeValueAsString (insertRequest (request)));
 					break;
 
 				default:
@@ -165,16 +169,17 @@ public class RequestsServlet extends HttpServlet {
 		}
 	}
 	
-	private Retval insertRequest (HttpServletRequest request,
-			PrintWriter swriter) {		
+	private Retval insertRequest (HttpServletRequest request) {		
 		
-		String title, description, place, category;
+		String title, description, place, category, time;
 		int categoryId;
+		Request newRequest;
 		
 		title = request.getParameter ("title");
 		description = request.getParameter ("description");
 		place = request.getParameter ("place");
 		category = request.getParameter ("categoryId");
+		time = request.getParameter ("time");
 		
 		if (title == null)
 			return new Retval (false, "Missing \"title\" parameter");
@@ -187,6 +192,9 @@ public class RequestsServlet extends HttpServlet {
 		
 		if (category == null) 
 			return new Retval (false, "Missing \"categoryId\" parameter");
+		
+		if (time == null) 
+			return new Retval (false, "Missin \"time\" parameter");
 		
 		try {
 			
@@ -206,7 +214,23 @@ public class RequestsServlet extends HttpServlet {
 			return new Retval (false, "Backend error: " + e.getMessage ());
 		}
 		
-		return null;
+		newRequest = new Request ();
+		
+		newRequest.setDescription (description);
+		newRequest.setTitle (title);
+		newRequest.setPlace (place);
+		newRequest.setIdCategory (categoryId);
+		newRequest.setDateTime (time);
+		
+		try {
+			RequestModel.insert (newRequest);
+		} catch (SQLException | NamingException e) {
+			
+			e.printStackTrace();
+			return new Retval (false, "Backend error: " + e.getMessage ());
+		}
+		
+		return new Retval (true);
 	}
 	
 	private class Packet implements JsonPacket {
