@@ -1,13 +1,12 @@
 package com.sonstuf.control;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.sonstuf.model.UserModel;
 import com.sonstuf.model.bean.User;
 import com.sonstuf.utils.ProjectGlobals;
+import com.sonstuf.utils.serializers.UserSerializer;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -173,37 +172,42 @@ public class GetUsersServlet extends HttpServlet {
 		try {
 			userListDB = requestDataFromDB(pattern);
 		} catch (SQLException | NamingException e) {
-			response.getWriter().write(e.toString());
+			response.getWriter().write("fail");
 		}
 
-		//filtrate userList based on the pattern
-		PrintWriter writer = response.getWriter();
+		sendMatchingUsers(userListDB, pattern, response);
+
+	}
+
+	private void sendMatchingUsers(List<User> list, UserPattern pattern, HttpServletResponse response) {
 		ObjectMapper mapper = new ObjectMapper();
-		writer.write('[');
+		SimpleModule module = new SimpleModule();
+		module.addSerializer(User.class, new UserSerializer<>("idUser", "name", "surname", "telephone", "email", "birthdate"));
+		mapper.registerModule(module);
 
-		SimpleFilterProvider filters;
-
-		filters = new SimpleFilterProvider();
-		filters.addFilter("filter", SimpleBeanPropertyFilter.serializeAllExcept("passwordHash", "rankO", "rankP"));
-
-		boolean done = false; //flag for check if it's the first iteration.
 		try {
-			for (User user : userListDB) {
+			PrintWriter writer = response.getWriter();
+			writer.write("[");
+			System.out.println("[");
+			boolean done = true;
+			for (User user : list) {
 				if (pattern.equals(user)) { //retain only the Users that match the pattern
 					if (!done) {
 						done = true;
 					} else {
 						writer.write(',');
 					}
-					writer.write(mapper.setFilterProvider(filters)
-							.writeValueAsString(user));
+					String json = mapper.writeValueAsString(user);
+					System.out.println(json);
+					writer.write(json);
 
 				}
 			}
-		} catch (JsonProcessingException e) {
+			System.out.println("]");
+			writer.write("]");
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		writer.write(']');
 	}
 
 	/**

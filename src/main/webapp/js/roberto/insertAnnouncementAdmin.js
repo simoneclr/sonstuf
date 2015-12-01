@@ -24,10 +24,8 @@ function eventCerca(){
 		user.phone=$("#telephone").val();
 		user.email=$("#email").val();
 		user.birthDate=$("#birthdate").val();
-console.log("birthDate: "+user.birthDate);
 
 		var json=jQuery.extend(true, {}, user);
-		console.log(JSON.stringify(json));
 		$.ajax({
 			type: "POST",
 			url: "/GetUsers",
@@ -35,19 +33,19 @@ console.log("birthDate: "+user.birthDate);
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
 			success: function(input){
+				console.log("input: " + input);
 				console.log("json: " + JSON.stringify(input));
 				var data= JSON.parse(JSON.stringify(input));
 				if(data.length==0){
 					registraUtente(json);
 				} else{
-					console.log("2");
 					updateTable(data);
 				}
 
 
 			},
-			failure: function(errMsg) {
-				alert(errMsg);
+			error: function(errMsg) {
+				console.log("failed: " + errMsg);
 			}
 		});
 
@@ -69,7 +67,7 @@ function registraUtente(json){
 			success: function(data){
 				location.href = 'inserisciRichiesta.jsp';
 			},
-			failure: function(errMsg) {
+			error: function(errMsg) {
 				alert(errMsg);
 			}
 		});
@@ -87,7 +85,7 @@ function updateTable(data){
 			surname: data[i].surname,
 			telephone: data[i].phone,
 			email: data[i].email,
-			birthdate: data[i].birthDate,
+			birthdate: data[i].birthdate,
 
 		};
 		var html = template(context);
