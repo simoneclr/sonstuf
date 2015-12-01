@@ -20,6 +20,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -174,6 +176,23 @@ public class RequestsServlet extends HttpServlet {
 		String title, description, place, category, time;
 		int categoryId;
 		Request newRequest;
+		User user;
+		HttpSession session;
+		
+		session = request.getSession ();
+		
+		if (session != null) {
+			
+			user = (User) session.getAttribute ("user");
+			
+			if (user == null) {
+				
+				return new Retval (false, "Login needed");
+			}
+		} else {
+			
+			return new Retval (false, "Login needed");
+		}
 		
 		title = request.getParameter ("title");
 		description = request.getParameter ("description");
@@ -221,6 +240,7 @@ public class RequestsServlet extends HttpServlet {
 		newRequest.setPlace (place);
 		newRequest.setIdCategory (categoryId);
 		newRequest.setDateTime (time);
+		newRequest.setIdUser (user.getIdUser ());
 		
 		try {
 			RequestModel.insert (newRequest);

@@ -25,7 +25,7 @@ public class RequestModel {
 
 		String query = "INSERT INTO request\n"
 				+ "(`title`, `description`, `place`, `datetime`, `photo`, `iduser`, `idcategory`, `status`, `posttime`)\n"
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP ());";
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP ());";
 
 		connection = Connector.getConnection();
 
@@ -38,7 +38,6 @@ public class RequestModel {
 		ps.setInt(6, request.getIdUser());
 		ps.setInt(7, request.getIdCategory());
 		ps.setInt(8, request.getStatus());
-		//ps.setTimestamp(9, request.getPostTime());
 
 		rs = ps.execute();
 
