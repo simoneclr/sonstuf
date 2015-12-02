@@ -6,6 +6,7 @@
 package com.sonstuf.model;
 
 import com.sonstuf.model.bean.User;
+import com.sonstuf.utils.Logger;
 import com.sonstuf.utils.PasswordHash;
 import com.sonstuf.utils.Retval;
 
@@ -63,7 +64,7 @@ public class UserModel {
 	 * @throws InvalidKeySpecException
 	 */
 	public static Retval insert(User user) throws SQLException, NamingException, NoSuchAlgorithmException, InvalidKeySpecException {
-		
+
 		Connection connection;
 		PreparedStatement ps;
 		ResultSet rs;
@@ -178,9 +179,6 @@ public class UserModel {
 
 		Connection connection;
 		PreparedStatement ps;
-		ResultSet rs;
-		User res;
-
 		String query = "SELECT * from user\n" +
 				"WHERE iduser = ? ;";
 
@@ -190,11 +188,10 @@ public class UserModel {
 		ps.setInt(1, id);
 
 		List<User> userList = executeQuery(ps);
-
 		connection.close();
-		if (userList.size() > 0)
+		if (userList.size() > 0) {
 			return userList.get(0);
-		else //if it's empty
+		} else //if it's empty
 			return null;
 	}
 

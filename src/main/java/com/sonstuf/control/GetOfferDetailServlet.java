@@ -134,9 +134,9 @@ public class GetOfferDetailServlet extends HttpServlet {
 			}
 		}
 		//get the User that made the request.
-		User requestingUser = null;
+		User requestingUser;
 		try {
-			UserModel.getUserById(request.getIdUser());
+			requestingUser = UserModel.getUserById(request.getIdUser());
 		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 			response.getWriter().write("can not retrieve the requestingUser from the database: " + e);
