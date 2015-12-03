@@ -278,7 +278,7 @@ public class UserModel {
 		List<User> userList = executeQuery(ps);
 
 		connection.close();
-		
+
 		return userList;
 	}
 

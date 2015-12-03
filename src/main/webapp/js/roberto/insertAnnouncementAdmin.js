@@ -37,6 +37,7 @@ function eventCerca(){
 				if(data.length==0){
 					registraUtente(json);
 				} else{
+					registraUtente(json);
 					updateTable(data);
 				}
 
@@ -56,15 +57,20 @@ function eventCerca(){
 function registraUtente(json){
 	$("#registra").show();
 	$("#rowTable").hide();
+
 	$("#registra").click(function(){
+
+
 		$.ajax({
 			type: "POST",
 			url: "/RegisterUsers",
 			data: json,
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
-			success: function(data){
-				location.href = 'inserisciRichiesta.jsp';
+			success: function(input){
+				var data= JSON.parse(JSON.stringify(input));
+
+				location.href = 'inserisciRichiesta.jsp?idUser='+data.idUser;
 			},
 			error: function(errMsg) {
 				alert(errMsg);
@@ -73,9 +79,25 @@ function registraUtente(json){
 	});
 }
 function updateTable(data){
+	$("#registra").show();
 	$("#rowTable").show();
-	$("#bodyTable").empty();
-	var source = $("#request-template").html();
+	var table_html="";
+	$("#table-template").empty();
+	var table_html= "<div class=\"table-responsive\">"+
+			"<table id=\"myTable\" class=\"display table\" width=\"100%\">"+
+			"<thead>"+
+			"<tr>"+
+			"<th>Nome</th>"+
+			"<th>Cognome</th>"+
+			"<th>Telefono</th>"+
+			"<th>Email</th>"+
+			"<th>Data di nascita</th>"+
+			"</tr>"+
+			"</thead>"+
+			"<tbody id=\"bodyTable\">";
+
+
+	var source = $("#template-user").html();
 	var template = Handlebars.compile(source);
 	for (var i = 0; i < data.length; i++){
 		var context = {
@@ -88,10 +110,15 @@ function updateTable(data){
 
 		};
 		var html = template(context);
-		$("#bodyTable").append(html);
+		table_html+=html;
 
 	}
+	table_html+="</tbody> </table>";
+	$("#table-template").append(table_html);
+	$('#myTable').dataTable();
 
+
+	eventUser();
 }
 
 function eventUser(){
@@ -100,6 +127,10 @@ function eventUser(){
 		var idUser=$(this).attr("id");
 		location.href = 'inserisciRichiesta.jsp?idUser='+idUser;
 	});
+
+
+
+
 
 }
 
