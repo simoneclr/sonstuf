@@ -233,7 +233,11 @@ public class GetUsersServlet extends HttpServlet {
 		else if (pattern.isBirthDateSetted())
 			userList = UserModel.getUserByBirthdate(pattern.getBirthDate());
 
-		else  userList = UserModel.getAllUsers();
+		else  {
+
+			userList = UserModel.getAllUsers();
+
+		}
 
 		return userList;
 	}
