@@ -25,6 +25,7 @@ import com.sonstuf.model.bean.OfferPacket;
 import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.User;
 import com.sonstuf.utils.JsonPacket;
+import com.sonstuf.utils.serializers.RequestSerializer;
 import com.sonstuf.utils.serializers.RequestSerializerNoDescription;
 import com.sonstuf.utils.serializers.UserSerializer;
 
@@ -256,7 +257,7 @@ public class UserProfileServlet extends HttpServlet {
 			
 			module = new SimpleModule ();
 			module.addSerializer (Request.class,
-					new RequestSerializerNoDescription<Request> ());
+					new RequestSerializer<Request> ());
 			mapper.registerModule (module);
 			
 			filters.addFilter("userFilter",

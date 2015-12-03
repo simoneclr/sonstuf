@@ -1,6 +1,7 @@
 package com.sonstuf.model;
 
 import com.sonstuf.model.bean.Offer;
+import com.sonstuf.utils.Retval;
 
 import javax.naming.NamingException;
 import java.sql.Connection;
@@ -14,6 +15,36 @@ import java.util.List;
  * Created by hypertesto on 18/11/15.
  */
 public class OfferModel {
+	
+	public static Retval insert ( Offer offer ) throws SQLException, NamingException {
+
+		Connection connection;
+		PreparedStatement ps;
+		boolean rs;
+
+		String query = "INSERT INTO offer\n"
+				+ "(`iduser`, `idrequest`, `posttime`)\n"
+				+ "VALUES (?, ?, CURRENT_TIMESTAMP ());";
+
+		connection = Connector.getConnection();
+
+		ps = connection.prepareStatement(query);
+		ps.setInt( 1, offer.getIdUser() );
+		ps.setInt( 2, offer.getIdRequest() );
+
+		rs = ps.execute();
+
+		if( rs ) {
+
+			return new Retval(true);
+
+		} else {
+
+			return new Retval(false, "Could not insert offer");
+		}
+
+
+	}
 
 	public static Offer getOfferById(int id ) throws SQLException, NamingException {
 
