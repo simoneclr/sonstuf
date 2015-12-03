@@ -370,7 +370,7 @@ public class RequestsServlet extends HttpServlet {
 
 			module = new SimpleModule();
 			module.addSerializer(Request.class,
-					new RequestSerializer<>("title", "description", "place", "time", "postTimeStamp"));
+					new RequestSerializer<>("title", "description", "place", "time", "postTimeStamp", "category"));
 			mapper.registerModule(module);
 
 			filters.addFilter("userFilter",
@@ -426,7 +426,7 @@ public class RequestsServlet extends HttpServlet {
 
 			module = new SimpleModule();
 			module.addSerializer(Request.class,
-					new RequestSerializer<>("title", "place", "time", "postTimeStamp"));
+					new RequestSerializer<>("title", "place", "time", "postTimeStamp", "category"));
 			mapper.registerModule(module);
 
 			filters.addFilter("userFilter",
