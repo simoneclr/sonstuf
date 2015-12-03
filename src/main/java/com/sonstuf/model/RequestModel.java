@@ -45,6 +45,7 @@ public class RequestModel {
 
 		if( rs ) {
 
+			//FIXME: aggiornare il campo rankp nella tabella utente
 			return new Retval(true);
 
 		} else {
