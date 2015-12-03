@@ -167,10 +167,16 @@ function checkFields(){
 	}
 }
 
-function validateForm() {
+$("#button_submit_register").click(function(){
+
 	if (!checkFields()){
 		msg = "È stato riscontrato un errore nei seguenti campi";
 		addErrorBlockMessage(msg);
 		return false;
 	}
-}
+	else{
+		$("#myForm").submit();
+	}
+});
+
+

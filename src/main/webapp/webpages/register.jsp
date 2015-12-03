@@ -25,7 +25,7 @@
 					</div>
 				</div>
 			</div>
-			<form name="myForm" onsubmit="return validateForm()" action="/RegistrationServlet">
+			<form id="myForm" onsubmit="return validateForm()" action="/RegistrationServlet">
 				<div class="row">
 					<input type="hidden" name="op" value="register">
 					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-7">
