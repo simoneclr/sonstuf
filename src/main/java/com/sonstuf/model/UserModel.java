@@ -196,9 +196,9 @@ public class UserModel {
 		List<User> userList = executeQuery(ps);
 
 		connection.close();
-		if (userList.size() > 0)
+		if (userList.size() > 0) {
 			return userList.get(0);
-		else //if it's empty
+		} else //if it's empty
 			return null;
 	}
 

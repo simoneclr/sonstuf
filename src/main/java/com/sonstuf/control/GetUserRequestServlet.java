@@ -1,10 +1,16 @@
 package com.sonstuf.control;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.sonstuf.model.RequestModel;
 import com.sonstuf.model.UserModel;
 import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.User;
+import com.sonstuf.utils.JsonPacket;
+import com.sonstuf.utils.Logger;
+import com.sonstuf.utils.serializers.RequestSerializer;
+import com.sonstuf.utils.serializers.UserSerializer;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -19,32 +25,14 @@ import java.sql.SQLException;
  * Servlet implementation class CategoriesServlet
  */
 public class GetUserRequestServlet extends HttpServlet {
-	private static class MiniPacket {
+	private static class MiniPacket implements JsonPacket {
 
-		private int idRequest;
 		private User user;
 		private Request request;
 
-		public static MiniPacket ToMiniPacket(User user, Request request) {
-
-			MiniPacket res;
-
-			res = new MiniPacket();
-
-			res.setIdRequest(request.getIdRequest());
-			res.setUser(user);
-			res.setRequest(request);
-
-			return res;
-		}
-
-
-		public int getIdRequest() {
-			return idRequest;
-		}
-
-		public void setIdRequest(int idRequest) {
-			this.idRequest = idRequest;
+		MiniPacket(User user, Request request) {
+			this.request = request;
+			this.user = user;
 		}
 
 		public User getUser() {
@@ -62,6 +50,18 @@ public class GetUserRequestServlet extends HttpServlet {
 		public void setRequest(Request request) {
 			this.request = request;
 		}
+
+		@Override
+		public String toJSON() throws JsonProcessingException {
+			ObjectMapper mapper = new ObjectMapper();
+			SimpleModule module = new SimpleModule();
+
+			module.addSerializer(Request.class, new RequestSerializer<>("title", "description", "place", "time", "photo"));
+			module.addSerializer(User.class, new UserSerializer<>("name", "rankO"));
+			mapper.registerModule(module);
+
+			return mapper.writeValueAsString(this);
+		}
 	}
 
 	/**
@@ -77,26 +77,33 @@ public class GetUserRequestServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int idRequest = -1;
+		int idRequest;
 		try {
-			idRequest = (int) request.getAttribute("idRequest");
-		} catch (ClassCastException e) {
+			idRequest = Integer.parseInt(request.getParameter("idRequest"));
+		} catch (ClassCastException | NumberFormatException | NullPointerException e) {
 			response.getWriter().write("bad request attributes");
+			e.printStackTrace();
 			return;
 		}
 
 		PrintWriter writer;
 
-		ObjectMapper mapper = new ObjectMapper();
 
 		writer = response.getWriter();
 
 		try {
 			Request request2 = RequestModel.getRequestById(idRequest);
+
 			User user = UserModel.getUserById(request2.getIdUser());
-			writer.write(mapper.writeValueAsString(MiniPacket.ToMiniPacket(user, request2)));
+
+			MiniPacket packet = new MiniPacket(user, request2);
+			String json = packet.toJSON();
+			Logger.debug("json:" + json);
+			writer.write(json);
 		} catch (SQLException | NamingException e) {
 			writer.write(e.toString());
+			e.printStackTrace();
+			return;
 		}
 	}
 
