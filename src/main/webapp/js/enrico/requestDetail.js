@@ -1,4 +1,8 @@
 var idRequest = '${idRequest}';
+function showMessageOffer(message){
+	$(".sendOffer").append("<p>"+message+"</p>");
+}
+
 $.getJSON("/getrequest?idRequest=" + idRequest, function (json) {
 	var request = json.request;
 	$(document).ready(function () {
@@ -23,4 +27,29 @@ $.getJSON("/getrequest?idRequest=" + idRequest, function (json) {
 	});
 });
 var user = json.user;
+
+$(".sendOffer").click(function () {
+	var OK_RESPONSE = "success";
+	var ERROR_RESPONSE = "fail";
+	var USER_NOT_LOGGED_RESPONSE = "not_logged";
+	$.ajax({
+		type: "POST",
+		url: "/acceptrequest",
+		dataType: "string",
+		success: function (data) {
+			var message;
+			if (data === OK_RESPONSE)
+				message = "done";
+			else if (data === ERROR_RESPONSE)
+				message = "error";
+			else if (data === USER_NOT_LOGGED_RESPONSE)
+				message = "you are not logged in";
+			showMessageOffer(message);
+		},
+		error: function (errMsg) {
+			alert(errMsg);
+		}
+	});
+})
+;
 

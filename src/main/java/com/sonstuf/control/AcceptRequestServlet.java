@@ -24,8 +24,8 @@ public class AcceptRequestServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idRequest;
 		try {
-			idRequest =Integer.parseInt(request.getParameter("idRequest"));
-		}catch(ClassCastException | NumberFormatException |NullPointerException e){
+			idRequest = Integer.parseInt(request.getParameter("idRequest"));
+		} catch (ClassCastException | NumberFormatException | NullPointerException e) {
 			response.getWriter().write(ERROR_RESPONSE);
 			e.printStackTrace();
 			return;
@@ -33,7 +33,7 @@ public class AcceptRequestServlet extends HttpServlet {
 		User offeringUser;
 		try {
 			offeringUser = (User) request.getSession().getAttribute("user");
-		}catch(ClassCastException | NullPointerException e){
+		} catch (ClassCastException | NullPointerException e) {
 			response.getWriter().write(USER_NOT_LOGGED_RESPONSE);
 			e.printStackTrace();
 			return;
@@ -50,7 +50,7 @@ public class AcceptRequestServlet extends HttpServlet {
 			e.printStackTrace();
 			return;
 		}
-		if(!retVal.getSuccess()){
+		if (!retVal.getSuccess()) {
 			response.getWriter().write(ERROR_RESPONSE);
 			Logger.log("insertion of a offert in the database returned false");
 			return;

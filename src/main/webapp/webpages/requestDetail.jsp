@@ -59,7 +59,7 @@
 						<h3>desideri aiutare <span class="requesterName"></span>?</h3>
 					</div>
 					<div class="col-xs-3" style="padding-top: 20px;">
-						<small><cite><i class="glyphicon glyphicon-ok"></i>Accetta</cite></small>
+						<small><cite><i class="sendOffer glyphicon glyphicon-ok"></i>Accetta</cite></small>
 					</div>
 					<div class="col-xs-3"></div>
 				</div>
