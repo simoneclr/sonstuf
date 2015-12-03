@@ -22,7 +22,9 @@ tabella che mappa idCategoria su nomeCategoria
 [{"<categoryId>":"<categoryName>"}, {"<categoryId>":"<categoryName>"}]
 
 output: (nota la photo va passata in push)
-campi del form: "title" , "description" , "categoryId" , "place" , "time", "photo"
+campi del form: "title" , "description" , "categoryId" , "place" , "time", "photo", "user"
+NOTA: user è parsato dalla servlet solo se l'uttente che invia la richiesta è un amministratore in modo da sapere per
+quale utente deve inserire la richiesta
 
 PAGINA RICHIESTA
 input:
