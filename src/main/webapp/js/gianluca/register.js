@@ -8,6 +8,13 @@ $(document).ready(function () {
 	$("#password2").keyup(validate2);
 });
 
+
+function addErrorBlock(msg){
+	$(".msg").empty();
+	$(".msg").addClass("alert alert-danger bs-alert-old-docs");
+	$(".msg").append("<p>"+msg+"</p>");
+}
+
 function start(){
 	$("#password2").prop("disabled",true);
 }
@@ -21,8 +28,10 @@ function validateEmail_Support(email) {
 
 function validate_Email(){
 	if (!validateEmail_Support($("#email").val())){
+		$(".msg").empty();
+		$(".msg").addClass("alert alert-danger bs-alert-old-docs");
+		$(".msg").append("<p>È stato riscontrato un errore nei seguenti campi</p>");
 		$("#email").parent('div').addClass("has-error has-feedback");
-		alert("Inserire una mail valida");
 	}
 	else{
 		$("#email").parent('div').removeClass("has-error has-feedback");
@@ -69,8 +78,7 @@ function validate2(){
 		$("#password2").parent('div').removeClass("has-error has-feedback");
 		$("#password1").parent('div').addClass("has-success has-feedback");
 		$("#password2").parent('div').addClass("has-success has-feedback");
-		$("#confirmMessage").empty();
-		$("#confirmMessage").append("cacca");
+
 
 	}
 }
@@ -137,6 +145,7 @@ function checkFields(){
 	}
 	if(!checkEmail()){
 		$("#email").parent('div').addClass("has-error has-feedback");
+
 	}
 	else{
 
@@ -160,9 +169,8 @@ function checkFields(){
 
 function validateForm() {
 	if (!checkFields()){
-		$(".msg").empty();
-		$(".msg").addClass("alert alert-danger bs-alert-old-docs");
-		$(".msg").append("<p>È stato riscontrato un errore nei seguenti campi</p>");
+		msg = "È stato riscontrato un errore nei seguenti campi";
+		addErrorBlockMessage(msg);
 		return false;
 	}
 }

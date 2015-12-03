@@ -24,9 +24,11 @@
 						<p class="text_link2B">VISUALIZZA LISTA ANNUNCI</p>
 					</div>
 					<div class="col-md-1">
-						<button class="btn btn-default go_request" href="">
-							<span class="glyphicon glyphicon-arrow-right"></span>
-						</button>
+						<a href="requestList.jsp">
+							<button class="btn btn-default go_request" href="">
+								<span class="glyphicon glyphicon-arrow-right"></span>
+							</button>
+						</a>
 					</div>
 				</div>
 				<div class = row>
@@ -34,9 +36,11 @@
 						<p class="text_link2B">INSERISCI RICHIESTA</p>
 					</div>
 					<div class="col-md-1">
-						<button class="btn btn-default go_request" href="">
-							<span class="glyphicon glyphicon-arrow-right"></span>
-						</button>
+						<a href="inserisciRichiesta.jsp">
+							<button class="btn btn-default go_request">
+								<span class="glyphicon glyphicon-arrow-right"></span>
+							</button>
+						</a>
 					</div>
 				</div>
 			</div>
