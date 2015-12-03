@@ -11,6 +11,7 @@ import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.RequestRank;
 import com.sonstuf.model.bean.User;
 import com.sonstuf.utils.JsonPacket;
+import com.sonstuf.utils.Logger;
 import com.sonstuf.utils.serializers.RequestRankSerializer;
 import com.sonstuf.utils.serializers.RequestSerializer;
 import com.sonstuf.utils.serializers.UserSerializer;
@@ -144,7 +145,7 @@ public class GetOfferDetailServlet extends HttpServlet {
 		}
 
 		String json = new MiniPacket(requestingUser, request, requestRank).toJSON();
-		System.out.println("json: " + json);
+		Logger.debug("json: " + json);
 		response.getWriter().write(json);
 	}
 

@@ -92,11 +92,10 @@ public class GetUserRequestServlet extends HttpServlet {
 		writer = response.getWriter();
 
 		try {
-			Logger.debug("request2id: " + idRequest);
 			Request request2 = RequestModel.getRequestById(idRequest);
-			Logger.debug("request2: " + request2);
+
 			User user = UserModel.getUserById(request2.getIdUser());
-			Logger.debug("user: " + user);
+
 			MiniPacket packet = new MiniPacket(user, request2);
 			String json = packet.toJSON();
 			Logger.debug("json:" + json);

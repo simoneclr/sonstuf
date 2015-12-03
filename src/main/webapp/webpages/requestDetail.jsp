@@ -59,8 +59,8 @@
 			<div class="col-md-3 col-md-offset-3 col-sm-offset-3 col-sm-4 col-xs-5 col-xs-offset-1">
 				<h3>Desideri aiutare<span class="requesterName"></span>?</h3>
 			</div>
-			<div class="col-md-2 col-md-offset-2 col-sm-offset-1 col-sm-4 col-xs-offset-1 col-xs-5 check_offriti">
-				<small><cite><i class="sendOffer glyphicon glyphicon-ok"></i>Accetta</cite></small>
+			<div id ="sendOffer" class="col-md-2 col-md-offset-2 col-sm-offset-1 col-sm-4 col-xs-offset-1 col-xs-5 check_offriti">
+				<small><cite><i class="glyphicon glyphicon-ok"></i>Accetta</cite></small>
 			</div>
 		</div>
 	</div>
