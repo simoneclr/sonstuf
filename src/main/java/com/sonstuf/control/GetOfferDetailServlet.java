@@ -71,7 +71,7 @@ public class GetOfferDetailServlet extends HttpServlet {
 			ObjectMapper mapper = new ObjectMapper();
 			SimpleModule module = new SimpleModule();
 
-			module.addSerializer(Request.class, new RequestSerializer<>());
+			module.addSerializer(Request.class, new RequestSerializer<>("title", "description", "place", "time", "postTimeStamp"));
 			module.addSerializer(User.class, new UserSerializer<>("idUser", "name", "rankO"));
 			module.addSerializer(RequestRank.class, new RequestRankSerializer<>("rank", "comment"));
 			mapper.registerModule(module);

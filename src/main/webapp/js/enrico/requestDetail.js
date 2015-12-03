@@ -1,10 +1,12 @@
-var idRequest = '${idRequest}';
-function showMessageOffer(message){
-	$(".sendOffer").append("<p>"+message+"</p>");
+//var idRequest = '${idRequest}';
+function showMessageOffer(message) {
+	$(".sendOffer").append("<p>" + message + "</p>");
 }
 
 $.getJSON("/getrequest?idRequest=" + idRequest, function (json) {
+	console.log("json: " + json);
 	var request = json.request;
+	var user = json.user;
 	$(document).ready(function () {
 		var source = $("#request").html();
 		var template = Handlebars.compile(source);
@@ -25,8 +27,10 @@ $.getJSON("/getrequest?idRequest=" + idRequest, function (json) {
 			'readonly': true
 		}).rating('update', parseInt(user.rankR));
 	});
+}).fail(function () {
+	console.log("failed the json request to /getrequest");
 });
-var user = json.user;
+
 
 $(".sendOffer").click(function () {
 	var OK_RESPONSE = "success";
