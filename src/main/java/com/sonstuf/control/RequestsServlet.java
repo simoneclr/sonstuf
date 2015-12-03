@@ -5,11 +5,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.sonstuf.model.CategoryModel;
+import com.sonstuf.model.OfferModel;
 import com.sonstuf.model.RequestModel;
 import com.sonstuf.model.UserModel;
+import com.sonstuf.model.bean.Offer;
 import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.User;
 import com.sonstuf.utils.JsonPacket;
+import com.sonstuf.utils.Retval;
 import com.sonstuf.utils.serializers.RequestSerializer;
 import com.sonstuf.utils.serializers.RequestSerializerNoDescription;
 
@@ -18,6 +22,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -45,6 +51,7 @@ public class RequestsServlet extends HttpServlet {
 
 		String op;
 		PrintWriter writer;
+		ObjectMapper mapper;
 
 		writer = response.getWriter();
 		op = request.getParameter("op");
@@ -62,7 +69,22 @@ public class RequestsServlet extends HttpServlet {
 
 					viewRequest (request, writer);
 					break;
-
+					
+				case "insert":
+					
+					mapper = new ObjectMapper ();
+					writer.write (mapper
+							.writeValueAsString (insertRequest (request)));
+					break;
+				
+				case "register":
+					
+					mapper = new ObjectMapper ();
+					writer.write (mapper
+							.writeValueAsString (registerForRequest (request)));
+							
+					break;
+					
 				default:
 
 					response.getWriter().write("Unsupported operation");
@@ -155,6 +177,144 @@ public class RequestsServlet extends HttpServlet {
 			e.printStackTrace();
 			return;
 		}
+	}
+	
+	private User getUserFromSession (HttpSession session) {
+		
+		if (session != null) {
+			
+			return (User) session.getAttribute ("user");
+		}
+		
+		return null;
+	}
+	
+	private Retval insertRequest (HttpServletRequest request) {		
+		
+		String title, description, place, category, time;
+		int categoryId;
+		Request newRequest;
+		User user;
+		
+		user = getUserFromSession (request.getSession ());
+		
+		if (user == null)
+			return new Retval (false, "Login nedded");
+		
+		title = request.getParameter ("title");
+		description = request.getParameter ("description");
+		place = request.getParameter ("place");
+		category = request.getParameter ("categoryId");
+		time = request.getParameter ("time");
+		
+		if (title == null)
+			return new Retval (false, "Missing \"title\" parameter");
+		
+		if (description == null) 
+			return new Retval (false, "Missing \"description\" parameter");
+		
+		if (place == null)
+			return new Retval (false, "Missing \"place\" parameter");
+		
+		if (category == null) 
+			return new Retval (false, "Missing \"categoryId\" parameter");
+		
+		if (time == null) 
+			return new Retval (false, "Missin \"time\" parameter");
+		
+		try {
+			
+			categoryId = Integer.parseInt (category);
+			
+		} catch (NumberFormatException e) {
+			
+			return new Retval (false, "Invalid categoryId integer");
+		}
+		
+		try {
+			if (CategoryModel.getCategoryById (categoryId) == null)
+				return new Retval (false, "Invalid categoryId: category not found");
+		} catch (SQLException | NamingException e) {
+			
+			e.printStackTrace();
+			return new Retval (false, "Backend error: " + e.getMessage ());
+		}
+		
+		newRequest = new Request ();
+		
+		newRequest.setDescription (description);
+		newRequest.setTitle (title);
+		newRequest.setPlace (place);
+		newRequest.setIdCategory (categoryId);
+		newRequest.setDateTime (time);
+		newRequest.setIdUser (user.getIdUser ());
+		
+		try {
+			RequestModel.insert (newRequest);
+		} catch (SQLException | NamingException e) {
+			
+			e.printStackTrace();
+			return new Retval (false, "Backend error: " + e.getMessage ());
+		}
+		
+		return new Retval (true);
+	}
+	
+	private Retval registerForRequest (HttpServletRequest servletRequest) {
+		
+		String request;
+		int idRequest;
+		Offer newOffer;
+		User user;
+		
+		user = getUserFromSession (servletRequest.getSession ());
+		
+		if (user == null) 
+			return new Retval (false, "Login required");
+		
+		request = servletRequest.getParameter ("requestId");
+		
+		if (request == null) 
+			return new Retval (false, "Missing parameter \"requestId\"");
+		
+		try {
+			
+			idRequest = Integer.parseInt (request);
+			
+		} catch (NumberFormatException e) {
+			
+			return new Retval (false, "Invalid parameter \"requestId\"");
+		}
+		
+		try {
+			
+			if (RequestModel.getRequestById (idRequest) == null) {
+				
+				return new Retval (false, "Ivalid parameter \"requestId\": request not found");
+			}
+		
+		} catch (SQLException | NamingException e) {
+			
+			e.printStackTrace();
+			return new Retval (false, "Backend error: " + e.getMessage ());
+		}
+		
+		newOffer = new Offer ();
+		
+		newOffer.setIdRequest (idRequest);
+		newOffer.setIdUser (user.getIdUser ());
+		newOffer.setInCharge (false);
+		//newOffer.setStatus (0); //Unuseful, by default is 0
+		
+		try {
+			OfferModel.insert (newOffer);
+		} catch (SQLException | NamingException e) {
+			
+			e.printStackTrace();
+			return new Retval (false, "Backend error: " + e.getMessage ());
+		}
+		
+		return new Retval (true);
 	}
 	
 	private class Packet implements JsonPacket {
