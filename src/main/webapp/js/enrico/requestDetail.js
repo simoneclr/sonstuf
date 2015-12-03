@@ -35,7 +35,7 @@ $.ajax({
 	dataType: "json",
 	success: function (json) {
 		console.log("json: " + JSON.stringify(json));
-		
+
 		var request = json.request;
 
 		var user = json.user;
