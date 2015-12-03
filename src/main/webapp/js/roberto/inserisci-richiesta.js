@@ -20,7 +20,8 @@ function updateCategory(){
 
 				for (var i = 0; i < json.length; i++) {
 					context = {
-						category: json[i].category
+						category: json[i].category,
+						id: json[i].idcategory
 
 					};
 					var html = template(context);

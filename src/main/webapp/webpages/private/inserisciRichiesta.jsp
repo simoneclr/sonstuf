@@ -46,10 +46,10 @@
 						<div class="form-group">
 							<label class="control-label col-md-3" for="category">Categoria:</label>
 							<div class="col-md-9">
-								<select class="form-control" id="category" name="category">
+								<select class="form-control" id="category" name="categoryId">
 									<option value="" disabled selected> Scegli una categoria</option>
 									<script id="category-template" type="text/x-handlebars-template">
-										<option>{{category}}</option>
+										<option value="{{id}}">{{category}}</option>
 									</script>
 								</select>
 							</div>
