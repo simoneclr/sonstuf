@@ -100,7 +100,6 @@ public class RequestsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 	                      HttpServletResponse response) throws ServletException, IOException {
 
-		//TODO: inserimento richiesta
 		doGet(request, response);
 	}
 
@@ -189,7 +188,7 @@ public class RequestsServlet extends HttpServlet {
 
 	private Retval insertRequest(HttpServletRequest request) {
 
-		String title, description, place, category, time;
+		String title, description, place, category, time, assignedUser;
 		int categoryId;
 		Request newRequest;
 		User user;
@@ -218,7 +217,7 @@ public class RequestsServlet extends HttpServlet {
 			return new Retval(false, "Missing \"categoryId\" parameter");
 
 		if (time == null)
-			return new Retval(false, "Missin \"time\" parameter");
+			return new Retval(false, "Missing \"time\" parameter");
 
 		try {
 
@@ -245,7 +244,37 @@ public class RequestsServlet extends HttpServlet {
 		newRequest.setPlace(place);
 		newRequest.setIdCategory(categoryId);
 		newRequest.setDateTime(time);
-		newRequest.setIdUser(user.getIdUser());
+		
+		if (user.isAdmin ()) {
+			
+			int assigneUserId;
+			
+			assignedUser = request.getParameter ("user");
+			
+			if (assignedUser == null || assignedUser.equals ("")
+					|| assignedUser.equals ("null")) {
+				/*
+				 * Admin inserted a request without specifing a user, so we
+				 * insert it with his account
+				 */
+				 
+				newRequest.setIdUser (user.getIdUser ());
+				
+			} else {
+				
+				try {
+					assigneUserId = Integer.parseInt (assignedUser);
+				} catch (NumberFormatException e) {
+					
+					return new Retval (false, "Invalid user field");
+				}
+				
+				newRequest.setIdUser (assigneUserId);
+			}
+			
+		} else {
+			newRequest.setIdUser(user.getIdUser());
+		}
 
 		try {
 			RequestModel.insert(newRequest);
