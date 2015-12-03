@@ -29,7 +29,7 @@
 					<div class="panel-body">
 						<div class="row row_admin">
 							<div class="col-xs-3 col-md-3 col-sm-3 col-md-offset-2 col-sm-offset-2">
-								<a href="#" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-plus"></span> <br/>Annuncio</a>
+								<a href="insertAnnouncementAdmin.jsp" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-plus"></span> <br/>Annuncio</a>
 							</div>
 							<div class="col-xs-10 col-md-7 col-sm-7">
 								<p class="admin_p">Inserisci annuncio</p>
