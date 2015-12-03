@@ -1,9 +1,7 @@
 package com.sonstuf.control;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.sonstuf.model.OfferModel;
 import com.sonstuf.model.RequestModel;
@@ -12,6 +10,8 @@ import com.sonstuf.model.bean.Offer;
 import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.RequestRank;
 import com.sonstuf.model.bean.User;
+import com.sonstuf.utils.JsonPacket;
+import com.sonstuf.utils.Logger;
 import com.sonstuf.utils.serializers.RequestRankSerializer;
 import com.sonstuf.utils.serializers.RequestSerializer;
 import com.sonstuf.utils.serializers.UserSerializer;
@@ -28,18 +28,17 @@ import java.sql.SQLException;
  * Servlet implementation class CategoriesServlet
  */
 public class GetOfferDetailServlet extends HttpServlet {
-	private static final class MiniPacket extends JsonSerializer<MiniPacket> {
+	private static final class MiniPacket implements JsonPacket {
 		private User user;
 		private Request request;
 		private RequestRank requestRank;
+		private int state;
 
-		public static MiniPacket ToMiniPacket(User user, Request request, RequestRank requestRank) {
-			MiniPacket res;
-			res = new MiniPacket();
-			res.setUser(user);
-			res.setRequest(request);
-			res.setRequestRank(requestRank);
-			return res;
+		public MiniPacket(User user, Request request, RequestRank requestRank) {
+			this.user = user;
+			this.request = request;
+			this.requestRank = requestRank;
+			this.state = request.getStatus();
 		}
 
 		public User getUser() {
@@ -56,6 +55,7 @@ public class GetOfferDetailServlet extends HttpServlet {
 
 		public void setRequest(Request request) {
 			this.request = request;
+			this.state = request.getStatus();
 		}
 
 		public RequestRank getRequestRank() {
@@ -66,43 +66,18 @@ public class GetOfferDetailServlet extends HttpServlet {
 			this.requestRank = requestRank;
 		}
 
+
 		@Override
-		public void serialize(MiniPacket o, JsonGenerator jsonGenerator, SerializerProvider provider) throws IOException {
-			jsonGenerator.writeStartObject();
+		public String toJSON() throws JsonProcessingException {
+			ObjectMapper mapper = new ObjectMapper();
+			SimpleModule module = new SimpleModule();
 
-			//serialize User
-			{
-				ObjectMapper mapper = new ObjectMapper();
-				SimpleModule module = new SimpleModule();
-				module.addSerializer(User.class, new UserSerializer<>("idUser", "name", "rankO"));
-				mapper.registerModule(module);
-				jsonGenerator.writeStringField("requestingUser", mapper.writeValueAsString(this.user));
-			}
+			module.addSerializer(Request.class, new RequestSerializer<>("title", "description", "place", "time", "postTimeStamp"));
+			module.addSerializer(User.class, new UserSerializer<>("idUser", "name", "rankO"));
+			module.addSerializer(RequestRank.class, new RequestRankSerializer<>("rank", "comment"));
+			mapper.registerModule(module);
 
-			//serialize Request
-			{
-				ObjectMapper mapper = new ObjectMapper();
-				SimpleModule module = new SimpleModule();
-				module.addSerializer(Request.class, new RequestSerializer<>());
-				mapper.registerModule(module);
-				jsonGenerator.writeStringField("request", mapper.writeValueAsString(this.request));
-			}
-
-			//serialize RequestRank if present
-			if (this.requestRank != null) {
-				ObjectMapper mapper = new ObjectMapper();
-				SimpleModule module = new SimpleModule();
-				module.addSerializer(RequestRank.class, new RequestRankSerializer<>("rank", "comment"));
-				mapper.registerModule(module);
-				jsonGenerator.writeStringField("valuation", mapper.writeValueAsString(this.requestRank));
-			}
-
-			//serialize state
-			{
-				jsonGenerator.writeNumberField("state", this.request.getStatus());
-			}
-
-			jsonGenerator.writeEndObject();
+			return mapper.writeValueAsString(this);
 		}
 	}
 
@@ -118,13 +93,13 @@ public class GetOfferDetailServlet extends HttpServlet {
 	 * response)
 	 */
 	protected void doGet(HttpServletRequest requestHttp, HttpServletResponse response) throws ServletException, IOException {
-
 		//get the offer with the given id.
 		int idOffer;
 		try {
-			idOffer = (int) requestHttp.getAttribute("idOffer");
-		} catch (ClassCastException | NullPointerException e) {
-			response.getWriter().write("bad request attributes");
+			idOffer = Integer.parseInt(requestHttp.getParameter("idOffer"));
+		} catch (ClassCastException | NumberFormatException |NullPointerException e) {
+			response.getWriter().write("bad request attributes: " + e);
+			e.printStackTrace();
 			return;
 		}
 
@@ -134,7 +109,7 @@ public class GetOfferDetailServlet extends HttpServlet {
 			offer = OfferModel.getOfferById(idOffer);
 		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
-			response.getWriter().write("can not retrieve the offer from the database");
+			response.getWriter().write("can not retrieve the offer from the database: " + e);
 			return;
 		}
 
@@ -144,7 +119,7 @@ public class GetOfferDetailServlet extends HttpServlet {
 			request = RequestModel.getRequestById(offer.getIdRequest());
 		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
-			response.getWriter().write("can not retrieve the request from the database");
+			response.getWriter().write("can not retrieve the request from the database: " + e);
 			return;
 		}
 
@@ -155,29 +130,22 @@ public class GetOfferDetailServlet extends HttpServlet {
 				requestRank = RequestModel.getRankById(request.getIdRequest());
 			} catch (SQLException | NamingException e) {
 				e.printStackTrace();
-				response.getWriter().write("can not retrieve the requestRank from the database");
+				response.getWriter().write("can not retrieve the requestRank from the database: " + e);
 				return;
 			}
 		}
 		//get the User that made the request.
-		User requestingUser = null;
+		User requestingUser;
 		try {
-			UserModel.getUserById(request.getIdUser());
+			requestingUser = UserModel.getUserById(request.getIdUser());
 		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
-			response.getWriter().write("can not retrieve the requestingUser from the database");
+			response.getWriter().write("can not retrieve the requestingUser from the database: " + e);
 			return;
 		}
 
-		MiniPacket outputObject = MiniPacket.ToMiniPacket(requestingUser, request, requestRank);
-
-		ObjectMapper mapper = new ObjectMapper();
-		SimpleModule module = new SimpleModule();
-		module.addSerializer(MiniPacket.class, new MiniPacket());
-		mapper.registerModule(module);
-
-		String json = mapper.writeValueAsString(outputObject);
-		System.out.println("json: " + json);
+		String json = new MiniPacket(requestingUser, request, requestRank).toJSON();
+		Logger.debug("json: " + json);
 		response.getWriter().write(json);
 	}
 

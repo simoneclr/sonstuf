@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.sonstuf.model.UserModel;
 import com.sonstuf.model.bean.User;
+import com.sonstuf.utils.ProjectGlobals;
 import com.sonstuf.utils.serializers.UserSerializer;
 
 import javax.naming.NamingException;
@@ -17,6 +18,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,6 +143,15 @@ public class GetUsersServlet extends HttpServlet {
 		public Date getBirthDate() {
 			return birthDate;
 		}
+
+		public void setBirthDate(String dateStr) throws ParseException {
+			if(dateStr == null  || dateStr.equals("")){
+				this.birthDate = null;
+				return;
+			}
+			SimpleDateFormat df = new SimpleDateFormat(ProjectGlobals.DATE_INPUT_FORMAT);
+			this.birthDate = new Date(df.parse(dateStr).getTime());
+		}
 	}
 
 	public GetUsersServlet() {
@@ -171,8 +183,8 @@ public class GetUsersServlet extends HttpServlet {
 		try {
 			PrintWriter writer = response.getWriter();
 			writer.write("[");
-			System.out.println("[");
-			boolean done = true;
+
+			boolean done = false;
 			for (User user : list) {
 				if (pattern.equals(user)) { //retain only the Users that match the pattern
 					if (!done) {
@@ -181,12 +193,12 @@ public class GetUsersServlet extends HttpServlet {
 						writer.write(',');
 					}
 					String json = mapper.writeValueAsString(user);
-					System.out.println(json);
+
 					writer.write(json);
 
 				}
 			}
-			System.out.println("]");
+
 			writer.write("]");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -221,8 +233,11 @@ public class GetUsersServlet extends HttpServlet {
 		else if (pattern.isBirthDateSetted())
 			userList = UserModel.getUserByBirthdate(pattern.getBirthDate());
 
-		else userList = UserModel.getAllUsers();
+		else  {
 
+			userList = UserModel.getAllUsers();
+
+		}
 
 		return userList;
 	}
@@ -238,7 +253,6 @@ public class GetUsersServlet extends HttpServlet {
 			throw new IOException("impossible to read the json");
 		}
 
-		String jsonUser = jb.toString();
 		ObjectMapper mapper = new ObjectMapper();
 		res = mapper.readValue(jb.toString(), UserPattern.class);
 		return res;

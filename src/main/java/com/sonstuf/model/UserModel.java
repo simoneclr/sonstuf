@@ -6,6 +6,7 @@
 package com.sonstuf.model;
 
 import com.sonstuf.model.bean.User;
+import com.sonstuf.utils.Logger;
 import com.sonstuf.utils.PasswordHash;
 import com.sonstuf.utils.Retval;
 
@@ -29,19 +30,23 @@ public class UserModel {
 
 				User user = new User();
 
-				user.setIdUser(rs.getInt("iduser"));
+				user.setIdUser(rs.getInt("idUser"));
 				user.setEmail(rs.getString("email"));
 				user.setName(rs.getString("name"));
 				user.setSurname(rs.getString("surname"));
 				user.setPhone(rs.getString("phone"));
-				user.setPasswordHash(rs.getString("passwordhash"));
-				user.setRankO(rs.getFloat("ranko"));
-				user.setRankR(rs.getFloat("rankp"));
-				user.setBirthDate(rs.getDate("birthdate"));
+				user.setPasswordHash(rs.getString("passwordHash"));
+				user.setRankO(rs.getFloat("rankO"));
+				user.setRankR(rs.getFloat("rankP"));
+				user.setBirthDate(rs.getDate("birthDate"));
 				user.setAdmin(rs.getBoolean("admin"));
 
 				res.add(user);
 			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
 
 		} finally {
 
@@ -178,8 +183,7 @@ public class UserModel {
 
 		Connection connection;
 		PreparedStatement ps;
-		ResultSet rs;
-		User res;
+
 
 		String query = "SELECT * from user\n" +
 				"WHERE iduser = ? ;";
@@ -192,9 +196,9 @@ public class UserModel {
 		List<User> userList = executeQuery(ps);
 
 		connection.close();
-		if (userList.size() > 0)
+		if (userList.size() > 0) {
 			return userList.get(0);
-		else //if it's empty
+		} else //if it's empty
 			return null;
 	}
 
@@ -222,8 +226,6 @@ public class UserModel {
 
 		Connection connection;
 		PreparedStatement ps;
-		ResultSet rs;
-		List<User> res = new ArrayList<>();
 
 		String query = "SELECT * from user\n" +
 				"WHERE surname = ? ;";
@@ -244,8 +246,6 @@ public class UserModel {
 
 		Connection connection;
 		PreparedStatement ps;
-		ResultSet rs;
-		List<User> res = new ArrayList<>();
 
 		String query = "SELECT * from user\n" +
 				"WHERE birthdate = ? ;";
@@ -269,7 +269,9 @@ public class UserModel {
 
 		String query = "SELECT * from user;";
 
+
 		connection = Connector.getConnection();
+
 
 		ps = connection.prepareStatement(query);
 
