@@ -36,7 +36,7 @@
 						<p class="text_link2B">INSERISCI RICHIESTA</p>
 					</div>
 					<div class="col-md-1">
-						<a href="inserisciRichiesta.jsp">
+						<a href="private/inserisciRichiesta.jsp">
 							<button class="btn btn-default go_request">
 								<span class="glyphicon glyphicon-arrow-right"></span>
 							</button>

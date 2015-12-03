@@ -23,7 +23,7 @@
 				<a href="/webpages/home.jsp">Home</a>
 			</li>
 			<li>
-				<a href="/webpages/inserisciRichiesta.jsp">Inserimento Richiesta</a>
+				<a href="/webpages/private/inserisciRichiesta.jsp">Inserimento Richiesta</a>
 			</li>
 			<li>
 				<a href="/webpages/login.jsp">Login</a>

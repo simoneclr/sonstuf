@@ -63,7 +63,7 @@ function registraUtente(json){
 
 		$.ajax({
 			type: "POST",
-			url: "/RegisterUsers",
+			url: "/RegistrationServlet",
 			data: json,
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",

@@ -4,6 +4,8 @@
 	<head>
 		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<c:import url="/prefabs/header.jsp"></c:import>
+		<script src="/js/roberto/inserisci-richiesta.js"></script>
+
 		<!--
 		<link href="/css/style-gianluca.css" rel="stylesheet">
 		-->
@@ -26,7 +28,10 @@
 
 			<br>
 
-			<form class="form-horizontal" role="form">
+			<form class="form-horizontal" role="form" action="/RequestsServlet">
+
+				<input type="hidden" name="op" value="insert">
+				<input type="hidden" name="user" value=<%= request.getParameter("idUser")%>>
 
 				<div class="row">
 					<div class="col-md-8">
@@ -43,11 +48,9 @@
 							<div class="col-md-9">
 								<select class="form-control" id="category" name="category">
 									<option value="" disabled selected> Scegli una categoria</option>
-									<option value="">Giardinaggio</option>
-									<option value="">Spesa</option>
-									<option value="">Elettronica</option>
-									<option value="">DIY</option>
-									<option value="">Compagnia</option>
+									<script id="category-template" type="text/x-handlebars-template">
+										<option>{{category}}</option>
+									</script>
 								</select>
 							</div>
 						</div>
