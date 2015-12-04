@@ -64,7 +64,7 @@
 						<input type="password" name="password2" class="form-control" id="password2">
 						<span id="confirmMessage" class="confirmMessage"></span>
 					</div>
-					<div class="form-group col-md-offset-2 col-md-2 col-sm-3 col-sm-offset-2 col-xs-7">
+					<div class="form-group col-md-offset-3 col-md-2 col-sm-3 col-sm-offset-2 col-xs-7">
 						<button id="button_submit_register"  class="btn btn-success" >Registrati</button>
 					</div>
 				</div>

@@ -209,7 +209,8 @@ span.glyphicon-arrow-right {
 
 #button_submit_register{
 	color:black;
-	margin-top: 23px;
-	margin-left: 176px;
+	margin-top: 24px;
+	padding-left: 52px;
+	padding-right: 52px;
 }
 
