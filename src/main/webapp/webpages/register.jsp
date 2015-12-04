@@ -4,6 +4,7 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<c:import url="/prefabs/header.jsp"></c:import>
 	<link href="../css/style-gianluca.css" rel="stylesheet">
+	<link href="../css/datepicker.css" rel="stylesheet">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Registrati</title>
 
@@ -40,7 +41,7 @@
 				<div class="row">
 					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-7">
 						<label>Data di nascita</label>
-						<input type="tel" name="birthdate" id="birthdate" class="form-control">
+						<input type="date" name="birthdate" id="birthdate" class="form-control">
 					</div>
 					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-7">
 						<label>Email</label>
@@ -72,7 +73,10 @@
 
 		<c:import url="/prefabs/footer.jsp"></c:import>
 
+
+		<script src="../js/gianluca/bootstrap-datepicker.js"></script>
 		<script src="../js/gianluca/register.js"></script>
+
 
 	</body>
 </html>

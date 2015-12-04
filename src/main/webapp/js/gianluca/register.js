@@ -12,6 +12,7 @@ $(document).ready(function () {
 
 function start(){
 	$("#password2").prop("disabled",true);
+	$('#birthdate').datepicker();
 }
 
 function addErrorSuccessBlockMessage(msg,classe){
@@ -195,5 +196,4 @@ $("#button_submit_register").click(function(event){
 		$("#myForm").submit();
 	}
 });
-
 
