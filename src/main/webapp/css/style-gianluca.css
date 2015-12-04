@@ -214,3 +214,7 @@ span.glyphicon-arrow-right {
 	padding-right: 52px;
 }
 
+.border{
+	border: 2px solid rgb(42, 42, 42);
+}
+
