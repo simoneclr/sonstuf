@@ -6,6 +6,7 @@ $(document).ready(function () {
 	$("#email").blur(validate_Email);
 	$("#password1").keyup(validate1);
 	$("#password2").keyup(validate2);
+	$("#password2").focusout(removeErrorSuccessBlockMessage);
 });
 
 
@@ -15,13 +16,19 @@ function start(){
 	$('#birthdate').datepicker();
 }
 
-function addErrorSuccessBlockMessage(msg,classe){
+function removeErrorSuccessBlockMessage(){
 	$(".msg").empty();
 	$(".msg").removeClass("alert alert-danger");
 	$(".msg").removeClass("alert alert-success");
+}
+
+function addErrorSuccessBlockMessage(msg,classe){
+	removeErrorSuccessBlockMessage();
 	$(".msg").addClass(classe);
 	$(".msg").append("<p>"+msg+"</p>");
 }
+
+
 
 function addESClass(elementP,classe){
 	$("#"+elementP).parent('div').addClass(classe);
@@ -46,6 +53,7 @@ function validate_Email(){
 	else{
 		removeESClass("email","has-error has-feedback");
 		addESClass("email","has-success has-feedback");
+		removeErrorSuccessBlockMessage();
 	}
 
 }
