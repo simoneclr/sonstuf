@@ -78,6 +78,12 @@
 		<description></description>
 		<servlet-class>com.sonstuf.control.UserProfileServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>AdminRegistrationServlet</servlet-name>
+		<display-name>AdminRegistrationServlet</display-name>
+		<description></description>
+		<servlet-class>com.sonstuf.control.AdminRegistrationServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>AcceptRequestServlet</servlet-name>
 		<url-pattern>/acceptrequest</url-pattern>
@@ -113,5 +119,9 @@
 	<servlet-mapping>
 		<servlet-name>UserProfileServlet</servlet-name>
 		<url-pattern>/webpages/private/UserProfileServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AdminRegistrationServlet</servlet-name>
+		<url-pattern>/webpages/private/admin/AdminRegistrationServlet</url-pattern>
 	</servlet-mapping>
 </web-app>
