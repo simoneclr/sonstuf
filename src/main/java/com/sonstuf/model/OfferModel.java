@@ -36,16 +36,21 @@ public class OfferModel {
 
 		rs = ps.execute();
 
+		Retval res;
+
 		if( rs ) {
 
-			return new Retval(true);
+			res = new Retval(true);
 
 		} else {
 
-			return new Retval(false, "Could not insert offer");
+			res =  new Retval(false, "Could not insert offer");
 		}
 
+		ps.close();
+		connection.close();
 
+		return res;
 	}
 
 	public static Offer getOfferById(int id ) throws SQLException, NamingException {

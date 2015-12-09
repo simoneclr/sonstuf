@@ -65,7 +65,7 @@ public class AcceptRequestServlet extends HttpServlet {
 		}
 		if (!retVal.getSuccess()) {
 			response.getWriter().write(ERROR_RESPONSE);
-			Logger.log("insertion of a offert in the database returned false");
+			Logger.log("insertion of a offer in the database returned false");
 			return;
 		}
 		response.getWriter().write(OK_RESPONSE);
