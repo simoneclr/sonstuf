@@ -22,7 +22,7 @@
 			<h4>PAGINA DI ERRORE.</h4>
 			<br>
 			<p>
-				${requestScope.errorMessage}
+				<%= request.getAttribute ("errorMessage") %>
 			</p>
 			<p>
 				<a href="/webpages/home.jsp" style="color: #002a80"><u>Clicca qui</u></a>

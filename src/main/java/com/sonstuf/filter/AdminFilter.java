@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.sonstuf.model.bean.User;
+import com.sonstuf.utils.ProjectGlobals;
 
 /**
  * Servlet Filter implementation class LoginFilter
@@ -53,16 +54,23 @@ public class AdminFilter implements Filter {
 					// pass the request along the filter chain
 					chain.doFilter (request, response);
 				} else {
-					//TODO: forward to and error/page or login page
-					response.getWriter ().write ("Ciccia");
+					errorPageForward (httpRequest, response);
 				}
 			} else {
-				//TODO: forward to and error/page or login page
-				response.getWriter ().write ("Ciccia");
+				errorPageForward (httpRequest, response);
 			}
 		}
 		
 		
+	}
+	
+	private void errorPageForward (ServletRequest request,
+			ServletResponse response) throws ServletException, IOException {
+			
+		request.setAttribute ("errorMessage", "Forbidden: admin only area");
+		
+		request.getRequestDispatcher (ProjectGlobals.ERROR_PAGE)
+				.forward (request, response);
 	}
 	
 	/**
