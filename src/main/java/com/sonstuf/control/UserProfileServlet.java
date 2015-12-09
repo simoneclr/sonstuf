@@ -56,6 +56,8 @@ public class UserProfileServlet extends HttpServlet {
 			response.getWriter ().write ("Invalid request: missing op parameter");
 		
 		} else {
+
+			response.setContentType("application/json");
 		
 			switch (op) {
 				
