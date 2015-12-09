@@ -83,9 +83,10 @@ public class AdminRegistrationServlet extends HttpServlet {
 	
 	private Retval doRegistration(HttpServletRequest request) {
 
-		User user;
+		User user, temp;
 		String name, surname, email, phone, birthdate;
 		Date parsedBirthDate;
+		Retval res;
 
 		name = request.getParameter("name");
 		surname = request.getParameter("surname");
@@ -136,10 +137,34 @@ public class AdminRegistrationServlet extends HttpServlet {
 		user.setPhone(phone);
 
 		try {
-			return UserModel.insert(user);
+			res =  UserModel.insert(user);
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException
 				| SQLException | NamingException e) {
 			return new Retval(false, e.getMessage());
+		}
+		
+		if (res.getSuccess ()) {
+			
+			/*
+			if inserion was correct, we take out from the db the newly inserted 
+			user and send his id to the frontend
+			*/
+			
+			try {
+				
+				temp = UserModel.getUserByPhone (user.getPhone ());
+				
+				return new Retval (true, Integer.toString (temp.getIdUser ()));
+				
+			} catch (SQLException | NamingException e) {
+				
+				return new Retval (false, e.getMessage ());
+			}
+			
+		} else {
+			
+			// If the operation was unsuccessfull we return the error from the frontend
+			return res;
 		}
 	}
 	
