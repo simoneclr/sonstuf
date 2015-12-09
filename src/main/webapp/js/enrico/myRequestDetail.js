@@ -76,7 +76,6 @@ function setState(state, offerers, valuation, requesterName) {
 	}
 }
 
-var idRequest = '${idRequest}';
 $.getJSON("/getmyrequest?idRequest=" + idRequest, function (json) {
 	var request = json.request;
 	var state = parseInt(json.state);
