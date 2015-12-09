@@ -272,6 +272,7 @@ var view = {
 		for (var i = 0; i < requests.length; i++){
 			var context = {
 				title: requests[i].request.title,
+				reqid: requests[i].idRequest,
 				description: requests[i].request.description,
 				place: requests[i].request.place,
 				time: requests[i].request.time
