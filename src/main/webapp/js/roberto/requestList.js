@@ -131,7 +131,7 @@ function updateCategory(){
 	var template = Handlebars.compile(source);
 
 	var context;
-	console.log("1");
+
 	$.getJSON("/CategoriesServlet", function(json){
 
 				for (var i = 0; i < json.length; i++) {

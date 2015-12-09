@@ -8,47 +8,42 @@
 		<title>Home | Sonstuf</title>
 	</head>
 
-	<body>
+	<body class="body_img">
 		<c:import url="/prefabs/navbar.jsp"></c:import>
-
-		<div class="container" id="home_main_container">
-			<div class="row">
-				<div class="col-md-offset-1 col-md-10">
-					<img class="img-responsive" src="http://placehold.it/1050x400"/>
+			<div class = "container container-home">
+				<div class="row" id="row1">
+					<div class ="col-md-4 col-md-offset-1">
+						<h3 class="text_title">SONSTUF</h3>
+						<p class="text_link1">Piattaforma nata con lo scopo di offrire
+							un servizio volto a favorire l'incontro tra
+							una richiesta di "lavoro" e le possibili disponibilità
+							concerni lo stesso.
+						</p>
+					</div>
+					<div class="col-md-4 col-md-offset-1" >
+						<p class="text_link2B">VISUALIZZA LISTA ANNUNCI</p>
+					</div>
+					<div class="col-md-1">
+						<a href="requestList.jsp">
+							<button class="btn btn-default go_request" href="">
+								<span class="glyphicon glyphicon-arrow-right"></span>
+							</button>
+						</a>
+					</div>
+				</div>
+				<div class = row>
+					<div class="col-md-4 col-md-offset-6" >
+						<p class="text_link2B">INSERISCI RICHIESTA</p>
+					</div>
+					<div class="col-md-1">
+						<a href="private/inserisciRichiesta.jsp">
+							<button class="btn btn-default go_request">
+								<span class="glyphicon glyphicon-arrow-right"></span>
+							</button>
+						</a>
+					</div>
 				</div>
 			</div>
-
-			<br>
-
-			<div class="row" id="row1">
-				<div class="col-md-offset-2 col-md-4 col-sm-offset-2 col-sm-4 col-xs-offset-2 col-xs-4" >
-					<h3>VISUALIZZA LISTA ANNUNCI</h3>
-				</div>
-
-				<div class="col-md-offset-2 col-md-4 col-sm-offset-2 col-sm-4 col-xs-offset-2 col-xs-4">
-					<button class="btn btn-default orange-circle-button" href="">
-						<span class="glyphicon glyphicon-arrow-right"></span>
-						<span class="orange-circle-greater-than"></span>
-					</button>
-				</div>
-			</div>
-
-			<br>
-
-			<div class="row" id="row2">
-				<div class="col-md-offset-2 col-md-4 col-sm-offset-2 col-sm-4 col-sm-4 col-xs-offset-2 col-xs-4">
-					<h3>INSERISCI RICHIESTA</h3>
-				</div>
-
-				<div class="col-md-offset-2 col-md-4 col-sm-offset-2 col-sm-4 col-xs-offset-2 col-xs-4 ">
-					<button class="btn btn-default orange-circle-button" href="">
-						<span class="glyphicon glyphicon-arrow-right"></span>
-						<span class="orange-circle-greater-than"></span>
-					</button>
-				</div>
-			</div>
-		</div>
-
 		<c:import url="/prefabs/footer.jsp"></c:import>
 	</body>
 </html>

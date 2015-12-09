@@ -15,6 +15,12 @@
 		<url-pattern>/webpages/private/*</url-pattern>
 	</filter-mapping>
 	<servlet>
+		<servlet-name>AcceptRequestServlet</servlet-name>
+		<display-name>AcceptRequestServlet</display-name>
+		<description></description>
+		<servlet-class>com.sonstuf.control.AcceptRequestServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>AuthenticationServlet</servlet-name>
 		<display-name>AuthenticationServlet</display-name>
 		<description></description>
@@ -25,6 +31,12 @@
 		<display-name>GetUsersServlet</display-name>
 		<description></description>
 		<servlet-class>com.sonstuf.control.GetUsersServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>GetOfferDetailServlet</servlet-name>
+		<display-name>GetOfferDetailServlet</display-name>
+		<description></description>
+		<servlet-class>com.sonstuf.control.GetOfferDetailServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>GetUserRequestServlet</servlet-name>
@@ -56,6 +68,14 @@
 		<description></description>
 		<servlet-class>com.sonstuf.control.UserProfileServlet</servlet-class>
 	</servlet>
+	<servlet-mapping>
+		<servlet-name>AcceptRequestServlet</servlet-name>
+		<url-pattern>/acceptrequest</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetOfferDetailServlet</servlet-name>
+		<url-pattern>/getmyoffer</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>AuthenticationServlet</servlet-name>
 		<url-pattern>/AuthenticationServlet</url-pattern>

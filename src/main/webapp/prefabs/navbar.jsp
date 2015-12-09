@@ -13,12 +13,17 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li><a href="/webpages/requestList.jsp">Naviga tra le richieste</a></li>
-				<li><a href="/webpages/inserisciRichiesta.jsp">Nuova richiesta</a></li>
+				<li><a href="/webpages/private/inserisciRichiesta.jsp">Nuova richiesta</a></li>
 			</ul>
 
-			<ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav navbar-right" id="not-logged-user-nav" style="display: none">
 				<li><a href="/webpages/register.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 				<li><a href="/webpages/login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right" id="logged-user-nav" style="display: none">
+				<li><a href="/webpages/private/userProfile.jsp"><span class="glyphicon glyphicon-user"></span> Il tuo profilo</a></li>
+				<li><a id="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			</ul>
 		</div>
 	</div>

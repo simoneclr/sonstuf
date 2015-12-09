@@ -1,16 +1,16 @@
 package com.sonstuf.utils.serializers;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Set;
-import java.util.TreeSet;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.sonstuf.model.bean.User;
 import com.sonstuf.utils.ProjectGlobals;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class UserSerializer<T extends User> extends JsonSerializer<T> {
 	
@@ -57,7 +57,7 @@ public class UserSerializer<T extends User> extends JsonSerializer<T> {
 		if (attributesToSerialize == null || attributesToSerialize.contains ("email"))
 			jsonGenerator.writeStringField ("email", object.getEmail ());
 
-		if (attributesToSerialize == null || attributesToSerialize.contains ("bithdate"))
+		if (attributesToSerialize == null || attributesToSerialize.contains ("birthdate"))
 			jsonGenerator.writeStringField ("birthdate", sdf.format (object.getBirthDate ()));
 
 		if (attributesToSerialize == null || attributesToSerialize.contains ("rankO"))

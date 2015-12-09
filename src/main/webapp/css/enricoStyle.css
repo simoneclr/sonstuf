@@ -1,7 +1,6 @@
 small {
 	display: block;
 	line-height: 1.428571429;
-	color: #585858;
 	font-size: 20px;
 }
 
@@ -23,10 +22,10 @@ small {
 	margin: 4px;
 }
 
-.panel {
+.panel_requestDetail {
 	background-color: #FFFFFF;
 	margin: 4px;
-	padding: 4px;
+	padding-top: 50px;
 }
 
 .box-shadow {
@@ -41,4 +40,20 @@ small {
 
 .hidden{
 	display: none;
+}
+
+.userInfo{
+	padding-top: 50px;
+}
+
+.panel_heading_requestDetail{
+	font-size: 25px;
+}
+
+.body_box{
+	overflow: auto;
+}
+
+.check_offriti{
+	padding-top: 20px;
 }
