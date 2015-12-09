@@ -15,6 +15,7 @@ import com.sonstuf.model.bean.User;
 import com.sonstuf.utils.JsonPacket;
 import com.sonstuf.utils.Retval;
 import com.sonstuf.utils.serializers.RequestSerializer;
+
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -46,7 +47,7 @@ public class RequestsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 	                     HttpServletResponse response) throws ServletException, IOException {
-
+		response.setContentType("application/json");
 		String op;
 		PrintWriter writer;
 		ObjectMapper mapper;
@@ -207,16 +208,28 @@ public class RequestsServlet extends HttpServlet {
 		if (title == null)
 			return new Retval(false, "Missing \"title\" parameter");
 
+		if (title.equals(""))
+			return new Retval(false, "Missing \"title\" parameter");
+
 		if (description == null)
 			return new Retval(false, "Missing \"description\" parameter");
 
+		if (description.equals(""))
+			return new Retval(false, "Missing \"description\" parameter");
+
 		if (place == null)
+			return new Retval(false, "Missing \"place\" parameter");
+
+		if (place.equals(""))
 			return new Retval(false, "Missing \"place\" parameter");
 
 		if (category == null)
 			return new Retval(false, "Missing \"categoryId\" parameter");
 
 		if (time == null)
+			return new Retval(false, "Missing \"time\" parameter");
+
+		if (time.equals(""))
 			return new Retval(false, "Missing \"time\" parameter");
 
 		try {
@@ -244,34 +257,34 @@ public class RequestsServlet extends HttpServlet {
 		newRequest.setPlace(place);
 		newRequest.setIdCategory(categoryId);
 		newRequest.setDateTime(time);
-		
-		if (user.isAdmin ()) {
-			
+
+		if (user.isAdmin()) {
+
 			int assigneUserId;
-			
-			assignedUser = request.getParameter ("user");
-			
-			if (assignedUser == null || assignedUser.equals ("")
-					|| assignedUser.equals ("null")) {
+
+			assignedUser = request.getParameter("user");
+
+			if (assignedUser == null || assignedUser.equals("")
+					|| assignedUser.equals("null")) {
 				/*
 				 * Admin inserted a request without specifing a user, so we
 				 * insert it with his account
 				 */
-				 
-				newRequest.setIdUser (user.getIdUser ());
-				
+
+				newRequest.setIdUser(user.getIdUser());
+
 			} else {
-				
+
 				try {
-					assigneUserId = Integer.parseInt (assignedUser);
+					assigneUserId = Integer.parseInt(assignedUser);
 				} catch (NumberFormatException e) {
-					
-					return new Retval (false, "Invalid user field");
+
+					return new Retval(false, "Invalid user field");
 				}
-				
-				newRequest.setIdUser (assigneUserId);
+
+				newRequest.setIdUser(assigneUserId);
 			}
-			
+
 		} else {
 			newRequest.setIdUser(user.getIdUser());
 		}

@@ -145,7 +145,7 @@ public class GetUsersServlet extends HttpServlet {
 		}
 
 		public void setBirthDate(String dateStr) throws ParseException {
-			if(dateStr == null  || dateStr.equals("")){
+			if (dateStr == null || dateStr.equals("")) {
 				this.birthDate = null;
 				return;
 			}
@@ -160,6 +160,7 @@ public class GetUsersServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json");
 		UserPattern pattern = parseJson(request.getReader());
 
 
@@ -233,7 +234,7 @@ public class GetUsersServlet extends HttpServlet {
 		else if (pattern.isBirthDateSetted())
 			userList = UserModel.getUserByBirthdate(pattern.getBirthDate());
 
-		else  {
+		else {
 
 			userList = UserModel.getAllUsers();
 

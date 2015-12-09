@@ -22,6 +22,7 @@ public class AcceptRequestServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json");
 		int idRequest;
 		try {
 			idRequest = Integer.parseInt(request.getParameter("idRequest"));
