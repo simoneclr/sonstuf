@@ -93,11 +93,12 @@ public class GetOfferDetailServlet extends HttpServlet {
 	 * response)
 	 */
 	protected void doGet(HttpServletRequest requestHttp, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json");
 		//get the offer with the given id.
 		int idOffer;
 		try {
 			idOffer = Integer.parseInt(requestHttp.getParameter("idOffer"));
-		} catch (ClassCastException | NumberFormatException |NullPointerException e) {
+		} catch (ClassCastException | NumberFormatException | NullPointerException e) {
 			response.getWriter().write("bad request attributes: " + e);
 			e.printStackTrace();
 			return;
