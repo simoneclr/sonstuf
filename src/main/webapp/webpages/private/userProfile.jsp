@@ -110,7 +110,7 @@
 
 		<div class="row">
 			<div class="col-md-3">
-				<img src="http://placehold.it/250x300">
+				<img class="img-responsive" src="http://placehold.it/250x300">
 			</div>
 			<div class="col-md-9">
 				<h4><strong>Data di nascita:</strong> <span id="bdate"></span></h4>
@@ -161,7 +161,7 @@
 									</div>
 								</div>
 								<div class="panel-body">
-									<img src="http://placehold.it/150x150" class="request-img">
+									<img src="http://placehold.it/150x150" class="img-responsive request-img">
 									<p>
 										{{description}}
 									</p>
@@ -201,7 +201,7 @@
 									</div>
 								</div>
 								<div class="panel-body">
-									<img src="http://placehold.it/150x150" class="request-img">
+									<img src="http://placehold.it/150x150" class="img-responsive request-img">
 									<p>
 										{{description}}
 									</p>
