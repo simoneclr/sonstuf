@@ -100,7 +100,6 @@ public class RequestsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 	                      HttpServletResponse response) throws ServletException, IOException {
 
-		//TODO: inserimento richiesta
 		doGet(request, response);
 	}
 
@@ -189,7 +188,7 @@ public class RequestsServlet extends HttpServlet {
 
 	private Retval insertRequest(HttpServletRequest request) {
 
-		String title, description, place, category, time;
+		String title, description, place, category, time, assignedUser;
 		int categoryId;
 		Request newRequest;
 		User user;
@@ -207,19 +206,31 @@ public class RequestsServlet extends HttpServlet {
 
 		if (title == null)
 			return new Retval(false, "Missing \"title\" parameter");
-
+		
+		if (title.equals (""))
+			return new Retval (false, "Missing \"title\" parameter");
+		
 		if (description == null)
 			return new Retval(false, "Missing \"description\" parameter");
-
+		
+		if (description.equals (""))
+			return new Retval (false, "Missing \"description\" parameter");
+		
 		if (place == null)
 			return new Retval(false, "Missing \"place\" parameter");
-
+		
+		if (place.equals (""))
+			return new Retval (false, "Missing \"place\" parameter");
+		
 		if (category == null)
 			return new Retval(false, "Missing \"categoryId\" parameter");
-
+		
 		if (time == null)
-			return new Retval(false, "Missin \"time\" parameter");
-
+			return new Retval(false, "Missing \"time\" parameter");
+		
+		if (time.equals (""))
+			return new Retval (false, "Missing \"time\" parameter");
+		
 		try {
 
 			categoryId = Integer.parseInt(category);
@@ -245,7 +256,37 @@ public class RequestsServlet extends HttpServlet {
 		newRequest.setPlace(place);
 		newRequest.setIdCategory(categoryId);
 		newRequest.setDateTime(time);
-		newRequest.setIdUser(user.getIdUser());
+		
+		if (user.isAdmin ()) {
+			
+			int assigneUserId;
+			
+			assignedUser = request.getParameter ("user");
+			
+			if (assignedUser == null || assignedUser.equals ("")
+					|| assignedUser.equals ("null")) {
+				/*
+				 * Admin inserted a request without specifing a user, so we
+				 * insert it with his account
+				 */
+				 
+				newRequest.setIdUser (user.getIdUser ());
+				
+			} else {
+				
+				try {
+					assigneUserId = Integer.parseInt (assignedUser);
+				} catch (NumberFormatException e) {
+					
+					return new Retval (false, "Invalid user field");
+				}
+				
+				newRequest.setIdUser (assigneUserId);
+			}
+			
+		} else {
+			newRequest.setIdUser(user.getIdUser());
+		}
 
 		try {
 			RequestModel.insert(newRequest);
@@ -341,7 +382,7 @@ public class RequestsServlet extends HttpServlet {
 
 			module = new SimpleModule();
 			module.addSerializer(Request.class,
-					new RequestSerializer<>("title", "description", "place", "time", "postTimeStamp"));
+					new RequestSerializer<>("title", "description", "place", "time", "postTimeStamp", "category"));
 			mapper.registerModule(module);
 
 			filters.addFilter("userFilter",
@@ -397,7 +438,7 @@ public class RequestsServlet extends HttpServlet {
 
 			module = new SimpleModule();
 			module.addSerializer(Request.class,
-					new RequestSerializer<>("title", "place", "time", "postTimeStamp"));
+					new RequestSerializer<>("title", "place", "time", "postTimeStamp", "category"));
 			mapper.registerModule(module);
 
 			filters.addFilter("userFilter",

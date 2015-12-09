@@ -63,6 +63,11 @@ public class AuthenticationServlet extends HttpServlet {
 					
 					operationStatus = doLogout (request);
 					break;
+				
+				case "checkLogin":
+					
+					operationStatus = checkLogin (request);
+					break;
 					
 				default:
 					
@@ -149,6 +154,24 @@ public class AuthenticationServlet extends HttpServlet {
 		}
 		
 		return new Retval (true);
+	}
+	
+	private Retval checkLogin (HttpServletRequest request) {
+		
+		HttpSession session;
+		User loggedUser;
+		
+		session = request.getSession ();
+		
+		if (session != null) {
+			
+			loggedUser = (User) session.getAttribute ("user");
+			
+			if (loggedUser != null)
+				return new Retval (true, loggedUser.getName ());
+		}
+		
+		return new Retval (false, "User is not logged in");
 	}
 
 }
