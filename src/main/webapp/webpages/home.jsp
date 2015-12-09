@@ -13,7 +13,7 @@
 			<div class = "container container-home">
 				<div class="row" id="row1">
 					<div class ="col-md-4 col-md-offset-1">
-						<h3 class="text_link1">SONSTUF</h3>
+						<h3 class="text_title">SONSTUF</h3>
 						<p class="text_link1">Piattaforma nata con lo scopo di offrire
 							un servizio volto a favorire l'incontro tra
 							una richiesta di "lavoro" e le possibili disponibilità
