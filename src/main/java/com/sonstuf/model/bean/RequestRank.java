@@ -4,22 +4,22 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class RequestRank {
 	
-	private int idRank;
+	private int idRequest;
 	private int rank;
 	private String comment;
 
 	/**
-	 * @return the idRank
+	 * @return the idRequest
 	 */
-	public int getIdRank () {
-		return idRank;
+	public int getIdRequest() {
+		return idRequest;
 	}
 
 	/**
-	 * @param idRank the idRank to set
+	 * @param idRequest the idRequest to set
 	 */
-	public void setIdRank (int idRank) {
-		this.idRank = idRank;
+	public void setIdRequest(int idRequest) {
+		this.idRequest = idRequest;
 	}
 
 	/**

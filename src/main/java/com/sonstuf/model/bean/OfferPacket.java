@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.sonstuf.model.CategoryModel;
 import com.sonstuf.model.RequestModel;
 import com.sonstuf.model.UserModel;
+import com.sonstuf.utils.ProjectGlobals;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
@@ -35,9 +36,8 @@ public class OfferPacket {
 		Request request;
 
 		SimpleDateFormat sdf;
-
-		//TODO: impostare la variabile globale
-		sdf = new SimpleDateFormat("dd-MM-yyyy");
+		
+		sdf = new SimpleDateFormat(ProjectGlobals.DATE_OUTPUT_FORMAT);
 
 		userPacket = new UserPacket();
 		user = UserModel.getUserById(offer.getIdUser());
