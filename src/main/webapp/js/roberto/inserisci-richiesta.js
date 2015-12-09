@@ -2,10 +2,11 @@
  * Created by gianluke on 19/11/15.
  */
 
+var arrayId=[];
 $(document).ready(function () {
 
 	updateCategory();
-
+	updateImage();
 
 });
 
@@ -24,6 +25,9 @@ function updateCategory(){
 						id: json[i].idcategory
 
 					};
+
+					var index=parseInt(json[i].idcategory);
+					arrayId[index]=json[i].category;
 					var html = template(context);
 					$("#category").append(html);
 				}
@@ -39,4 +43,14 @@ function updateCategory(){
 				console.log( "complete" );
 			});
 
+}
+
+function updateImage(){
+	$("#category").click(function(){
+		var category=$("#category").val();
+		console.log("c"+category);
+		$("#img").html("<img src=\"../../img/"+arrayId[category]+".jpeg\" style=\"width:350px ; height:180px\">");
+
+
+	});
 }

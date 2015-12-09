@@ -115,7 +115,7 @@ function updateRequestList(offers){
 			title: offers[i].request.title,
 			place: offers[i].request.place,
 			time: offers[i].request.time,
-			postTimestamp: offers[i].request.postTimestamp,
+			postTimestamp: offers[i].request.postTimeStamp,
 			name:offers[i].user.name
 		};
 		var html = template(context);
