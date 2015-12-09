@@ -113,7 +113,7 @@ var view = {
 				isInCharge: this.inChargeClass(offers[i].isInCharge)
 			};
 
-			var html = template(context);
+			var html = this.offerTemplate(context);
 			$("#offers").append(html);
 		}
 	},
