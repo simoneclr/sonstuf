@@ -206,19 +206,31 @@ public class RequestsServlet extends HttpServlet {
 
 		if (title == null)
 			return new Retval(false, "Missing \"title\" parameter");
-
+		
+		if (title.equals (""))
+			return new Retval (false, "Missing \"title\" parameter");
+		
 		if (description == null)
 			return new Retval(false, "Missing \"description\" parameter");
-
+		
+		if (description.equals (""))
+			return new Retval (false, "Missing \"description\" parameter");
+		
 		if (place == null)
 			return new Retval(false, "Missing \"place\" parameter");
-
+		
+		if (place.equals (""))
+			return new Retval (false, "Missing \"place\" parameter");
+		
 		if (category == null)
 			return new Retval(false, "Missing \"categoryId\" parameter");
-
+		
 		if (time == null)
 			return new Retval(false, "Missing \"time\" parameter");
-
+		
+		if (time.equals (""))
+			return new Retval (false, "Missing \"time\" parameter");
+		
 		try {
 
 			categoryId = Integer.parseInt(category);
