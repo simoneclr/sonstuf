@@ -113,8 +113,8 @@ public class AdminRegistrationServlet extends HttpServlet {
 
 			return new Retval(false, "Birth date is mandatory");
 		}
-
-		if (!EmailValidator.validateEmail(email)) {
+		
+		if (email != null && email.length () != 0 && !EmailValidator.validateEmail(email)) {
 
 			return new Retval(false, "Please double check your email address");
 		}
