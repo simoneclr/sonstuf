@@ -38,7 +38,7 @@ public class OfferModel {
 
 		Retval res;
 
-		if( rs > 0 ) {
+		if( rs == 1 ) {
 
 			res = new Retval(true);
 

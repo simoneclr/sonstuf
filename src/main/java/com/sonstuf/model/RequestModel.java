@@ -22,7 +22,7 @@ public class RequestModel {
 
 		Connection connection;
 		PreparedStatement ps;
-		boolean rs;
+		int rs;
 
 		String query = "INSERT INTO request\n"
 				+ "(`title`, `description`, `place`, `datetime`, `photo`, `iduser`, `idcategory`, `status`, `posttime`)\n"
@@ -40,9 +40,9 @@ public class RequestModel {
 		ps.setInt(7, request.getIdCategory());
 		ps.setInt(8, request.getStatus());
 
-		rs = ps.execute();
+		rs = ps.executeUpdate();
 
-		if( rs ) {
+		if( rs == 1 ) {
 
 			//FIXME: aggiornare il campo rankp nella tabella utente
 			/*
