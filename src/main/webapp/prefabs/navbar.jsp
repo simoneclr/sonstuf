@@ -23,7 +23,7 @@
 
 			<ul class="nav navbar-nav navbar-right" id="logged-user-nav" style="display: none">
 				<li><a href="/webpages/private/userProfile.jsp"><span class="glyphicon glyphicon-user"></span> Il tuo profilo</a></li>
-				<li><a href="#logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+				<li><a href="/AuthenticationServlet?op=logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			</ul>
 		</div>
 	</div>
