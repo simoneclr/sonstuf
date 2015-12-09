@@ -44,6 +44,13 @@ public class RequestModel {
 
 		if( rs ) {
 
+			//FIXME: aggiornare il campo rankp nella tabella utente
+			/*
+			 * TODO: passo 1: se sono qui significa che il rank è stato salvato nella tabella
+			 * TODO: passo 2: faccio il join con request e ricavo l'utente
+			 * TODO: passo 3: con l'utente mi ricavo la media dei voti
+			 * TODO: passo 5: aggiorno rankp dell'utente
+			 */
 			return new Retval(true);
 
 		} else {
