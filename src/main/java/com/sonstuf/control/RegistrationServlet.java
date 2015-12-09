@@ -3,7 +3,9 @@ package com.sonstuf.control;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sonstuf.model.UserModel;
 import com.sonstuf.model.bean.User;
+import com.sonstuf.utils.EmailValidator;
 import com.sonstuf.utils.PasswordHash;
+import com.sonstuf.utils.ProjectGlobals;
 import com.sonstuf.utils.Retval;
 
 import javax.naming.NamingException;
@@ -18,8 +20,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -27,9 +27,6 @@ import java.util.regex.Pattern;
 public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final String EMAIL_PATTERN =
-			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-					+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -136,7 +133,7 @@ public class RegistrationServlet extends HttpServlet {
 			return new Retval(false, "Please confirm your password");
 		}
 
-		if (!validateEmail(email)) {
+		if (!EmailValidator.validateEmail(email)) {
 
 			return new Retval(false, "Please double check your email address");
 		}
@@ -183,22 +180,11 @@ public class RegistrationServlet extends HttpServlet {
 		}
 	}
 
-	private boolean validateEmail(String emailAddress) {
-
-		Pattern pattern;
-		Matcher matcher;
-
-		pattern = Pattern.compile(EMAIL_PATTERN);
-		matcher = pattern.matcher(emailAddress);
-
-		return matcher.matches();
-	}
-
 	private static Date parseBirthDate(String date) throws ParseException {
 
 		SimpleDateFormat sdf;
 
-		sdf = new SimpleDateFormat("dd/MM/yyyy");
+		sdf = new SimpleDateFormat(ProjectGlobals.DATE_INPUT_FORMAT);
 
 		return sdf.parse(date);
 	}
