@@ -1,5 +1,6 @@
 package com.sonstuf.control;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.sonstuf.model.OfferModel;
 import com.sonstuf.model.bean.Offer;
 import com.sonstuf.model.bean.User;
@@ -18,11 +19,12 @@ public class AcceptRequestServlet extends HttpServlet {
 	private static final String OK_RESPONSE = "success";
 	private static final String ERROR_RESPONSE = "fail";
 	private static final String USER_NOT_LOGGED_RESPONSE = "not_logged";
+	private static final String CONSTRAINT_VIOLATION = "constraint_violation";
 
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/json");
+		response.setContentType("text/html");
 		int idRequest;
 		try {
 			idRequest = Integer.parseInt(request.getParameter("idRequest"));
@@ -40,12 +42,22 @@ public class AcceptRequestServlet extends HttpServlet {
 			return;
 		}
 
+		if (offeringUser == null) {
+			response.getWriter().write(USER_NOT_LOGGED_RESPONSE);
+			Logger.log("not logged");
+			return;
+		}
+
 		Offer newOffer = new Offer();
 		newOffer.setIdRequest(idRequest);
 		newOffer.setIdUser(offeringUser.getIdUser());
 		Retval retVal;
 		try {
 			retVal = OfferModel.insert(newOffer);
+		} catch (MySQLIntegrityConstraintViolationException e) {
+			response.getWriter().write(CONSTRAINT_VIOLATION);
+			e.printStackTrace();
+			return;
 		} catch (SQLException | NamingException e) {
 			response.getWriter().write(ERROR_RESPONSE);
 			e.printStackTrace();
