@@ -145,7 +145,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<h3 class="panel-title">
-												<a href="/webpages/requestDetail.jsp?idRequest={{reqid}}"><strong>{{title}}</strong></a>
+												<a href="/webpages/private/myRequestDetail.jsp?idRequest={{reqid}}"><strong>{{title}}</strong></a>
 											</h3>
 										</div>
 										<div class="col-md-6" style="text-align: right">
@@ -181,7 +181,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<h3 class="panel-title">
-												<a href="#"><strong>{{title}}</strong></a>
+												<a href="/webpages/private/myOfferDetail.jsp?idOffer={{offid}}"><strong>{{title}}</strong></a>
 											</h3>
 										</div>
 										<div class="col-md-6" style="text-align: right">
