@@ -22,7 +22,7 @@ public class OfferModel {
 
 		Connection connection;
 		PreparedStatement ps;
-		boolean rs;
+		int rs;
 
 		String query = "INSERT INTO offer\n"
 				+ "(`iduser`, `idrequest`, `posttime`)\n"
@@ -34,11 +34,11 @@ public class OfferModel {
 		ps.setInt( 1, offer.getIdUser() );
 		ps.setInt( 2, offer.getIdRequest() );
 
-		rs = ps.execute();
+		rs = ps.executeUpdate();
 
 		Retval res;
 
-		if( rs ) {
+		if( rs > 0 ) {
 
 			res = new Retval(true);
 
