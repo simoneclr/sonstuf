@@ -23,16 +23,16 @@
 				<a href="/webpages/home.jsp">Home</a>
 			</li>
 			<li>
-				<a href="/webpages/inserisciRichiesta.jsp">Inserimento Richiesta</a>
+				<a href="/webpages/private/inserisciRichiesta.jsp">Inserimento Richiesta</a>
 			</li>
 			<li>
 				<a href="/webpages/login.jsp">Login</a>
 			</li>
 			<li>
-				<a href="/webpages/myOfferDetail.jsp">Dettaglio offerta</a>
+				<a href="/webpages/private/myOfferDetail.jsp">Dettaglio offerta</a>
 			</li>
 			<li>
-				<a href="/webpages/myRequestDetail.jsp">Dettaglio mia richiesta</a>
+				<a href="/webpages/private/myRequestDetail.jsp">Dettaglio mia richiesta</a>
 			</li>
 			<li>
 				<a href="/webpages/register.jsp">Registrazione</a>

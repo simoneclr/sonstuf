@@ -13,7 +13,7 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li><a href="/webpages/requestList.jsp">Naviga tra le richieste</a></li>
-				<li><a href="/webpages/inserisciRichiesta.jsp">Nuova richiesta</a></li>
+				<li><a href="/webpages/private/inserisciRichiesta.jsp">Nuova richiesta</a></li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">

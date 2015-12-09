@@ -14,7 +14,7 @@ import java.sql.Date;
  * @author enrico.t
  */
 
-@JsonFilter ("userFilter")
+@JsonFilter("userFilter")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -29,11 +29,6 @@ public class User implements Serializable {
 	private float rankR;
 	private Date birthDate;
 	private boolean admin;
-	/**
-	 * checks if user and this are the same User ignoring null fields
-	 * @param user
-	 * @return false if user is null. true if all the not null fields in both user and this are equals.
-	 */
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
@@ -63,7 +58,7 @@ public class User implements Serializable {
 		this.surname = surname;
 	}
 
-	@JsonProperty ("telephone")
+	@JsonProperty("telephone")
 	public String getPhone() {
 		return phone;
 	}

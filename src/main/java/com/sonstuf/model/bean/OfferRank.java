@@ -4,23 +4,23 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class OfferRank {
 	
-	private int idRank;
+	private int idOffer;
 	private int rank;
 	private String comment;
 
 	/**
-	 * @return the idRank
+	 * @return the idOffer
 	 */
 
-	public int getIdRank () {
-		return idRank;
+	public int getIdOffer() {
+		return idOffer;
 	}
 	/**
-	 * @param idRank the idRank to set
+	 * @param idOffer the idOffer to set
 	 */
 
-	public void setIdRank (int idRank) {
-		this.idRank = idRank;
+	public void setIdOffer(int idOffer) {
+		this.idOffer = idOffer;
 	}
 
 	/**

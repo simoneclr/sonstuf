@@ -1,17 +1,5 @@
 package com.sonstuf.control;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.naming.NamingException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -25,8 +13,18 @@ import com.sonstuf.model.bean.OfferPacket;
 import com.sonstuf.model.bean.Request;
 import com.sonstuf.model.bean.User;
 import com.sonstuf.utils.JsonPacket;
-import com.sonstuf.utils.serializers.RequestSerializerNoDescription;
+import com.sonstuf.utils.serializers.RequestSerializer;
 import com.sonstuf.utils.serializers.UserSerializer;
+import javax.naming.NamingException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Servlet implementation class UserProfileServlet
@@ -256,7 +254,7 @@ public class UserProfileServlet extends HttpServlet {
 			
 			module = new SimpleModule ();
 			module.addSerializer (Request.class,
-					new RequestSerializerNoDescription<Request> ());
+					new RequestSerializer<> ("title", "description", "place", "time", "postTimeStamp"));
 			mapper.registerModule (module);
 			
 			filters.addFilter("userFilter",

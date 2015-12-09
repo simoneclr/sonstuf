@@ -2,6 +2,8 @@ package com.sonstuf.model;
 
 import com.sonstuf.model.bean.Category;
 import com.sonstuf.model.bean.Request;
+import com.sonstuf.model.bean.RequestRank;
+import com.sonstuf.utils.Retval;
 
 import javax.naming.NamingException;
 import java.sql.Connection;
@@ -15,6 +17,48 @@ import java.util.List;
  * Created by hypertesto on 18/11/15.
  */
 public class RequestModel {
+
+	public static Retval insert ( Request request ) throws SQLException, NamingException {
+
+		Connection connection;
+		PreparedStatement ps;
+		boolean rs;
+
+		String query = "INSERT INTO request\n"
+				+ "(`title`, `description`, `place`, `datetime`, `photo`, `iduser`, `idcategory`, `status`, `posttime`)\n"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP ());";
+
+		connection = Connector.getConnection();
+
+		ps = connection.prepareStatement(query);
+		ps.setString(1, request.getTitle());
+		ps.setString(2, request.getDescription());
+		ps.setString(3, request.getPlace());
+		ps.setString(4, request.getDateTime());
+		ps.setString(5, request.getPhoto());
+		ps.setInt(6, request.getIdUser());
+		ps.setInt(7, request.getIdCategory());
+		ps.setInt(8, request.getStatus());
+
+		rs = ps.execute();
+
+		if( rs ) {
+
+			//FIXME: aggiornare il campo rankp nella tabella utente
+			/*
+			 * TODO: passo 1: se sono qui significa che il rank è stato salvato nella tabella
+			 * TODO: passo 2: faccio il join con request e ricavo l'utente
+			 * TODO: passo 3: con l'utente mi ricavo la media dei voti
+			 * TODO: passo 5: aggiorno rankp dell'utente
+			 */
+			return new Retval(true);
+
+		} else {
+
+			return new Retval(false, "Could not insert request");
+		}
+
+	}
 
 	public static Request getRequestById ( int id ) throws SQLException, NamingException {
 
@@ -150,6 +194,45 @@ public class RequestModel {
 		connection.close();
 
 		return res;
+
+	}
+
+	public static RequestRank getRankById ( int id ) throws SQLException, NamingException {
+
+		Connection connection;
+		PreparedStatement ps;
+		ResultSet rs;
+		RequestRank res;
+
+		String query = 	"SELECT * from requesterrank\n" +
+						"WHERE idrequest = ? ;";
+
+		connection = Connector.getConnection();
+
+		ps = connection.prepareStatement(query);
+		ps.setInt( 1, id );
+
+		rs = ps.executeQuery();
+
+		if ( rs.next() ) {
+
+			res = new RequestRank();
+			res.setIdRequest(rs.getInt("idrequest"));
+			res.setRank(rs.getInt("rank"));
+			res.setComment(rs.getString("comment"));
+
+		} else {
+
+			res = null;
+
+		}
+
+		rs.close();
+		ps.close();
+		connection.close();
+
+		return res;
+
 
 	}
 

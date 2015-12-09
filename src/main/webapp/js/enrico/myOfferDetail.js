@@ -51,7 +51,7 @@ function setState(state, requestingUser, valuation) {
 			alert("sorry invalid state");
 	}
 }
-var idOffer = '${idOffer}';
+
 $.getJSON("/getmyoffer?idOffer=" + idOffer, function (json) {
 	var request = json.request;
 	var state = parseInt(json.state);

@@ -1,13 +1,12 @@
 package com.sonstuf.control;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.sonstuf.model.UserModel;
 import com.sonstuf.model.bean.User;
 import com.sonstuf.utils.ProjectGlobals;
+import com.sonstuf.utils.serializers.UserSerializer;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -87,21 +86,13 @@ public class GetUsersServlet extends HttpServlet {
 			User user = (User) obj;
 
 			//if the user name is in the pattern.
-			if (this.isNameSetted()){
-				System.out.println("1");
-				if (!this.getName().equals(user.getName())) {
-					System.out.println("2");
-					return false;
-				}} //if different user names.
+			if (this.isNameSetted())
+				if (!this.getName().equals(user.getName())) return false; //if different user names.
 
 			//if the surname is in the pattern.
-			if (this.isSurnameSetted()) {
-				System.out.println("3");
-				if (!this.getSurname().equals(user.getSurname())) {
-					System.out.println("4");
-					return false; //if different surnames.
-				}
-			}
+			if (this.isSurnameSetted())
+				if (!this.getSurname().equals(user.getSurname())) return false; //if different surnames.
+
 			//if the phone number is in the pattern.
 			if (this.isPhoneSetted())
 				if (!this.getPhone().equals(user.getPhone())) return false; //if different phones.
@@ -153,18 +144,13 @@ public class GetUsersServlet extends HttpServlet {
 			return birthDate;
 		}
 
-		public void setBirthDate(String birthDate) {
-			if (birthDate == null || birthDate.equals(""))
+		public void setBirthDate(String dateStr) throws ParseException {
+			if(dateStr == null  || dateStr.equals("")){
 				this.birthDate = null;
-			else {
-				SimpleDateFormat dateFormat = new SimpleDateFormat(ProjectGlobals.DATE_INPUT_FORMAT);
-				try {
-					this.birthDate = new Date(dateFormat.parse(birthDate).getTime());
-				} catch (ParseException e) {
-					this.birthDate = null;
-					//LOG THAT BIRTHDATE FORMAT WAS WRONG.
-				}
+				return;
 			}
+			SimpleDateFormat df = new SimpleDateFormat(ProjectGlobals.DATE_INPUT_FORMAT);
+			this.birthDate = new Date(df.parse(dateStr).getTime());
 		}
 	}
 
@@ -174,7 +160,6 @@ public class GetUsersServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("bbbbbbbbbbbbbb");
 		UserPattern pattern = parseJson(request.getReader());
 
 
@@ -185,39 +170,40 @@ public class GetUsersServlet extends HttpServlet {
 			response.getWriter().write(e.toString());
 		}
 
-		//filtrate userList based on the pattern
-		PrintWriter writer = response.getWriter();
+		sendMatchingUsers(userListDB, pattern, response);
+
+	}
+
+	private void sendMatchingUsers(List<User> list, UserPattern pattern, HttpServletResponse response) {
 		ObjectMapper mapper = new ObjectMapper();
-		writer.write('[');
+		SimpleModule module = new SimpleModule();
+		module.addSerializer(User.class, new UserSerializer<>("idUser", "name", "surname", "telephone", "email", "birthdate"));
+		mapper.registerModule(module);
 
-		SimpleFilterProvider filters;
-
-		filters = new SimpleFilterProvider();
-		filters.addFilter("filter", SimpleBeanPropertyFilter.serializeAllExcept("passwordHash", "rankO", "rankP"));
-
-		boolean done = false; //flag for check if it's the first iteration.
 		try {
-			for (User user : userListDB) {
-				System.out.println("uDB: "+user.getName());
-				System.out.println("upatt: "+pattern.getName());
+			PrintWriter writer = response.getWriter();
+			writer.write("[");
+
+			boolean done = false;
+			for (User user : list) {
 				if (pattern.equals(user)) { //retain only the Users that match the pattern
-					System.out.println("entrato");
 					if (!done) {
 						done = true;
 					} else {
 						writer.write(',');
 					}
-					System.out.print("user: "+mapper.setFilterProvider(filters)
-							.writeValueAsString(user));
-					writer.write(mapper.setFilterProvider(filters)
-							.writeValueAsString(user));
+					String json = mapper.writeValueAsString(user);
+
+					writer.write(json);
 
 				}
 			}
-		} catch (JsonProcessingException e) {
+
+			writer.write("]");
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		writer.write(']');
+
 	}
 
 	/**
@@ -247,14 +233,16 @@ public class GetUsersServlet extends HttpServlet {
 		else if (pattern.isBirthDateSetted())
 			userList = UserModel.getUserByBirthdate(pattern.getBirthDate());
 
-		else userList = UserModel.getAllUsers();
+		else  {
 
+			userList = UserModel.getAllUsers();
+
+		}
 
 		return userList;
 	}
 
 	private UserPattern parseJson(BufferedReader jsonReader) throws IOException {
-		System.out.println("aaaaaaaaaaaaaaaaaa");
 		UserPattern res = null;
 		StringBuffer jb = new StringBuffer();
 		String line = null;
@@ -265,11 +253,8 @@ public class GetUsersServlet extends HttpServlet {
 			throw new IOException("impossible to read the json");
 		}
 
-		String jsonUser = jb.toString();
 		ObjectMapper mapper = new ObjectMapper();
-
 		res = mapper.readValue(jb.toString(), UserPattern.class);
-		System.out.println("u: "+res.getName());
 		return res;
 	}
 
