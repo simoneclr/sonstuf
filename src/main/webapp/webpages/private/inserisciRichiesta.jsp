@@ -70,7 +70,7 @@
 						</div>
 					</div>
 
-					<div class="col-md-4" style="text-align: center">
+					<div class="col-md-4" style="text-align: center" id="img">
 						<img src="http://www.placehold.it/350x180">
 					</div>
 				</div>
