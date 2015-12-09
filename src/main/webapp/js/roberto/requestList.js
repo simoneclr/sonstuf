@@ -115,7 +115,7 @@ function updateRequestList(offers){
 			title: offers[i].request.title,
 			place: offers[i].request.place,
 			time: offers[i].request.time,
-			postTimestamp: offers[i].request.postTimestamp,
+			postTimestamp: offers[i].request.postTimeStamp,
 			name:offers[i].user.name
 		};
 		var html = template(context);
@@ -131,7 +131,7 @@ function updateCategory(){
 	var template = Handlebars.compile(source);
 
 	var context;
-	console.log("1");
+
 	$.getJSON("/CategoriesServlet", function(json){
 
 				for (var i = 0; i < json.length; i++) {

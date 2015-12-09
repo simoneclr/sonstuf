@@ -79,8 +79,8 @@ public class RequestSerializer<T extends Request> extends JsonSerializer<T> {
 
 		if (attributesToSerialize == null || attributesToSerialize.contains("postTimeStamp")) {
 			SimpleDateFormat df = new SimpleDateFormat(ProjectGlobals.DATE_OUTPUT_FORMAT);
-			String formattedDate = df.format(new java.util.Date(o.getPostTime().getTime()));
-			jsonGenerator.writeStringField("posttime", formattedDate);
+			String formattedDate = df.format(o.getPostTime());
+			jsonGenerator.writeStringField("postTimeStamp", formattedDate);
 		}
 
 		if (attributesToSerialize == null || attributesToSerialize.contains("time")) {

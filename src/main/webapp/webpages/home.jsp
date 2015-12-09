@@ -13,7 +13,7 @@
 			<div class = "container container-home">
 				<div class="row" id="row1">
 					<div class ="col-md-4 col-md-offset-1">
-						<h3 class="text_link1">SONSTUF</h3>
+						<h3 class="text_title">SONSTUF</h3>
 						<p class="text_link1">Piattaforma nata con lo scopo di offrire
 							un servizio volto a favorire l'incontro tra
 							una richiesta di "lavoro" e le possibili disponibilità
@@ -24,9 +24,11 @@
 						<p class="text_link2B">VISUALIZZA LISTA ANNUNCI</p>
 					</div>
 					<div class="col-md-1">
-						<button class="btn btn-default go_request" href="">
-							<span class="glyphicon glyphicon-arrow-right"></span>
-						</button>
+						<a href="requestList.jsp">
+							<button class="btn btn-default go_request" href="">
+								<span class="glyphicon glyphicon-arrow-right"></span>
+							</button>
+						</a>
 					</div>
 				</div>
 				<div class = row>
@@ -34,9 +36,11 @@
 						<p class="text_link2B">INSERISCI RICHIESTA</p>
 					</div>
 					<div class="col-md-1">
-						<button class="btn btn-default go_request" href="">
-							<span class="glyphicon glyphicon-arrow-right"></span>
-						</button>
+						<a href="private/inserisciRichiesta.jsp">
+							<button class="btn btn-default go_request">
+								<span class="glyphicon glyphicon-arrow-right"></span>
+							</button>
+						</a>
 					</div>
 				</div>
 			</div>

@@ -6,12 +6,37 @@ $(document).ready(function () {
 	$("#email").blur(validate_Email);
 	$("#password1").keyup(validate1);
 	$("#password2").keyup(validate2);
+	$("#password2").focusout(removeErrorSuccessBlockMessage);
 });
+
+
 
 function start(){
 	$("#password2").prop("disabled",true);
+	$('#birthdate').datepicker();
 }
 
+function removeErrorSuccessBlockMessage(){
+	$(".msg").empty();
+	$(".msg").removeClass("alert alert-danger");
+	$(".msg").removeClass("alert alert-success");
+}
+
+function addErrorSuccessBlockMessage(msg,classe){
+	removeErrorSuccessBlockMessage();
+	$(".msg").addClass(classe);
+	$(".msg").append("<p>"+msg+"</p>");
+}
+
+
+
+function addESClass(elementP,classe){
+	$("#"+elementP).parent('div').addClass(classe);
+}
+
+function removeESClass(elementP,classe){
+	$("#"+elementP).parent('div').removeClass(classe);
+}
 
 function validateEmail_Support(email) {
 	var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -21,12 +46,14 @@ function validateEmail_Support(email) {
 
 function validate_Email(){
 	if (!validateEmail_Support($("#email").val())){
-		$("#email").parent('div').addClass("has-error has-feedback");
-		alert("Inserire una mail valida");
+		var msg = "Inserire una mail valida";
+		addErrorSuccessBlockMessage(msg,"alert alert-danger");
+		addESClass("email","has-error has-feedback");
 	}
 	else{
-		$("#email").parent('div').removeClass("has-error has-feedback");
-		$("#email").parent('div').addClass("has-success has-feedback");
+		removeESClass("email","has-error has-feedback");
+		addESClass("email","has-success has-feedback");
+		removeErrorSuccessBlockMessage();
 	}
 
 }
@@ -41,15 +68,15 @@ function validate1(){
 		$("#password2").prop("disabled",false);
 		if (password1 == password2) {
 			//$("#password2").prop("disabled",true);
-			$("#password1").parent('div').removeClass("has-error has-feedback");
-			$("#password2").parent('div').removeClass("has-error has-feedback");
+			removeESClass("password1","has-error has-feedback");
+			removeESClass("password2","has-error has-feedback");
 		}
 	}
 	else{
-		$("#password1").parent('div').removeClass("has-success has-feedback");
-		$("#password2").parent('div').removeClass("has-success has-feedback");
-		$("#password1").parent('div').removeClass("has-error has-feedback");
-		$("#password2").parent('div').removeClass("has-error has-feedback");
+		removeESClass("password1","has-success has-feedback");
+		removeESClass("password2","has-success has-feedback");
+		removeESClass("password1","has-error has-feedback");
+		removeESClass("password2","has-error has-feedback");
 		$("#password2").prop("disabled",true);
 	}
 }
@@ -59,19 +86,20 @@ function validate2(){
 	var password2 = $("#password2").val();
 
 	if (password1 != password2){
-		$("#password1").parent('div').removeClass("has-success has-feedback");
-		$("#password2").parent('div').removeClass("has-success has-feedback");
-		$("#password1").parent('div').addClass("has-error has-feedback");
-		$("#password2").parent('div').addClass("has-error has-feedback");
+		removeESClass("password1","has-success has-feedback");
+		removeESClass("password2","has-success has-feedback");
+		addESClass("password1","has-error has-feedback");
+		addESClass("password2","has-error has-feedback");
+		msg = "Le passwords non coincidono";
+		addErrorSuccessBlockMessage(msg,"alert alert-danger");
 	}
 	else{
-		$("#password1").parent('div').removeClass("has-error has-feedback");
-		$("#password2").parent('div').removeClass("has-error has-feedback");
-		$("#password1").parent('div').addClass("has-success has-feedback");
-		$("#password2").parent('div').addClass("has-success has-feedback");
-		$("#confirmMessage").empty();
-		$("#confirmMessage").append("cacca");
-
+		removeESClass("password1","has-error has-feedback");
+		removeESClass("password2","has-error has-feedback");
+		addESClass("password1","has-success has-feedback");
+		addESClass("password2","has-success has-feedback");
+		msg = "Le passwords coincidono";
+		addErrorSuccessBlockMessage(msg,"alert alert-success");
 	}
 }
 
@@ -117,52 +145,63 @@ function checkPassword(){
 	return true;
 }
 function checkFields(){
+	var send = true;
 	if(!checkName()){
-		$("#name").parent('div').addClass("has-error has-feedback");
+		addESClass("name","has-error has-feedback");
+		send = false;
 	}
 	else{
-		$("#name").parent('div').removeClass("has-error has-feedback");
+		removeESClass("name","has-error has-feedback");
 	}
 	if(!checkSurname()){
-		$("#surname").parent('div').addClass("has-error has-feedback");
+		addESClass("surname","has-error has-feedback");
+		send = false;
 	}
 	else{
-		$("#surname").parent('div').removeClass("has-error has-feedback");
+		removeESClass("surname","has-error has-feedback");
 	}
 	if(!checkBirthdate()){
-		$("#birthdate").parent('div').addClass("has-error has-feedback");
+		addESClass("birthdate","has-error has-feedback");
+		send = false;
 	}
 	else{
-		$("#birthdate").parent('div').removeClass("has-error has-feedback");
+		removeESClass("birthdate","has-error has-feedback");
 	}
 	if(!checkEmail()){
-		$("#email").parent('div').addClass("has-error has-feedback");
+		addESClass("email","has-error has-feedback");
+		send = false;
 	}
 	else{
-
-		$("#email").parent('div').removeClass("has-error has-feedback");
+		removeESClass("email","has-error has-feedback");
 	}
 	if(!checkPhone()){
-		$("#phone").parent('div').addClass("has-error has-feedback");
+		addESClass("phone","has-error has-feedback");
+		send = false;
 	}
 	else{
-		$("#phone").parent('div').removeClass("has-error has-feedback");
+		removeESClass("phone","has-error has-feedback");
 	}
 	if(!checkPassword()){
-		$("#password1").parent('div').addClass("has-error has-feedback");
-		$("#password2").parent('div').addClass("has-error has-feedback");
+		addESClass("password1","has-error has-feedback");
+		addESClass("password2","has-error has-feedback");
+		send = false;
 	}
 	else{
-		$("#password1").parent('div').removeClass("has-error has-feedback");
-		$("#password2").parent('div').removeClass("has-error has-feedback");
+		removeESClass("password1","has-error has-feedback");
+		removeESClass("password2","has-error has-feedback");
 	}
+	return send;
 }
 
-function validateForm() {
+$("#button_submit_register").click(function(event){
+
 	if (!checkFields()){
-		$(".msg").empty();
-		$(".msg").addClass("alert alert-danger bs-alert-old-docs");
-		$(".msg").append("<p>È stato riscontrato un errore nei seguenti campi</p>");
-		return false;
+		msg = "È stato riscontrato un errore nei seguenti campi";
+		addErrorSuccessBlockMessage(msg,"alert alert-danger");
+		event.preventDefault();
 	}
-}
+	else{
+		$("#myForm").submit();
+	}
+});
+

@@ -82,54 +82,31 @@
 	<br>
 
 	<div class="list row" id="rowTable">
-		<div class="col-md-offset-1 col-md-10">
-
-			<div class="table-responsive">
-				<table id="myTable" class="display table" width="100%">
-
-					<thead>
-					<tr>
-						<th>Nome</th>
-						<th>Cognome</th>
-						<th>Telefono</th>
-						<th>Email</th>
-						<th>Data di nascita</th>
-					</tr>
-					</thead>
-					<tbody id="bodyTable">
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-
-					</tbody>
-					<script id="request-template" type="text/x-handlebars-template">
-						<tr id="{{id}}">
-							<td>{{name}}</td>
-							<td>{{surname}}</td>
-							<td>{{telephone}}</td>
-							<td>{{email}}</td>
-							<td>{{birthdate}}</td>
-
-						</tr>
-					</script>
-				</table>
-			</div>
-
+		<div class="col-md-offset-1 col-md-10" id="table-template">
 
 		</div>
+		<script id="template-user" type="text/x-handlebars-template">
+			<tr id="{{id}}">
+				<td>{{name}}</td>
+				<td>{{surname}}</td>
+				<td>{{telephone}}</td>
+				<td>{{email}}</td>
+				<td>{{birthdate}}</td>
+
+			</tr>
+		</script>
+
+
 	</div>
+
+	<br>
+	<br>
+	<br>
+	<br>
+</div>
 
 </div>
 
-<script>
-	$(document).ready(function () {
-		$('#myTable').dataTable();
-	});
-</script>
 
 <c:import url="/prefabs/footer.jsp"></c:import>
 
