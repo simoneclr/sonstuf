@@ -52,15 +52,23 @@ $.ajax({
 					dataType: "text",
 					success: function (data) {
 						var message = "unknown response";
-						if (data === OK_RESPONSE)
+						if (data === OK_RESPONSE) {
 							location.href = 'private/jobsConfirmsAccepted.jsp';
-						else if (data === ERROR_RESPONSE)
+							$("#error-alert").hide();
+						}
+						else if (data === ERROR_RESPONSE){
 							message = "error";
-						else if (data === USER_NOT_LOGGED_RESPONSE)
+							showMessageOffer(message);
+						}
+						else if (data === USER_NOT_LOGGED_RESPONSE){
 							message = "devi loggarti per accedere a questa funzionalità";
-						else if (data === CONSTRAINT_VIOLATION)
+							showMessageOffer(message);
+						}
+						else if (data === CONSTRAINT_VIOLATION){
 							message = "hai già dato disponibilità per questa richiesta";
-						showMessageOffer(message);
+							showMessageOffer(message);
+						}
+
 					},
 					error: function (errMsg) {
 						showMessageOffer(errMsg);
