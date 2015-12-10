@@ -32,7 +32,11 @@
 	</div>
 
 	<br>
-
+	<div class="alert alert-danger fade in hidden" id="error-alert">
+		<strong>Errore!</strong>
+		<span id="error-message"></span>
+	</div>
+	<br>
 	<div class="row">
 		<div class="col-md-offset-1 col-md-3">
 			<label>Nome</label>
