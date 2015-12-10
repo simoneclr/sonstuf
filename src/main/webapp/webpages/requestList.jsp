@@ -43,7 +43,6 @@
 			<label>Luogo</label>
 			<input type="text" name="place" class="form-control" id="place" value="">
 		</div>
-
 		<div class="col-md-offset-1 col-md-2">
 			<button class="btn btn-success" style="margin-top: 25px" id="btn">Cerca </button>
 		</div>
@@ -52,22 +51,44 @@
 	<br>
 	<br>
 
-	<div class="list row" id="list">
+	<div class="list" id="list">
 
 	</div>
 		<script id="request-template" type="text/x-handlebars-template">
-			<div class="request col-md-offset-1 col-md-10" id="{{id}}">
-
+			<input type="hidden" id="{{id}}">
 				<div class="row">
-					<div class="col-md-12">
-
-						<div class="row">
-							<div class="col-sm-6 col-md-3">
-								<div><h3>{{category}}</h3>
+					<div class="col-md-10 col-md-offset-1 col-sm-12">
+						<div class="panel panel-default request-panel">
+							<div class="panel-heading">
+								<div class="row rowR">
+									<div class="col-sm-3 col-md-2 col-xs-12">
+										<h3 class="panel-title titleR"><strong>{{category}}</strong></h3>
+									</div>
+									<div class="col-md-6 col-md-offset-3 col-sm-9 col-xs-12">
+										<ul class="request-info">
+											<li>
+												<span class="glyphicon glyphicon-map-marker"></span> {{place}}
+											</li>
+											<li>
+												<span class="glyphicon glyphicon-time"></span>{{time}}
+											</li>
+											<li>
+												<span class="glyphicon glyphicon-user"></span>{{name}}
+											</li>
+										</ul>
+									</div>
 								</div>
-								<img src="../img/{{category}}.jpeg" alt="..." class="imgCategory img-circle img-responsive">
 							</div>
-							<div class="col-sm-6 col-md-8  summary-profile-position">
+							<p>
+								{{postTimestamp}}
+							</p>
+							<div class="panel-body">
+								<img src="../img/{{category}}.jpeg" alt="..." class="imgCategory img-circle img-responsive col-md-3 col-sm-3">
+								<div class="main-profile-p col-md-6 col-md-offset-3 col-sm-offset-1 col-sm-8">
+									{{title}}
+								</div>
+							</div>
+							<!--<div class="col-sm-6 col-md-8  summary-profile-position">
 								<br>
 								<br>
 								<br>
@@ -78,18 +99,19 @@
 								<small><cite> <i class="glyphicon glyphicon-time"></i>{{time}}</cite></small>
 								<small><cite> <i class="glyphicon glyphicon-user"></i>{{name}}</cite></small> <span style="float: right">{{postTimestamp}}</span>
 
-							</div>
+							</div>-->
+
 						</div>
 
 					</div>
 				</div>
-			</div>
 		</script>
+		<br><br><br>
 
 
 		<!--
 		<div class="request col-md-offset-1 col-md-10">
-
+<img src="../img/{{category}}.jpeg" alt="..." class="imgCategory img-circle img-responsive">
 				<div class="row">
 					<div class="col-md-12">
 
@@ -127,6 +149,7 @@
 
 
 </div>
+
 
 <c:import url="/prefabs/footer.jsp"></c:import>
 

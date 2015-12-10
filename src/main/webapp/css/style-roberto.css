@@ -16,8 +16,24 @@ hr.colorgraph {
 
 .request{
 	height: 180px;
-	background-color:#CEF6D8;
+	background-color: white;
 	margin-bottom: 5px;
+}
+
+ul.request-info {
+	padding-left: 0;
+	text-align: right;
+	margin: 0;
+	display: inline;
+}
+
+ul.request-info > li {
+	display: inline;
+	padding-left: 10px;
+}
+
+.rowR {
+	margin-top: 6px;
 }
 
 .list{
@@ -27,8 +43,9 @@ hr.colorgraph {
 
 
 .imgCategory{
-	height: 120px;
-	width: 150px;
+	height: 114px;
+	width: 170px;
+	border-radius: 15%;
 }
 
 .glyphicon {  margin-bottom: 10px;margin-right: 10px;}
@@ -41,8 +58,9 @@ small {
 }
 
 .main-profile-p{
-	font-size: 16px;
+	font-size: 25px;
 	color: black;
+	padding-top: 25px;
 }
 
 .summary-profile-position{
