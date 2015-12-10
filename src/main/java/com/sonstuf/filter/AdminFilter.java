@@ -10,17 +10,18 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sonstuf.model.bean.User;
 import com.sonstuf.utils.ProjectGlobals;
 
 /**
  * Servlet Filter implementation class LoginFilter
  */
-public class LoginFilter implements Filter {
+public class AdminFilter implements Filter {
 	
 	/**
 	 * Default constructor.
 	 */
-	public LoginFilter () {
+	public AdminFilter () {
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -41,13 +42,20 @@ public class LoginFilter implements Filter {
 			
 			HttpServletRequest httpRequest;
 			HttpSession session;
+			User user;
 			
 			httpRequest = (HttpServletRequest) request;
 			session = httpRequest.getSession ();
 			
 			if (session != null && session.getAttribute ("user") != null) {
-				// pass the request along the filter chain
-				chain.doFilter (request, response);
+				user = (User) session.getAttribute ("user");
+				
+				if (user != null && user.isAdmin ()) {
+					// pass the request along the filter chain
+					chain.doFilter (request, response);
+				} else {
+					errorPageForward (httpRequest, response);
+				}
 			} else {
 				errorPageForward (httpRequest, response);
 			}
@@ -59,7 +67,7 @@ public class LoginFilter implements Filter {
 	private void errorPageForward (ServletRequest request,
 			ServletResponse response) throws ServletException, IOException {
 			
-		request.setAttribute ("errorMessage", "Forbidden: registered user only area");
+		request.setAttribute ("errorMessage", "Forbidden: admin only area");
 		
 		request.getRequestDispatcher (ProjectGlobals.ERROR_PAGE)
 				.forward (request, response);

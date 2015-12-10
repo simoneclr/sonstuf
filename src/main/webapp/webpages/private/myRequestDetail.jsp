@@ -4,6 +4,9 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<c:import url="/prefabs/header.jsp"></c:import>
 	<link href="/css/enricoStyle.css" rel="stylesheet">
+	<script language="javascript">
+		var idRequest = <%= request.getParameter("idRequest")%>;
+	</script>
 	<script src="/js/enrico/myRequestDetail.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Dettaglio richiesta</title>

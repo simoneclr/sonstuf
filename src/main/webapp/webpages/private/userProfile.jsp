@@ -110,7 +110,7 @@
 
 		<div class="row">
 			<div class="col-md-3">
-				<img src="http://placehold.it/250x300">
+				<img class="img-responsive" src="http://placehold.it/250x300">
 			</div>
 			<div class="col-md-9">
 				<h4><strong>Data di nascita:</strong> <span id="bdate"></span></h4>
@@ -145,7 +145,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<h3 class="panel-title">
-												<a href="#"><strong>{{title}}</strong></a>
+												<a href="/webpages/private/myRequestDetail.jsp?idRequest={{reqid}}"><strong>{{title}}</strong></a>
 											</h3>
 										</div>
 										<div class="col-md-6" style="text-align: right">
@@ -161,7 +161,7 @@
 									</div>
 								</div>
 								<div class="panel-body">
-									<img src="http://placehold.it/150x150" class="request-img">
+									<img src="http://placehold.it/150x150" class="img-responsive request-img">
 									<p>
 										{{description}}
 									</p>
@@ -181,7 +181,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<h3 class="panel-title">
-												<a href="#"><strong>{{title}}</strong></a>
+												<a href="/webpages/private/myOfferDetail.jsp?idOffer={{offid}}"><strong>{{title}}</strong></a>
 											</h3>
 										</div>
 										<div class="col-md-6" style="text-align: right">
@@ -201,7 +201,7 @@
 									</div>
 								</div>
 								<div class="panel-body">
-									<img src="http://placehold.it/150x150" class="request-img">
+									<img src="http://placehold.it/150x150" class="img-responsive request-img">
 									<p>
 										{{description}}
 									</p>

@@ -1,32 +1,9 @@
 //var idRequest = '${idRequest}';
 function showMessageOffer(message) {
-	$(".sendOffer").append("<p>" + message + "</p>");
+	$("#messageOffer").text(message);
+	$("#error-alert").removeClass("hidden");
 }
 
-$("#sendOffer").on("click", function () {
-	console.log("OFFER MAN!");
-	var OK_RESPONSE = "success";
-	var ERROR_RESPONSE = "fail";
-	var USER_NOT_LOGGED_RESPONSE = "not_logged";
-	$.ajax({
-		type: "POST",
-		url: "/acceptrequest",
-		dataType: "string",
-		success: function (data) {
-			var message;
-			if (data === OK_RESPONSE)
-				message = "done";
-			else if (data === ERROR_RESPONSE)
-				message = "error";
-			else if (data === USER_NOT_LOGGED_RESPONSE)
-				message = "you are not logged in";
-			showMessageOffer(message);
-		},
-		error: function (errMsg) {
-			alert(errMsg);
-		}
-	});
-});
 
 $.ajax({
 	type: "GET",
@@ -63,6 +40,33 @@ $.ajax({
 				'readonly': true
 			}).rating('update', parseFloat(user.rankO));
 
+
+			$("#sendOffer").on("click", function () {
+				var OK_RESPONSE = "success";
+				var ERROR_RESPONSE = "fail";
+				var USER_NOT_LOGGED_RESPONSE = "not_logged";
+				var CONSTRAINT_VIOLATION = "constraint_violation";
+				$.ajax({
+					type: "GET",
+					url: "/acceptrequest?idRequest=" + idRequest,
+					dataType: "text",
+					success: function (data) {
+						var message = "unknown response";
+						if (data === OK_RESPONSE)
+							location.href = 'private/jobsConfirmsAccepted.jsp';
+						else if (data === ERROR_RESPONSE)
+							message = "error";
+						else if (data === USER_NOT_LOGGED_RESPONSE)
+							message = "devi loggarti per accedere a questa funzionalità";
+						else if (data === CONSTRAINT_VIOLATION)
+							message = "hai già dato disponibilità per questa richiesta";
+						showMessageOffer(message);
+					},
+					error: function (errMsg) {
+						showMessageOffer(errMsg);
+					}
+				});
+			});
 		});
 	},
 	fail: function () {

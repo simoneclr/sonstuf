@@ -57,14 +57,23 @@
 	<div class="panel-body">
 		<div class="well well-xm box-shadow body_box">
 			<div class="col-md-3 col-md-offset-3 col-sm-offset-3 col-sm-4 col-xs-5 col-xs-offset-1">
-				<h3>Desideri aiutare<span class="requesterName"></span>?</h3>
+				<h3>Desideri aiutare <span class="requesterName"></span>?</h3>
 			</div>
-			<div id ="sendOffer" class="col-md-2 col-md-offset-2 col-sm-offset-1 col-sm-4 col-xs-offset-1 col-xs-5 check_offriti">
-				<small><cite><i class="glyphicon glyphicon-ok"></i>Accetta</cite></small>
+			<div class="col-md-2 col-md-offset-2 col-sm-offset-1 col-sm-4 col-xs-offset-1 col-xs-5 ">
+				<button id="sendOffer"
+				        class="row btn btn-primary">
+					<small><cite><i class="glyphicon glyphicon-ok"></i>Accetta</cite></small>
+				</button>
+
+				<br>
+				<div class="alert alert-danger fade in hidden" id="error-alert">
+					<strong>Errore!</strong>
+					<span id="messageOffer"></span>
+				</div>
+
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 
 

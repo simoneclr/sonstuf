@@ -5,6 +5,7 @@
 		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<c:import url="/prefabs/header.jsp"></c:import>
 		<script src="/js/roberto/inserisci-richiesta.js"></script>
+		<script src="/js/simone/request.js"></script>
 
 		<!--
 		<link href="/css/style-gianluca.css" rel="stylesheet">
@@ -28,7 +29,12 @@
 
 			<br>
 
-			<form class="form-horizontal" role="form" action="/RequestsServlet">
+			<div class="alert alert-danger fade in hidden" id="error-alert">
+				<strong>Errore!</strong>
+				<span id="error-message"></span>
+			</div>
+
+			<form name="form-new-request" class="form-horizontal" role="form" action="/RequestsServlet">
 
 				<input type="hidden" name="op" value="insert">
 				<input type="hidden" name="user" value=<%= request.getParameter("idUser")%>>
@@ -70,7 +76,7 @@
 						</div>
 					</div>
 
-					<div class="col-md-4" style="text-align: center">
+					<div class="col-md-4" style="text-align: center" id="img">
 						<img src="http://www.placehold.it/350x180">
 					</div>
 				</div>
@@ -102,9 +108,7 @@
 			</form>
 		</div>
 
-		<%--
 		<c:import url="/prefabs/footer.jsp"></c:import>
-		--%>
 
 	</body>
 </html>

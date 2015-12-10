@@ -19,6 +19,7 @@ $(document).ready(function(){
 function eventCerca(){
 
 	$("#cerca").click(function(){
+		$("#error-alert").addClass("hidden");
 		user.name=$("#name").val();
 		user.surname=$("#surname").val();
 		user.phone=$("#telephone").val();
@@ -60,17 +61,31 @@ function registraUtente(json){
 
 	$("#registra").click(function(){
 
+console.log(json);
+		var u="name="+json.name+"&surname="+json.surname+"&phone="+json.phone+"&email="+json.email+"&birthdate="+json.birthDate+"&op=register";
 
+		console.log(u);
+		$("#registra").hide();
 		$.ajax({
 			type: "POST",
-			url: "/RegistrationServlet",
-			data: json,
-			contentType: "application/json; charset=utf-8",
+			url: "/webpages/private/admin/AdminRegistrationServlet",
+			data: u,
+			contentType: "application/x-www-form-urlencoded",
 			dataType: "json",
 			success: function(input){
-				var data= JSON.parse(JSON.stringify(input));
+				var data= input;//JSON.parse(JSON.stringify(input));
+console.log("data: "+data);
 
-				location.href = 'inserisciRichiesta.jsp?idUser='+data.idUser;
+				console.log("s: "+data.success);
+				console.log("s: "+data.description);
+				if(data.success){
+
+location.href = '../inserisciRichiesta.jsp?idUser='+data.description;
+				}
+				else{
+					updateErrorAlert(data.description);
+				}
+
 			},
 			error: function(errMsg) {
 				alert(errMsg);
@@ -78,6 +93,12 @@ function registraUtente(json){
 		});
 	});
 }
+
+function updateErrorAlert(msg){
+	$("#error-message").text(msg);
+	$("#error-alert").removeClass("hidden");
+}
+
 function updateTable(data){
 	$("#registra").show();
 	$("#rowTable").show();
@@ -125,7 +146,7 @@ function eventUser(){
 
 	$( "#bodyTable" ).on( "click", "tr", function() {
 		var idUser=$(this).attr("id");
-		location.href = 'inserisciRichiesta.jsp?idUser='+idUser;
+		location.href = '../inserisciRichiesta.jsp?idUser='+idUser;
 	});
 
 

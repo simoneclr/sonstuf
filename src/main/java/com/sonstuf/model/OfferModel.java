@@ -22,7 +22,7 @@ public class OfferModel {
 
 		Connection connection;
 		PreparedStatement ps;
-		boolean rs;
+		int rs;
 
 		String query = "INSERT INTO offer\n"
 				+ "(`iduser`, `idrequest`, `posttime`)\n"
@@ -34,18 +34,23 @@ public class OfferModel {
 		ps.setInt( 1, offer.getIdUser() );
 		ps.setInt( 2, offer.getIdRequest() );
 
-		rs = ps.execute();
+		rs = ps.executeUpdate();
 
-		if( rs ) {
+		Retval res;
 
-			return new Retval(true);
+		if( rs == 1 ) {
+
+			res = new Retval(true);
 
 		} else {
 
-			return new Retval(false, "Could not insert offer");
+			res =  new Retval(false, "Could not insert offer");
 		}
 
+		ps.close();
+		connection.close();
 
+		return res;
 	}
 
 	public static Offer getOfferById(int id ) throws SQLException, NamingException {

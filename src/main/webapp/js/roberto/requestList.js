@@ -112,10 +112,11 @@ function updateRequestList(offers){
 		var context = {
 			id:offers[i].idRequest,
 			category: offers[i].request.category,
+			category2: offers[i].request.category.replace(" ","_"),
 			title: offers[i].request.title,
 			place: offers[i].request.place,
 			time: offers[i].request.time,
-			postTimestamp: offers[i].request.postTimestamp,
+			postTimestamp: offers[i].request.postTimeStamp,
 			name:offers[i].user.name
 		};
 		var html = template(context);
@@ -182,6 +183,7 @@ function eventFilter(offers){
 				var context = {
 					id:offers[i].idRequest,
 					category: offers[i].request.category,
+					category2: offers[i].request.category.replace(" ","_"),
 					title: offers[i].request.title,
 					place: offers[i].request.place,
 					time: offers[i].request.time,
