@@ -49,7 +49,8 @@ function updateImage(){
 	$("#category").click(function(){
 		var category=$("#category").val();
 		console.log("c"+category);
-		$("#img").html("<img src=\"../../img/"+arrayId[category]+".jpeg\" style=\"width:350px ; height:180px\">");
+		var img=arrayId[category].replace(" ","_");
+		$("#img").html("<img src=\"../../img/"+img+".jpeg\" style=\"width:350px ; height:180px\">");
 
 
 	});
