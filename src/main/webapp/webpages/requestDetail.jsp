@@ -64,9 +64,13 @@
 				        class="row btn btn-primary">
 					<small><cite><i class="glyphicon glyphicon-ok"></i>Accetta</cite></small>
 				</button>
-				<div id="messageOffer" class="row">
 
+				<br>
+				<div class="alert alert-danger fade in hidden" id="error-alert">
+					<strong>Errore!</strong>
+					<span id="messageOffer"></span>
 				</div>
+
 			</div>
 		</div>
 	</div>

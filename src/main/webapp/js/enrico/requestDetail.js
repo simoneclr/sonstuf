@@ -1,6 +1,7 @@
 //var idRequest = '${idRequest}';
 function showMessageOffer(message) {
-	$("#messageOffer").append(message);
+	$("#messageOffer").text(message);
+	$("#error-alert").removeClass("hidden");
 }
 
 
@@ -52,7 +53,7 @@ $.ajax({
 					success: function (data) {
 						var message = "unknown response";
 						if (data === OK_RESPONSE)
-							message = "done";
+							location.href = 'private/jobsConfirmsAccepted.jsp';
 						else if (data === ERROR_RESPONSE)
 							message = "error";
 						else if (data === USER_NOT_LOGGED_RESPONSE)
