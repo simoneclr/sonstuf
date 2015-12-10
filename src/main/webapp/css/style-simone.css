@@ -73,3 +73,23 @@ div.request-panel > .panel-heading {
 .hidden {
 	display: none;
 }
+
+/* Home */
+.home-jumbo h1 {
+	font-size: 40px;
+}
+
+.home-jumbo {
+	background-color: rgba(0, 0, 0, 0.55);
+	border-radius: 0 !important;
+	color: #ffffff;
+	margin-top: 70px;
+}
+
+.home-body {
+	background: url(/img/home_opt.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
