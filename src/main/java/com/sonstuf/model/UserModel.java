@@ -73,7 +73,7 @@ public class UserModel {
 		PreparedStatement ps;
 		ResultSet rs;
 
-		String check = "SELECT COUNT(*) AS count FROM user WHERE email = ?;";
+		String check = "SELECT COUNT(*) AS count FROM user WHERE phone = ?;";
 
 		String query = "INSERT INTO user\n"
 				+ "(`name`, `surname`, `phone`, `email`, `passwordhash`, `ranko`, `rankp`, `birthdate`, `admin`)\n"
@@ -82,7 +82,7 @@ public class UserModel {
 		connection = Connector.getConnection();
 
 		ps = connection.prepareStatement(check);
-		ps.setString(1, user.getEmail());
+		ps.setString(1, user.getEmail ());
 		rs = ps.executeQuery();
 
 		if (rs.next()) {

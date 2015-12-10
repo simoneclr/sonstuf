@@ -131,7 +131,11 @@ public class AdminRegistrationServlet extends HttpServlet {
 		user.setSurname(surname);
 		user.setPasswordHash(null);
 
-		user.setEmail(email);
+		if (email != null && email.length () == 0)
+			user.setEmail (null);
+		else
+			user.setEmail(email);
+		
 		user.setAdmin(false);
 		user.setBirthDate(new java.sql.Date(parsedBirthDate.getTime()));
 		user.setPhone(phone);
