@@ -55,14 +55,14 @@
 
 	</div>
 		<script id="request-template" type="text/x-handlebars-template">
-			<input type="hidden" id="{{id}}">
-				<div class="row">
+
+				<div class="row" id="{{id}}">
 					<div class="col-md-10 col-md-offset-1 col-sm-12">
 						<div class="panel panel-default request-panel">
 							<div class="panel-heading">
 								<div class="row rowR">
 									<div class="col-sm-3 col-md-2 col-xs-12">
-										<h3 class="panel-title titleR"><strong>{{category2}}</strong></h3>
+										<h3 class="panel-title titleR"><strong>{{category}}</strong></h3>
 									</div>
 									<div class="col-md-8 col-md-offset-2 col-sm-9 col-xs-12">
 										<ul class="request-info">
@@ -80,7 +80,7 @@
 								</div>
 							</div>
 							<div class="panel-body">
-								<img src="../img/{{category}}.jpeg" alt="..." class="imgCategory img-circle img-responsive col-md-3 col-sm-3">
+								<img src="../img/{{category2}}.jpeg" alt="..." class="imgCategory img-circle img-responsive col-md-3 col-sm-3">
 								<div class="main-profile-p col-md-6 col-md-offset-3 col-sm-offset-1 col-sm-8">
 									{{title}}
 								</div>
@@ -88,65 +88,12 @@
 									<p>{{postTimestamp}}</p>
 								</div>
 							</div>
-							<!--<div class="col-sm-6 col-md-8  summary-profile-position">
-								<br>
-								<br>
-								<br>
-								<p class="main-profile-p">
-									{{title}}
-								</p>
-								<small><cite> <i class="glyphicon glyphicon-map-marker"></i>{{place}}</cite></small>
-								<small><cite> <i class="glyphicon glyphicon-time"></i>{{time}}</cite></small>
-								<small><cite> <i class="glyphicon glyphicon-user"></i>{{name}}</cite></small> <span style="float: right">{{postTimestamp}}</span>
-
-							</div>-->
-
 						</div>
 
 					</div>
 				</div>
 		</script>
 		<br><br><br>
-
-
-		<!--
-		<div class="request col-md-offset-1 col-md-10">
-<img src="../img/{{category}}.jpeg" alt="..." class="imgCategory img-circle img-responsive">
-				<div class="row">
-					<div class="col-md-12">
-
-							<div class="row">
-								<div class="col-sm-6 col-md-3">
-									<div><h3>Giardinaggio</h3>
-									</div>
-									<img src="../img/gardening.jpg" alt="..." class="imgCategory img-circle img-responsive">
-								</div>
-								<div class="col-sm-6 col-md-8  summary-profile-position">
-									<br>
-									<br>
-									<br>
-									<p class="main-profile-p">
-										Coltivare le ortensie è un'arte ma per ottenere dei buoni risultati si
-										devono assicurare alle piante le condizioni climatiche adeguate ed in questa
-										sezione potrete scoprire tutti i segreti per coltivare le ortensie e riconoscere
-										dal loro aspetto eventuali problemi che...
-									</p>
-									<small><cite> <i class="glyphicon glyphicon-map-marker"></i>Dambel</cite></small>
-									<small><cite> <i class="glyphicon glyphicon-time"></i>Sabato mattina</cite></small>
-									<small><cite> <i class="glyphicon glyphicon-user"></i>Gianlu94</cite></small>
-
-
-
-								</div>
-							</div>
-
-					</div>
-				</div>
-
-
-		</div>
-		-->
-
 
 </div>
 

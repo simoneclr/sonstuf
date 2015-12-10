@@ -26,7 +26,7 @@
 					</div>
 				</div>
 			</div>
-			<form id="myForm" action="/RegistrationServlet">
+			<form id="myForm" action="/RegistrationServlet" name="registerForm">
 				<div class="row">
 					<input type="hidden" name="op" value="register">
 					<div class="form-group col-md-offset-2 col-md-3 col-sm-3 col-sm-offset-2 col-xs-7">

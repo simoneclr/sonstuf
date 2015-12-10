@@ -6,7 +6,7 @@ $(document).ready(function () {
 	$("#email").blur(validate_Email);
 	$("#password1").keyup(validate1);
 	$("#password2").keyup(validate2);
-	$("#password2").focusout(removeErrorSuccessBlockMessage);
+	//$("#password2").focusout(removeErrorSuccessBlockMessage);
 });
 
 
@@ -139,7 +139,7 @@ function checkPhone(){
 }
 
 function checkPassword(){
-	if (($("#password1").val()=="")||($("#password2").val()=="")){
+	if (($("#password1").val()=="")||($("#password2").val()=="") || ($("#password1").val()!=$("#password2").val())){
 		return false;
 	}
 	return true;
@@ -201,7 +201,27 @@ $("#button_submit_register").click(function(event){
 		event.preventDefault();
 	}
 	else{
-		$("#myForm").submit();
+		//$("#myForm").submit();
+
+		$("form[name=registerForm]").submit(function (){
+			$.post($(this).attr("action"), $(this).serialize(), function(json){
+				var success = json.success;
+				var description = json.description;
+
+				if (success){
+					window.location.replace("/webpages/confirmReg.jsp");
+				} else {
+
+					addErrorSuccessBlockMessage(description,"alert alert-danger");
+
+				}
+
+			}, "json");
+
+			//Impedisce al form di essere spedito;
+			return false;
+		});
+
 	}
 });
 
