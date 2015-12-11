@@ -1,8 +1,10 @@
 package com.sonstuf.control;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sonstuf.model.UserModel;
 import com.sonstuf.model.bean.User;
+import com.sonstuf.utils.JsonPacket;
 import com.sonstuf.utils.Retval;
 
 import javax.naming.NamingException;
@@ -40,7 +42,7 @@ public class AuthenticationServlet extends HttpServlet {
 	                     HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
 		String op;
-		Retval operationStatus;
+		Object operationStatus;
 		ObjectMapper mapper;
 
 		op = request.getParameter("op");
@@ -155,7 +157,7 @@ public class AuthenticationServlet extends HttpServlet {
 		return new Retval(true);
 	}
 
-	private Retval checkLogin(HttpServletRequest request) {
+	private MiniPacket checkLogin(HttpServletRequest request) {
 
 		HttpSession session;
 		User loggedUser;
@@ -167,10 +169,57 @@ public class AuthenticationServlet extends HttpServlet {
 			loggedUser = (User) session.getAttribute("user");
 
 			if (loggedUser != null)
-				return new Retval(true, loggedUser.getName());
+				return new MiniPacket(true, loggedUser.getName(), loggedUser.isAdmin ());
 		}
 
-		return new Retval(false, "User is not logged in");
+		return new MiniPacket(false, null, false);
+	}
+	
+	private class MiniPacket implements JsonPacket {
+		
+		private boolean logged;
+		private boolean isAdmin;
+		private String name;
+		
+		public MiniPacket (boolean logged, String name, boolean isAdmin) {
+			
+			this.logged = logged;
+			this.name = name;
+			this.isAdmin = isAdmin;
+		}
+		
+		@Override
+		public String toJSON () throws JsonProcessingException {
+			
+			ObjectMapper mapper;
+			
+			mapper = new ObjectMapper ();
+			return mapper.writeValueAsString (this);
+		}
+
+		public boolean isLogged () {
+			return logged;
+		}
+
+		public void setLogged (boolean logged) {
+			this.logged = logged;
+		}
+
+		public boolean isAdmin () {
+			return isAdmin;
+		}
+
+		public void setAdmin (boolean isAdmin) {
+			this.isAdmin = isAdmin;
+		}
+
+		public String getName () {
+			return name;
+		}
+
+		public void setName (String name) {
+			this.name = name;
+		}
 	}
 
 }
