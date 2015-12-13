@@ -22,7 +22,9 @@ tabella che mappa idCategoria su nomeCategoria
 [{"<categoryId>":"<categoryName>"}, {"<categoryId>":"<categoryName>"}]
 
 output: (nota la photo va passata in push)
-campi del form: "title" , "description" , "categoryId" , "place" , "time", "photo"
+campi del form: "title" , "description" , "categoryId" , "place" , "time", "photo", "user"
+NOTA: user è parsato dalla servlet solo se l'uttente che invia la richiesta è un amministratore in modo da sapere per
+quale utente deve inserire la richiesta
 
 PAGINA RICHIESTA
 input:
@@ -31,7 +33,7 @@ input:
 	"user" : 
 		{"name" : "<incompleteName>", "rankR" : "<rankDouble>"},
 	"request":
-		{"category" : "<categoryName>", "requestDescription" : "text", "place" : "<place>", "time" : "<time>", "photo" : "<link>", "postTimestamp" : "<postTimeStamp>"}
+		{"category" : "<categoryName>", "description" : "text", "title" : "title" "place" : "<place>", "time" : "<time>", "photo" : "<link>", "postTimestamp" : "<postTimeStamp>"}
 }
 
 output: per segnalare che si offre per quella richiesta.
@@ -47,7 +49,7 @@ HOME ADMIN
 
 INSERISCI RICHIESTA OPERATORE SELEZIONE UTENTE (form di inserimento dati utente con sotto la lista di user che matchano i dati inseriti)
 output:
-form per dati utente(può essere già esistente oppure no): "name", "surname", "telephone", "email", "birthdate" ;
+form per dati utente(può essere già esistente oppure no): "name", "surname", "telephone", "email", "birthDate" ;
 a questo form la pagina mi risponde con una lista:
 [
 	{"idUser": "<userId>", "nameame" : "<name>", "surname" : "<surname>" , "telephone" : "<telephone>", "email" : "<email>" , "birthdate" : "birthdate"},
@@ -83,7 +85,6 @@ REQUESTS = [
 		},
 		"request" : {
 			"category" : "<categoryName>",
-			"categoryDescription" : "<shortDescription>",
 			"title" : "<titolo della richiesta>",
 			"description" : "<descrizione richiesta>",
 			"place" : "<place>",
@@ -104,9 +105,8 @@ OFFERS = [
 		},
 		"request" :{
 			"category" : "<categoryName>",
-			"categoryDescription" : "<shortDescription>",
 			"title" : "<titolo della richiesta>",
-			"description" : "<descrizione richiesta>",
+		//	"description" : "<descrizione richiesta>", da togliere?
 			"place" : "<place>",
 			"time" : "<time>",
 			"postTimestamp" : "<postTimeStamp>"
@@ -128,7 +128,7 @@ se dalla pagina personale clicca su una richiesta
 input:
 {
 	"request":
-		{"idRequest" : "<requestId>","category" : "<categoryName>", "requestDescription" : "<requestDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>", "photo" : "<link>"},
+		{"idRequest" : "<requestId>","category" : "<categoryName>", "title" : "<requestTitle>", "requesterName" : "userName", "requestDescription" : "<requestDescription>", "place" : "<place>", "time" : "<time>", "postTimestamp" : "<postTimeStamp>", "photo" : "<link>"},
 	"state" : "<can be 0: in corso, 1: in attesa di valutazione (c'è un incaricato), 2: finito>",
 	"offerers" : 
 		[
