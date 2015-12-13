@@ -2,10 +2,15 @@ $(document).ready(function () {
 
 	$.getJSON("/AuthenticationServlet?op=checkLogin", function (data) {
 	}).done(function (data) {
-		var success = data.success;
+		var success = data.logged;
 
 		if (success) {
 			$("#logged-user-nav").show();
+			
+			if (data.admin) {
+				$("#admin-user-li").show();
+			}
+			
 		} else {
 			$("#not-logged-user-nav").show();
 		}
